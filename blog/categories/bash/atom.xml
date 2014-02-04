@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Bash | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-04T18:37:01+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[Bash]連番のディレクトリを作成する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories/"/>
+    <updated>2013-12-18T22:22:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories</id>
+    <content type="html"><![CDATA[<p>dir_1, dir_2, dir_3&hellip;と連番でディレクトリを作成したい場合は以下で一発。</p>
+
+<p><code>sh
+$ mkdir dir_{1..15}
+</code></p>
+
+<p>普段書かないので普通に忘れる。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bash 一時的にaliasを無効にする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/05/01/temporarily-ignore-alias/"/>
+    <updated>2013-05-01T23:11:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/05/01/temporarily-ignore-alias</id>
+    <content type="html"><![CDATA[<p>aliasは便利ですが、aliasを解除したコマンドを使用したい場合があります。</p>
+
+<p>そんなときは頭に \ (バックスラッシュ) を付けるとaliasを一時的に無効にしてくれます。</p>
+
+<h2>一時的にaliasを無効にする</h2>
+
+<p><code>sh
+$ \cp -f hoge/ piyo
+</code></p>
+
+<p>知らんかった&hellip;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bash Hack & Tips 1]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/16/bash-hack-tips/"/>
+    <updated>2013-04-16T23:40:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/16/bash-hack-tips</id>
+    <content type="html"><![CDATA[<p>最近shellにハマってるので調べて便利そうなものをまとめてみます。</p>
+
+<p>タイトルに「1」と記載してますがシリーズ化するかは分かりません。たぶんしないでしょう&hellip;</p>
+
+<h2>cd コマンド 少しのスペルミスを自動で修正して実行してくれる</h2>
+
+<p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
+
+<p><code>sh
+$ shopt -s cdspell
+</code></p>
+
+<p>ex)
+<code>
+$ cd Dropbix/Publoc
+Dropbox/Public
+</code></p>
+
+<p>少しのスペルミスは構わず実行します。リファレンスによるとチェックされるスペルミスは</p>
+
+<blockquote><p>チェックされる誤りは、文字の入れ替わり・文字の欠け・ 1 文字余分にあることです</p></blockquote>
+
+<p>だそうです。このオプションは対話型のみに有効でスクリプト内では無効となっています。</p>
+
+<h2>historyからのコマンドの実行は一度編集バッファに出力する</h2>
+
+<p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
+
+<p><code>
+$ shopt -s histverify
+</code></p>
+
+<p>ex)
+<code>
+直前に実行したコマンドを再実行
+$ !!
+rake preview
+</code></p>
+
+<p>histverifyオプションが無効の場合、即時に実行されますが有効の場合は、確認後に実行することができます。</p>
+
+<h2>連続して実行したコマンドはhistoryに保存しない</h2>
+
+<p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
+
+<p><code>
+$ export HISTCONTROL=ignoredups
+</code></p>
+
+<p>historyの最後の行と同じコマンドは記録されません。</p>
+
+<h2>空白で始まるコマンドはhistoryに保存しない</h2>
+
+<p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
+
+<p><code>
+$ export HISTCONTROL=ignorespace
+</code></p>
+
+<p>ignoredups ignorespace 両方を指定したい場合</p>
+
+<p><code>
+$ export HISTCONTROL=ignoreboth
+</code></p>
+
+<h2>EOF (Ctrl-D) 入力の許可数を設定する</h2>
+
+<p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
+
+<p><code>
+$ export IGNOREEOF=5
+</code></p>
+
+<p>デフォルトでは Ctrl-D を一度押すとログアウトしてしまいますが、IGNOREEOFを設定することでその回数を任意に決めることができます。</p>
+
+<h2>バックアップファイルを簡単に作成する</h2>
+
+<p>作業をする際に念のためconfファイルのバックアップをとっておきたい場合があります。</p>
+
+<p>通常のコピー</p>
+
+<p><code>
+$ cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.back
+</code></p>
+
+<p>もっと短く書けます。</p>
+
+<p><code>
+$ cp /etc/httpd/conf/httpd.conf{,.back}
+</code></p>
+
+<h2>ディレクトリを複数作成する</h2>
+
+<p>上記と同じ方法で複数のディレクトリを作成することできます。</p>
+
+<p>```
+$ mkdir -p ~/rpm/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+$ ll ~/rpm/</p>
+
+<p>drwxr-xr-x  2 noto  staff  68  4 17 00:19 BUILD
+drwxr-xr-x  2 noto  staff  68  4 17 00:19 RPMS
+drwxr-xr-x  2 noto  staff  68  4 17 00:19 SOURCES
+drwxr-xr-x  2 noto  staff  68  4 17 00:19 SPECS
+drwxr-xr-x  2 noto  staff  68  4 17 00:19 SRPMS
+```</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><p><a href="http://linuxjm.sourceforge.jp/html/GNU_bash/man1/bash.1.html">Bash Reference Manual: The Shopt Builtin</a></p></li>
+<li><p><a href="http://www.ukuug.org/events/linux2003/papers/bash_tips/">Bash Tips &amp; Tricks</a></p></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

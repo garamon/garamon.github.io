@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Streaming | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/streaming/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-04T18:37:01+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CentOSにm3u8-segmenterをインストールする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/"/>
+    <updated>2013-04-14T22:48:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos</id>
+    <content type="html"><![CDATA[<h2>環境</h2>
+
+<p>CentOS 6.3 x86_64</p>
+
+<h2>Require</h2>
+
+<p>ffmpegがインストール済みであること</p>
+
+<p>インストールしてない場合は、<a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-ffmpeg-on-centos6-x86-64/">CentOS6.xにFFmpegをインストールする</a>を参考にしてみてください。</p>
+
+<h2>m3u8-segmenterのインストール</h2>
+
+<p>この記事を見ている方は恐らくHLSの知識がある方が多いと思うので、HLSとはなんぞやという説明は省きます。</p>
+
+<p>オープンソースのsegmenterはいくつかありますが、今回は <a href="https://github.com/johnf/m3u8-segmenter">m3u8-segmenter</a>を試すことにします。</p>
+
+<p><code>sh
+$ cd /usr/local/src/
+$ git clone https://github.com/johnf/m3u8-segmenter.git
+$ cd m3u8-segmenter
+</code></p>
+
+<h3>Configure Error</h3>
+
+<p>configureを実行すると以下のエラーが発生</p>
+
+<p>```
+configure: error: Package requirements (libavformat libavcodec libavutil) were not met:
+No package &lsquo;libavformat&rsquo; found
+No package &lsquo;libavcodec&rsquo; found
+No package &lsquo;libavutil&rsquo; found</p>
+
+<p>Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.</p>
+
+<p>Alternatively,  you may set the environment variables FFMPEG_CFLAGS
+and FFMPEG_LIBS to avoid the need to call pkg-config.
+See the pkg-config man page for more details.
+```</p>
+
+<p>以前、<a href="http://code-life.net/?p=2331">CentOSにHttpSegmenterをインストールする</a>でも似たエラーが発生してたので同じ方法で解決できる。</p>
+
+<p><code>
+$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+$ ./configure
+</code></p>
+
+<h3>インストール</h3>
+
+<p><code>
+$ make
+$ make install
+</code></p>
+
+<h2>segmentしてみる</h2>
+
+<p><code>
+$ mkdir tmp
+$ ffmpeg -i big_buck_bunny.mp4 -f mpegts - | \
+  m3u8-segmenter -i - -d 10 -p tmp/big_buck_bunny -m tmp/big_buck.m3u8 -u http://localhost/segment
+</code></p>
+
+<p>簡単にオプションの説明をすると、</p>
+
+<dl>
+  <dt>オプション -d</dt>
+  <dd>何秒毎に分割するか。上記のコマンドの場合、10秒</dd>
+
+  <dt>オプション -p</dt>
+  <dd>分割されたtsファイルの出力先 & 出力ファイル名。出力先にbig_buck_bunny-1.ts ... big_buck_bunny-50.ts ... と連番でファイルが作成される</dd>
+
+  <dt>オプション -m</dt>
+  <dd>m3u8の出力先</dd>
+
+  <dt>オプション -u</dt>
+  <dd>m3u8に記載されるファイルのURL</dd>
+</dl>
+
+
+<h2>出力されたm3u8を確認する</h2>
+
+<p>現時点でのm3u8-segmenterは以下のようなm3u8ファイルを出力します。</p>
+
+<pre><code>#EXTM3U
+#EXT-X-TARGETDURATION:10
+#EXTINF:10,
+http://localhost/segmenttmp/big_buck_bunny-1.ts
+#EXTINF:10,
+http://localhost/segmenttmp/big_buck_bunny-2.ts
+#EXTINF:10,
+http://localhost/segmenttmp/big_buck_bunny-3.ts
+#EXTINF:10,
+
+・・・ 省略 ・・・
+
+http://localhost/segmenttmp/big_buck_bunny-58.ts
+#EXTINF:10,
+http://localhost/segmenttmp/big_buck_bunny-59.ts
+#EXT-X-ENDLIST
+</code></pre>
+
+<p>今まで試したオープンソースのsegmenterでは一番良い感じだと思います。</p>
+
+<h2>関連</h2>
+
+<p><a href="/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/">FFMpegでHttp Live Streaming(HLS)向けにセグメント化する</a></p>
+]]></content>
+  </entry>
+  
+</feed>

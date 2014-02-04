@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Javascript | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-04T18:37:01+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/"/>
+    <updated>2013-12-09T23:07:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox</id>
+    <content type="html"><![CDATA[<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>JQuery2.0.3</li>
+</ul>
+
+
+<h2>checkedプロパティを変更</h2>
+
+<p>見たら分かるんだけど、期待する動作はコンソールに「checkbox change!!」と出力されること。</p>
+
+<p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html>
+<head></p>
+
+<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p></head>
+<body>
+<form></p>
+
+<pre><code>&lt;input id="checkbox1" type="checkbox" name="example" value="hoge"&gt;
+&lt;label for="checkbox1"&gt;Sample CheckBox&lt;/label&gt;
+</code></pre>
+
+<p></form></p>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e) {
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true);
+    })();
+</script>
+
+
+<p></body>
+</html>
+```</p>
+
+<h2>triggerでイベントを発行</h2>
+
+<p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
+
+<p>``` javascript</p>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e) {
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true).trigger('change');
+    })();
+</script>
+
+
+<p>```</p>
+
+<h2>イベントの発行元を判断する</h2>
+
+<p>trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。</p>
+
+<p>そんな時は以下のようにしておく。</p>
+
+<p>``` javascript</p>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e, param) {
+            if (param === true) {
+                // 何らかの処理
+            }
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true).trigger("change", [true]);
+    })();
+</script>
+
+
+<p>```</p>
+
+<p>ちなみにラジオボタンでも同じです。
+javascript好きになってきた今日この頃。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Javascript オブジェクトのマージあれこれ]]></title>
+    <link href="http://blog.code-life.net/blog/2013/05/29/javascript-object-merge/"/>
+    <updated>2013-05-29T22:45:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/05/29/javascript-object-merge</id>
+    <content type="html"><![CDATA[<p>最近 javascriptを書く機会が少し増えてきたのでオブジェクトのマージ方法を備忘録的にメモ。</p>
+
+<h2>pure JS</h2>
+
+<h3>通常のマージ</h3>
+
+<p>```javascript
+var merge = function (obj1, obj2) {</p>
+
+<pre><code>if (!obj2) {
+    obj2 = {};
+}
+for (var attrname in obj2) {
+    if (obj2.hasOwnProperty(attrname)) {
+        obj1[attrname] = obj2[attrname];
+    }
+}
+</code></pre>
+
+<p>};</p>
+
+<p>var obj1 = {</p>
+
+<pre><code>name: 'pigmon',
+city: 'tokyo',
+tel: '00-0000-0000'
+</code></pre>
+
+<p>};</p>
+
+<p>var obj2 = {</p>
+
+<pre><code>name: 'garamon',
+city: 'osaka',
+sex: 'man'
+</code></pre>
+
+<p>};</p>
+
+<p>merge(obj1, obj2);
+console.log(obj1);</p>
+
+<p>// 実行結果
+=> {name: &ldquo;garamon&rdquo;, city: &ldquo;osaka&rdquo;, tel: &ldquo;00-0000-0000&rdquo;, sex: &ldquo;man&rdquo;}
+```</p>
+
+<h3>存在しないプロパティのみマージ</h3>
+
+<p>```javascript</p>
+
+<p>var merge = function (obj1, obj2) {</p>
+
+<pre><code>if (!obj2) {
+    obj2 = {};
+}
+for (var attrname in obj2) {
+    if (obj2.hasOwnProperty(attrname) &amp;&amp; !obj1.hasOwnProperty(attrname)) {
+        obj1[attrname] = obj2[attrname];
+    }
+}
+</code></pre>
+
+<p>};</p>
+
+<p>var obj1 = {</p>
+
+<pre><code>name: 'pigmon',
+city: 'tokyo',
+tel: '00-0000-0000'
+</code></pre>
+
+<p>};</p>
+
+<p>var obj2 = {</p>
+
+<pre><code>name: 'garamon',
+city: 'osaka',
+sex: 'man'
+</code></pre>
+
+<p>};</p>
+
+<p>merge(obj1, obj2);
+console.log(obj1);</p>
+
+<p>// 実行結果
+=> {name: &ldquo;pigmon&rdquo;, city: &ldquo;tokyo&rdquo;, tel: &ldquo;00-0000-0000&rdquo;, sex: &ldquo;man&rdquo;}
+```</p>
+
+<h2>JQuery(1.9.1)</h2>
+
+<h3>通常のマージ</h3>
+
+<p>```javascript
+var obj1 = {</p>
+
+<pre><code>name: 'pigmon',
+city: 'tokyo',
+tel: '00-0000-0000'
+</code></pre>
+
+<p>};</p>
+
+<p>var obj2 = {</p>
+
+<pre><code>name: 'garamon',
+city: 'osaka',
+sex: 'man'
+</code></pre>
+
+<p>};</p>
+
+<p>$.extend(obj1, obj2);
+console.log(obj1);</p>
+
+<p>// 実行結果
+=> {name: &ldquo;garamon&rdquo;, city: &ldquo;osaka&rdquo;, tel: &ldquo;00-0000-0000&rdquo;, sex: &ldquo;man&rdquo;}</p>
+
+<p>```</p>
+
+<h3>再帰的にマージ</h3>
+
+<p>extendの第一引数にtrueを与えると再帰的にマージしてくれる</p>
+
+<p>```javascript</p>
+
+<p>var obj1 = {</p>
+
+<pre><code>name: 'pigmon',
+address: {
+    city: 'tokyo',
+    tel: '00-0000-0000'
+}
+</code></pre>
+
+<p>};</p>
+
+<p>var obj2 = {</p>
+
+<pre><code>name: 'garamon',
+address: {
+    city: 'osaka'
+}
+</code></pre>
+
+<p>};</p>
+
+<p>$.extend(true, obj1, obj2);
+console.log(obj1);</p>
+
+<p>// 実行結果
+=> {name: &ldquo;garamon&rdquo;, address: {city: &ldquo;osaka&rdquo;, tel: &ldquo;00-0000-0000&rdquo;}}
+```</p>
+
+<h2>underscore.js(1.4.3)</h2>
+
+<h3>通常のマージ</h3>
+
+<p>``` javascript
+obj1 = {</p>
+
+<pre><code>name: 'pigmon',
+city: 'tokyo',
+tel: "00-0000-0000"
+</code></pre>
+
+<p>};</p>
+
+<p>obj2 = {</p>
+
+<pre><code>name: 'garamon',
+city: 'osaka',
+sex: 'man'
+</code></pre>
+
+<p>};</p>
+
+<p>_.extend(obj1, obj2);
+console.log(obj1);</p>
+
+<p>// 実行結果
+=> {name: &ldquo;garamon&rdquo;, city: &ldquo;osaka&rdquo;, tel: &ldquo;00-0000-0000&rdquo;, sex: &ldquo;man&rdquo;}
+```</p>
+
+<p>ちなみにunderscore.jsでは再帰的にマージはしてくれないよう。</p>
+
+<p><a href="https://github.com/BenHall/underscore/commit/83133be8055dbecf23a27b866adbbae95b2140b7">これ</a>を見てるとできてるっぽいんだけど&hellip;</p>
+
+<h2>参考</h2>
+
+<p><a href="http://api.jquery.com/jQuery.extend/">jQuery.extend()</a></p>
+
+<p><a href="http://underscorejs.org/#extend">underscorejs extend</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mousemoveイベントにbindした処理の実行間隔を制御する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval/"/>
+    <updated>2013-05-29T21:31:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval</id>
+    <content type="html"><![CDATA[<p>制御するってのは言い過ぎですが、mousemoveイベントにbindした処理の実行間隔を空けたい場合、setIntervalで実行フラグのオン・オフを行い実行間隔を調整します。</p>
+
+<p>``` javascript</p>
+
+<pre><code>(function() {
+    var enableHandler = true;
+
+    $("body").mousemove(function(e) {
+        if (enableHandler) {
+            // 何らかの処理
+            enableHandler = false;
+        }
+    });
+
+    var timer = window.setInterval(function() {
+        enableHandler = true;
+    }, 100);
+})();
+</code></pre>
+
+<p>```</p>
+
+<p>偉大なるは先人達の知恵。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://stackoverflow.com/questions/4648444/jquery-fire-mousemove-events-less-often">jQuery: Fire mousemove events less often</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CentOSにnode.jsをインストールする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/29/install-node-on-centos/"/>
+    <updated>2013-04-29T00:13:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/29/install-node-on-centos</id>
+    <content type="html"><![CDATA[<p>JavaScript力向上の為、node.jsで何か作ってみようと思いインストールしてみた。</p>
+
+<h2>環境</h2>
+
+<p>CentOS 6.3</p>
+
+<h2>依存パッケージのインストール</h2>
+
+<p><code>sh
+$ yum install git openssh-devel
+</code></p>
+
+<h2>nvm(node.jsバージョン管理)のインストール</h2>
+
+<p>node.jsのバージョン管理は<a href="https://github.com/creationix/nvm">nvm</a>の他に<a href="https://github.com/hokaccha/nodebrew">nodebrew</a>や<a href="https://github.com/ekalinin/nodeenv">nodeenv</a>があるらしいが、初めてなので安直にStarが多かったnvmを利用してみる。</p>
+
+<p><code>sh
+$ curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+</code></p>
+
+<p>~/.bash_profileを確認すると次の設定が追加されていた。</p>
+
+<p><code>
+[[ -s /root/.nvm/nvm.sh ]] &amp;&amp; . /root/.nvm/nvm.sh # This loads NVM
+</code></p>
+
+<h3>反映</h3>
+
+<p>ということで反映</p>
+
+<p><code>
+$ source ~/.bash_profile
+</code></p>
+
+<h2>サブコマンドの補完</h2>
+
+<p>nvmコマンドは使えるようになったが、サブコマンドの補完が効かないので以下の設定を ~/.bash_profile または ~/.bashrc に追加</p>
+
+<p><code>
+[[ -r $NVM_DIR/bash_completion ]] &amp;&amp; . $NVM_DIR/bash_completion
+</code></p>
+
+<p>設定を反映させたら nvm [tab][tab] でサブコマンドの補完が効くようになる。</p>
+
+<p><code>
+$ nvm
+alias          copy-packages  help           list           ls             run            uninstall      version
+clear-cache    deactivate     install        list-remote    ls-remote      unalias        use
+</code></p>
+
+<h2>node.jsのインストール</h2>
+
+<p>サブコマンド「ls-remote」で利用可能なnode.jsのバージョンが確認できるので表示させてみる。</p>
+
+<h3>利用可能なバージョンの確認</h3>
+
+<p><code>sh
+$ nvm ls-remote
+   v0.1.14     v0.1.29    v0.1.100      v0.3.3      v0.4.9      v0.6.0     v0.6.15      v0.7.8     v0.8.10      v0.9.1     v0.10.3
+   v0.1.15     v0.1.30    v0.1.101      v0.3.4     v0.4.10      v0.6.1     v0.6.16      v0.7.9     v0.8.11      v0.9.2     v0.10.4
+   v0.1.16     v0.1.31    v0.1.102      v0.3.5     v0.4.11      v0.6.2     v0.6.17     v0.7.10     v0.8.12      v0.9.3     v0.10.5
+   v0.1.17     v0.1.32    v0.1.103      v0.3.6     v0.4.12      v0.6.3     v0.6.18     v0.7.11     v0.8.13      v0.9.4     v0.11.0
+   v0.1.18     v0.1.33    v0.1.104      v0.3.7      v0.5.0      v0.6.4     v0.6.19     v0.7.12     v0.8.14      v0.9.5     v0.11.1
+   v0.1.19     v0.1.90      v0.2.0      v0.3.8      v0.5.1      v0.6.5     v0.6.20      v0.8.0     v0.8.15      v0.9.6
+   v0.1.20     v0.1.91      v0.2.1      v0.4.0      v0.5.2      v0.6.6     v0.6.21      v0.8.1     v0.8.16      v0.9.7
+   v0.1.21     v0.1.92      v0.2.2      v0.4.1      v0.5.3      v0.6.7      v0.7.0      v0.8.2     v0.8.17      v0.9.8
+   v0.1.22     v0.1.93      v0.2.3      v0.4.2      v0.5.4      v0.6.8      v0.7.1      v0.8.3     v0.8.18      v0.9.9
+   v0.1.23     v0.1.94      v0.2.4      v0.4.3      v0.5.5      v0.6.9      v0.7.2      v0.8.4     v0.8.19     v0.9.10
+   v0.1.24     v0.1.95      v0.2.5      v0.4.4      v0.5.6     v0.6.10      v0.7.3      v0.8.5     v0.8.20     v0.9.11
+   v0.1.25     v0.1.96      v0.2.6      v0.4.5      v0.5.7     v0.6.11      v0.7.4      v0.8.6     v0.8.21     v0.9.12
+   v0.1.26     v0.1.97      v0.3.0      v0.4.6      v0.5.8     v0.6.12      v0.7.5      v0.8.7     v0.8.22     v0.10.0
+   v0.1.27     v0.1.98      v0.3.1      v0.4.7      v0.5.9     v0.6.13      v0.7.6      v0.8.8     v0.8.23     v0.10.1
+   v0.1.28     v0.1.99      v0.3.2      v0.4.8     v0.5.10     v0.6.14      v0.7.7      v0.8.9      v0.9.0     v0.10.2
+</code></p>
+
+<p><a href="http://blog.nodejs.org/">release notes</a>を確認すると現時点ではv0.10.5がstableなのでこいつをインストールする。</p>
+
+<h3>v0.10.5のインストール</h3>
+
+<p><code>
+nvm install 0.10.5
+</code></p>
+
+<h3>Aliasの設定</h3>
+
+<p>新しくshellを立ち上げたり再起動をかけるとnvmの設定がリセットされるようなのでデフォルトのバージョンを設定する。</p>
+
+<p><code>
+$ nvm alias default 0.10.5
+</code></p>
+
+<p>とりあえずこんな感じで大丈夫なのかな。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/creationix/nvm">Node Version Manager</a></p>
+]]></content>
+  </entry>
+  
+</feed>

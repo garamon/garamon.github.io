@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: MySQL | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/mysql/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-04T18:37:01+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MySQL 再起動せずconfigファイルの文法をチェックする方法]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/22/how-to-syntax-check-mysql-config-file/"/>
+    <updated>2013-04-22T16:39:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/22/how-to-syntax-check-mysql-config-file</id>
+    <content type="html"><![CDATA[<p>Apacheのconfigファイルの文法をチェックする方法として「configtest」があるが、
+MySQLの文法チェックはどうやるのか調べてみた。</p>
+
+<h2>MySQLのconfigファイルの文法をチェックする方法</h2>
+
+<p>次のコマンドで再起動せずに文法をチェックできる。</p>
+
+<p>&mdash;defaults-file と &mdash;pid-file は適宜変更すること。</p>
+
+<p><code>sh
+$ mysqld --help --verbose --skip-networking --defaults-file=&lt;path to my.cnf&gt; --pid-file=$(tempfile) 1&gt;/dev/null
+</code></p>
+
+<p>MySQLのhelpコマンドはヘルプ情報をコマンドライン上に表示しすぐに終了するが、configファイルは読みにいくようでそれを利用し文法のチェックを行う。</p>
+
+<p>また同じシステム上で既にMySQLが起動している場合、干渉することを避ける為 &mdash;skip-networking と &mdash;pid-file オプションを指定。</p>
+
+<h2>注意点</h2>
+
+<p>この方法は文法エラーを見つけるだけで値のチェックは行わないので注意する。</p>
+
+<p>ほぼ参考にした記事を翻訳しただけですね。はい</p>
+
+<h2>参考</h2>
+
+<p><a href="http://www.dbasquare.com/kb/how-to-check-mysql-configuration-file-syntax/">How to check MySQL configuration file syntax?</a></p>
+
+<p><a href="http://www.mysqlperformanceblog.com/2011/02/17/how-to-syntax-check-your-my-cnf-file/">How to syntax-check your my.cnf file</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AUTO INCREMENTの現在の値を確認する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/17/how-to-get-auto-increment-value-in-mysql/"/>
+    <updated>2013-04-17T20:15:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/17/how-to-get-auto-increment-value-in-mysql</id>
+    <content type="html"><![CDATA[<p>次のSQLを実行する</p>
+
+<p><code>mysql
+SELECT
+  AUTO_INCREMENT
+FROM
+  INFORMATION_SCHEMA.TABLES
+WHERE
+  table_name='hoge';
+</code></p>
+
+<p>結果</p>
+
+<pre><code>+----------------+
+| AUTO_INCREMENT |
++----------------+
+|         662058 |
++----------------+
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

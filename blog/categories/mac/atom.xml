@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Mac | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-04T18:37:01+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[行単位でファイルを結合するにはpasteコマンドが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/25/parallel-merging/"/>
+    <updated>2013-04-25T22:52:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/25/parallel-merging</id>
+    <content type="html"><![CDATA[<p>2つのファイルを単純に結合するには「cat」コマンドを使えばいいですが、
+行ごとに結合をする場合 「paste」コマンドなるものがあることを知りました。</p>
+
+<h2>pasteコマンドを使ったファイルの連結</h2>
+
+<p>fileAとfileBをpasteコマンドで連結します。</p>
+
+<p><code>sh
+$ paste fileA.txt fileB.txt &gt; fileC.txt
+</code></p>
+
+<p>fileA.txt
+<code>
+AAA
+BBB
+CCC
+</code></p>
+
+<p>fileB.txt
+<code>
+111
+222
+333
+</code></p>
+
+<h3>出力結果</h3>
+
+<p>以下のフォーマットで出力してくれます。素敵！</p>
+
+<p>fileC.txt
+<code>
+AAA 111
+BBB 222
+CCC 333
+</code></p>
+
+<p>区切り文字はデフォルトはタブですが -d [区切り文字] オプションを指定することでカンマなどで区切ることができます。</p>
+
+<h2>区切り文字をカンマに</h2>
+
+<p><code>
+$ paste -d , fileA.txt fileB.txt &gt; fileC.txt
+</code></p>
+
+<h3>出力結果</h3>
+
+<p>fileC.txt
+<code>
+AAA,111
+BBB,222
+CCC,333
+</code></p>
+
+<p>使う機会はそれほどないかもしれませんが、知っておくと楽できそうです。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[PHPのインストールでコンパイルエラーが発生する on Mac OSX]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/22/php-compilation-failed-on-mac-osx/"/>
+    <updated>2013-04-22T15:43:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/22/php-compilation-failed-on-mac-osx</id>
+    <content type="html"><![CDATA[<p>普段、開発環境は仮想マシン上にしか作らないのだが検証の必要があってローカルにPHPをインストールしようとしたところ
+コンパイル時に以下のエラーが発生した。</p>
+
+<h2>``` sh</h2>
+
+<h2>|  BUILD ERROR  |</h2>
+
+<p>Here are the last 10 lines from the log:</p>
+
+<hr />
+
+<p>  &ldquo;_sk_shift&rdquo;, referenced from:</p>
+
+<pre><code>  _load_all_certs_from_file in openssl.o
+</code></pre>
+
+<p>  &ldquo;_sk_value&rdquo;, referenced from:</p>
+
+<pre><code>  _zif_openssl_csr_new in openssl.o
+  _zif_openssl_pkcs7_verify in openssl.o
+  _php_openssl_parse_config in openssl.o
+  _php_openssl_sockop_set_option in xp_ssl.o
+</code></pre>
+
+<p>ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)</p>
+
+<h2>make: *** [sapi/cli/php] Error 1</h2>
+
+<p>```</p>
+
+<p><a href="https://github.com/CHH/phpenv/issues/22#issuecomment-1672712://github.com/CHH/phpenv/issues/22#issuecomment-16727120">同様の現象</a>に悩んでる方がいてそのコメントにOpenSSLのバージョンあげろと書いてあったので
+その通りにしてみたらインストールできた。</p>
+
+<h2>OpenSSLのアップデート方法</h2>
+
+<p>``` sh
+$ brew install openssl
+$ brew link openssl &mdash;force
+$ exec $SHELL -l
+$ openssl version
+OpenSSL 1.0.1e 11 Feb 2013</p>
+
+<p>```</p>
+
+<p>インストールできたついでに初めてコメントを書いてみたが自身の英語力がなくて泣けてくる。</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,359 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Php | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-04T18:37:01+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[Slim Framework]サブディレクトリにインストールした場合のリダイレクト方法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory/"/>
+    <updated>2014-01-06T22:07:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory</id>
+    <content type="html"><![CDATA[<p>簡単なWebアプリを作る機会があったので、PHPのマイクロフレームワークの一つである<a href="http://docs.slimframework.com">Slim Framework</a>を触ってみた。</p>
+
+<p>そこでサブディレクトリにインストールした場合のリダイレクト方法で少しハマったので共有しておく。</p>
+
+<h2>環境</h2>
+
+<p>Slim 2.4.0</p>
+
+<h2>getRootUriを利用する</h2>
+
+<p>Slim_Http_Request::getRootUriはサブディレクトリ名を返すのでそれを利用しリダイレクトを行う。</p>
+
+<p>ex) サブディレクトリ名がslimの場合、「/slim」という文字列を返す。</p>
+
+<p>``` php
+$app->get(&lsquo;/index&rsquo;,  function () use ($app) {</p>
+
+<pre><code>$app-&gt;redirect($app-&gt;request-&gt;getRootUri() . '/hoge' );
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>urlForを利用する</h2>
+
+<p>Slimはrouteに任意の名前を割り当てることができ、urlForでURLを生成することができる。</p>
+
+<p>``` php
+$app->get(&lsquo;/index&rsquo;,  function () use ($app) {</p>
+
+<pre><code>$app-&gt;render('index.php');
+</code></pre>
+
+<p>})&ndash;>name(&lsquo;index&rsquo;);</p>
+
+<p>$app->get(&lsquo;/edit&rsquo;,  function () use ($app) {</p>
+
+<pre><code>$app-&gt;redirect($app-&gt;urlFor('index'));
+</code></pre>
+
+<p>}
+```</p>
+
+<p>これでインストール先がドキュメントルートだろうが、サブディレクトリだろうがコードを変える必要はなくなる。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://docs.slimframework.com/#Route-Names">Slim Framework Documentation</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Php]連想配列を特定のキーの同じ値でグルーピング]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value/"/>
+    <updated>2013-12-18T22:36:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value</id>
+    <content type="html"><![CDATA[<p>連想配列を特定キーの同じ値でグルーピングする方法。</p>
+
+<p>``` php
+&lt;?php</p>
+
+<p>$arr = array(</p>
+
+<pre><code>array(
+    'name' =&gt; 'yamada',
+    'age'  =&gt; '20'
+),
+array(
+    'name' =&gt; 'satou',
+    'age'  =&gt; '20'
+),
+array(
+    'name' =&gt; 'suzuki',
+    'age'  =&gt; '30'
+),
+array(
+    'name' =&gt; 'tanaka',
+    'age'  =&gt; '40'
+)
+</code></pre>
+
+<p>);</p>
+
+<p>function groupArray($arr, $key) {</p>
+
+<pre><code>$retval = array();
+
+foreach($arr as $value) {
+    $group = $value[$key];
+
+    if (!isset($retval[$group])) {
+        $retval[$group] = array();
+    }
+
+    $retval[$group][] = $value;
+}
+
+return $retval;
+</code></pre>
+
+<p>}</p>
+
+<p>var_dump(groupArray($arr, &lsquo;age&rsquo;));
+```</p>
+
+<h3>結果</h3>
+
+<p>``` php</p>
+
+<p>array(3) {
+  [20]=>
+  array(2) {</p>
+
+<pre><code>[0]=&gt;
+array(2) {
+  ["name"]=&gt;
+  string(6) "yamada"
+  ["age"]=&gt;
+  string(2) "20"
+}
+[1]=&gt;
+array(2) {
+  ["name"]=&gt;
+  string(5) "satou"
+  ["age"]=&gt;
+  string(2) "20"
+}
+</code></pre>
+
+<p>  }
+  [30]=>
+  array(1) {</p>
+
+<pre><code>[0]=&gt;
+array(2) {
+  ["name"]=&gt;
+  string(6) "suzuki"
+  ["age"]=&gt;
+  string(2) "30"
+}
+</code></pre>
+
+<p>  }
+  [40]=>
+  array(1) {</p>
+
+<pre><code>[0]=&gt;
+array(2) {
+  ["name"]=&gt;
+  string(6) "tanaka"
+  ["age"]=&gt;
+  string(2) "40"
+}
+</code></pre>
+
+<p>  }
+}
+```</p>
+
+<p>ageキーの同じ値でグルーピングされていることが確認できます。そもそも(ry</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CakePHP]モデルのコールバックを無効化にする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback/"/>
+    <updated>2013-09-25T21:59:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback</id>
+    <content type="html"><![CDATA[<p>モデルの<a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html">コールバックメソッド</a>が様々ありますが、無効化したい場合があります。</p>
+
+<p>find, save共に第２引数にcallbacksをキーとした配列を渡すことでモデルのコールバック実行の可否を伝えることが可能です。</p>
+
+<h2>find(beforeFind, afterFind共に無効化)</h2>
+
+<p>``` php
+$this->find(&lsquo;first&rsquo;, array(</p>
+
+<pre><code>'callbacks' =&gt; false
+</code></pre>
+
+<p>));
+```</p>
+
+<h2>find(beforeFindのみ有効)</h2>
+
+<p>``` php
+$this->find(&lsquo;first&rsquo;, array(</p>
+
+<pre><code>'callbacks' =&gt; 'before'
+</code></pre>
+
+<p>));
+```</p>
+
+<h2>find(afterFindのみ有効)</h2>
+
+<p>``` php
+$this->find(&lsquo;first&rsquo;, array(</p>
+
+<pre><code>'callbacks' =&gt; 'after'
+</code></pre>
+
+<p>));
+```</p>
+
+<h2>save(beforeSave, afterSave共に無効化)</h2>
+
+<p>``` php
+$this->save($data, array(</p>
+
+<pre><code>'callbacks' =&gt; false
+</code></pre>
+
+<p>));
+```</p>
+
+<h2>save(beforeSaveのみ有効)</h2>
+
+<p>``` php
+$this->save($data, array(</p>
+
+<pre><code>'callbacks' =&gt; 'before'
+</code></pre>
+
+<p>));
+```</p>
+
+<h2>save(afterSaveのみ有効)</h2>
+
+<p>``` php
+$this->save($data, array(</p>
+
+<pre><code>'callbacks' =&gt; 'after'
+</code></pre>
+
+<p>));
+```</p>
+
+<p>という小ネタ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[レスポンスヘッダのPHPのバージョン情報を隠す]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/24/hide-php-version/"/>
+    <updated>2013-04-24T22:33:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/24/hide-php-version</id>
+    <content type="html"><![CDATA[<p>ほんとに今更感があるが、ちょっとしたことでもブログに書いておこうと思う。</p>
+
+<p>親切心からかPHPはデフォルトでレスポンスヘッダにPHPのバージョン情報を出力しています。</p>
+
+<p><code>
+HTTP/1.1 200 OK
+Date: Wed,  24 Apr 2013 13:46:59 GMT
+Server: Apache
+X-Powered-By: PHP/5.2.0
+Content-Length: 2558
+Content-Type: text/html; charset=UTF-8
+</code></p>
+
+<h2>PHPのバージョン出力を抑制する</h2>
+
+<p>PHPのバージョン情報が出力されると、そのバージョンの脆弱性を狙った攻撃を受ける可能性がある為、PHPのバージョン情報を出力しないよう設定行います。</p>
+
+<p>php.ini に次の設定を加え、Apache or Nginx の再起動します。</p>
+
+<p><code>
+expose_php=Off
+</code></p>
+
+<h3>設定を加えた後のレスポンスヘッダ</h3>
+
+<p>```
+HTTP/1.1 200 OK
+Date: Wed,  24 Apr 2013 13:46:59 GMT
+Server: Apache
+Content-Length: 2558
+Content-Type: text/html; charset=UTF-8
+&hellip;</p>
+
+<p>```</p>
+
+<p>バージョン情報が出力されていないことが確認できます。
+セキュリティ上 Webサーバのバージョン情報も抑制したほうがよいでしょう。</p>
+
+<h2>ヘッダ情報の確認方法</h2>
+
+<p>以下の方法で簡単にヘッダ情報を確認できます。</p>
+
+<p>wgetコマンドでも確認できますがmacはデフォルトではwgetコマンドがインストールされていないのでcurlを利用するのがいいと思います。Winはtelnet?</p>
+
+<p><code>
+curl -I http://hoge.com
+</code></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ld: Library Not Found for -lltdl]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/22/ld-library-not-found-for-lltdl/"/>
+    <updated>2013-04-22T20:04:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/22/ld-library-not-found-for-lltdl</id>
+    <content type="html"><![CDATA[<p>MacでPHP5.3.24をインストールしようとしたらコンパイル時に以下のエラーが発生した。</p>
+
+<h2>``` sh</h2>
+
+<h2>|  BUILD ERROR  |</h2>
+
+<p>Here are the last 10 lines from the log:</p>
+
+<hr />
+
+<p>/var/tmp/php-build/source/5.3.24/Zend/zend_objects.c:96: warning: assignment discards qualifiers from pointer target type
+/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c: In function ‘zend_get_property_guard’:
+/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:301: warning: passing argument 3 of ‘zend_unmangle_property_name’ from incompatible pointer type
+/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:301: warning: passing argument 4 of ‘zend_unmangle_property_name’ from incompatible pointer type
+/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:304: warning: assignment discards qualifiers from pointer target type
+/var/tmp/php-build/source/5.3.24/sapi/apache2handler/sapi_apache2.c: In function ‘php_handler’:
+/var/tmp/php-build/source/5.3.24/sapi/apache2handler/sapi_apache2.c:675: warning: format ‘%u’ expects type ‘unsigned int’,  but argument 3 has type ‘size_t’
+ld: library not found for -lltdl
+collect2: ld returned 1 exit status</p>
+
+<h2>make: *** [libs/libphp5.bundle] Error 1</h2>
+
+<p>```</p>
+
+<h2>libtoolのインストール</h2>
+
+<p>昔Linuxで似たエラーを経験したことがあったので「libtool」をいれる。</p>
+
+<p><code>sh
+$ brew install libtool
+</code></p>
+
+<p>これで無事インストールができた。このブログ全然コード書いてないですね。</p>
+]]></content>
+  </entry>
+  
+</feed>

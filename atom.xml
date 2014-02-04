@@ -1,16 +1,1963 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://garamon.github.io/atom.xml" rel="self"/>
-  <link href="http://garamon.github.io/"/>
-  <updated>2014-02-04T18:23:29+09:00</updated>
-  <id>http://garamon.github.io/</id>
+  <title><![CDATA[Code Life]]></title>
+  <link href="http://blog.code-life.net/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-04T18:37:01+09:00</updated>
+  <id>http://blog.code-life.net/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
-    
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[IntelliJ] vim-easymotionぽいことができるAceJumpプラグインが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2014/01/06/using-vim-easymotion-in-intellij/"/>
+    <updated>2014-01-06T23:21:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/01/06/using-vim-easymotion-in-intellij</id>
+    <content type="html"><![CDATA[<p>IntelliJ IDEA 13がリリースされ先日UpgradeついでにPluginを整理していたところ、Acejumpなるプラグインを発見し便利だったって話。</p>
+
+<p>なにができるかっていうとVimのプラグイン<a href="https://github.com/Lokaltog/vim-easymotion">easymotion</a>的なことができる。</p>
+
+<p>ということでデモ。</p>
+
+<h2>Demo</h2>
+
+<p>&ldquo;ctrl + ;&#8221;を入力、続けて任意の1文字を入力すると該当箇所にラベルが振られる。ハイライトされたアルファベットを入力するとその箇所に移動する。</p>
+
+<p><img src="http://blog.code-life.net/images/acejump.gif" width="600" height="400"></p>
+
+<h2>Install</h2>
+
+<p><code>Preferences</code> | <code>Plugins</code> | <code>Browse Repositories</code> | <code>AceJump</code> を選択しインストール</p>
+
+<h2>Keymap</h2>
+
+<p>キーマップが気に入らない場合は、</p>
+
+<p><code>Preferences</code> | <code>Keymap</code> | <code>Plug-ins</code> | <code>AceJump</code> | <code>Ace Jump</code> から好きなキーマップを割り当てることができる。</p>
+
+<p>AceJumpは WebStorm/PhpStorm, RubyMine, Pycharm等からも利用できるみたい。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://johnlindquist.com/2012/08/14/ace_jump.html">ACE JUMP</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[homebrew undefined method `to_sym' for nil:NilClass]]></title>
+    <link href="http://blog.code-life.net/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass/"/>
+    <updated>2014-01-06T22:40:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass</id>
+    <content type="html"><![CDATA[<p>brew updateをしたところ、下記のエラーが出力された。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Error: undefined method `to_sym' for nil:NilClass
+</span><span class='line'>Please report this bug:
+</span><span class='line'>    https://github.com/mxcl/homebrew/wiki/troubleshooting
+</span><span class='line'>    /usr/local/Library/Homebrew/cmd/update.rb:111:in `report'
+</span><span class='line'>    /usr/local/Library/Homebrew/cmd/update.rb:109:in `each_line'
+</span><span class='line'>    /usr/local/Library/Homebrew/cmd/update.rb:109:in `report'
+</span><span class='line'>    /usr/local/Library/Homebrew/cmd/update.rb:23:in `update'
+</span><span class='line'>    /usr/local/Library/brew.rb:95:in `send'
+</span><span class='line'>    /usr/local/Library/brew.rb:95</span></code></pre></td></tr></table></div></figure>
+
+
+<p>もう一度 brew update を行えば問題なく更新された。
+homebrewのバグだそう。</p>
+
+<p>対象のhomebrewのバージョンは確認するの忘れた&hellip;</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/Homebrew/homebrew/issues/24286">undefined method `to_sym&#8217; for nil:NilClass</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Slim Framework]サブディレクトリにインストールした場合のリダイレクト方法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory/"/>
+    <updated>2014-01-06T22:07:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory</id>
+    <content type="html"><![CDATA[<p>簡単なWebアプリを作る機会があったので、PHPのマイクロフレームワークの一つである<a href="http://docs.slimframework.com">Slim Framework</a>を触ってみた。</p>
+
+<p>そこでサブディレクトリにインストールした場合のリダイレクト方法で少しハマったので共有しておく。</p>
+
+<h2>環境</h2>
+
+<p>Slim 2.4.0</p>
+
+<h2>getRootUriを利用する</h2>
+
+<p>Slim_Http_Request::getRootUriはサブディレクトリ名を返すのでそれを利用しリダイレクトを行う。</p>
+
+<p>ex) サブディレクトリ名がslimの場合、「/slim」という文字列を返す。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/index&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getRootUri</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;/hoge&#39;</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>urlForを利用する</h2>
+
+<p>Slimはrouteに任意の名前を割り当てることができ、urlForでURLを生成することができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/index&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;index.php&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">})</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/edit&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlFor</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでインストール先がドキュメントルートだろうが、サブディレクトリだろうがコードを変える必要はなくなる。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://docs.slimframework.com/#Route-Names">Slim Framework Documentation</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FFMpegでHttp Live Streaming(HLS)向けにセグメント化する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/"/>
+    <updated>2013-12-19T22:45:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/">CentOSにm3u8-segmenterをインストールする</a>がほんのちょっぴり人気なので、FFMpeg単体でもセグメントできるよって話です。</p>
+
+<h2>FFMpegでSegment化</h2>
+
+<p>コンテンツは既に準備されているものとし、セグメント化のみ行います。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ffmpeg -i sample.mp4 -acodec copy -vcodec copy <span class="se">\</span>
+</span><span class='line'>  -vbsf h264_mp4toannexb <span class="se">\</span>
+</span><span class='line'>  -map 0 <span class="se">\</span>
+</span><span class='line'>  -f segment <span class="se">\</span>
+</span><span class='line'>  -segment_format mpegts <span class="se">\</span>
+</span><span class='line'>  -segment_time 5 <span class="se">\</span>
+</span><span class='line'>  -segment_list playlist.m3u8 <span class="se">\</span>
+</span><span class='line'>  -segment_list_flags -cache <span class="se">\</span>
+</span><span class='line'>  stream_%d.ts
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>オプションについて</h3>
+
+<ul>
+<li>-acodec copy -vcodec copy
+
+<ul>
+<li>コンテンツのコーデックをコピー。トランスコードは行われない。</li>
+</ul>
+</li>
+<li>-segment_time
+
+<ul>
+<li>分割秒数の設定。5秒を設定したとしても５秒ジャストでセグメント化されるわけではない。</li>
+</ul>
+</li>
+<li>-segment_list playlist.m3u8
+
+<ul>
+<li>プレイリストの出力先</li>
+</ul>
+</li>
+<li>-segment_list_flags -cache
+
+<ul>
+<li>キャッシュ(#EXT-X-ALLOW-CACHE)の無効化。デフォルトでは有効。</li>
+</ul>
+</li>
+</ul>
+
+
+<p>iPhoneやAndroidで再生し挙動を確認をしましたが、FFMpeg内蔵のsegmenterはm3u8-segmenterより優秀ですね。</p>
+
+<p>気が向いたらHLSの暗号化についても書こうかな。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://rest-term.com/archives/3008/">NginxとFFmpegを利用したHTTP Live Streaming配信</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CentOS]システム情報(メモリ情報、バージョン、カーネルのバージョン、CPU情報)を確認する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/18/centos-linux-system-information/"/>
+    <updated>2013-12-18T22:51:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/18/centos-linux-system-information</id>
+    <content type="html"><![CDATA[<h2>メモリ情報の確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/meminfo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>MemTotal:        1020532 kB
+</span><span class='line'>MemFree:          855980 kB
+</span><span class='line'>Buffers:           36860 kB
+</span><span class='line'>Cached:            59728 kB
+</span><span class='line'>
+</span><span class='line'>... 省略 ...
+</span><span class='line'>
+</span><span class='line'>HugePages_Free:        0
+</span><span class='line'>HugePages_Rsvd:        0
+</span><span class='line'>HugePages_Surp:        0
+</span><span class='line'>Hugepagesize:       2048 kB
+</span><span class='line'>DirectMap4k:        8128 kB
+</span><span class='line'>DirectMap2M:     1040384 kB
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>バージョン確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /etc/redhat-release
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>CentOS release 6.4 (Final)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>カーネルのバージョン確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/version
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Linux version 2.6.32-358.2.1.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-3) (GCC) ) #1 SMP Wed Mar 13 00:26:49 UTC 2013
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こっちでも確認できる</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>uname -a
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Linux localhost.localdomain 2.6.32-358.2.1.el6.x86_64 #1 SMP Wed Mar 13 00:26:49 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>CPU情報の確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/cpuinfo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>processor   : 0
+</span><span class='line'>vendor_id   : GenuineIntel
+</span><span class='line'>cpu family  : 6
+</span><span class='line'>model       : 58
+</span><span class='line'>model name  : Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+</span><span class='line'>stepping    : 9
+</span><span class='line'>cpu MHz     : 3405.814
+</span><span class='line'>cache size  : 6144 KB
+</span><span class='line'>fpu     : yes
+</span><span class='line'>fpu_exception   : yes
+</span><span class='line'>cpuid level : 5
+</span><span class='line'>wp      : yes
+</span><span class='line'>flags       : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx rdtscp lm constant_tsc up rep_good pni monitor ssse3 lahf_lm
+</span><span class='line'>bogomips    : 6811.62
+</span><span class='line'>clflush size    : 64
+</span><span class='line'>cache_alignment : 64
+</span><span class='line'>address sizes   : 36 bits physical,  48 bits virtual
+</span><span class='line'>power management:
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>地味に忘れる。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[php]連想配列を特定のキーの同じ値でグルーピング]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value/"/>
+    <updated>2013-12-18T22:36:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value</id>
+    <content type="html"><![CDATA[<p>連想配列を特定キーの同じ値でグルーピングする方法。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$arr</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yamada&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;20&#39;</span>
+</span><span class='line'>    <span class="p">),</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;satou&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;20&#39;</span>
+</span><span class='line'>    <span class="p">),</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;suzuki&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;30&#39;</span>
+</span><span class='line'>    <span class="p">),</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tanaka&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;40&#39;</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">groupArray</span><span class="p">(</span><span class="nv">$arr</span><span class="p">,</span> <span class="nv">$key</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$retval</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">foreach</span><span class="p">(</span><span class="nv">$arr</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$group</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">[</span><span class="nv">$key</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">][]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$retval</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">var_dump</span><span class="p">(</span><span class="nx">groupArray</span><span class="p">(</span><span class="nv">$arr</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">array</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;yamada&quot;</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;20&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="s2">&quot;satou&quot;</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;20&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="p">[</span><span class="mi">30</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;suzuki&quot;</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;30&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="p">[</span><span class="mi">40</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;tanaka&quot;</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;40&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ageキーの同じ値でグルーピングされていることが確認できます。そもそも(ry</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[bash]連番のディレクトリを作成する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories/"/>
+    <updated>2013-12-18T22:22:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories</id>
+    <content type="html"><![CDATA[<p>dir_1, dir_2, dir_3&hellip;と連番でディレクトリを作成したい場合は以下で一発。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir dir_<span class="o">{</span>1..15<span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>普段書かないので普通に忘れる。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/"/>
+    <updated>2013-12-09T23:07:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox</id>
+    <content type="html"><![CDATA[<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>JQuery2.0.3</li>
+</ul>
+
+
+<h2>checkedプロパティを変更</h2>
+
+<p>見たら分かるんだけど、期待する動作はコンソールに「checkbox change!!」と出力されること。</p>
+
+<p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;checkbox1&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;example&quot;</span> <span class="na">value=</span><span class="s">&quot;hoge&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;checkbox1&quot;</span><span class="nt">&gt;</span>Sample CheckBox<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">})();</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>triggerでイベントを発行</h2>
+
+<p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">})();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>イベントの発行元を判断する</h2>
+
+<p>trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。</p>
+
+<p>そんな時は以下のようにしておく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">param</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="c1">// 何らかの処理</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="p">[</span><span class="kc">true</span><span class="p">]);</span>
+</span><span class='line'>    <span class="p">})();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちなみにラジオボタンでも同じです。
+javascript好きになってきた今日この頃。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Vagrant]パブリックネットワークの設定]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/01/vagrant-configure-public-network/"/>
+    <updated>2013-12-01T15:39:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/01/vagrant-configure-public-network</id>
+    <content type="html"><![CDATA[<p>Vagrantでパブリックネットワークの設定をしようとしたところ、若干ハマったのでメモ。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Vagrant 1.3.2</li>
+</ul>
+
+
+<h2>Public Network</h2>
+
+<p><a href="http://docs.vagrantup.com/v2/networking/public_network.html">公式のドキュメント</a>通りに設定し、vagrant reload すれば設定が反映されます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="ss">:public_network</span><span class="p">,</span>  <span class="ss">:bridge</span> <span class="o">=&gt;</span> <span class="s1">&#39;en1: Wi-Fi (AirPort)&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Xdubug</h2>
+
+<p>public networkで起動したらサイトがクソ重くなる&hellip;</p>
+
+<p>色々調べたところ <a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a> に記載されてる方法で解決することができました。</p>
+
+<h3>xdubug.ini</h3>
+
+<p>xdubug.ini もしくは php.iniに以下の一文を追加</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>xdebug.remote_connect_back <span class="o">=</span> 1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Xdebug使ってる人は要注意です。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a></p>
+
+<p><a href="http://stackoverflow.com/questions/18241065/auto-setting-xdebug-remote-host-ip-address-with-vagrant-puppet">Auto setting xdebug.remote_host ip address with vagrant/puppet</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Vagrant]共有ディレクトリのマウントが失敗する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/09/26/vagrant-mounting-failed/"/>
+    <updated>2013-09-26T22:58:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/09/26/vagrant-mounting-failed</id>
+    <content type="html"><![CDATA[<h2>環境</h2>
+
+<ul>
+<li><p>HOST</p>
+
+<ul>
+<li>Mac OS X 10.8</li>
+<li>Vagrant 1.3.2</li>
+<li>Virtual Box 4.2.18</li>
+<li>ruby 1.9.3p392</li>
+</ul>
+</li>
+<li><p>GUEST</p>
+
+<ul>
+<li>CentOS 6.3 minimal</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>エラー内容</h2>
+
+<p>vagrantから新規仮想マシンを作成し、ホストOSとゲストOSの共有ディレクトリの設定後、起動させたところ
+下記のエラーが出力された。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>The following SSH <span class="nb">command </span>responded with a non-zero <span class="nb">exit </span>status.
+</span><span class='line'>Vagrant assumes that this means the <span class="nb">command </span>failed!
+</span><span class='line'>
+</span><span class='line'>mount -t vboxsf -o <span class="nv">uid</span><span class="o">=</span><span class="sb">`</span>id -u vagrant<span class="sb">`</span>,gid<span class="o">=</span><span class="sb">`</span>getent group vagrant | cut -d: -f3<span class="sb">`</span> /share /share
+</span><span class='line'>
+</span><span class='line'>Stdout from the <span class="nb">command</span>:
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>Stderr from the <span class="nb">command</span>:
+</span><span class='line'>
+</span><span class='line'>/sbin/mount.vboxsf: mounting failed with the error: No such device
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Guest additionsが正常にインストールされていないようなので /var/log/vboxadd-install.log を確認する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">test</span> -e include/linux/autoconf.h -a -e include/config/auto.conf <span class="o">||</span> <span class="o">(</span>            <span class="se">\</span>
+</span><span class='line'>        <span class="nb">echo</span>;                                                           <span class="se">\</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;  ERROR: Kernel configuration is invalid.&quot;</span>;               <span class="se">\</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;         include/linux/autoconf.h or include/config/auto.conf are missing.&quot;</span>;      <span class="se">\</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;         Run &#39;make oldconfig &amp;&amp; make prepare&#39; on kernel src to fix it.&quot;</span>;  <span class="se">\</span>
+</span><span class='line'>        <span class="nb">echo</span>;                                                           <span class="se">\</span>
+</span><span class='line'>        /bin/false<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>automake, autoconf がインストールされてない&hellip;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo yum install automake autoconf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Guest additionsの再インストール</h2>
+
+<p>ログアウト後</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant vbguest --do install <span class="c"># requier vagrant-vbguest</span>
+</span><span class='line'><span class="nv">$ </span>vagrant reload
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで共有設定が反映される。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CakePHP]モデルのコールバックを無効化にする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback/"/>
+    <updated>2013-09-25T21:59:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback</id>
+    <content type="html"><![CDATA[<p>モデルの<a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html">コールバックメソッド</a>が様々ありますが、無効化したい場合があります。</p>
+
+<p>find, save共に第２引数にcallbacksをキーとした配列を渡すことでモデルのコールバック実行の可否を伝えることが可能です。</p>
+
+<h2>find(beforeFind, afterFind共に無効化)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>find(beforeFindのみ有効)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>find(afterFindのみ有効)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;after&#39;</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>save(beforeSave, afterSave共に無効化)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>save(beforeSaveのみ有効)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>save(afterSaveのみ有効)</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;after&#39;</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>という小ネタ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrant1.2.2から1.3.2にあげたらvagrant-vbguestが動作しない]]></title>
+    <link href="http://blog.code-life.net/blog/2013/09/18/vagrant-vbguest-update/"/>
+    <updated>2013-09-18T21:57:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/09/18/vagrant-vbguest-update</id>
+    <content type="html"><![CDATA[<p>久しぶりに<a href="http://www.vagrantup.com/">Vagrant</a>を触ったついでにupdateした結果 <a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>がエラー吐く。</p>
+
+<p>エラー吐くどころかvagrant upもできない始末。
+<a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>自身もupdateしていたので反映させてみました。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Mac OS X 10.8</li>
+<li>Vagrant 1.3.2</li>
+<li>Virtual Box 4.2.18</li>
+<li>ruby 1.9.3p392</li>
+</ul>
+
+
+<h2>エラー内容</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>/Users/noto/.vagrant.d/gems/gems/vagrant-vbguest-0.8.0/lib/vagrant-vbguest/vagrant_compat.rb:7:in <span class="sb">`</span>&lt;top <span class="o">(</span>required<span class="o">)</span>&gt;<span class="s1">&#39;: undefined method `[]&#39;</span> <span class="k">for </span>nil:NilClass <span class="o">(</span>NoMethodError<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Global Configuration</h2>
+
+<p><a href="http://blog.code-life.net/blog/2013/06/10/the-guest-additions-on-this-vm-do-not-match-the-installed-version-of-virtualbox-on-vagrant/">以前</a>設定したグローバルの設定をコメントアウト</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vi ~/.vagrant.d/Vagrantfile
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Vagrant.configure(&quot;2&quot;) do |config|</span>
+</span><span class='line'><span class="c1">#  require &#39;vagrant-vbguest&#39; unless defined? config.vbguest</span>
+</span><span class='line'><span class="c1">#  config.vbguest.auto_update = false</span>
+</span><span class='line'><span class="c1">#end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Update vagrant-vbguest</h2>
+
+<p>さくっと一発</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant plugin update vagrant-vbguest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Global Configuration再び</h2>
+
+<p>updateが完了したら、globalの設定のコメントを外します。これでエラーの出力がなくなるはずです。</p>
+
+<p>ちなみに<a href="https://github.com/dotless-de/vagrant-vbguest/blob/master/Readme.md">README</a>に記載されてる設定では以前と同様にエラーになりました。</p>
+
+<h3>エラーの内容はこちら</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>Vagrant failed to initialize at a very early stage:
+</span><span class='line'>
+</span><span class='line'>There was an error loading a Vagrantfile. The file being loaded
+</span><span class='line'>and the error message are shown below. This is usually caused by
+</span><span class='line'>a syntax error.
+</span><span class='line'>
+</span><span class='line'>Path: /Users/noto/.vagrant.d/Vagrantfile
+</span><span class='line'>Message: uninitialized constant VagrantVbguest::Config
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/dotless-de/vagrant-vbguest/issues/73">uninitialized constant VagrantVbguest::Config when using global configuration</a>でも同じこと言われてます。</p>
+
+<h2>Guest Additionsのバージョン確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant up <span class="c"># 起動させていないなら</span>
+</span><span class='line'><span class="nv">$ </span>vagrant vbguest --status
+</span><span class='line'>GuestAdditions versions on your host <span class="o">(</span>4.2.18<span class="o">)</span> and guest <span class="o">(</span>4.2.12<span class="o">)</span> <span class="k">do </span>not match.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Update Guestadditions</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant up <span class="c"># 起動させていないなら</span>
+</span><span class='line'><span class="nv">$ </span>vagrant vbguest --do install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定すべて外してstatusとdoコマンド利用すればいいんじゃないかなと思ってきました。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Vagrant] 仮想マシンのスナップショットとるならvagrant-vbox-snapshotが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2013/06/12/vagrant-vbox-snapshot/"/>
+    <updated>2013-06-12T21:25:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/06/12/vagrant-vbox-snapshot</id>
+    <content type="html"><![CDATA[<p>vagrant1.2で仮想マシンのスナップショットをとりたかったので調べたところ <a href="https://github.com/dergachev/vagrant-vbox-snapshot">vagrant-vbox-snapshot</a>なるものが公開されていたのでインストールしてみました。</p>
+
+<p>似たプラグインで<a href="https://github.com/ryuzee/sahara">sahara</a>がありますが、sandboxモードで動作させることができるプラグインのようでスナップショットをとる機能はないようです。
+google先生に伺ってもsaharaの記事は多くヒットするのですが、vagrant-vbox-snapshotはあまりヒットしないのは需要がないんですかね。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Mac OS X 10.8</li>
+<li>Vagrant 1.2.2</li>
+<li>Virtual Box 4.2.12</li>
+</ul>
+
+
+<h2>Requirements</h2>
+
+<ul>
+<li>Vagrant 1.1+</li>
+</ul>
+
+
+<h2>インストール</h2>
+
+<p>さくっとインスト</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant plugin install vagrant-vbox-snapshot
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>使い方</h2>
+
+<p><a href="https://github.com/dergachev/vagrant-vbox-snapshot/blob/master/README.md">README</a> に書いてあるまんまですが。</p>
+
+<h2>スナップショットの作成</h2>
+
+<p>スナップショット名を指定して作成します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant snapshot take <span class="o">[</span>NAME<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>スナップショットの一覧</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant snapshot list
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>出力結果</h3>
+
+<p>複数のスナップショットをとっている場合、以下のように出力されます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>   Name: init <span class="o">(</span>UUID: c45af534-e64a-409e-95f7-1a7ef697f7cc<span class="o">)</span>
+</span><span class='line'>      Name: before-AMP <span class="o">(</span>UUID: 97dfc94b-f0ba-45b9-9bc4-c43c8b251d22<span class="o">)</span> *
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>スナップショットに復元</h2>
+
+<p>指定した名前のスナップショットに復元します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant snapshot go <span class="o">[</span>NAME<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>直前のスナップショットに復元</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant snapshot back
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>スナップショットの削除</h2>
+
+<p>指定した名前のスナップショットを削除します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant snapshot delete <span class="o">[</span>NAME<span class="o">]</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ひと通りコマンドを試してみましたが問題なく動作しています。</p>
+
+<p>Vagrant便利っすね。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/dergachev/vagrant-vbox-snapshot#vagrant-vbox-snapshot">vagrant-vbox-snapshot</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Vagrant] VirtualBoxのバージョンとGuest additionsのバージョンが合わない場合の対処法]]></title>
+    <link href="http://blog.code-life.net/blog/2013/06/10/the-guest-additions-on-this-vm-do-not-match-the-installed-version-of-virtualbox-on-vagrant/"/>
+    <updated>2013-06-10T23:33:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/06/10/the-guest-additions-on-this-vm-do-not-match-the-installed-version-of-virtualbox-on-vagrant</id>
+    <content type="html"><![CDATA[<p>遅ればせながらvagrantを触り始めました。今のところ単純なことしかしてないのでほとんど詰まるところはありませんが、仮想マシンを起動した際にVirtualBoxのバージョンとGuest additionsのバージョンが一致しないと怒られたのでその解決方法です。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Mac OS X 10.8</li>
+<li>vagrant 1.2.2</li>
+<li>ruby 1.9.3 (rbenv)</li>
+</ul>
+
+
+<h2>アラート内容</h2>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[default] The guest additions on this VM do not match the installed version of
+</span><span class='line'>VirtualBox! In most cases this is fine,   but in rare cases it can
+</span><span class='line'>cause things such as shared folders to not work properly. If you see
+</span><span class='line'>shared folder errors,   please update the guest additions within the
+</span><span class='line'>virtual machine and reload your VM.
+</span><span class='line'>
+</span><span class='line'>Guest Additions Version: 4.1.18
+</span><span class='line'>VirtualBox Version: 4.2</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>vagrant-vbguest</h2>
+
+<p><a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a> は自動的にGuest Additionsを更新してくれるプラグインです。</p>
+
+<p>このプラグインをインストールし up or reload で自動的に新しいバージョンのGuest Additions がインストールされます。</p>
+
+<h3>Install</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant plugin install vagrant-vbguest
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Configuration</h3>
+
+<p>vagrant-vbguestはインスタンス起動時に毎回自動で更新の確認を行うようなのでグローバルはOFFにして
+利用するプロジェクト場合はOnに設定します。</p>
+
+<h4>Global Configuration</h4>
+
+<p>~/.vagrant.d/ 以下にVagrantfileが存在する場合、この設定ファイルを読みに行くようなのでglobalの設定として
+vagrant-vbguest の自動更新をOFFになるよう設定します。</p>
+
+<p>1.2.2ではDocumentに記載されている方法でエラーが発生したので変更を加えます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vi ~/.vagrant.d/Vagrantfile
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># 1.2.2ではエラーになった</span>
+</span><span class='line'><span class="nb">require</span> <span class="s1">&#39;vagrant-vbguest&#39;</span> <span class="k">unless</span> <span class="n">defined?</span> <span class="ss">VagrantVbguest</span><span class="p">:</span><span class="ss">:Config</span>
+</span><span class='line'><span class="ss">VagrantVbguest</span><span class="p">:</span><span class="ss">:Config</span><span class="o">.</span><span class="n">auto_update</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1"># こっちだとうまくいく</span>
+</span><span class='line'><span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="s2">&quot;2&quot;</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="nb">require</span> <span class="s1">&#39;vagrant-vbguest&#39;</span> <span class="k">unless</span> <span class="n">defined?</span> <span class="n">config</span><span class="o">.</span><span class="n">vbguest</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">vbguest</span><span class="o">.</span><span class="n">auto_update</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ruby殆ど知らないのですがvbguestのconfigを初期化して値を設定してる感じでしょう。</p>
+
+<h4>Project Configuration</h4>
+
+<p>プロジェクト固有の設定です。auto_updateが有効になるよう設定を加えます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vi /path/to/vagrant_project/Vagrantfile
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1"># set auto_update to false,  if do NOT want to check the correct additions</span>
+</span><span class='line'><span class="c1"># version when booting this machine</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vbguest</span><span class="o">.</span><span class="n">auto_update</span> <span class="o">=</span> <span class="kp">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Vagrant up or reload</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant up
+</span><span class='line'>or
+</span><span class='line'><span class="nv">$ </span>vagrant reload
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>すると自動的にGuest Additionsをupdateしてる！素晴らしい。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="o">[</span>default<span class="o">]</span> Setting the name of the VM...
+</span><span class='line'><span class="o">[</span>default<span class="o">]</span> Clearing any previously <span class="nb">set </span>forwarded ports...
+</span><span class='line'><span class="o">[</span>default<span class="o">]</span> Creating shared folders metadata...
+</span><span class='line'><span class="o">[</span>default<span class="o">]</span> Clearing any previously <span class="nb">set </span>network interfaces...
+</span><span class='line'><span class="o">[</span>default<span class="o">]</span> Preparing network interfaces based on configuration...
+</span><span class='line'><span class="o">[</span>default<span class="o">]</span> Forwarding ports...
+</span><span class='line'><span class="o">[</span>default<span class="o">]</span> -- <span class="nv">22</span> <span class="o">=</span>&gt; 2222 <span class="o">(</span>adapter 1<span class="o">)</span>
+</span><span class='line'><span class="o">[</span>default<span class="o">]</span> Booting VM...
+</span><span class='line'><span class="o">[</span>default<span class="o">]</span> Waiting <span class="k">for </span>VM to boot. This can take a few minutes.
+</span><span class='line'><span class="o">[</span>default<span class="o">]</span> VM booted and ready <span class="k">for </span>use!
+</span><span class='line'>GuestAdditions versions on your host <span class="o">(</span>4.2.12<span class="o">)</span> and guest <span class="o">(</span>4.1.18<span class="o">)</span> <span class="k">do </span>not match.
+</span><span class='line'>Loaded plugins: fastestmirror,  presto
+</span><span class='line'>Loading mirror speeds from cached hostfile
+</span><span class='line'> * base: mirror.fairway.ne.jp
+</span><span class='line'>  * extras: mirror.fairway.ne.jp
+</span><span class='line'>   * updates: mirror.fairway.ne.jp
+</span><span class='line'>   Setting up Install Process
+</span><span class='line'>   Package kernel-devel-2.6.32-358.6.2.el6.x86_64 already installed and latest version
+</span><span class='line'>   Package gcc-4.4.7-3.el6.x86_64 already installed and latest version
+</span><span class='line'>   Package 1:make-3.81-20.el6.x86_64 already installed and latest version
+</span><span class='line'>   Package 4:perl-5.10.1-131.el6_4.x86_64 already installed and latest version
+</span><span class='line'>   Nothing to <span class="k">do</span>
+</span><span class='line'><span class="k">   </span>Copy iso file /Applications/VirtualBox.app/Contents/MacOS/VBoxGuestAdditions.iso into the box /tmp/VBoxGuestAdditions.iso
+</span><span class='line'>   Installing Virtualbox Guest Additions 4.2.12 - guest version is 4.1.18
+</span><span class='line'>   Verifying archive integrity... All good.
+</span><span class='line'>   Uncompressing VirtualBox 4.2.12 Guest Additions <span class="k">for </span>Linux............
+</span><span class='line'>   VirtualBox Guest Additions installer
+</span><span class='line'>   Removing installed version 4.1.18 of VirtualBox Guest Additions...
+</span><span class='line'>   Copying additional installer modules ...
+</span><span class='line'>   Installing additional modules ...
+</span><span class='line'>   Removing existing VirtualBox non-DKMS kernel modules<span class="o">[</span>  OK  <span class="o">]</span>
+</span><span class='line'>   Building the VirtualBox Guest Additions kernel modules
+</span><span class='line'>   Building the main Guest Additions module<span class="o">[</span>  OK  <span class="o">]</span>
+</span><span class='line'>   Building the shared folder support module<span class="o">[</span>  OK  <span class="o">]</span>
+</span><span class='line'>   Building the OpenGL support module<span class="o">[</span>  OK  <span class="o">]</span>
+</span><span class='line'>   Doing non-kernel setup of the Guest Additions<span class="o">[</span>  OK  <span class="o">]</span>
+</span><span class='line'>   Starting the VirtualBox Guest Additions <span class="o">[</span>  OK  <span class="o">]</span>
+</span><span class='line'>   Installing the Window System drivers<span class="o">[</span>FAILED<span class="o">]</span>
+</span><span class='line'>   <span class="o">(</span>Could not find the X.Org or XFree86 Window System.<span class="o">)</span>
+</span><span class='line'>   An error occurred during installation of VirtualBox Guest Additions 4.2.12. Some functionality may not work as intended.
+</span><span class='line'>   <span class="o">[</span>default<span class="o">]</span> Configuring and enabling network interfaces...
+</span><span class='line'>   <span class="o">[</span>default<span class="o">]</span> Mounting shared folders...
+</span><span class='line'>   <span class="o">[</span>default<span class="o">]</span> -- /vagrant
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>念のためvagrant sshでログインして確認する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ls /opt
+</span><span class='line'>VBoxGuestAdditions-4.2.12
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>無事新しいバージョンのGuest Additionsがインストールされたことが確認できます。</p>
+
+<h2>補足</h2>
+
+<p><a href="http://blog.code-life.net/blog/2013/09/18/vagrant-vbguest-update/">Vagrant1.2.2から1.3.2にあげたらvagrant-vbguestが動作しない</a></p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a></p>
+
+<p><a href="http://theholyjava.wordpress.com/2012/03/24/note-to-self-how-to-solve-vagrant-destroy-failing-with-error-in-api-call-in-ffi-rb/">Note To Self: What to Do When a Vagrant Machine Stops Working (Destroy or Up Failing)</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[javascript オブジェクトのマージあれこれ]]></title>
+    <link href="http://blog.code-life.net/blog/2013/05/29/javascript-object-merge/"/>
+    <updated>2013-05-29T22:45:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/05/29/javascript-object-merge</id>
+    <content type="html"><![CDATA[<p>最近 javascriptを書く機会が少し増えてきたのでオブジェクトのマージ方法を備忘録的にメモ。</p>
+
+<h2>pure JS</h2>
+
+<h3>通常のマージ</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">merge</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj1</span><span class="p">,</span> <span class="nx">obj2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">obj2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">attrname</span> <span class="k">in</span> <span class="nx">obj2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">obj2</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">attrname</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">obj1</span><span class="p">[</span><span class="nx">attrname</span><span class="p">]</span> <span class="o">=</span> <span class="nx">obj2</span><span class="p">[</span><span class="nx">attrname</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;pigmon&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">city</span><span class="o">:</span> <span class="s1">&#39;tokyo&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">tel</span><span class="o">:</span> <span class="s1">&#39;00-0000-0000&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;garamon&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">city</span><span class="o">:</span> <span class="s1">&#39;osaka&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">sex</span><span class="o">:</span> <span class="s1">&#39;man&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">merge</span><span class="p">(</span><span class="nx">obj1</span><span class="p">,</span> <span class="nx">obj2</span><span class="p">);</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 実行結果</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;garamon&quot;</span><span class="p">,</span> <span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;osaka&quot;</span><span class="p">,</span> <span class="nx">tel</span><span class="o">:</span> <span class="s2">&quot;00-0000-0000&quot;</span><span class="p">,</span> <span class="nx">sex</span><span class="o">:</span> <span class="s2">&quot;man&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>存在しないプロパティのみマージ</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">merge</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">obj1</span><span class="p">,</span> <span class="nx">obj2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">obj2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{};</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">attrname</span> <span class="k">in</span> <span class="nx">obj2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">obj2</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">attrname</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nx">obj1</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">attrname</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">obj1</span><span class="p">[</span><span class="nx">attrname</span><span class="p">]</span> <span class="o">=</span> <span class="nx">obj2</span><span class="p">[</span><span class="nx">attrname</span><span class="p">];</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;pigmon&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">city</span><span class="o">:</span> <span class="s1">&#39;tokyo&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">tel</span><span class="o">:</span> <span class="s1">&#39;00-0000-0000&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;garamon&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">city</span><span class="o">:</span> <span class="s1">&#39;osaka&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">sex</span><span class="o">:</span> <span class="s1">&#39;man&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">merge</span><span class="p">(</span><span class="nx">obj1</span><span class="p">,</span> <span class="nx">obj2</span><span class="p">);</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 実行結果</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;pigmon&quot;</span><span class="p">,</span> <span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;tokyo&quot;</span><span class="p">,</span> <span class="nx">tel</span><span class="o">:</span> <span class="s2">&quot;00-0000-0000&quot;</span><span class="p">,</span> <span class="nx">sex</span><span class="o">:</span> <span class="s2">&quot;man&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>JQuery(1.9.1)</h2>
+
+<h3>通常のマージ</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;pigmon&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">city</span><span class="o">:</span> <span class="s1">&#39;tokyo&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">tel</span><span class="o">:</span> <span class="s1">&#39;00-0000-0000&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;garamon&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">city</span><span class="o">:</span> <span class="s1">&#39;osaka&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">sex</span><span class="o">:</span> <span class="s1">&#39;man&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">obj1</span><span class="p">,</span> <span class="nx">obj2</span><span class="p">);</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 実行結果</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;garamon&quot;</span><span class="p">,</span> <span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;osaka&quot;</span><span class="p">,</span> <span class="nx">tel</span><span class="o">:</span> <span class="s2">&quot;00-0000-0000&quot;</span><span class="p">,</span> <span class="nx">sex</span><span class="o">:</span> <span class="s2">&quot;man&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>再帰的にマージ</h3>
+
+<p>extendの第一引数にtrueを与えると再帰的にマージしてくれる</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;pigmon&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">address</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">city</span><span class="o">:</span> <span class="s1">&#39;tokyo&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="nx">tel</span><span class="o">:</span> <span class="s1">&#39;00-0000-0000&#39;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;garamon&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">address</span><span class="o">:</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">city</span><span class="o">:</span> <span class="s1">&#39;osaka&#39;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">$</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="kc">true</span><span class="p">,</span> <span class="nx">obj1</span><span class="p">,</span> <span class="nx">obj2</span><span class="p">);</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 実行結果</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;garamon&quot;</span><span class="p">,</span> <span class="nx">address</span><span class="o">:</span> <span class="p">{</span><span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;osaka&quot;</span><span class="p">,</span> <span class="nx">tel</span><span class="o">:</span> <span class="s2">&quot;00-0000-0000&quot;</span><span class="p">}}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>underscore.js(1.4.3)</h2>
+
+<h3>通常のマージ</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">obj1</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;pigmon&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">city</span><span class="o">:</span> <span class="s1">&#39;tokyo&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">tel</span><span class="o">:</span> <span class="s2">&quot;00-0000-0000&quot;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nx">name</span><span class="o">:</span> <span class="s1">&#39;garamon&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">city</span><span class="o">:</span> <span class="s1">&#39;osaka&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">sex</span><span class="o">:</span> <span class="s1">&#39;man&#39;</span>
+</span><span class='line'><span class="p">};</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">_</span><span class="p">.</span><span class="nx">extend</span><span class="p">(</span><span class="nx">obj1</span><span class="p">,</span> <span class="nx">obj2</span><span class="p">);</span>
+</span><span class='line'><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">obj1</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// 実行結果</span>
+</span><span class='line'><span class="o">=&gt;</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;garamon&quot;</span><span class="p">,</span> <span class="nx">city</span><span class="o">:</span> <span class="s2">&quot;osaka&quot;</span><span class="p">,</span> <span class="nx">tel</span><span class="o">:</span> <span class="s2">&quot;00-0000-0000&quot;</span><span class="p">,</span> <span class="nx">sex</span><span class="o">:</span> <span class="s2">&quot;man&quot;</span><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちなみにunderscore.jsでは再帰的にマージはしてくれないよう。</p>
+
+<p><a href="https://github.com/BenHall/underscore/commit/83133be8055dbecf23a27b866adbbae95b2140b7">これ</a>を見てるとできてるっぽいんだけど&hellip;</p>
+
+<h2>参考</h2>
+
+<p><a href="http://api.jquery.com/jQuery.extend/">jQuery.extend()</a></p>
+
+<p><a href="http://underscorejs.org/#extend">underscorejs extend</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mousemoveイベントにbindした処理の実行間隔を制御する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval/"/>
+    <updated>2013-05-29T21:31:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval</id>
+    <content type="html"><![CDATA[<p>制御するってのは言い過ぎですが、mousemoveイベントにbindした処理の実行間隔を空けたい場合、setIntervalで実行フラグのオン・オフを行い実行間隔を調整します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">enableHandler</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;body&quot;</span><span class="p">).</span><span class="nx">mousemove</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nx">enableHandler</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="c1">// 何らかの処理</span>
+</span><span class='line'>            <span class="nx">enableHandler</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="kd">var</span> <span class="nx">timer</span> <span class="o">=</span> <span class="nb">window</span><span class="p">.</span><span class="nx">setInterval</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">enableHandler</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">},</span> <span class="mi">100</span><span class="p">);</span>
+</span><span class='line'><span class="p">})();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>偉大なるは先人達の知恵。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://stackoverflow.com/questions/4648444/jquery-fire-mousemove-events-less-often">jQuery: Fire mousemove events less often</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Bash 一時的にaliasを無効にする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/05/01/temporarily-ignore-alias/"/>
+    <updated>2013-05-01T23:11:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/05/01/temporarily-ignore-alias</id>
+    <content type="html"><![CDATA[<p>aliasは便利ですが、aliasを解除したコマンドを使用したい場合があります。</p>
+
+<p>そんなときは頭に \ (バックスラッシュ) を付けるとaliasを一時的に無効にしてくれます。</p>
+
+<h2>一時的にaliasを無効にする</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="se">\c</span>p -f hoge/ piyo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>知らんかった&hellip;</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CentOSにnode.jsをインストールする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/29/install-node-on-centos/"/>
+    <updated>2013-04-29T00:13:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/29/install-node-on-centos</id>
+    <content type="html"><![CDATA[<p>JavaScript力向上の為、node.jsで何か作ってみようと思いインストールしてみた。</p>
+
+<h2>環境</h2>
+
+<p>CentOS 6.3</p>
+
+<h2>依存パッケージのインストール</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install git openssh-devel
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>nvm(node.jsバージョン管理)のインストール</h2>
+
+<p>node.jsのバージョン管理は<a href="https://github.com/creationix/nvm">nvm</a>の他に<a href="https://github.com/hokaccha/nodebrew">nodebrew</a>や<a href="https://github.com/ekalinin/nodeenv">nodeenv</a>があるらしいが、初めてなので安直にStarが多かったnvmを利用してみる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>~/.bash_profileを確認すると次の設定が追加されていた。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="o">[[</span> -s /root/.nvm/nvm.sh <span class="o">]]</span> <span class="o">&amp;&amp;</span> . /root/.nvm/nvm.sh <span class="c"># This loads NVM</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>反映</h3>
+
+<p>ということで反映</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">source</span> ~/.bash_profile
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>サブコマンドの補完</h2>
+
+<p>nvmコマンドは使えるようになったが、サブコマンドの補完が効かないので以下の設定を ~/.bash_profile または ~/.bashrc に追加</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="o">[[</span> -r <span class="nv">$NVM_DIR</span>/bash_completion <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="nv">$NVM_DIR</span>/bash_completion
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定を反映させたら nvm [tab][tab] でサブコマンドの補完が効くようになる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nvm
+</span><span class='line'><span class="nb">alias          </span>copy-packages  <span class="nb">help           </span>list           ls             run            uninstall      version
+</span><span class='line'>clear-cache    deactivate     install        list-remote    ls-remote      <span class="nb">unalias        </span>use
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>node.jsのインストール</h2>
+
+<p>サブコマンド「ls-remote」で利用可能なnode.jsのバージョンが確認できるので表示させてみる。</p>
+
+<h3>利用可能なバージョンの確認</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nvm ls-remote
+</span><span class='line'>   v0.1.14     v0.1.29    v0.1.100      v0.3.3      v0.4.9      v0.6.0     v0.6.15      v0.7.8     v0.8.10      v0.9.1     v0.10.3
+</span><span class='line'>   v0.1.15     v0.1.30    v0.1.101      v0.3.4     v0.4.10      v0.6.1     v0.6.16      v0.7.9     v0.8.11      v0.9.2     v0.10.4
+</span><span class='line'>   v0.1.16     v0.1.31    v0.1.102      v0.3.5     v0.4.11      v0.6.2     v0.6.17     v0.7.10     v0.8.12      v0.9.3     v0.10.5
+</span><span class='line'>   v0.1.17     v0.1.32    v0.1.103      v0.3.6     v0.4.12      v0.6.3     v0.6.18     v0.7.11     v0.8.13      v0.9.4     v0.11.0
+</span><span class='line'>   v0.1.18     v0.1.33    v0.1.104      v0.3.7      v0.5.0      v0.6.4     v0.6.19     v0.7.12     v0.8.14      v0.9.5     v0.11.1
+</span><span class='line'>   v0.1.19     v0.1.90      v0.2.0      v0.3.8      v0.5.1      v0.6.5     v0.6.20      v0.8.0     v0.8.15      v0.9.6
+</span><span class='line'>   v0.1.20     v0.1.91      v0.2.1      v0.4.0      v0.5.2      v0.6.6     v0.6.21      v0.8.1     v0.8.16      v0.9.7
+</span><span class='line'>   v0.1.21     v0.1.92      v0.2.2      v0.4.1      v0.5.3      v0.6.7      v0.7.0      v0.8.2     v0.8.17      v0.9.8
+</span><span class='line'>   v0.1.22     v0.1.93      v0.2.3      v0.4.2      v0.5.4      v0.6.8      v0.7.1      v0.8.3     v0.8.18      v0.9.9
+</span><span class='line'>   v0.1.23     v0.1.94      v0.2.4      v0.4.3      v0.5.5      v0.6.9      v0.7.2      v0.8.4     v0.8.19     v0.9.10
+</span><span class='line'>   v0.1.24     v0.1.95      v0.2.5      v0.4.4      v0.5.6     v0.6.10      v0.7.3      v0.8.5     v0.8.20     v0.9.11
+</span><span class='line'>   v0.1.25     v0.1.96      v0.2.6      v0.4.5      v0.5.7     v0.6.11      v0.7.4      v0.8.6     v0.8.21     v0.9.12
+</span><span class='line'>   v0.1.26     v0.1.97      v0.3.0      v0.4.6      v0.5.8     v0.6.12      v0.7.5      v0.8.7     v0.8.22     v0.10.0
+</span><span class='line'>   v0.1.27     v0.1.98      v0.3.1      v0.4.7      v0.5.9     v0.6.13      v0.7.6      v0.8.8     v0.8.23     v0.10.1
+</span><span class='line'>   v0.1.28     v0.1.99      v0.3.2      v0.4.8     v0.5.10     v0.6.14      v0.7.7      v0.8.9      v0.9.0     v0.10.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://blog.nodejs.org/">release notes</a>を確認すると現時点ではv0.10.5がstableなのでこいつをインストールする。</p>
+
+<h3>v0.10.5のインストール</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>nvm install 0.10.5
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Aliasの設定</h3>
+
+<p>新しくshellを立ち上げたり再起動をかけるとnvmの設定がリセットされるようなのでデフォルトのバージョンを設定する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nvm <span class="nb">alias </span>default 0.10.5
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とりあえずこんな感じで大丈夫なのかな。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/creationix/nvm">Node Version Manager</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[行単位でファイルを結合するにはpasteコマンドが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/25/parallel-merging/"/>
+    <updated>2013-04-25T22:52:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/25/parallel-merging</id>
+    <content type="html"><![CDATA[<p>2つのファイルを単純に結合するには「cat」コマンドを使えばいいですが、
+行ごとに結合をする場合 「paste」コマンドなるものがあることを知りました。</p>
+
+<h2>pasteコマンドを使ったファイルの連結</h2>
+
+<p>fileAとfileBをpasteコマンドで連結します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>paste fileA.txt fileB.txt &gt; fileC.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>fileA.txt</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>AAA
+</span><span class='line'>BBB
+</span><span class='line'>CCC
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>fileB.txt</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>111
+</span><span class='line'>222
+</span><span class='line'>333
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>出力結果</h3>
+
+<p>以下のフォーマットで出力してくれます。素敵！</p>
+
+<p>fileC.txt</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>AAA 111
+</span><span class='line'>BBB 222
+</span><span class='line'>CCC 333
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>区切り文字はデフォルトはタブですが -d [区切り文字] オプションを指定することでカンマなどで区切ることができます。</p>
+
+<h2>区切り文字をカンマに</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>paste -d , fileA.txt fileB.txt &gt; fileC.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>出力結果</h3>
+
+<p>fileC.txt</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>AAA,111
+</span><span class='line'>BBB,222
+</span><span class='line'>CCC,333
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使う機会はそれほどないかもしれませんが、知っておくと楽できそうです。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[レスポンスヘッダのPHPのバージョン情報を隠す]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/24/hide-php-version/"/>
+    <updated>2013-04-24T22:33:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/24/hide-php-version</id>
+    <content type="html"><![CDATA[<p>ほんとに今更感があるが、ちょっとしたことでもブログに書いておこうと思う。</p>
+
+<p>親切心からかPHPはデフォルトでレスポンスヘッダにPHPのバージョン情報を出力しています。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Date: Wed,  24 Apr 2013 13:46:59 GMT
+</span><span class='line'>Server: Apache
+</span><span class='line'>X-Powered-By: PHP/5.2.0
+</span><span class='line'>Content-Length: 2558
+</span><span class='line'>Content-Type: text/html; charset=UTF-8</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>PHPのバージョン出力を抑制する</h2>
+
+<p>PHPのバージョン情報が出力されると、そのバージョンの脆弱性を狙った攻撃を受ける可能性がある為、PHPのバージョン情報を出力しないよう設定行います。</p>
+
+<p>php.ini に次の設定を加え、Apache or Nginx の再起動します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>expose_php=Off</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>設定を加えた後のレスポンスヘッダ</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Date: Wed,  24 Apr 2013 13:46:59 GMT
+</span><span class='line'>Server: Apache
+</span><span class='line'>Content-Length: 2558
+</span><span class='line'>Content-Type: text/html; charset=UTF-8
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>バージョン情報が出力されていないことが確認できます。
+セキュリティ上 Webサーバのバージョン情報も抑制したほうがよいでしょう。</p>
+
+<h2>ヘッダ情報の確認方法</h2>
+
+<p>以下の方法で簡単にヘッダ情報を確認できます。</p>
+
+<p>wgetコマンドでも確認できますがmacはデフォルトではwgetコマンドがインストールされていないのでcurlを利用するのがいいと思います。Winはtelnet?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -I http://hoge.com</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
 </feed>

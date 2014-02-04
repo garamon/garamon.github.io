@@ -1,104 +1,1216 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>My Octopress Blog</title>
-  <meta name="author" content="Your Name">
+<!DOCTYPE HTML>
 
-  
-  <meta name="description" content=" Blog Archives Recent Posts ">
-  
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="2014-01-06 intellij [IntelliJ] vim-easymotionぽいことができるAceJumpプラグインが便利 IntelliJ IDEA 13がリリースされ先日UpgradeついでにPluginを整理していたところ、Acejumpなるプラグインを発見し便利だったって話 &hellip;">
+	
 
   <!-- http://t.co/dKP3o1e -->
   <meta name="HandheldFriendly" content="True">
   <meta name="MobileOptimized" content="320">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  
-  <link rel="canonical" href="http://garamon.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="My Octopress Blog" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
 <link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 <link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
 
   
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">My Octopress Blog</a></h1>
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
   
-    <h2>A blogging framework for hackers.</h2>
+    <h2>noto's blog</h2>
   
 </hgroup>
 
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:garamon.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
+<nav id="main-nav"><ul class="main-navigation">
   <li><a href="/">Blog</a></li>
   <li><a href="/blog/archives">Archives</a></li>
 </ul>
 
 </nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
   
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
+
+
+<time datetime="2014-01-06T23:21:00+09:00" data-updated="true" itemprop="datePublished">2014-01-06</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/intellij/'>intellij</a>
+
+
 </div>
-<aside class="sidebar">
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/06/using-vim-easymotion-in-intellij/" itemprop="url">[IntelliJ] vim-easymotionぽいことができるAceJumpプラグインが便利</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>IntelliJ IDEA 13がリリースされ先日UpgradeついでにPluginを整理していたところ、Acejumpなるプラグインを発見し便利だったって話。</p>
+
+<p>なにができるかっていうとVimのプラグイン<a href="https://github.com/Lokaltog/vim-easymotion">easymotion</a>的なことができる。</p>
+
+<p>ということでデモ。</p>
+
+<h2>Demo</h2>
+
+<p>&ldquo;ctrl + ;&#8221;を入力、続けて任意の1文字を入力すると該当箇所にラベルが振られる。ハイライトされたアルファベットを入力するとその箇所に移動する。</p>
+
+<p><img src="/images/acejump.gif" width="600" height="400"></p>
+
+<h2>Install</h2>
+
+<p><code>Preferences</code> | <code>Plugins</code> | <code>Browse Repositories</code> | <code>AceJump</code> を選択しインストール</p>
+
+<h2>Keymap</h2>
+
+<p>キーマップが気に入らない場合は、</p>
+
+<p><code>Preferences</code> | <code>Keymap</code> | <code>Plug-ins</code> | <code>AceJump</code> | <code>Ace Jump</code> から好きなキーマップを割り当てることができる。</p>
+
+<p>AceJumpは WebStorm/PhpStorm, RubyMine, Pycharm等からも利用できるみたい。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://johnlindquist.com/2012/08/14/ace_jump.html">ACE JUMP</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
   
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
+
+
+<time datetime="2014-01-06T22:40:00+09:00" data-updated="true" itemprop="datePublished">2014-01-06</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/homebrew/'>homebrew</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass/" itemprop="url">Homebrew Undefined Method `to_sym&#8217; for nil:NilClass</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>brew updateをしたところ、下記のエラーが出力された。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Error: undefined method `to_sym' for nil:NilClass
+</span><span class='line'>Please report this bug:
+</span><span class='line'>    https://github.com/mxcl/homebrew/wiki/troubleshooting
+</span><span class='line'>    /usr/local/Library/Homebrew/cmd/update.rb:111:in `report'
+</span><span class='line'>    /usr/local/Library/Homebrew/cmd/update.rb:109:in `each_line'
+</span><span class='line'>    /usr/local/Library/Homebrew/cmd/update.rb:109:in `report'
+</span><span class='line'>    /usr/local/Library/Homebrew/cmd/update.rb:23:in `update'
+</span><span class='line'>    /usr/local/Library/brew.rb:95:in `send'
+</span><span class='line'>    /usr/local/Library/brew.rb:95</span></code></pre></td></tr></table></div></figure>
+
+
+<p>もう一度 brew update を行えば問題なく更新された。
+homebrewのバグだそう。</p>
+
+<p>対象のhomebrewのバージョンは確認するの忘れた&hellip;</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/Homebrew/homebrew/issues/24286">undefined method `to_sym&#8217; for nil:NilClass</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-06T22:07:00+09:00" data-updated="true" itemprop="datePublished">2014-01-06</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/slim-framework/'>slim framework</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/06/redirecting-slim-application-from-subdirectory/" itemprop="url">[Slim Framework]サブディレクトリにインストールした場合のリダイレクト方法</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>簡単なWebアプリを作る機会があったので、PHPのマイクロフレームワークの一つである<a href="http://docs.slimframework.com">Slim Framework</a>を触ってみた。</p>
+
+<p>そこでサブディレクトリにインストールした場合のリダイレクト方法で少しハマったので共有しておく。</p>
+
+<h2>環境</h2>
+
+<p>Slim 2.4.0</p>
+
+<h2>getRootUriを利用する</h2>
+
+<p>Slim_Http_Request::getRootUriはサブディレクトリ名を返すのでそれを利用しリダイレクトを行う。</p>
+
+<p>ex) サブディレクトリ名がslimの場合、「/slim」という文字列を返す。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/index&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getRootUri</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;/hoge&#39;</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>urlForを利用する</h2>
+
+<p>Slimはrouteに任意の名前を割り当てることができ、urlForでURLを生成することができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/index&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;index.php&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">})</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/edit&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlFor</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">));</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでインストール先がドキュメントルートだろうが、サブディレクトリだろうがコードを変える必要はなくなる。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://docs.slimframework.com/#Route-Names">Slim Framework Documentation</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-19T22:45:00+09:00" data-updated="true" itemprop="datePublished">2013-12-19</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ffmpeg/'>ffmpeg</a>, <a class='category' href='/blog/categories/hls/'>hls</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/" itemprop="url">FFMpegでHttp Live Streaming(HLS)向けにセグメント化する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p><a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/">CentOSにm3u8-segmenterをインストールする</a>がほんのちょっぴり人気なので、FFMpeg単体でもセグメントできるよって話です。</p>
+
+<h2>FFMpegでSegment化</h2>
+
+<p>コンテンツは既に準備されているものとし、セグメント化のみ行います。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ffmpeg -i sample.mp4 -acodec copy -vcodec copy <span class="se">\</span>
+</span><span class='line'>  -vbsf h264_mp4toannexb <span class="se">\</span>
+</span><span class='line'>  -map 0 <span class="se">\</span>
+</span><span class='line'>  -f segment <span class="se">\</span>
+</span><span class='line'>  -segment_format mpegts <span class="se">\</span>
+</span><span class='line'>  -segment_time 5 <span class="se">\</span>
+</span><span class='line'>  -segment_list playlist.m3u8 <span class="se">\</span>
+</span><span class='line'>  -segment_list_flags -cache <span class="se">\</span>
+</span><span class='line'>  stream_%d.ts
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>オプションについて</h3>
+
+<ul>
+<li>-acodec copy -vcodec copy
+
+<ul>
+<li>コンテンツのコーデックをコピー。トランスコードは行われない。</li>
+</ul>
+</li>
+<li>-segment_time
+
+<ul>
+<li>分割秒数の設定。5秒を設定したとしても５秒ジャストでセグメント化されるわけではない。</li>
+</ul>
+</li>
+<li>-segment_list playlist.m3u8
+
+<ul>
+<li>プレイリストの出力先</li>
+</ul>
+</li>
+<li>-segment_list_flags -cache
+
+<ul>
+<li>キャッシュ(#EXT-X-ALLOW-CACHE)の無効化。デフォルトでは有効。</li>
+</ul>
+</li>
+</ul>
+
+
+<p>iPhoneやAndroidで再生し挙動を確認をしましたが、FFMpeg内蔵のsegmenterはm3u8-segmenterより優秀ですね。</p>
+
+<p>気が向いたらHLSの暗号化についても書こうかな。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://rest-term.com/archives/3008/">NginxとFFmpegを利用したHTTP Live Streaming配信</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-18T22:51:00+09:00" data-updated="true" itemprop="datePublished">2013-12-18</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/centos/'>CentOS</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/18/centos-linux-system-information/" itemprop="url">[CentOS]システム情報(メモリ情報、バージョン、カーネルのバージョン、CPU情報)を確認する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h2>メモリ情報の確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/meminfo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>MemTotal:        1020532 kB
+</span><span class='line'>MemFree:          855980 kB
+</span><span class='line'>Buffers:           36860 kB
+</span><span class='line'>Cached:            59728 kB
+</span><span class='line'>
+</span><span class='line'>... 省略 ...
+</span><span class='line'>
+</span><span class='line'>HugePages_Free:        0
+</span><span class='line'>HugePages_Rsvd:        0
+</span><span class='line'>HugePages_Surp:        0
+</span><span class='line'>Hugepagesize:       2048 kB
+</span><span class='line'>DirectMap4k:        8128 kB
+</span><span class='line'>DirectMap2M:     1040384 kB
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>バージョン確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /etc/redhat-release
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>CentOS release 6.4 (Final)
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>カーネルのバージョン確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/version
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Linux version 2.6.32-358.2.1.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-3) (GCC) ) #1 SMP Wed Mar 13 00:26:49 UTC 2013
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>こっちでも確認できる</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>uname -a
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Linux localhost.localdomain 2.6.32-358.2.1.el6.x86_64 #1 SMP Wed Mar 13 00:26:49 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>CPU情報の確認</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/cpuinfo
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>processor   : 0
+</span><span class='line'>vendor_id   : GenuineIntel
+</span><span class='line'>cpu family  : 6
+</span><span class='line'>model       : 58
+</span><span class='line'>model name  : Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+</span><span class='line'>stepping    : 9
+</span><span class='line'>cpu MHz     : 3405.814
+</span><span class='line'>cache size  : 6144 KB
+</span><span class='line'>fpu     : yes
+</span><span class='line'>fpu_exception   : yes
+</span><span class='line'>cpuid level : 5
+</span><span class='line'>wp      : yes
+</span><span class='line'>flags       : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx rdtscp lm constant_tsc up rep_good pni monitor ssse3 lahf_lm
+</span><span class='line'>bogomips    : 6811.62
+</span><span class='line'>clflush size    : 64
+</span><span class='line'>cache_alignment : 64
+</span><span class='line'>address sizes   : 36 bits physical,  48 bits virtual
+</span><span class='line'>power management:
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>地味に忘れる。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-18T22:36:00+09:00" data-updated="true" itemprop="datePublished">2013-12-18</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/18/php-group-array-by-value/" itemprop="url">[Php]連想配列を特定のキーの同じ値でグルーピング</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>連想配列を特定キーの同じ値でグルーピングする方法。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$arr</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yamada&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;20&#39;</span>
+</span><span class='line'>    <span class="p">),</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;satou&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;20&#39;</span>
+</span><span class='line'>    <span class="p">),</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;suzuki&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;30&#39;</span>
+</span><span class='line'>    <span class="p">),</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tanaka&#39;</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;40&#39;</span>
+</span><span class='line'>    <span class="p">)</span>
+</span><span class='line'><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">groupArray</span><span class="p">(</span><span class="nv">$arr</span><span class="p">,</span> <span class="nv">$key</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$retval</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">foreach</span><span class="p">(</span><span class="nv">$arr</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$group</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">[</span><span class="nv">$key</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">]))</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">][]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$retval</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nb">var_dump</span><span class="p">(</span><span class="nx">groupArray</span><span class="p">(</span><span class="nv">$arr</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>結果</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">array</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;yamada&quot;</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;20&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="s2">&quot;satou&quot;</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;20&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="p">[</span><span class="mi">30</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;suzuki&quot;</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;30&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'>  <span class="p">[</span><span class="mi">40</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;tanaka&quot;</span>
+</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
+</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;40&quot;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>  <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ageキーの同じ値でグルーピングされていることが確認できます。そもそも(ry</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-18T22:22:00+09:00" data-updated="true" itemprop="datePublished">2013-12-18</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/bash/'>bash</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/18/bash-creating-sequentially-numbered-directories/" itemprop="url">[Bash]連番のディレクトリを作成する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>dir_1, dir_2, dir_3&hellip;と連番でディレクトリを作成したい場合は以下で一発。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir dir_<span class="o">{</span>1..15<span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>普段書かないので普通に忘れる。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-09T23:07:00+09:00" data-updated="true" itemprop="datePublished">2013-12-09</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/jquery/'>JQuery</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/" itemprop="url">[JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>JQuery2.0.3</li>
+</ul>
+
+
+<h2>checkedプロパティを変更</h2>
+
+<p>見たら分かるんだけど、期待する動作はコンソールに「checkbox change!!」と出力されること。</p>
+
+<p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;checkbox1&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;example&quot;</span> <span class="na">value=</span><span class="s">&quot;hoge&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;checkbox1&quot;</span><span class="nt">&gt;</span>Sample CheckBox<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">})();</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>triggerでイベントを発行</h2>
+
+<p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">})();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>イベントの発行元を判断する</h2>
+
+<p>trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。</p>
+
+<p>そんな時は以下のようにしておく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">param</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="c1">// 何らかの処理</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="p">[</span><span class="kc">true</span><span class="p">]);</span>
+</span><span class='line'>    <span class="p">})();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちなみにラジオボタンでも同じです。
+javascript好きになってきた今日この頃。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-01T15:39:00+09:00" data-updated="true" itemprop="datePublished">2013-12-01</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/vagrant/'>vagrant</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/01/vagrant-configure-public-network/" itemprop="url">[Vagrant]パブリックネットワークの設定</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Vagrantでパブリックネットワークの設定をしようとしたところ、若干ハマったのでメモ。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Vagrant 1.3.2</li>
+</ul>
+
+
+<h2>Public Network</h2>
+
+<p><a href="http://docs.vagrantup.com/v2/networking/public_network.html">公式のドキュメント</a>通りに設定し、vagrant reload すれば設定が反映されます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="ss">:public_network</span><span class="p">,</span>  <span class="ss">:bridge</span> <span class="o">=&gt;</span> <span class="s1">&#39;en1: Wi-Fi (AirPort)&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Xdubug</h2>
+
+<p>public networkで起動したらサイトがクソ重くなる&hellip;</p>
+
+<p>色々調べたところ <a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a> に記載されてる方法で解決することができました。</p>
+
+<h3>xdubug.ini</h3>
+
+<p>xdubug.ini もしくは php.iniに以下の一文を追加</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>xdebug.remote_connect_back <span class="o">=</span> 1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Xdebug使ってる人は要注意です。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a></p>
+
+<p><a href="http://stackoverflow.com/questions/18241065/auto-setting-xdebug-remote-host-ip-address-with-vagrant-puppet">Auto setting xdebug.remote_host ip address with vagrant/puppet</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-26T22:58:00+09:00" data-updated="true" itemprop="datePublished">2013-09-26</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/vagrant/'>vagrant</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/09/26/vagrant-mounting-failed/" itemprop="url">[Vagrant]共有ディレクトリのマウントが失敗する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h2>環境</h2>
+
+<ul>
+<li><p>HOST</p>
+
+<ul>
+<li>Mac OS X 10.8</li>
+<li>Vagrant 1.3.2</li>
+<li>Virtual Box 4.2.18</li>
+<li>ruby 1.9.3p392</li>
+</ul>
+</li>
+<li><p>GUEST</p>
+
+<ul>
+<li>CentOS 6.3 minimal</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>エラー内容</h2>
+
+<p>vagrantから新規仮想マシンを作成し、ホストOSとゲストOSの共有ディレクトリの設定後、起動させたところ
+下記のエラーが出力された。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>The following SSH <span class="nb">command </span>responded with a non-zero <span class="nb">exit </span>status.
+</span><span class='line'>Vagrant assumes that this means the <span class="nb">command </span>failed!
+</span><span class='line'>
+</span><span class='line'>mount -t vboxsf -o <span class="nv">uid</span><span class="o">=</span><span class="sb">`</span>id -u vagrant<span class="sb">`</span>,gid<span class="o">=</span><span class="sb">`</span>getent group vagrant | cut -d: -f3<span class="sb">`</span> /share /share
+</span><span class='line'>
+</span><span class='line'>Stdout from the <span class="nb">command</span>:
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>Stderr from the <span class="nb">command</span>:
+</span><span class='line'>
+</span><span class='line'>/sbin/mount.vboxsf: mounting failed with the error: No such device
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Guest additionsが正常にインストールされていないようなので /var/log/vboxadd-install.log を確認する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">test</span> -e include/linux/autoconf.h -a -e include/config/auto.conf <span class="o">||</span> <span class="o">(</span>            <span class="se">\</span>
+</span><span class='line'>        <span class="nb">echo</span>;                                                           <span class="se">\</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;  ERROR: Kernel configuration is invalid.&quot;</span>;               <span class="se">\</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;         include/linux/autoconf.h or include/config/auto.conf are missing.&quot;</span>;      <span class="se">\</span>
+</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;         Run &#39;make oldconfig &amp;&amp; make prepare&#39; on kernel src to fix it.&quot;</span>;  <span class="se">\</span>
+</span><span class='line'>        <span class="nb">echo</span>;                                                           <span class="se">\</span>
+</span><span class='line'>        /bin/false<span class="o">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>automake, autoconf がインストールされてない&hellip;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo yum install automake autoconf
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Guest additionsの再インストール</h2>
+
+<p>ログアウト後</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant vbguest --do install <span class="c"># requier vagrant-vbguest</span>
+</span><span class='line'><span class="nv">$ </span>vagrant reload
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで共有設定が反映される。</p>
+
+		
+		
+	</div>
+
+</article>
+
+</div>
+<nav id="pagenavi">
     
-  </ul>
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Your Name -
+    
+        <a href="/blog/page/2/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - noto -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 
-</footer>
-  
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
 
 
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
 
 
@@ -118,5 +1230,7 @@
 
 
 
+		</div>
+	</div>
 </body>
 </html>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Windows | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-04T18:37:01+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ファイルリストを読み込んで目的のディレクトリにコピーする方法 in Windows]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/15/how-to-copy-list-of-filename-in-windows/"/>
+    <updated>2013-04-15T22:31:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/15/how-to-copy-list-of-filename-in-windows</id>
+    <content type="html"><![CDATA[<p>コマンドラインから以下を実行。リストファイル名とコピー先は適宜変更すること。</p>
+
+<p><code>sh
+for /f %n in (listfile_path) do copy "%n" "destination"
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Homebrew | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/homebrew/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-04T18:37:01+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Homebrew Undefined Method `to_sym' for nil:NilClass]]></title>
+    <link href="http://blog.code-life.net/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass/"/>
+    <updated>2014-01-06T22:40:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass</id>
+    <content type="html"><![CDATA[<p>brew updateをしたところ、下記のエラーが出力された。</p>
+
+<p><code>``
+Error: undefined method</code>to_sym' for nil:NilClass
+Please report this bug:</p>
+
+<pre><code>https://github.com/mxcl/homebrew/wiki/troubleshooting
+/usr/local/Library/Homebrew/cmd/update.rb:111:in `report'
+/usr/local/Library/Homebrew/cmd/update.rb:109:in `each_line'
+/usr/local/Library/Homebrew/cmd/update.rb:109:in `report'
+/usr/local/Library/Homebrew/cmd/update.rb:23:in `update'
+/usr/local/Library/brew.rb:95:in `send'
+/usr/local/Library/brew.rb:95
+</code></pre>
+
+<p>```</p>
+
+<p>もう一度 brew update を行えば問題なく更新された。
+homebrewのバグだそう。</p>
+
+<p>対象のhomebrewのバージョンは確認するの忘れた&hellip;</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/Homebrew/homebrew/issues/24286">undefined method `to_sym' for nil:NilClass</a></p>
+]]></content>
+  </entry>
+  
+</feed>

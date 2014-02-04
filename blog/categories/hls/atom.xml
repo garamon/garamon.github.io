@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Hls | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/hls/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-04T18:37:01+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[FFMpegでHttp Live Streaming(HLS)向けにセグメント化する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/"/>
+    <updated>2013-12-19T22:45:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/">CentOSにm3u8-segmenterをインストールする</a>がほんのちょっぴり人気なので、FFMpeg単体でもセグメントできるよって話です。</p>
+
+<h2>FFMpegでSegment化</h2>
+
+<p>コンテンツは既に準備されているものとし、セグメント化のみ行います。</p>
+
+<p><code>sh
+ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
+  -vbsf h264_mp4toannexb \
+  -map 0 \
+  -f segment \
+  -segment_format mpegts \
+  -segment_time 5 \
+  -segment_list playlist.m3u8 \
+  -segment_list_flags -cache \
+  stream_%d.ts
+</code></p>
+
+<h3>オプションについて</h3>
+
+<ul>
+<li>-acodec copy -vcodec copy
+
+<ul>
+<li>コンテンツのコーデックをコピー。トランスコードは行われない。</li>
+</ul>
+</li>
+<li>-segment_time
+
+<ul>
+<li>分割秒数の設定。5秒を設定したとしても５秒ジャストでセグメント化されるわけではない。</li>
+</ul>
+</li>
+<li>-segment_list playlist.m3u8
+
+<ul>
+<li>プレイリストの出力先</li>
+</ul>
+</li>
+<li>-segment_list_flags -cache
+
+<ul>
+<li>キャッシュ(#EXT-X-ALLOW-CACHE)の無効化。デフォルトでは有効。</li>
+</ul>
+</li>
+</ul>
+
+
+<p>iPhoneやAndroidで再生し挙動を確認をしましたが、FFMpeg内蔵のsegmenterはm3u8-segmenterより優秀ですね。</p>
+
+<p>気が向いたらHLSの暗号化についても書こうかな。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://rest-term.com/archives/3008/">NginxとFFmpegを利用したHTTP Live Streaming配信</a></p>
+]]></content>
+  </entry>
+  
+</feed>
