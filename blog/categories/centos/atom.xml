@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: CentOS | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/centos/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-08T12:04:58+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[CentOS]システム情報(メモリ情報、バージョン、カーネルのバージョン、CPU情報)を確認する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/18/centos-linux-system-information/"/>
+    <updated>2013-12-18T22:51:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/18/centos-linux-system-information</id>
+    <content type="html"><![CDATA[<h2>メモリ情報の確認</h2>
+
+<p><code>sh
+$ cat /proc/meminfo
+</code></p>
+
+<h3>結果</h3>
+
+<p>``` text</p>
+
+<p>MemTotal:        1020532 kB
+MemFree:          855980 kB
+Buffers:           36860 kB
+Cached:            59728 kB</p>
+
+<p>&hellip; 省略 &hellip;</p>
+
+<p>HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:        8128 kB
+DirectMap2M:     1040384 kB</p>
+
+<p>```</p>
+
+<h2>バージョン確認</h2>
+
+<p><code>sh
+$ cat /etc/redhat-release
+</code></p>
+
+<h3>結果</h3>
+
+<p><code>text
+CentOS release 6.4 (Final)
+</code></p>
+
+<h2>カーネルのバージョン確認</h2>
+
+<p><code>sh
+$ cat /proc/version
+</code></p>
+
+<h3>結果</h3>
+
+<p><code>text
+Linux version 2.6.32-358.2.1.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-3) (GCC) ) #1 SMP Wed Mar 13 00:26:49 UTC 2013
+</code></p>
+
+<p>こっちでも確認できる</p>
+
+<p><code>sh
+$ uname -a
+</code></p>
+
+<h3>結果</h3>
+
+<p><code>text
+Linux localhost.localdomain 2.6.32-358.2.1.el6.x86_64 #1 SMP Wed Mar 13 00:26:49 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
+</code></p>
+
+<h2>CPU情報の確認</h2>
+
+<p><code>sh
+$ cat /proc/cpuinfo
+</code></p>
+
+<h3>結果</h3>
+
+<p><code>text
+processor   : 0
+vendor_id   : GenuineIntel
+cpu family  : 6
+model       : 58
+model name  : Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+stepping    : 9
+cpu MHz     : 3405.814
+cache size  : 6144 KB
+fpu     : yes
+fpu_exception   : yes
+cpuid level : 5
+wp      : yes
+flags       : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx rdtscp lm constant_tsc up rep_good pni monitor ssse3 lahf_lm
+bogomips    : 6811.62
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 36 bits physical,  48 bits virtual
+power management:
+</code></p>
+
+<p>地味に忘れる。</p>
+]]></content>
+  </entry>
+  
+</feed>

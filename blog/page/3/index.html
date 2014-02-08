@@ -1,0 +1,1345 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="2013-04-24 php, security レスポンスヘッダのPHPのバージョン情報を隠す ほんとに今更感があるが、ちょっとしたことでもブログに書いておこうと思う。 親切心からかPHPはデフォルトでレスポンスヘッダにPHPのバージョン情報を出力しています。 1
+2
+3
+4
+5
+6
+HTTP &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/blog/page/3/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-24T22:33:00+09:00" data-updated="true" itemprop="datePublished">2013-04-24</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/security/'>security</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/24/hide-php-version/" itemprop="url">レスポンスヘッダのPHPのバージョン情報を隠す</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>ほんとに今更感があるが、ちょっとしたことでもブログに書いておこうと思う。</p>
+
+<p>親切心からかPHPはデフォルトでレスポンスヘッダにPHPのバージョン情報を出力しています。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Date: Wed,  24 Apr 2013 13:46:59 GMT
+</span><span class='line'>Server: Apache
+</span><span class='line'>X-Powered-By: PHP/5.2.0
+</span><span class='line'>Content-Length: 2558
+</span><span class='line'>Content-Type: text/html; charset=UTF-8</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>PHPのバージョン出力を抑制する</h2>
+
+<p>PHPのバージョン情報が出力されると、そのバージョンの脆弱性を狙った攻撃を受ける可能性がある為、PHPのバージョン情報を出力しないよう設定行います。</p>
+
+<p>php.ini に次の設定を加え、Apache or Nginx の再起動します。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>expose_php=Off</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>設定を加えた後のレスポンスヘッダ</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>HTTP/1.1 200 OK
+</span><span class='line'>Date: Wed,  24 Apr 2013 13:46:59 GMT
+</span><span class='line'>Server: Apache
+</span><span class='line'>Content-Length: 2558
+</span><span class='line'>Content-Type: text/html; charset=UTF-8
+</span><span class='line'>...
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>バージョン情報が出力されていないことが確認できます。
+セキュリティ上 Webサーバのバージョン情報も抑制したほうがよいでしょう。</p>
+
+<h2>ヘッダ情報の確認方法</h2>
+
+<p>以下の方法で簡単にヘッダ情報を確認できます。</p>
+
+<p>wgetコマンドでも確認できますがmacはデフォルトではwgetコマンドがインストールされていないのでcurlを利用するのがいいと思います。Winはtelnet?</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>curl -I http://hoge.com</span></code></pre></td></tr></table></div></figure>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-22T20:04:00+09:00" data-updated="true" itemprop="datePublished">2013-04-22</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/22/ld-library-not-found-for-lltdl/" itemprop="url">Ld: Library Not Found for -lltdl</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>MacでPHP5.3.24をインストールしようとしたらコンパイル時に以下のエラーが発生した。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>-----------------
+</span><span class='line'>|  BUILD ERROR  |
+</span><span class='line'>-----------------
+</span><span class='line'>
+</span><span class='line'>Here are the last 10 lines from the log:
+</span><span class='line'>
+</span><span class='line'>-----------------------------------------
+</span><span class='line'>/var/tmp/php-build/source/5.3.24/Zend/zend_objects.c:96: warning: assignment discards qualifiers from pointer target <span class="nb">type</span>
+</span><span class='line'>/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c: In <span class="k">function</span> ‘zend_get_property_guard’:
+</span><span class='line'>/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:301: warning: passing argument 3 of ‘zend_unmangle_property_name’ from incompatible pointer <span class="nb">type</span>
+</span><span class='line'>/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:301: warning: passing argument 4 of ‘zend_unmangle_property_name’ from incompatible pointer <span class="nb">type</span>
+</span><span class='line'>/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:304: warning: assignment discards qualifiers from pointer target <span class="nb">type</span>
+</span><span class='line'>/var/tmp/php-build/source/5.3.24/sapi/apache2handler/sapi_apache2.c: In <span class="k">function</span> ‘php_handler’:
+</span><span class='line'>/var/tmp/php-build/source/5.3.24/sapi/apache2handler/sapi_apache2.c:675: warning: format ‘%u’ expects <span class="nb">type</span> ‘unsigned int’,  but argument 3 has <span class="nb">type</span> ‘size_t’
+</span><span class='line'>ld: library not found <span class="k">for</span> -lltdl
+</span><span class='line'>collect2: ld returned 1 <span class="nb">exit </span>status
+</span><span class='line'>make: *** <span class="o">[</span>libs/libphp5.bundle<span class="o">]</span> Error 1
+</span><span class='line'>-----------------------------------------
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>libtoolのインストール</h2>
+
+<p>昔Linuxで似たエラーを経験したことがあったので「libtool」をいれる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>brew install libtool
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これで無事インストールができた。このブログ全然コード書いてないですね。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-22T16:39:00+09:00" data-updated="true" itemprop="datePublished">2013-04-22</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/22/how-to-syntax-check-mysql-config-file/" itemprop="url">MySQL 再起動せずconfigファイルの文法をチェックする方法</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Apacheのconfigファイルの文法をチェックする方法として「configtest」があるが、
+MySQLの文法チェックはどうやるのか調べてみた。</p>
+
+<h2>MySQLのconfigファイルの文法をチェックする方法</h2>
+
+<p>次のコマンドで再起動せずに文法をチェックできる。</p>
+
+<p>&mdash;defaults-file と &mdash;pid-file は適宜変更すること。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mysqld --help --verbose --skip-networking --defaults-file<span class="o">=</span>&lt;path to my.cnf&gt; --pid-file<span class="o">=</span><span class="k">$(</span>tempfile<span class="k">)</span> 1&gt;/dev/null
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>MySQLのhelpコマンドはヘルプ情報をコマンドライン上に表示しすぐに終了するが、configファイルは読みにいくようでそれを利用し文法のチェックを行う。</p>
+
+<p>また同じシステム上で既にMySQLが起動している場合、干渉することを避ける為 &mdash;skip-networking と &mdash;pid-file オプションを指定。</p>
+
+<h2>注意点</h2>
+
+<p>この方法は文法エラーを見つけるだけで値のチェックは行わないので注意する。</p>
+
+<p>ほぼ参考にした記事を翻訳しただけですね。はい</p>
+
+<h2>参考</h2>
+
+<p><a href="http://www.dbasquare.com/kb/how-to-check-mysql-configuration-file-syntax/">How to check MySQL configuration file syntax?</a></p>
+
+<p><a href="http://www.mysqlperformanceblog.com/2011/02/17/how-to-syntax-check-your-my-cnf-file/">How to syntax-check your my.cnf file</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-22T15:43:00+09:00" data-updated="true" itemprop="datePublished">2013-04-22</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/22/php-compilation-failed-on-mac-osx/" itemprop="url">PHPのインストールでコンパイルエラーが発生する on Mac OSX</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>普段、開発環境は仮想マシン上にしか作らないのだが検証の必要があってローカルにPHPをインストールしようとしたところ
+コンパイル時に以下のエラーが発生した。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>-----------------
+</span><span class='line'>|  BUILD ERROR  |
+</span><span class='line'>-----------------
+</span><span class='line'>
+</span><span class='line'>Here are the last 10 lines from the log:
+</span><span class='line'>
+</span><span class='line'>-----------------------------------------
+</span><span class='line'>  <span class="s2">&quot;_sk_shift&quot;</span>, referenced from:
+</span><span class='line'>      _load_all_certs_from_file in openssl.o
+</span><span class='line'>  <span class="s2">&quot;_sk_value&quot;</span>, referenced from:
+</span><span class='line'>      _zif_openssl_csr_new in openssl.o
+</span><span class='line'>      _zif_openssl_pkcs7_verify in openssl.o
+</span><span class='line'>      _php_openssl_parse_config in openssl.o
+</span><span class='line'>      _php_openssl_sockop_set_option in xp_ssl.o
+</span><span class='line'>ld: symbol<span class="o">(</span>s<span class="o">)</span> not found <span class="k">for </span>architecture x86_64
+</span><span class='line'>clang: error: linker <span class="nb">command </span>failed with <span class="nb">exit </span>code 1 <span class="o">(</span>use -v to see invocation<span class="o">)</span>
+</span><span class='line'>make: *** <span class="o">[</span>sapi/cli/php<span class="o">]</span> Error 1
+</span><span class='line'>-----------------------------------------
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="https://github.com/CHH/phpenv/issues/22#issuecomment-1672712://github.com/CHH/phpenv/issues/22#issuecomment-16727120">同様の現象</a>に悩んでる方がいてそのコメントにOpenSSLのバージョンあげろと書いてあったので
+その通りにしてみたらインストールできた。</p>
+
+<h2>OpenSSLのアップデート方法</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>brew install openssl
+</span><span class='line'><span class="nv">$ </span>brew link openssl --force
+</span><span class='line'><span class="nv">$ </span><span class="nb">exec</span> <span class="nv">$SHELL</span> -l
+</span><span class='line'><span class="nv">$ </span>openssl version
+</span><span class='line'>OpenSSL 1.0.1e 11 Feb 2013
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>インストールできたついでに初めてコメントを書いてみたが自身の英語力がなくて泣けてくる。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-17T20:15:00+09:00" data-updated="true" itemprop="datePublished">2013-04-17</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>MySQL</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/17/how-to-get-auto-increment-value-in-mysql/" itemprop="url">AUTO INCREMENTの現在の値を確認する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>次のSQLを実行する</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='mysql'><span class='line'><span class="k">SELECT</span>
+</span><span class='line'>  <span class="kp">AUTO_INCREMENT</span>
+</span><span class='line'><span class="k">FROM</span>
+</span><span class='line'>  <span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="kp">TABLES</span>
+</span><span class='line'><span class="k">WHERE</span>
+</span><span class='line'>  <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;hoge&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果</p>
+
+<pre><code>+----------------+
+| AUTO_INCREMENT |
++----------------+
+|         662058 |
++----------------+
+</code></pre>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-16T23:40:00+09:00" data-updated="true" itemprop="datePublished">2013-04-16</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/bash/'>bash</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/16/bash-hack-tips/" itemprop="url">Bash Hack & Tips 1</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近shellにハマってるので調べて便利そうなものをまとめてみます。</p>
+
+<p>タイトルに「1」と記載してますがシリーズ化するかは分かりません。たぶんしないでしょう&hellip;</p>
+
+<h2>cd コマンド 少しのスペルミスを自動で修正して実行してくれる</h2>
+
+<p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">shopt</span> -s cdspell
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ex)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd </span>Dropbix/Publoc
+</span><span class='line'>Dropbox/Public
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>少しのスペルミスは構わず実行します。リファレンスによるとチェックされるスペルミスは</p>
+
+<blockquote><p>チェックされる誤りは、文字の入れ替わり・文字の欠け・ 1 文字余分にあることです</p></blockquote>
+
+<p>だそうです。このオプションは対話型のみに有効でスクリプト内では無効となっています。</p>
+
+<h2>historyからのコマンドの実行は一度編集バッファに出力する</h2>
+
+<p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">shopt</span> -s histverify
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ex)</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>直前に実行したコマンドを再実行
+</span><span class='line'><span class="nv">$ </span>!!
+</span><span class='line'>rake preview
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>histverifyオプションが無効の場合、即時に実行されますが有効の場合は、確認後に実行することができます。</p>
+
+<h2>連続して実行したコマンドはhistoryに保存しない</h2>
+
+<p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">HISTCONTROL</span><span class="o">=</span>ignoredups
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>historyの最後の行と同じコマンドは記録されません。</p>
+
+<h2>空白で始まるコマンドはhistoryに保存しない</h2>
+
+<p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">HISTCONTROL</span><span class="o">=</span>ignorespace
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ignoredups ignorespace 両方を指定したい場合</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">HISTCONTROL</span><span class="o">=</span>ignoreboth
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>EOF (Ctrl-D) 入力の許可数を設定する</h2>
+
+<p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">IGNOREEOF</span><span class="o">=</span>5
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>デフォルトでは Ctrl-D を一度押すとログアウトしてしまいますが、IGNOREEOFを設定することでその回数を任意に決めることができます。</p>
+
+<h2>バックアップファイルを簡単に作成する</h2>
+
+<p>作業をする際に念のためconfファイルのバックアップをとっておきたい場合があります。</p>
+
+<p>通常のコピー</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.back
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>もっと短く書けます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cp /etc/httpd/conf/httpd.conf<span class="o">{</span>,.back<span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ディレクトリを複数作成する</h2>
+
+<p>上記と同じ方法で複数のディレクトリを作成することできます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir -p ~/rpm/<span class="o">{</span>BUILD,RPMS,SOURCES,SPECS,SRPMS<span class="o">}</span>
+</span><span class='line'><span class="nv">$ </span>ll ~/rpm/
+</span><span class='line'>
+</span><span class='line'>drwxr-xr-x  2 noto  staff  68  4 17 00:19 BUILD
+</span><span class='line'>drwxr-xr-x  2 noto  staff  68  4 17 00:19 RPMS
+</span><span class='line'>drwxr-xr-x  2 noto  staff  68  4 17 00:19 SOURCES
+</span><span class='line'>drwxr-xr-x  2 noto  staff  68  4 17 00:19 SPECS
+</span><span class='line'>drwxr-xr-x  2 noto  staff  68  4 17 00:19 SRPMS
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考</h2>
+
+<ul>
+<li><p><a href="http://linuxjm.sourceforge.jp/html/GNU_bash/man1/bash.1.html">Bash Reference Manual: The Shopt Builtin</a></p></li>
+<li><p><a href="http://www.ukuug.org/events/linux2003/papers/bash_tips/">Bash Tips &amp; Tricks</a></p></li>
+</ul>
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-15T22:31:00+09:00" data-updated="true" itemprop="datePublished">2013-04-15</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/windows/'>windows</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/15/how-to-copy-list-of-filename-in-windows/" itemprop="url">ファイルリストを読み込んで目的のディレクトリにコピーする方法 in Windows</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>コマンドラインから以下を実行。リストファイル名とコピー先は適宜変更すること。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">for</span> /f %n in <span class="o">(</span>listfile_path<span class="o">)</span> <span class="k">do </span>copy <span class="s2">&quot;%n&quot;</span> <span class="s2">&quot;destination&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-14T22:48:00+09:00" data-updated="true" itemprop="datePublished">2013-04-14</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/streaming/'>streaming</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/" itemprop="url">CentOSにm3u8-segmenterをインストールする</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<h2>環境</h2>
+
+<p>CentOS 6.3 x86_64</p>
+
+<h2>Require</h2>
+
+<p>ffmpegがインストール済みであること</p>
+
+<p>インストールしてない場合は、<a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-ffmpeg-on-centos6-x86-64/">CentOS6.xにFFmpegをインストールする</a>を参考にしてみてください。</p>
+
+<h2>m3u8-segmenterのインストール</h2>
+
+<p>この記事を見ている方は恐らくHLSの知識がある方が多いと思うので、HLSとはなんぞやという説明は省きます。</p>
+
+<p>オープンソースのsegmenterはいくつかありますが、今回は <a href="https://github.com/johnf/m3u8-segmenter">m3u8-segmenter</a>を試すことにします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /usr/local/src/
+</span><span class='line'><span class="nv">$ </span>git clone https://github.com/johnf/m3u8-segmenter.git
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>m3u8-segmenter
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Configure Error</h3>
+
+<p>configureを実行すると以下のエラーが発生</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>configure: error: Package requirements <span class="o">(</span>libavformat libavcodec libavutil<span class="o">)</span> were not met:
+</span><span class='line'>No package <span class="s1">&#39;libavformat&#39;</span> found
+</span><span class='line'>No package <span class="s1">&#39;libavcodec&#39;</span> found
+</span><span class='line'>No package <span class="s1">&#39;libavutil&#39;</span> found
+</span><span class='line'>
+</span><span class='line'>Consider adjusting the PKG_CONFIG_PATH environment variable <span class="k">if </span>you
+</span><span class='line'>installed software in a non-standard prefix.
+</span><span class='line'>
+</span><span class='line'>Alternatively,  you may <span class="nb">set </span>the environment variables FFMPEG_CFLAGS
+</span><span class='line'>and FFMPEG_LIBS to avoid the need to call pkg-config.
+</span><span class='line'>See the pkg-config man page <span class="k">for </span>more details.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以前、<a href="http://code-life.net/?p=2331">CentOSにHttpSegmenterをインストールする</a>でも似たエラーが発生してたので同じ方法で解決できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span>/usr/local/lib/pkgconfig
+</span><span class='line'><span class="nv">$ </span>./configure
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>インストール</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>make
+</span><span class='line'><span class="nv">$ </span>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>segmentしてみる</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir tmp
+</span><span class='line'><span class="nv">$ </span>ffmpeg -i big_buck_bunny.mp4 -f mpegts - | <span class="se">\</span>
+</span><span class='line'>  m3u8-segmenter -i - -d 10 -p tmp/big_buck_bunny -m tmp/big_buck.m3u8 -u http://localhost/segment
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>簡単にオプションの説明をすると、</p>
+
+<dl>
+  <dt>オプション -d</dt>
+  <dd>何秒毎に分割するか。上記のコマンドの場合、10秒</dd>
+
+  <dt>オプション -p</dt>
+  <dd>分割されたtsファイルの出力先 & 出力ファイル名。出力先にbig_buck_bunny-1.ts &#8230; big_buck_bunny-50.ts &#8230; と連番でファイルが作成される</dd>
+
+  <dt>オプション -m</dt>
+  <dd>m3u8の出力先</dd>
+
+  <dt>オプション -u</dt>
+  <dd>m3u8に記載されるファイルのURL</dd>
+</dl>
+
+
+<h2>出力されたm3u8を確認する</h2>
+
+<p>現時点でのm3u8-segmenterは以下のようなm3u8ファイルを出力します。</p>
+
+<pre><code>#EXTM3U
+#EXT-X-TARGETDURATION:10
+#EXTINF:10,
+http://localhost/segmenttmp/big_buck_bunny-1.ts
+#EXTINF:10,
+http://localhost/segmenttmp/big_buck_bunny-2.ts
+#EXTINF:10,
+http://localhost/segmenttmp/big_buck_bunny-3.ts
+#EXTINF:10,
+
+・・・ 省略 ・・・
+
+http://localhost/segmenttmp/big_buck_bunny-58.ts
+#EXTINF:10,
+http://localhost/segmenttmp/big_buck_bunny-59.ts
+#EXT-X-ENDLIST
+</code></pre>
+
+<p>今まで試したオープンソースのsegmenterでは一番良い感じだと思います。</p>
+
+<h2>関連</h2>
+
+<p><a href="/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/">FFMpegでHttp Live Streaming(HLS)向けにセグメント化する</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-14T22:32:00+09:00" data-updated="true" itemprop="datePublished">2013-04-14</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/linux/'>linux</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/14/scp-command-not-found-on-centos/" itemprop="url">CentOS6.x SCPコマンドが見つからない場合</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>CentOS6.xをminimalで構成した場合、クライアントからscpコマンドを実行すると
+&ldquo;bash: scp: コマンドが見つかりません&#8221;と怒られる。</p>
+
+<p>以下のパッケージをインストールをすれば利用できるようになります。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install openssh-clients
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>以上。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-14T14:53:00+09:00" data-updated="true" itemprop="datePublished">2013-04-14</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ffmpeg/'>ffmpeg</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/14/how-to-install-ffmpeg-on-centos6-x86-64/" itemprop="url">CentOS6.xにFFmpegをインストールする</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>CentOS 6.x系にインストールしたことはなかったので備忘録としてメモ。</p>
+
+<p>x264/AACのトランスコードだけできればいい環境を構築します。</p>
+
+<h2>環境</h2>
+
+<p>CentOS 6.3 x86_64</p>
+
+<p>バージョンの確認方法がわからない方は以下のコマンドで確認</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /etc/redhat-release
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>64bitかどうかの確認は以下のコマンドで確認</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>uname -a
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>必要なパッケージのインストール</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install autoconf automake make gcc gcc-c++ pkgconfig wget libtool zlib-devel
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>リポジトリの追加</h2>
+
+<p>gitやらもろもろ必要となるのでepelとDAG(RPMforge)をリポジトリに追加する。</p>
+
+<h3>リポジトリのダウンロード</h3>
+
+<p><a href="http://dl.fedoraproject.org/pub/epel/6/x86_64/">epel</a></p>
+
+<p><a href="http://pkgs.repoforge.org/rpmforge-release/">Dag(RPMforge)</a></p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+</span><span class='line'><span class="nv">$ </span>wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>リポジトリの追加</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rpm -Uvh epel-release-6-8.noarch.rpm rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>追加したリポジトリの使用制限をかける</h3>
+
+<p>追加したリポジトリの使用をする際は明示的に指定するよう制限をかける</p>
+
+<h4>epel</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vi /etc/yum.repos.d/epel.repo
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span>epel<span class="o">]</span>
+</span><span class='line'><span class="nv">name</span><span class="o">=</span>Extra Packages <span class="k">for </span>Enterprise Linux 6 - <span class="nv">$basearch</span>
+</span><span class='line'><span class="c">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch</span>
+</span><span class='line'><span class="nv">mirrorlist</span><span class="o">=</span>https://mirrors.fedoraproject.org/metalink?repo<span class="o">=</span>epel-6&amp;arch<span class="o">=</span><span class="nv">$basearch</span>
+</span><span class='line'><span class="nv">failovermethod</span><span class="o">=</span>priority
+</span><span class='line'><span class="nv">enabled</span><span class="o">=</span>0 ← 0に変更
+</span><span class='line'><span class="nv">gpgcheck</span><span class="o">=</span>1
+</span><span class='line'><span class="nv">gpgkey</span><span class="o">=</span>file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>DAG(RPMforge)</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vi /etc/yum.repos.d/rpmforge.repo
+</span><span class='line'>
+</span><span class='line'><span class="o">[</span>rpmforge<span class="o">]</span>
+</span><span class='line'><span class="nv">name</span> <span class="o">=</span> RHEL <span class="nv">$releasever</span> - RPMforge.net - dag
+</span><span class='line'><span class="nv">baseurl</span> <span class="o">=</span> http://apt.sw.be/redhat/el6/en/<span class="nv">$basearch</span>/rpmforge
+</span><span class='line'><span class="nv">mirrorlist</span> <span class="o">=</span> http://mirrorlist.repoforge.org/el6/mirrors-rpmforge
+</span><span class='line'><span class="c">#mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge</span>
+</span><span class='line'><span class="nv">enabled</span> <span class="o">=</span> 0 ← 0に変更
+</span><span class='line'><span class="nv">protect</span> <span class="o">=</span> 0
+</span><span class='line'><span class="nv">gpgkey</span> <span class="o">=</span> file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag
+</span><span class='line'><span class="nv">gpgcheck</span> <span class="o">=</span> 1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>FFmpegのインストール</h2>
+
+<p>ソースコードからインストールするものが多いので作業ディレクトリを作成する</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir ~/ffmpeg-source
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>x264 FFmpegは最新版を利用するのでgitをインストール</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install --enablerepo<span class="o">=</span>epel git
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>YASM</h3>
+
+<p>アセンブラ x264 FFmpegで使用される</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install --enablerepo<span class="o">=</span>epel yasm
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>X264のインストール</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/ffmpeg-source
+</span><span class='line'><span class="nv">$ </span>git clone git://git.videolan.org/x264.git
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>x264
+</span><span class='line'><span class="nv">$ </span>./configure --enable-shared --disable-asm
+</span><span class='line'><span class="nv">$ </span>make
+</span><span class='line'><span class="nv">$ </span>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>libfdk_aac</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/ffmpeg-source¬
+</span><span class='line'><span class="nv">$ </span>git clone --depth 1 git://github.com/mstorsjo/fdk-aac.git
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>fdk-aac
+</span><span class='line'><span class="nv">$ </span>autoreconf -fiv
+</span><span class='line'><span class="nv">$ </span>./configure
+</span><span class='line'><span class="nv">$ </span>make
+</span><span class='line'><span class="nv">$ </span>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>ライブラリの設定</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/lib/
+</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> /usr/local/lib &gt; /etc/ld.so.conf.d/custom-libs.conf
+</span><span class='line'><span class="nv">$ </span>ldconfig
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>FFmpegのインストール</h3>
+
+<p>今回はver1.2をインストールします。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/ffmpeg-source¬
+</span><span class='line'><span class="nv">$ </span>git clone git://source.ffmpeg.org/ffmpeg.git
+</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>ffmpeg
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ブランチ一覧の表示</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git branch -a
+</span><span class='line'>
+</span><span class='line'>* master
+</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
+</span><span class='line'>  remotes/origin/master
+</span><span class='line'>  remotes/origin/oldabi
+</span><span class='line'>  remotes/origin/release/0.10
+</span><span class='line'>  remotes/origin/release/0.11
+</span><span class='line'>  remotes/origin/release/0.5
+</span><span class='line'>  remotes/origin/release/0.6
+</span><span class='line'>  remotes/origin/release/0.7
+</span><span class='line'>  remotes/origin/release/0.8
+</span><span class='line'>  remotes/origin/release/0.9
+</span><span class='line'>  remotes/origin/release/1.0
+</span><span class='line'>  remotes/origin/release/1.1
+</span><span class='line'>  remotes/origin/release/1.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>1.2のブランチに切り替え</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git checkout -b n1.2 origin/release/1.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>切り替わっているか確認</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git branch
+</span><span class='line'>
+</span><span class='line'>  master
+</span><span class='line'>* n1.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>インストール</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>./configure --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libx264 <span class="se">\</span>
+</span><span class='line'>    --enable-shared --arch<span class="o">=</span>x86_64 --enable-pthreads
+</span><span class='line'><span class="nv">$ </span>make
+</span><span class='line'><span class="nv">$ </span>make install
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>確認</h4>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ffmpeg -version
+</span><span class='line'>
+</span><span class='line'>ffmpeg version 1.2
+</span><span class='line'>built on Mar  3 2013 03:53:58 with gcc 4.4.6 <span class="o">(</span>GCC<span class="o">)</span> 20120305 <span class="o">(</span>Red Hat 4.4.6-4<span class="o">)</span>
+</span><span class='line'>configuration: --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libx264 --enable-shared --arch<span class="o">=</span>x86_64 --enable-pthreads
+</span><span class='line'>libavutil      52. 18.100 / 52. 18.100
+</span><span class='line'>libavcodec     54. 92.100 / 54. 92.100
+</span><span class='line'>libavformat    54. 63.104 / 54. 63.104
+</span><span class='line'>libavdevice    54.  3.103 / 54.  3.103
+</span><span class='line'>libavfilter     3. 42.103 /  3. 42.103
+</span><span class='line'>libswscale      2.  2.100 /  2.  2.100
+</span><span class='line'>libswresample   0. 17.102 /  0. 17.102
+</span><span class='line'>libpostproc    52.  2.100 / 52.  2.100
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>トランスコード</h2>
+
+<p>下記のコマンドでトランスコードしてみましたが、問題はなさそうです。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ffmpeg -i big_buck_bunny_480p_surround-fix.avi -s 400x300 <span class="se">\</span>
+</span><span class='line'>  -c:v libx264 -c:v libx264 -profile:v baseline -preset:v slower <span class="se">\</span>
+</span><span class='line'>  -b:v 300k -maxrate 300k -minrate 300k -bufsize 1835k <span class="se">\</span>
+</span><span class='line'>  -ac 2 -c:a libfdk_aac -b:a 128k big_buck_bunny.mp4
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>ライセンス</h2>
+
+<p>x.264 aacは商用で利用する際はライセンス料が発生するので注意して下さい。ライセンス気にしたくない方はAmazon Elastic TranceCoder使えばいいと思います。大抵のことはできますよ。</p>
+
+<p>あれ&hellip;Dag(RPMforge)使ってない&hellip;まぁ他のコーデックいれたりするとき使うのでいれとけばいいと思います。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://wiki.razuna.com/display/ecp/FFMpeg+Installation+on+CentOS+and+RedHat">Install FFmpeg on CentOS or RedHat EL 6.x</a></p>
+
+<p><a href="http://ffmpeg.org/trac/ffmpeg/wiki/CentosCompilationGuide#ffmpeg">Compile FFmpeg on CentOS 6.x</a></p>
+
+<p><a href="http://dev.classmethod.jp/cloud/amazon-linux-ffmpeg-encoding/">Amazon Linuxにffmpegを入れて動画エンコーディングする</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+</div>
+<nav id="pagenavi">
+    
+        <a href="/blog/page/2/" class="prev">Prev</a>
+    
+    
+        <a href="/blog/page/4/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Cakephp | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/cakephp/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-08T12:04:58+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[CakePHP]モデルのコールバックを無効化にする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback/"/>
+    <updated>2013-09-25T21:59:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback</id>
+    <content type="html"><![CDATA[<p>モデルの<a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html">コールバックメソッド</a>が様々ありますが、無効化したい場合があります。</p>
+
+<p>find, save共に第２引数にcallbacksをキーとした配列を渡すことでモデルのコールバック実行の可否を伝えることが可能です。</p>
+
+<h2>find(beforeFind, afterFind共に無効化)</h2>
+
+<p>``` php
+$this->find(&lsquo;first&rsquo;, array(</p>
+
+<pre><code>'callbacks' =&gt; false
+</code></pre>
+
+<p>));
+```</p>
+
+<h2>find(beforeFindのみ有効)</h2>
+
+<p>``` php
+$this->find(&lsquo;first&rsquo;, array(</p>
+
+<pre><code>'callbacks' =&gt; 'before'
+</code></pre>
+
+<p>));
+```</p>
+
+<h2>find(afterFindのみ有効)</h2>
+
+<p>``` php
+$this->find(&lsquo;first&rsquo;, array(</p>
+
+<pre><code>'callbacks' =&gt; 'after'
+</code></pre>
+
+<p>));
+```</p>
+
+<h2>save(beforeSave, afterSave共に無効化)</h2>
+
+<p>``` php
+$this->save($data, array(</p>
+
+<pre><code>'callbacks' =&gt; false
+</code></pre>
+
+<p>));
+```</p>
+
+<h2>save(beforeSaveのみ有効)</h2>
+
+<p>``` php
+$this->save($data, array(</p>
+
+<pre><code>'callbacks' =&gt; 'before'
+</code></pre>
+
+<p>));
+```</p>
+
+<h2>save(afterSaveのみ有効)</h2>
+
+<p>``` php
+$this->save($data, array(</p>
+
+<pre><code>'callbacks' =&gt; 'after'
+</code></pre>
+
+<p>));
+```</p>
+
+<p>という小ネタ。</p>
+]]></content>
+  </entry>
+  
+</feed>

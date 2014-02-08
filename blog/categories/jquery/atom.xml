@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: JQuery | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/jquery/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-02-08T12:04:58+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/"/>
+    <updated>2013-12-09T23:07:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox</id>
+    <content type="html"><![CDATA[<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>JQuery2.0.3</li>
+</ul>
+
+
+<h2>checkedプロパティを変更</h2>
+
+<p>見たら分かるんだけど、期待する動作はコンソールに「checkbox change!!」と出力されること。</p>
+
+<p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html>
+<head></p>
+
+<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"&gt;&lt;/script&gt;
+</code></pre>
+
+<p></head>
+<body>
+<form></p>
+
+<pre><code>&lt;input id="checkbox1" type="checkbox" name="example" value="hoge"&gt;
+&lt;label for="checkbox1"&gt;Sample CheckBox&lt;/label&gt;
+</code></pre>
+
+<p></form></p>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e) {
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true);
+    })();
+</script>
+
+
+<p></body>
+</html>
+```</p>
+
+<h2>triggerでイベントを発行</h2>
+
+<p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
+
+<p>``` javascript</p>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e) {
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true).trigger('change');
+    })();
+</script>
+
+
+<p>```</p>
+
+<h2>イベントの発行元を判断する</h2>
+
+<p>trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。</p>
+
+<p>そんな時は以下のようにしておく。</p>
+
+<p>``` javascript</p>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e, param) {
+            if (param === true) {
+                // 何らかの処理
+            }
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true).trigger("change", [true]);
+    })();
+</script>
+
+
+<p>```</p>
+
+<p>ちなみにラジオボタンでも同じです。
+javascript好きになってきた今日この頃。</p>
+]]></content>
+  </entry>
+  
+</feed>
