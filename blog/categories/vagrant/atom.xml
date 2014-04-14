@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Vagrant | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/vagrant/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-03-03T21:57:48+09:00</updated>
+  <updated>2014-04-14T21:29:46+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,105 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[Vagrant]複数の共有ディレクトリをマウントさせる]]></title>
+    <link href="http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders/"/>
+    <updated>2014-04-14T21:06:31+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders</id>
+    <content type="html"><![CDATA[<p>ドキュメントみてもgoogle先生に伺っても意外と情報がない。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Vagrant 1.5.2</li>
+</ul>
+
+
+<h2>複数の共有ディレクトリをマウントさせる</h2>
+
+<p>ただ複数書けばいいだけだった&hellip;</p>
+
+<p><code>ruby
+config.vm.synced_folder "../path_to_share1", "/share1"
+config.vm.synced_folder "../path_to_share2", "/share2"
+</code></p>
+
+<p>常識なんですかね。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://docs.vagrantup.com/v2/synced-folders/basic_usage.html">Synced Folders</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Server WEBrickの起動やレスポンス速度が遅い場合の対処法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow/"/>
+    <updated>2014-04-14T20:41:27+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow</id>
+    <content type="html"><![CDATA[<p>最近Railsを触っているのだが、いかんせんWebrickの起動やレスポンスが遅い。</p>
+
+<p>世のRubyistはこんな環境で開発しているのか(いやない)ということで調べた。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Ruby on Rails4</li>
+<li>ruby 2.1.1p76</li>
+<li>Vagrant 1.5.2</li>
+</ul>
+
+
+<h2>Webrickの設定を見直す</h2>
+
+<p>google先生に伺うと下記の解決方法が多かったがボクの環境では効果が見られなかった。</p>
+
+<p>``` sh
+$ gem which webrick
+/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb</p>
+
+<p>$ vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb</p>
+
+<p>:DoNotReverseLookup => nil
+↓
+:DoNotReverseLookup => true
+```</p>
+
+<h2>Vagrant Synced Foldersの設定</h2>
+
+<p>synced_folderを<code>nfs</code> にするとパフォーマンスの向上が期待できると何処かで見た記憶があったので</p>
+
+<p>ドキュメントを覗いてみると <code>rsync</code> がバージョン1.5から利用できるとのこと。
+使わない手はないと早速1.5に上げて試してみた。</p>
+
+<p><code>ruby
+config.vm.synced_folder "../target", "/share", type: "rsync"
+</code></p>
+
+<p>初回起動時は立ち上がるまで若干時間がかかったが、それ以降は遅いとは感じない。</p>
+
+<p>肝心のWebrickのレスポンス速度は劇的に上がった。今までと比べると爆速。</p>
+
+<h3>注意点</h3>
+
+<p>ホストOS側で変更した点がゲストOSに反映されない。
+rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</code> を実行する必要がある。</p>
+
+<p><code>
+$ vagrant up
+$ vagrant rsync #１度きりの同期
+or
+$ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグがある。
+</code></p>
+
+<h2>参考</h2>
+
+<p><a href="https://www.vagrantup.com/blog/feature-preview-vagrant-1-5-rsync.html">Feature Preview: Rsync Synced Folders</a></p>
+
+<p><a href="http://docs.vagrantup.com/v2/getting-started/synced_folders.html">Synced Folders</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Vagrantのコマンドを補完する]]></title>
@@ -172,196 +271,6 @@ $ vagrant reload
 </code></p>
 
 <p>これで共有設定が反映される。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Vagrant1.2.2から1.3.2にあげたらvagrant-vbguestが動作しない]]></title>
-    <link href="http://blog.code-life.net/blog/2013/09/18/vagrant-vbguest-update/"/>
-    <updated>2013-09-18T21:57:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/09/18/vagrant-vbguest-update</id>
-    <content type="html"><![CDATA[<p>久しぶりに<a href="http://www.vagrantup.com/">Vagrant</a>を触ったついでにupdateした結果 <a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>がエラー吐く。</p>
-
-<p>エラー吐くどころかvagrant upもできない始末。
-<a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>自身もupdateしていたので反映させてみました。</p>
-
-<h2>環境</h2>
-
-<ul>
-<li>Mac OS X 10.8</li>
-<li>Vagrant 1.3.2</li>
-<li>Virtual Box 4.2.18</li>
-<li>ruby 1.9.3p392</li>
-</ul>
-
-
-<h2>エラー内容</h2>
-
-<p><code> sh
-/Users/noto/.vagrant.d/gems/gems/vagrant-vbguest-0.8.0/lib/vagrant-vbguest/vagrant_compat.rb:7:in `&lt;top (required)&gt;': undefined method `[]' for nil:NilClass (NoMethodError)
-</code></p>
-
-<h2>Global Configuration</h2>
-
-<p><a href="http://blog.code-life.net/blog/2013/06/10/the-guest-additions-on-this-vm-do-not-match-the-installed-version-of-virtualbox-on-vagrant/">以前</a>設定したグローバルの設定をコメントアウト</p>
-
-<p><code>sh
-$ vi ~/.vagrant.d/Vagrantfile
-</code></p>
-
-<p>``` ruby</p>
-
-<h1>Vagrant.configure(&ldquo;2&rdquo;) do |config|</h1>
-
-<h1>require &lsquo;vagrant-vbguest&rsquo; unless defined? config.vbguest</h1>
-
-<h1>config.vbguest.auto_update = false</h1>
-
-<h1>end</h1>
-
-<p>```</p>
-
-<h2>Update vagrant-vbguest</h2>
-
-<p>さくっと一発</p>
-
-<p><code>sh
-$ vagrant plugin update vagrant-vbguest
-</code></p>
-
-<h2>Global Configuration再び</h2>
-
-<p>updateが完了したら、globalの設定のコメントを外します。これでエラーの出力がなくなるはずです。</p>
-
-<p>ちなみに<a href="https://github.com/dotless-de/vagrant-vbguest/blob/master/Readme.md">README</a>に記載されてる設定では以前と同様にエラーになりました。</p>
-
-<h3>エラーの内容はこちら</h3>
-
-<p>``` sh
-Vagrant failed to initialize at a very early stage:</p>
-
-<p>There was an error loading a Vagrantfile. The file being loaded
-and the error message are shown below. This is usually caused by
-a syntax error.</p>
-
-<p>Path: /Users/noto/.vagrant.d/Vagrantfile
-Message: uninitialized constant VagrantVbguest::Config
-```</p>
-
-<p><a href="https://github.com/dotless-de/vagrant-vbguest/issues/73">uninitialized constant VagrantVbguest::Config when using global configuration</a>でも同じこと言われてます。</p>
-
-<h2>Guest Additionsのバージョン確認</h2>
-
-<p><code>sh
-$ vagrant up # 起動させていないなら
-$ vagrant vbguest --status
-GuestAdditions versions on your host (4.2.18) and guest (4.2.12) do not match.
-</code></p>
-
-<h2>Update Guestadditions</h2>
-
-<p><code>sh
-$ vagrant up # 起動させていないなら
-$ vagrant vbguest --do install
-</code></p>
-
-<p>設定すべて外してstatusとdoコマンド利用すればいいんじゃないかなと思ってきました。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Vagrant] 仮想マシンのスナップショットとるならvagrant-vbox-snapshotが便利]]></title>
-    <link href="http://blog.code-life.net/blog/2013/06/12/vagrant-vbox-snapshot/"/>
-    <updated>2013-06-12T21:25:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/06/12/vagrant-vbox-snapshot</id>
-    <content type="html"><![CDATA[<p>vagrant1.2で仮想マシンのスナップショットをとりたかったので調べたところ <a href="https://github.com/dergachev/vagrant-vbox-snapshot">vagrant-vbox-snapshot</a>なるものが公開されていたのでインストールしてみました。</p>
-
-<p>似たプラグインで<a href="https://github.com/ryuzee/sahara">sahara</a>がありますが、sandboxモードで動作させることができるプラグインのようでスナップショットをとる機能はないようです。
-google先生に伺ってもsaharaの記事は多くヒットするのですが、vagrant-vbox-snapshotはあまりヒットしないのは需要がないんですかね。</p>
-
-<h2>環境</h2>
-
-<ul>
-<li>Mac OS X 10.8</li>
-<li>Vagrant 1.2.2</li>
-<li>Virtual Box 4.2.12</li>
-</ul>
-
-
-<h2>Requirements</h2>
-
-<ul>
-<li>Vagrant 1.1+</li>
-</ul>
-
-
-<h2>インストール</h2>
-
-<p>さくっとインスト</p>
-
-<p><code>sh
-$ vagrant plugin install vagrant-vbox-snapshot
-</code></p>
-
-<h2>使い方</h2>
-
-<p><a href="https://github.com/dergachev/vagrant-vbox-snapshot/blob/master/README.md">README</a> に書いてあるまんまですが。</p>
-
-<h2>スナップショットの作成</h2>
-
-<p>スナップショット名を指定して作成します。</p>
-
-<p><code>sh
-$ vagrant snapshot take [NAME]
-</code></p>
-
-<h2>スナップショットの一覧</h2>
-
-<p><code>sh
-$ vagrant snapshot list
-</code></p>
-
-<h3>出力結果</h3>
-
-<p>複数のスナップショットをとっている場合、以下のように出力されます。</p>
-
-<p>``` sh
-   Name: init (UUID: c45af534-e64a-409e-95f7-1a7ef697f7cc)</p>
-
-<pre><code>  Name: before-AMP (UUID: 97dfc94b-f0ba-45b9-9bc4-c43c8b251d22) *
-</code></pre>
-
-<p>```</p>
-
-<h2>スナップショットに復元</h2>
-
-<p>指定した名前のスナップショットに復元します。</p>
-
-<p><code>sh
-$ vagrant snapshot go [NAME]
-</code></p>
-
-<h2>直前のスナップショットに復元</h2>
-
-<p><code>sh
-$ vagrant snapshot back
-</code></p>
-
-<h2>スナップショットの削除</h2>
-
-<p>指定した名前のスナップショットを削除します。</p>
-
-<p><code>sh
-$ vagrant snapshot delete [NAME]
-</code></p>
-
-<p>ひと通りコマンドを試してみましたが問題なく動作しています。</p>
-
-<p>Vagrant便利っすね。</p>
-
-<h2>参考</h2>
-
-<p><a href="https://github.com/dergachev/vagrant-vbox-snapshot#vagrant-vbox-snapshot">vagrant-vbox-snapshot</a></p>
 ]]></content>
   </entry>
   

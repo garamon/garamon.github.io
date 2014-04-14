@@ -9,10 +9,7 @@
 	<meta name="author" content="noto">
 
 	
-	<meta name="description" content="2013-09-26 vagrant [Vagrant]共有ディレクトリのマウントが失敗する 環境 HOST Mac OS X 10.8
-Vagrant 1.3.2
-Virtual Box 4.2.18
-ruby 1.9.3p392 GUEST CentOS 6.3 minimal エラー内容 &hellip;">
+	<meta name="description" content="2013-12-09 JQuery, javascript [JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない checkboxをprop(&lsquo;checked&rsquo;, true) &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +103,236 @@ ruby 1.9.3p392 GUEST CentOS 6.3 minimal エラー内容 &hellip;">
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-09T23:07:00+09:00" data-updated="true" itemprop="datePublished">2013-12-09</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/jquery/'>JQuery</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/" itemprop="url">[JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>JQuery2.0.3</li>
+</ul>
+
+
+<h2>checkedプロパティを変更</h2>
+
+<p>見たら分かるんだけど、期待する動作はコンソールに「checkbox change!!」と出力されること。</p>
+
+<p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
+</span><span class='line'><span class="nt">&lt;html&gt;</span>
+</span><span class='line'><span class="nt">&lt;head&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/head&gt;</span>
+</span><span class='line'><span class="nt">&lt;body&gt;</span>
+</span><span class='line'><span class="nt">&lt;form&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;checkbox1&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;example&quot;</span> <span class="na">value=</span><span class="s">&quot;hoge&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;checkbox1&quot;</span><span class="nt">&gt;</span>Sample CheckBox<span class="nt">&lt;/label&gt;</span>
+</span><span class='line'><span class="nt">&lt;/form&gt;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">})();</span>
+</span><span class='line'><span class="nt">&lt;/script&gt;</span>
+</span><span class='line'><span class="nt">&lt;/body&gt;</span>
+</span><span class='line'><span class="nt">&lt;/html&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>triggerでイベントを発行</h2>
+
+<p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">})();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>イベントの発行元を判断する</h2>
+
+<p>trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。</p>
+
+<p>そんな時は以下のようにしておく。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
+</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">param</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>                <span class="c1">// 何らかの処理</span>
+</span><span class='line'>            <span class="p">}</span>
+</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">});</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="p">[</span><span class="kc">true</span><span class="p">]);</span>
+</span><span class='line'>    <span class="p">})();</span>
+</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ちなみにラジオボタンでも同じです。
+javascript好きになってきた今日この頃。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-01T15:39:00+09:00" data-updated="true" itemprop="datePublished">2013-12-01</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/vagrant/'>vagrant</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/01/vagrant-configure-public-network/" itemprop="url">[Vagrant]パブリックネットワークの設定</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Vagrantでパブリックネットワークの設定をしようとしたところ、若干ハマったのでメモ。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Vagrant 1.3.2</li>
+</ul>
+
+
+<h2>Public Network</h2>
+
+<p><a href="http://docs.vagrantup.com/v2/networking/public_network.html">公式のドキュメント</a>通りに設定し、vagrant reload すれば設定が反映されます。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="ss">:public_network</span><span class="p">,</span>  <span class="ss">:bridge</span> <span class="o">=&gt;</span> <span class="s1">&#39;en1: Wi-Fi (AirPort)&#39;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Xdubug</h2>
+
+<p>public networkで起動したらサイトがクソ重くなる&hellip;</p>
+
+<p>色々調べたところ <a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a> に記載されてる方法で解決することができました。</p>
+
+<h3>xdubug.ini</h3>
+
+<p>xdubug.ini もしくは php.iniに以下の一文を追加</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>xdebug.remote_connect_back <span class="o">=</span> 1
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Xdebug使ってる人は要注意です。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a></p>
+
+<p><a href="http://stackoverflow.com/questions/18241065/auto-setting-xdebug-remote-host-ip-address-with-vagrant-puppet">Auto setting xdebug.remote_host ip address with vagrant/puppet</a></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -1272,268 +1499,6 @@ vagrant-vbguest の自動更新をOFFになるよう設定します。</p>
 
 
 <p>知らんかった&hellip;</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-29T00:13:00+09:00" data-updated="true" itemprop="datePublished">2013-04-29</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/node-dot-js/'>node.js</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/04/29/install-node-on-centos/" itemprop="url">CentOSにnode.jsをインストールする</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>JavaScript力向上の為、node.jsで何か作ってみようと思いインストールしてみた。</p>
-
-<h2>環境</h2>
-
-<p>CentOS 6.3</p>
-
-<h2>依存パッケージのインストール</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install git openssh-devel
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>nvm(node.jsバージョン管理)のインストール</h2>
-
-<p>node.jsのバージョン管理は<a href="https://github.com/creationix/nvm">nvm</a>の他に<a href="https://github.com/hokaccha/nodebrew">nodebrew</a>や<a href="https://github.com/ekalinin/nodeenv">nodeenv</a>があるらしいが、初めてなので安直にStarが多かったnvmを利用してみる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>curl https://raw.github.com/creationix/nvm/master/install.sh | sh
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>~/.bash_profileを確認すると次の設定が追加されていた。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="o">[[</span> -s /root/.nvm/nvm.sh <span class="o">]]</span> <span class="o">&amp;&amp;</span> . /root/.nvm/nvm.sh <span class="c"># This loads NVM</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>反映</h3>
-
-<p>ということで反映</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">source</span> ~/.bash_profile
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>サブコマンドの補完</h2>
-
-<p>nvmコマンドは使えるようになったが、サブコマンドの補完が効かないので以下の設定を ~/.bash_profile または ~/.bashrc に追加</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="o">[[</span> -r <span class="nv">$NVM_DIR</span>/bash_completion <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="nv">$NVM_DIR</span>/bash_completion
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>設定を反映させたら nvm [tab][tab] でサブコマンドの補完が効くようになる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nvm
-</span><span class='line'><span class="nb">alias          </span>copy-packages  <span class="nb">help           </span>list           ls             run            uninstall      version
-</span><span class='line'>clear-cache    deactivate     install        list-remote    ls-remote      <span class="nb">unalias        </span>use
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>node.jsのインストール</h2>
-
-<p>サブコマンド「ls-remote」で利用可能なnode.jsのバージョンが確認できるので表示させてみる。</p>
-
-<h3>利用可能なバージョンの確認</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nvm ls-remote
-</span><span class='line'>   v0.1.14     v0.1.29    v0.1.100      v0.3.3      v0.4.9      v0.6.0     v0.6.15      v0.7.8     v0.8.10      v0.9.1     v0.10.3
-</span><span class='line'>   v0.1.15     v0.1.30    v0.1.101      v0.3.4     v0.4.10      v0.6.1     v0.6.16      v0.7.9     v0.8.11      v0.9.2     v0.10.4
-</span><span class='line'>   v0.1.16     v0.1.31    v0.1.102      v0.3.5     v0.4.11      v0.6.2     v0.6.17     v0.7.10     v0.8.12      v0.9.3     v0.10.5
-</span><span class='line'>   v0.1.17     v0.1.32    v0.1.103      v0.3.6     v0.4.12      v0.6.3     v0.6.18     v0.7.11     v0.8.13      v0.9.4     v0.11.0
-</span><span class='line'>   v0.1.18     v0.1.33    v0.1.104      v0.3.7      v0.5.0      v0.6.4     v0.6.19     v0.7.12     v0.8.14      v0.9.5     v0.11.1
-</span><span class='line'>   v0.1.19     v0.1.90      v0.2.0      v0.3.8      v0.5.1      v0.6.5     v0.6.20      v0.8.0     v0.8.15      v0.9.6
-</span><span class='line'>   v0.1.20     v0.1.91      v0.2.1      v0.4.0      v0.5.2      v0.6.6     v0.6.21      v0.8.1     v0.8.16      v0.9.7
-</span><span class='line'>   v0.1.21     v0.1.92      v0.2.2      v0.4.1      v0.5.3      v0.6.7      v0.7.0      v0.8.2     v0.8.17      v0.9.8
-</span><span class='line'>   v0.1.22     v0.1.93      v0.2.3      v0.4.2      v0.5.4      v0.6.8      v0.7.1      v0.8.3     v0.8.18      v0.9.9
-</span><span class='line'>   v0.1.23     v0.1.94      v0.2.4      v0.4.3      v0.5.5      v0.6.9      v0.7.2      v0.8.4     v0.8.19     v0.9.10
-</span><span class='line'>   v0.1.24     v0.1.95      v0.2.5      v0.4.4      v0.5.6     v0.6.10      v0.7.3      v0.8.5     v0.8.20     v0.9.11
-</span><span class='line'>   v0.1.25     v0.1.96      v0.2.6      v0.4.5      v0.5.7     v0.6.11      v0.7.4      v0.8.6     v0.8.21     v0.9.12
-</span><span class='line'>   v0.1.26     v0.1.97      v0.3.0      v0.4.6      v0.5.8     v0.6.12      v0.7.5      v0.8.7     v0.8.22     v0.10.0
-</span><span class='line'>   v0.1.27     v0.1.98      v0.3.1      v0.4.7      v0.5.9     v0.6.13      v0.7.6      v0.8.8     v0.8.23     v0.10.1
-</span><span class='line'>   v0.1.28     v0.1.99      v0.3.2      v0.4.8     v0.5.10     v0.6.14      v0.7.7      v0.8.9      v0.9.0     v0.10.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="http://blog.nodejs.org/">release notes</a>を確認すると現時点ではv0.10.5がstableなのでこいつをインストールする。</p>
-
-<h3>v0.10.5のインストール</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>nvm install 0.10.5
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Aliasの設定</h3>
-
-<p>新しくshellを立ち上げたり再起動をかけるとnvmの設定がリセットされるようなのでデフォルトのバージョンを設定する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nvm <span class="nb">alias </span>default 0.10.5
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>とりあえずこんな感じで大丈夫なのかな。</p>
-
-<h2>参考</h2>
-
-<p><a href="https://github.com/creationix/nvm">Node Version Manager</a></p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-25T22:52:00+09:00" data-updated="true" itemprop="datePublished">2013-04-25</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/unix/'>unix</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/04/25/parallel-merging/" itemprop="url">行単位でファイルを結合するにはpasteコマンドが便利</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>2つのファイルを単純に結合するには「cat」コマンドを使えばいいですが、
-行ごとに結合をする場合 「paste」コマンドなるものがあることを知りました。</p>
-
-<h2>pasteコマンドを使ったファイルの連結</h2>
-
-<p>fileAとfileBをpasteコマンドで連結します。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>paste fileA.txt fileB.txt &gt; fileC.txt
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>fileA.txt</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>AAA
-</span><span class='line'>BBB
-</span><span class='line'>CCC
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>fileB.txt</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>111
-</span><span class='line'>222
-</span><span class='line'>333
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>出力結果</h3>
-
-<p>以下のフォーマットで出力してくれます。素敵！</p>
-
-<p>fileC.txt</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>AAA 111
-</span><span class='line'>BBB 222
-</span><span class='line'>CCC 333
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>区切り文字はデフォルトはタブですが -d [区切り文字] オプションを指定することでカンマなどで区切ることができます。</p>
-
-<h2>区切り文字をカンマに</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>paste -d , fileA.txt fileB.txt &gt; fileC.txt
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>出力結果</h3>
-
-<p>fileC.txt</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>AAA,111
-</span><span class='line'>BBB,222
-</span><span class='line'>CCC,333
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>使う機会はそれほどないかもしれませんが、知っておくと楽できそうです。</p>
 
 		
 		

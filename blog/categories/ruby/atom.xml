@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Ruby | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-04-14T21:29:46+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Server WEBrickの起動やレスポンス速度が遅い場合の対処法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow/"/>
+    <updated>2014-04-14T20:41:27+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow</id>
+    <content type="html"><![CDATA[<p>最近Railsを触っているのだが、いかんせんWebrickの起動やレスポンスが遅い。</p>
+
+<p>世のRubyistはこんな環境で開発しているのか(いやない)ということで調べた。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Ruby on Rails4</li>
+<li>ruby 2.1.1p76</li>
+<li>Vagrant 1.5.2</li>
+</ul>
+
+
+<h2>Webrickの設定を見直す</h2>
+
+<p>google先生に伺うと下記の解決方法が多かったがボクの環境では効果が見られなかった。</p>
+
+<p>``` sh
+$ gem which webrick
+/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb</p>
+
+<p>$ vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb</p>
+
+<p>:DoNotReverseLookup => nil
+↓
+:DoNotReverseLookup => true
+```</p>
+
+<h2>Vagrant Synced Foldersの設定</h2>
+
+<p>synced_folderを<code>nfs</code> にするとパフォーマンスの向上が期待できると何処かで見た記憶があったので</p>
+
+<p>ドキュメントを覗いてみると <code>rsync</code> がバージョン1.5から利用できるとのこと。
+使わない手はないと早速1.5に上げて試してみた。</p>
+
+<p><code>ruby
+config.vm.synced_folder "../target", "/share", type: "rsync"
+</code></p>
+
+<p>初回起動時は立ち上がるまで若干時間がかかったが、それ以降は遅いとは感じない。</p>
+
+<p>肝心のWebrickのレスポンス速度は劇的に上がった。今までと比べると爆速。</p>
+
+<h3>注意点</h3>
+
+<p>ホストOS側で変更した点がゲストOSに反映されない。
+rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</code> を実行する必要がある。</p>
+
+<p><code>
+$ vagrant up
+$ vagrant rsync #１度きりの同期
+or
+$ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグがある。
+</code></p>
+
+<h2>参考</h2>
+
+<p><a href="https://www.vagrantup.com/blog/feature-preview-vagrant-1-5-rsync.html">Feature Preview: Rsync Synced Folders</a></p>
+
+<p><a href="http://docs.vagrantup.com/v2/getting-started/synced_folders.html">Synced Folders</a></p>
+]]></content>
+  </entry>
+  
+</feed>

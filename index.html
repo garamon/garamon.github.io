@@ -9,10 +9,8 @@
 	<meta name="author" content="noto">
 
 	
-	<meta name="description" content="2014-02-07 vagrant Vagrantのコマンドを補完する vagrant-bash-completionなるものを発見したのでインストールした。 環境 Mac OS X 10.9.1
-Vagrant 1.4.3 Installation 1
-2
-$ brew tap &hellip;">
+	<meta name="description" content="2014-04-14 vagrant [Vagrant]複数の共有ディレクトリをマウントさせる ドキュメントみてもgoogle先生に伺っても意外と情報がない。 環境 Vagrant 1.5.2 複数の共有ディレクトリをマウントさせる ただ複数書けばいいだけだった&hellip; 1
+2 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -106,6 +104,172 @@ $ brew tap &hellip;">
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-14T21:06:31+09:00" data-updated="true" itemprop="datePublished">2014-04-14</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/vagrant/'>vagrant</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/04/14/vagrant-multiple-synced-folders/" itemprop="url">[Vagrant]複数の共有ディレクトリをマウントさせる</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>ドキュメントみてもgoogle先生に伺っても意外と情報がない。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Vagrant 1.5.2</li>
+</ul>
+
+
+<h2>複数の共有ディレクトリをマウントさせる</h2>
+
+<p>ただ複数書けばいいだけだった&hellip;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span> <span class="s2">&quot;../path_to_share1&quot;</span><span class="p">,</span> <span class="s2">&quot;/share1&quot;</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span> <span class="s2">&quot;../path_to_share2&quot;</span><span class="p">,</span> <span class="s2">&quot;/share2&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>常識なんですかね。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://docs.vagrantup.com/v2/synced-folders/basic_usage.html">Synced Folders</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-04-14T20:41:27+09:00" data-updated="true" itemprop="datePublished">2014-04-14</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/ruby/'>ruby</a>, <a class='category' href='/blog/categories/vagrant/'>vagrant</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/04/14/rails-server-webrick-is-so-slow/" itemprop="url">Rails Server WEBrickの起動やレスポンス速度が遅い場合の対処法</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近Railsを触っているのだが、いかんせんWebrickの起動やレスポンスが遅い。</p>
+
+<p>世のRubyistはこんな環境で開発しているのか(いやない)ということで調べた。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Ruby on Rails4</li>
+<li>ruby 2.1.1p76</li>
+<li>Vagrant 1.5.2</li>
+</ul>
+
+
+<h2>Webrickの設定を見直す</h2>
+
+<p>google先生に伺うと下記の解決方法が多かったがボクの環境では効果が見られなかった。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gem which webrick
+</span><span class='line'>/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb
+</span><span class='line'>
+</span><span class='line'>:DoNotReverseLookup <span class="o">=</span>&gt; nil
+</span><span class='line'>↓
+</span><span class='line'>:DoNotReverseLookup <span class="o">=</span>&gt; <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Vagrant Synced Foldersの設定</h2>
+
+<p>synced_folderを<code>nfs</code> にするとパフォーマンスの向上が期待できると何処かで見た記憶があったので</p>
+
+<p>ドキュメントを覗いてみると <code>rsync</code> がバージョン1.5から利用できるとのこと。
+使わない手はないと早速1.5に上げて試してみた。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span> <span class="s2">&quot;../target&quot;</span><span class="p">,</span> <span class="s2">&quot;/share&quot;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="s2">&quot;rsync&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>初回起動時は立ち上がるまで若干時間がかかったが、それ以降は遅いとは感じない。</p>
+
+<p>肝心のWebrickのレスポンス速度は劇的に上がった。今までと比べると爆速。</p>
+
+<h3>注意点</h3>
+
+<p>ホストOS側で変更した点がゲストOSに反映されない。
+rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</code> を実行する必要がある。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">vagrant</span> <span class="n">up</span>
+</span><span class='line'><span class="err">$</span> <span class="n">vagrant</span> <span class="n">rsync</span> <span class="c1">#１度きりの同期</span>
+</span><span class='line'><span class="ow">or</span>
+</span><span class='line'><span class="err">$</span> <span class="n">vagrant</span> <span class="n">rsync</span><span class="o">-</span><span class="n">auto</span> <span class="c1">#監視して変更があれば同期 若干タイムラグがある。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考</h2>
+
+<p><a href="https://www.vagrantup.com/blog/feature-preview-vagrant-1-5-rsync.html">Feature Preview: Rsync Synced Folders</a></p>
+
+<p><a href="http://docs.vagrantup.com/v2/getting-started/synced_folders.html">Synced Folders</a></p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -881,236 +1045,6 @@ homebrewのバグだそう。</p>
 
 
 <p>普段書かないので普通に忘れる。</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-09T23:07:00+09:00" data-updated="true" itemprop="datePublished">2013-12-09</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/jquery/'>JQuery</a>, <a class='category' href='/blog/categories/javascript/'>javascript</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/" itemprop="url">[JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
-
-<h2>環境</h2>
-
-<ul>
-<li>JQuery2.0.3</li>
-</ul>
-
-
-<h2>checkedプロパティを変更</h2>
-
-<p>見たら分かるんだけど、期待する動作はコンソールに「checkbox change!!」と出力されること。</p>
-
-<p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span><span class='line'><span class="nt">&lt;body&gt;</span>
-</span><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;checkbox1&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;example&quot;</span> <span class="na">value=</span><span class="s">&quot;hoge&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;checkbox1&quot;</span><span class="nt">&gt;</span>Sample CheckBox<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">})();</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>triggerでイベントを発行</h2>
-
-<p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">})();</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>イベントの発行元を判断する</h2>
-
-<p>trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。</p>
-
-<p>そんな時は以下のようにしておく。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">param</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="c1">// 何らかの処理</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="p">[</span><span class="kc">true</span><span class="p">]);</span>
-</span><span class='line'>    <span class="p">})();</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ちなみにラジオボタンでも同じです。
-javascript好きになってきた今日この頃。</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-01T15:39:00+09:00" data-updated="true" itemprop="datePublished">2013-12-01</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/vagrant/'>vagrant</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/01/vagrant-configure-public-network/" itemprop="url">[Vagrant]パブリックネットワークの設定</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Vagrantでパブリックネットワークの設定をしようとしたところ、若干ハマったのでメモ。</p>
-
-<h2>環境</h2>
-
-<ul>
-<li>Vagrant 1.3.2</li>
-</ul>
-
-
-<h2>Public Network</h2>
-
-<p><a href="http://docs.vagrantup.com/v2/networking/public_network.html">公式のドキュメント</a>通りに設定し、vagrant reload すれば設定が反映されます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="ss">:public_network</span><span class="p">,</span>  <span class="ss">:bridge</span> <span class="o">=&gt;</span> <span class="s1">&#39;en1: Wi-Fi (AirPort)&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Xdubug</h2>
-
-<p>public networkで起動したらサイトがクソ重くなる&hellip;</p>
-
-<p>色々調べたところ <a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a> に記載されてる方法で解決することができました。</p>
-
-<h3>xdubug.ini</h3>
-
-<p>xdubug.ini もしくは php.iniに以下の一文を追加</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>xdebug.remote_connect_back <span class="o">=</span> 1
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Xdebug使ってる人は要注意です。</p>
-
-<h2>参考</h2>
-
-<p><a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a></p>
-
-<p><a href="http://stackoverflow.com/questions/18241065/auto-setting-xdebug-remote-host-ip-address-with-vagrant-puppet">Auto setting xdebug.remote_host ip address with vagrant/puppet</a></p>
 
 		
 		

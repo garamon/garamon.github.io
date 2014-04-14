@@ -9,13 +9,8 @@
 	<meta name="author" content="noto">
 
 	
-	<meta name="description" content="2013-04-24 php, security レスポンスヘッダのPHPのバージョン情報を隠す ほんとに今更感があるが、ちょっとしたことでもブログに書いておこうと思う。 親切心からかPHPはデフォルトでレスポンスヘッダにPHPのバージョン情報を出力しています。 1
-2
-3
-4
-5
-6
-HTTP &hellip;">
+	<meta name="description" content="2013-04-29 javascript, node.js CentOSにnode.jsをインストールする JavaScript力向上の為、node.jsで何か作ってみようと思いインストールしてみた。 環境 CentOS 6.3 依存パッケージのインストール 1
+$ yum install &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -109,6 +104,268 @@ HTTP &hellip;">
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-29T00:13:00+09:00" data-updated="true" itemprop="datePublished">2013-04-29</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/javascript/'>javascript</a>, <a class='category' href='/blog/categories/node-dot-js/'>node.js</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/29/install-node-on-centos/" itemprop="url">CentOSにnode.jsをインストールする</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>JavaScript力向上の為、node.jsで何か作ってみようと思いインストールしてみた。</p>
+
+<h2>環境</h2>
+
+<p>CentOS 6.3</p>
+
+<h2>依存パッケージのインストール</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install git openssh-devel
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>nvm(node.jsバージョン管理)のインストール</h2>
+
+<p>node.jsのバージョン管理は<a href="https://github.com/creationix/nvm">nvm</a>の他に<a href="https://github.com/hokaccha/nodebrew">nodebrew</a>や<a href="https://github.com/ekalinin/nodeenv">nodeenv</a>があるらしいが、初めてなので安直にStarが多かったnvmを利用してみる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>~/.bash_profileを確認すると次の設定が追加されていた。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="o">[[</span> -s /root/.nvm/nvm.sh <span class="o">]]</span> <span class="o">&amp;&amp;</span> . /root/.nvm/nvm.sh <span class="c"># This loads NVM</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>反映</h3>
+
+<p>ということで反映</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">source</span> ~/.bash_profile
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>サブコマンドの補完</h2>
+
+<p>nvmコマンドは使えるようになったが、サブコマンドの補完が効かないので以下の設定を ~/.bash_profile または ~/.bashrc に追加</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="o">[[</span> -r <span class="nv">$NVM_DIR</span>/bash_completion <span class="o">]]</span> <span class="o">&amp;&amp;</span> . <span class="nv">$NVM_DIR</span>/bash_completion
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>設定を反映させたら nvm [tab][tab] でサブコマンドの補完が効くようになる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nvm
+</span><span class='line'><span class="nb">alias          </span>copy-packages  <span class="nb">help           </span>list           ls             run            uninstall      version
+</span><span class='line'>clear-cache    deactivate     install        list-remote    ls-remote      <span class="nb">unalias        </span>use
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>node.jsのインストール</h2>
+
+<p>サブコマンド「ls-remote」で利用可能なnode.jsのバージョンが確認できるので表示させてみる。</p>
+
+<h3>利用可能なバージョンの確認</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nvm ls-remote
+</span><span class='line'>   v0.1.14     v0.1.29    v0.1.100      v0.3.3      v0.4.9      v0.6.0     v0.6.15      v0.7.8     v0.8.10      v0.9.1     v0.10.3
+</span><span class='line'>   v0.1.15     v0.1.30    v0.1.101      v0.3.4     v0.4.10      v0.6.1     v0.6.16      v0.7.9     v0.8.11      v0.9.2     v0.10.4
+</span><span class='line'>   v0.1.16     v0.1.31    v0.1.102      v0.3.5     v0.4.11      v0.6.2     v0.6.17     v0.7.10     v0.8.12      v0.9.3     v0.10.5
+</span><span class='line'>   v0.1.17     v0.1.32    v0.1.103      v0.3.6     v0.4.12      v0.6.3     v0.6.18     v0.7.11     v0.8.13      v0.9.4     v0.11.0
+</span><span class='line'>   v0.1.18     v0.1.33    v0.1.104      v0.3.7      v0.5.0      v0.6.4     v0.6.19     v0.7.12     v0.8.14      v0.9.5     v0.11.1
+</span><span class='line'>   v0.1.19     v0.1.90      v0.2.0      v0.3.8      v0.5.1      v0.6.5     v0.6.20      v0.8.0     v0.8.15      v0.9.6
+</span><span class='line'>   v0.1.20     v0.1.91      v0.2.1      v0.4.0      v0.5.2      v0.6.6     v0.6.21      v0.8.1     v0.8.16      v0.9.7
+</span><span class='line'>   v0.1.21     v0.1.92      v0.2.2      v0.4.1      v0.5.3      v0.6.7      v0.7.0      v0.8.2     v0.8.17      v0.9.8
+</span><span class='line'>   v0.1.22     v0.1.93      v0.2.3      v0.4.2      v0.5.4      v0.6.8      v0.7.1      v0.8.3     v0.8.18      v0.9.9
+</span><span class='line'>   v0.1.23     v0.1.94      v0.2.4      v0.4.3      v0.5.5      v0.6.9      v0.7.2      v0.8.4     v0.8.19     v0.9.10
+</span><span class='line'>   v0.1.24     v0.1.95      v0.2.5      v0.4.4      v0.5.6     v0.6.10      v0.7.3      v0.8.5     v0.8.20     v0.9.11
+</span><span class='line'>   v0.1.25     v0.1.96      v0.2.6      v0.4.5      v0.5.7     v0.6.11      v0.7.4      v0.8.6     v0.8.21     v0.9.12
+</span><span class='line'>   v0.1.26     v0.1.97      v0.3.0      v0.4.6      v0.5.8     v0.6.12      v0.7.5      v0.8.7     v0.8.22     v0.10.0
+</span><span class='line'>   v0.1.27     v0.1.98      v0.3.1      v0.4.7      v0.5.9     v0.6.13      v0.7.6      v0.8.8     v0.8.23     v0.10.1
+</span><span class='line'>   v0.1.28     v0.1.99      v0.3.2      v0.4.8     v0.5.10     v0.6.14      v0.7.7      v0.8.9      v0.9.0     v0.10.2
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><a href="http://blog.nodejs.org/">release notes</a>を確認すると現時点ではv0.10.5がstableなのでこいつをインストールする。</p>
+
+<h3>v0.10.5のインストール</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>nvm install 0.10.5
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Aliasの設定</h3>
+
+<p>新しくshellを立ち上げたり再起動をかけるとnvmの設定がリセットされるようなのでデフォルトのバージョンを設定する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>nvm <span class="nb">alias </span>default 0.10.5
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>とりあえずこんな感じで大丈夫なのかな。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/creationix/nvm">Node Version Manager</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-25T22:52:00+09:00" data-updated="true" itemprop="datePublished">2013-04-25</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mac/'>mac</a>, <a class='category' href='/blog/categories/unix/'>unix</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/25/parallel-merging/" itemprop="url">行単位でファイルを結合するにはpasteコマンドが便利</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>2つのファイルを単純に結合するには「cat」コマンドを使えばいいですが、
+行ごとに結合をする場合 「paste」コマンドなるものがあることを知りました。</p>
+
+<h2>pasteコマンドを使ったファイルの連結</h2>
+
+<p>fileAとfileBをpasteコマンドで連結します。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>paste fileA.txt fileB.txt &gt; fileC.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>fileA.txt</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>AAA
+</span><span class='line'>BBB
+</span><span class='line'>CCC
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>fileB.txt</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>111
+</span><span class='line'>222
+</span><span class='line'>333
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>出力結果</h3>
+
+<p>以下のフォーマットで出力してくれます。素敵！</p>
+
+<p>fileC.txt</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>AAA 111
+</span><span class='line'>BBB 222
+</span><span class='line'>CCC 333
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>区切り文字はデフォルトはタブですが -d [区切り文字] オプションを指定することでカンマなどで区切ることができます。</p>
+
+<h2>区切り文字をカンマに</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>paste -d , fileA.txt fileB.txt &gt; fileC.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>出力結果</h3>
+
+<p>fileC.txt</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>AAA,111
+</span><span class='line'>BBB,222
+</span><span class='line'>CCC,333
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>使う機会はそれほどないかもしれませんが、知っておくと楽できそうです。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -869,408 +1126,6 @@ http://localhost/segmenttmp/big_buck_bunny-59.ts
 <h2>関連</h2>
 
 <p><a href="/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/">FFMpegでHttp Live Streaming(HLS)向けにセグメント化する</a></p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-14T22:32:00+09:00" data-updated="true" itemprop="datePublished">2013-04-14</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/linux/'>linux</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/04/14/scp-command-not-found-on-centos/" itemprop="url">CentOS6.x SCPコマンドが見つからない場合</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>CentOS6.xをminimalで構成した場合、クライアントからscpコマンドを実行すると
-&ldquo;bash: scp: コマンドが見つかりません&#8221;と怒られる。</p>
-
-<p>以下のパッケージをインストールをすれば利用できるようになります。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install openssh-clients
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上。</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-14T14:53:00+09:00" data-updated="true" itemprop="datePublished">2013-04-14</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/ffmpeg/'>ffmpeg</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/04/14/how-to-install-ffmpeg-on-centos6-x86-64/" itemprop="url">CentOS6.xにFFmpegをインストールする</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>CentOS 6.x系にインストールしたことはなかったので備忘録としてメモ。</p>
-
-<p>x264/AACのトランスコードだけできればいい環境を構築します。</p>
-
-<h2>環境</h2>
-
-<p>CentOS 6.3 x86_64</p>
-
-<p>バージョンの確認方法がわからない方は以下のコマンドで確認</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /etc/redhat-release
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>64bitかどうかの確認は以下のコマンドで確認</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>uname -a
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>必要なパッケージのインストール</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install autoconf automake make gcc gcc-c++ pkgconfig wget libtool zlib-devel
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>リポジトリの追加</h2>
-
-<p>gitやらもろもろ必要となるのでepelとDAG(RPMforge)をリポジトリに追加する。</p>
-
-<h3>リポジトリのダウンロード</h3>
-
-<p><a href="http://dl.fedoraproject.org/pub/epel/6/x86_64/">epel</a></p>
-
-<p><a href="http://pkgs.repoforge.org/rpmforge-release/">Dag(RPMforge)</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-</span><span class='line'><span class="nv">$ </span>wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>リポジトリの追加</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rpm -Uvh epel-release-6-8.noarch.rpm rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>追加したリポジトリの使用制限をかける</h3>
-
-<p>追加したリポジトリの使用をする際は明示的に指定するよう制限をかける</p>
-
-<h4>epel</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vi /etc/yum.repos.d/epel.repo
-</span><span class='line'>
-</span><span class='line'><span class="o">[</span>epel<span class="o">]</span>
-</span><span class='line'><span class="nv">name</span><span class="o">=</span>Extra Packages <span class="k">for </span>Enterprise Linux 6 - <span class="nv">$basearch</span>
-</span><span class='line'><span class="c">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch</span>
-</span><span class='line'><span class="nv">mirrorlist</span><span class="o">=</span>https://mirrors.fedoraproject.org/metalink?repo<span class="o">=</span>epel-6&amp;arch<span class="o">=</span><span class="nv">$basearch</span>
-</span><span class='line'><span class="nv">failovermethod</span><span class="o">=</span>priority
-</span><span class='line'><span class="nv">enabled</span><span class="o">=</span>0 ← 0に変更
-</span><span class='line'><span class="nv">gpgcheck</span><span class="o">=</span>1
-</span><span class='line'><span class="nv">gpgkey</span><span class="o">=</span>file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>DAG(RPMforge)</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vi /etc/yum.repos.d/rpmforge.repo
-</span><span class='line'>
-</span><span class='line'><span class="o">[</span>rpmforge<span class="o">]</span>
-</span><span class='line'><span class="nv">name</span> <span class="o">=</span> RHEL <span class="nv">$releasever</span> - RPMforge.net - dag
-</span><span class='line'><span class="nv">baseurl</span> <span class="o">=</span> http://apt.sw.be/redhat/el6/en/<span class="nv">$basearch</span>/rpmforge
-</span><span class='line'><span class="nv">mirrorlist</span> <span class="o">=</span> http://mirrorlist.repoforge.org/el6/mirrors-rpmforge
-</span><span class='line'><span class="c">#mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge</span>
-</span><span class='line'><span class="nv">enabled</span> <span class="o">=</span> 0 ← 0に変更
-</span><span class='line'><span class="nv">protect</span> <span class="o">=</span> 0
-</span><span class='line'><span class="nv">gpgkey</span> <span class="o">=</span> file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag
-</span><span class='line'><span class="nv">gpgcheck</span> <span class="o">=</span> 1
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>FFmpegのインストール</h2>
-
-<p>ソースコードからインストールするものが多いので作業ディレクトリを作成する</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir ~/ffmpeg-source
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>x264 FFmpegは最新版を利用するのでgitをインストール</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install --enablerepo<span class="o">=</span>epel git
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>YASM</h3>
-
-<p>アセンブラ x264 FFmpegで使用される</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install --enablerepo<span class="o">=</span>epel yasm
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>X264のインストール</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/ffmpeg-source
-</span><span class='line'><span class="nv">$ </span>git clone git://git.videolan.org/x264.git
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>x264
-</span><span class='line'><span class="nv">$ </span>./configure --enable-shared --disable-asm
-</span><span class='line'><span class="nv">$ </span>make
-</span><span class='line'><span class="nv">$ </span>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>libfdk_aac</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/ffmpeg-source¬
-</span><span class='line'><span class="nv">$ </span>git clone --depth 1 git://github.com/mstorsjo/fdk-aac.git
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>fdk-aac
-</span><span class='line'><span class="nv">$ </span>autoreconf -fiv
-</span><span class='line'><span class="nv">$ </span>./configure
-</span><span class='line'><span class="nv">$ </span>make
-</span><span class='line'><span class="nv">$ </span>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>ライブラリの設定</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/lib/
-</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> /usr/local/lib &gt; /etc/ld.so.conf.d/custom-libs.conf
-</span><span class='line'><span class="nv">$ </span>ldconfig
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>FFmpegのインストール</h3>
-
-<p>今回はver1.2をインストールします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/ffmpeg-source¬
-</span><span class='line'><span class="nv">$ </span>git clone git://source.ffmpeg.org/ffmpeg.git
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>ffmpeg
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ブランチ一覧の表示</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git branch -a
-</span><span class='line'>
-</span><span class='line'>* master
-</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
-</span><span class='line'>  remotes/origin/master
-</span><span class='line'>  remotes/origin/oldabi
-</span><span class='line'>  remotes/origin/release/0.10
-</span><span class='line'>  remotes/origin/release/0.11
-</span><span class='line'>  remotes/origin/release/0.5
-</span><span class='line'>  remotes/origin/release/0.6
-</span><span class='line'>  remotes/origin/release/0.7
-</span><span class='line'>  remotes/origin/release/0.8
-</span><span class='line'>  remotes/origin/release/0.9
-</span><span class='line'>  remotes/origin/release/1.0
-</span><span class='line'>  remotes/origin/release/1.1
-</span><span class='line'>  remotes/origin/release/1.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>1.2のブランチに切り替え</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git checkout -b n1.2 origin/release/1.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>切り替わっているか確認</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git branch
-</span><span class='line'>
-</span><span class='line'>  master
-</span><span class='line'>* n1.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>インストール</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>./configure --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libx264 <span class="se">\</span>
-</span><span class='line'>    --enable-shared --arch<span class="o">=</span>x86_64 --enable-pthreads
-</span><span class='line'><span class="nv">$ </span>make
-</span><span class='line'><span class="nv">$ </span>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>確認</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ffmpeg -version
-</span><span class='line'>
-</span><span class='line'>ffmpeg version 1.2
-</span><span class='line'>built on Mar  3 2013 03:53:58 with gcc 4.4.6 <span class="o">(</span>GCC<span class="o">)</span> 20120305 <span class="o">(</span>Red Hat 4.4.6-4<span class="o">)</span>
-</span><span class='line'>configuration: --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libx264 --enable-shared --arch<span class="o">=</span>x86_64 --enable-pthreads
-</span><span class='line'>libavutil      52. 18.100 / 52. 18.100
-</span><span class='line'>libavcodec     54. 92.100 / 54. 92.100
-</span><span class='line'>libavformat    54. 63.104 / 54. 63.104
-</span><span class='line'>libavdevice    54.  3.103 / 54.  3.103
-</span><span class='line'>libavfilter     3. 42.103 /  3. 42.103
-</span><span class='line'>libswscale      2.  2.100 /  2.  2.100
-</span><span class='line'>libswresample   0. 17.102 /  0. 17.102
-</span><span class='line'>libpostproc    52.  2.100 / 52.  2.100
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>トランスコード</h2>
-
-<p>下記のコマンドでトランスコードしてみましたが、問題はなさそうです。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ffmpeg -i big_buck_bunny_480p_surround-fix.avi -s 400x300 <span class="se">\</span>
-</span><span class='line'>  -c:v libx264 -c:v libx264 -profile:v baseline -preset:v slower <span class="se">\</span>
-</span><span class='line'>  -b:v 300k -maxrate 300k -minrate 300k -bufsize 1835k <span class="se">\</span>
-</span><span class='line'>  -ac 2 -c:a libfdk_aac -b:a 128k big_buck_bunny.mp4
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>ライセンス</h2>
-
-<p>x.264 aacは商用で利用する際はライセンス料が発生するので注意して下さい。ライセンス気にしたくない方はAmazon Elastic TranceCoder使えばいいと思います。大抵のことはできますよ。</p>
-
-<p>あれ&hellip;Dag(RPMforge)使ってない&hellip;まぁ他のコーデックいれたりするとき使うのでいれとけばいいと思います。</p>
-
-<h2>参考</h2>
-
-<p><a href="http://wiki.razuna.com/display/ecp/FFMpeg+Installation+on+CentOS+and+RedHat">Install FFmpeg on CentOS or RedHat EL 6.x</a></p>
-
-<p><a href="http://ffmpeg.org/trac/ffmpeg/wiki/CentosCompilationGuide#ffmpeg">Compile FFmpeg on CentOS 6.x</a></p>
-
-<p><a href="http://dev.classmethod.jp/cloud/amazon-linux-ffmpeg-encoding/">Amazon Linuxにffmpegを入れて動画エンコーディングする</a></p>
 
 		
 		
