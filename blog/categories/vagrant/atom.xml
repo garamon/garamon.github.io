@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Vagrant | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/vagrant/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-04-14T21:29:46+09:00</updated>
+  <updated>2014-04-15T08:03:01+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -103,6 +103,23 @@ $ vagrant rsync #１度きりの同期
 or
 $ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグがある。
 </code></p>
+
+<h2>結局は&hellip;</h2>
+
+<p>rsyncで少し利用してみたが、同期のラグが気になった。
+変更してすぐに確認できないことがあるのでこの辺はストレスに感じる。</p>
+
+<p>また同期は一方方向 ホスト→ ゲストの為、仮想マシン上でコマンドを打ってファイルを作成しても
+ホストには反映されない。</p>
+
+<p>自分はゲストからコマンドを打つことが多いので困った点だった。
+こういった点はこれから改善されるのだと思う。</p>
+
+<p>ということでパフォーマンス的に問題がなかったので <code>nfs</code> に変更して開発している。</p>
+
+<hr />
+
+<p>追記 2014/04/15</p>
 
 <h2>参考</h2>
 
