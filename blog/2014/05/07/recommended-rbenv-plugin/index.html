@@ -5,12 +5,11 @@
 
 <head>
 	<meta charset="utf-8">
-	<title>[bash]連番のディレクトリを作成する - Code Life</title>
+	<title>rbenv使うならこれもいれとけプラグイン4選 - Code Life</title>
 	<meta name="author" content="noto">
 
 	
-	<meta name="description" content="[bash]連番のディレクトリを作成する dir_1, dir_2, dir_3&hellip;と連番でディレクトリを作成したい場合は以下で一発。 1
-$ mkdir dir_{1..15} 普段書かないので普通に忘れる。 <!-- google_ad_client = "ca-pub- &hellip;">
+	<meta name="description" content="rbenv使うならこれもいれとけプラグイン4選 複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。 ruby-build ruby-build 何するプラグイン? rubyのコンパイル &amp; インストール &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -20,7 +19,7 @@ $ mkdir dir_{1..15} 普段書かないので普通に忘れる。 <!-- google_ad
 
 	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
 	
-	<link rel="canonical" href="http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories/">
+	<link rel="canonical" href="http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/">
 	<link href="/favicon.png" rel="shortcut icon">
 	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
@@ -103,15 +102,76 @@ $ mkdir dir_{1..15} 普段書かないので普通に忘れる。 <!-- google_ad
 			
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-	<h1 class="title" itemprop="name">[bash]連番のディレクトリを作成する</h1>
-	<div class="entry-content" itemprop="articleBody"><p>dir_1, dir_2, dir_3&hellip;と連番でディレクトリを作成したい場合は以下で一発。</p>
+	<h1 class="title" itemprop="name">rbenv使うならこれもいれとけプラグイン4選</h1>
+	<div class="entry-content" itemprop="articleBody"><p>複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir dir_<span class="o">{</span>1..15<span class="o">}</span>
+<h2>ruby-build</h2>
+
+<p><a href="https://github.com/sstephenson/ruby-build">ruby-build</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>rubyのコンパイル &amp; インストール</p>
+
+<h3>インストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-default-gems</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-default-gems">rbenv-default-gems</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>新しくrubyをインストールする際、~/.rbenv/default-gemsに記載してあるgemを自動的にインストールする</p>
+
+<figure class='code'><figcaption><span>ex) ~/.rbenv/default-gems</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>bundler
+</span><span class='line'>pry
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>普段書かないので普通に忘れる。</p>
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-gem-rehash</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-gem-rehash">rbenv-gem-rehash</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>gemをインストール or アンインストールした際に自動的にrbenv rehashを行う</p>
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-update</h2>
+
+<p><a href="https://github.com/rkh/rbenv-update">rbenv-update</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p><code>rbenv update</code>と打てば rbenv &amp; rbenvプラグインをまとめて最新の状態にする</p>
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>全部<a href="https://github.com/sstephenson/rbenv/wiki/Plugins#approved-plugins">wiki</a>に載ってるんすけどね。</p>
 </div>
 
 </article>
@@ -132,7 +192,7 @@ $ mkdir dir_{1..15} 普段書かないので普通に忘れる。 <!-- google_ad
 <div class="share">
     <div class="addthis_toolbox addthis_default_style ">
         <div style="float:left">
-            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
             <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
         </div>
         
@@ -169,8 +229,8 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       
         
         // var disqus_developer = 1;
-        var disqus_identifier = 'http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories/';
-        var disqus_url = 'http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories/';
+        var disqus_identifier = 'http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/';
+        var disqus_url = 'http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/';
         var disqus_script = 'embed.js';
       
     (function () {

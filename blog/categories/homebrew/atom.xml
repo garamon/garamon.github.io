@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Homebrew | Code Life]]></title>
+  <title><![CDATA[Category: homebrew | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/homebrew/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-04-15T08:03:01+09:00</updated>
+  <updated>2014-05-07T23:03:46+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Homebrew Undefined Method `to_sym' for nil:NilClass]]></title>
+    <title type="html"><![CDATA[homebrew undefined method `to_sym' for nil:NilClass]]></title>
     <link href="http://blog.code-life.net/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass/"/>
     <updated>2014-01-06T22:40:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass</id>

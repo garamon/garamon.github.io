@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-04-15T08:03:01+09:00</updated>
+  <updated>2014-05-07T23:03:46+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,83 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[rbenv使うならこれもいれとけプラグイン4選]]></title>
+    <link href="http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/"/>
+    <updated>2014-05-07T22:30:15+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin</id>
+    <content type="html"><![CDATA[<p>複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。</p>
+
+<h2>ruby-build</h2>
+
+<p><a href="https://github.com/sstephenson/ruby-build">ruby-build</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>rubyのコンパイル &amp; インストール</p>
+
+<h3>インストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-default-gems</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-default-gems">rbenv-default-gems</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>新しくrubyをインストールする際、~/.rbenv/default-gemsに記載してあるgemを自動的にインストールする</p>
+
+<figure class='code'><figcaption><span>ex) ~/.rbenv/default-gems</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>bundler
+</span><span class='line'>pry
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-gem-rehash</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-gem-rehash">rbenv-gem-rehash</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>gemをインストール or アンインストールした際に自動的にrbenv rehashを行う</p>
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-update</h2>
+
+<p><a href="https://github.com/rkh/rbenv-update">rbenv-update</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p><code>rbenv update</code>と打てば rbenv &amp; rbenvプラグインをまとめて最新の状態にする</p>
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>全部<a href="https://github.com/sstephenson/rbenv/wiki/Plugins#approved-plugins">wiki</a>に載ってるんすけどね。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[Vagrant]複数の共有ディレクトリをマウントさせる]]></title>
@@ -1836,26 +1913,6 @@ vagrant-vbguest の自動更新をOFFになるよう設定します。</p>
 <h2>参考</h2>
 
 <p><a href="http://stackoverflow.com/questions/4648444/jquery-fire-mousemove-events-less-often">jQuery: Fire mousemove events less often</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Bash 一時的にaliasを無効にする]]></title>
-    <link href="http://blog.code-life.net/blog/2013/05/01/temporarily-ignore-alias/"/>
-    <updated>2013-05-01T23:11:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/05/01/temporarily-ignore-alias</id>
-    <content type="html"><![CDATA[<p>aliasは便利ですが、aliasを解除したコマンドを使用したい場合があります。</p>
-
-<p>そんなときは頭に \ (バックスラッシュ) を付けるとaliasを一時的に無効にしてくれます。</p>
-
-<h2>一時的にaliasを無効にする</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="se">\c</span>p -f hoge/ piyo
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>知らんかった&hellip;</p>
 ]]></content>
   </entry>
   

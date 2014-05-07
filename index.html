@@ -9,8 +9,7 @@
 	<meta name="author" content="noto">
 
 	
-	<meta name="description" content="2014-04-14 vagrant [Vagrant]複数の共有ディレクトリをマウントさせる ドキュメントみてもgoogle先生に伺っても意外と情報がない。 環境 Vagrant 1.5.2 複数の共有ディレクトリをマウントさせる ただ複数書けばいいだけだった&hellip; 1
-2 &hellip;">
+	<meta name="description" content="2014-05-07 rbenv, ruby rbenv使うならこれもいれとけプラグイン4選 複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。 ruby-build ruby-build 何するプラグイン? &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -104,6 +103,109 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-07T22:30:15+09:00" data-updated="true" itemprop="datePublished">2014-05-07</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/rbenv/'>rbenv</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/05/07/recommended-rbenv-plugin/" itemprop="url">rbenv使うならこれもいれとけプラグイン4選</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。</p>
+
+<h2>ruby-build</h2>
+
+<p><a href="https://github.com/sstephenson/ruby-build">ruby-build</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>rubyのコンパイル &amp; インストール</p>
+
+<h3>インストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-default-gems</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-default-gems">rbenv-default-gems</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>新しくrubyをインストールする際、~/.rbenv/default-gemsに記載してあるgemを自動的にインストールする</p>
+
+<figure class='code'><figcaption><span>ex) ~/.rbenv/default-gems</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>bundler
+</span><span class='line'>pry
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-gem-rehash</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-gem-rehash">rbenv-gem-rehash</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>gemをインストール or アンインストールした際に自動的にrbenv rehashを行う</p>
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-update</h2>
+
+<p><a href="https://github.com/rkh/rbenv-update">rbenv-update</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p><code>rbenv update</code>と打てば rbenv &amp; rbenvプラグインをまとめて最新の状態にする</p>
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>全部<a href="https://github.com/sstephenson/rbenv/wiki/Plugins#approved-plugins">wiki</a>に載ってるんすけどね。</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -443,7 +545,7 @@ rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</cod
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass/" itemprop="url">Homebrew Undefined Method `to_sym&#8217; for nil:NilClass</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass/" itemprop="url">homebrew undefined method `to_sym&#8217; for nil:NilClass</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<p>brew updateをしたところ、下記のエラーが出力された。</p>
 
@@ -851,7 +953,7 @@ homebrewのバグだそう。</p>
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/18/php-group-array-by-value/" itemprop="url">[Php]連想配列を特定のキーの同じ値でグルーピング</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/18/php-group-array-by-value/" itemprop="url">[php]連想配列を特定のキーの同じ値でグルーピング</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<p>連想配列を特定キーの同じ値でグルーピングする方法。</p>
 
@@ -1020,48 +1122,6 @@ homebrewのバグだそう。</p>
 
 
 <p>ageキーの同じ値でグルーピングされていることが確認できます。そもそも(ry</p>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-18T22:22:00+09:00" data-updated="true" itemprop="datePublished">2013-12-18</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/bash/'>bash</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/18/bash-creating-sequentially-numbered-directories/" itemprop="url">[Bash]連番のディレクトリを作成する</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>dir_1, dir_2, dir_3&hellip;と連番でディレクトリを作成したい場合は以下で一発。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir dir_<span class="o">{</span>1..15<span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>普段書かないので普通に忘れる。</p>
 
 		
 		

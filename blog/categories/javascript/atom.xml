@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Javascript | Code Life]]></title>
+  <title><![CDATA[Category: javascript | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-04-15T08:03:01+09:00</updated>
+  <updated>2014-05-07T23:03:46+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -115,7 +115,7 @@ javascript好きになってきた今日この頃。</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Javascript オブジェクトのマージあれこれ]]></title>
+    <title type="html"><![CDATA[javascript オブジェクトのマージあれこれ]]></title>
     <link href="http://blog.code-life.net/blog/2013/05/29/javascript-object-merge/"/>
     <updated>2013-05-29T22:45:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/05/29/javascript-object-merge</id>
@@ -316,7 +316,7 @@ console.log(obj1);</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Mousemoveイベントにbindした処理の実行間隔を制御する]]></title>
+    <title type="html"><![CDATA[mousemoveイベントにbindした処理の実行間隔を制御する]]></title>
     <link href="http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval/"/>
     <updated>2013-05-29T21:31:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval</id>
