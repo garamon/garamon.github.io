@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Hive | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/hive/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-08-19T01:17:07+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ThriftHiveClient を少し便利にしてみた]]></title>
+    <link href="http://blog.code-life.net/blog/2012/12/12/php-thrifthiveclient/"/>
+    <updated>2012-12-12T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/12/12/php-thrifthiveclient</id>
+    <content type="html"><![CDATA[<p>以前、<a href="/blog/2012/09/30/php-hiveql-hiveserver">HiveServerを使用してPHPからHiveQLを実行する</a>で、PHPから HiveQLを実行してみました。
+その際に、ThriftHiveClientの使い勝手が少し悪かったので改良を施してみました。</p>
+
+<!--more-->
+
+
+<p>どこが使い勝手が悪いどうこう言う前に、前回のコードを見てみます。</p>
+
+<p>```php
+&lt;?php
+$GLOBALS[&lsquo;THRIFT_ROOT&rsquo;] = dirname(<strong>FILE</strong>) . &lsquo;/lib/&rsquo;;
+require_once $GLOBALS[&lsquo;THRIFT_ROOT&rsquo;] . &lsquo;packages/hive_service/ThriftHive.php&rsquo;;
+require_once $GLOBALS[&lsquo;THRIFT_ROOT&rsquo;] . &lsquo;transport/TSocket.php&rsquo;;
+require_once $GLOBALS[&lsquo;THRIFT_ROOT&rsquo;] . &lsquo;protocol/TBinaryProtocol.php&rsquo;;</p>
+
+<p>$transport = new TSocket(&lsquo;localhost&rsquo;,  10000);
+$protocol = new TBinaryProtocol($transport);
+$client = new ThriftHiveClient($protocol);
+$transport->open();</p>
+
+<p>$client->execute(&lsquo;SHOW DATABASES&rsquo;);
+var_dump($client->fetchAll());
+$transport->close();
+```</p>
+
+<h2>問題点</h2>
+
+<p>ボクとしては、ThriftHiveClientインスタンスをどこか別のクラスで管理してクエリーを投げれば実行してくれるようにして欲しかったので、ThriftHiveClientクラスからコネクションを張りたいというのがありました。</p>
+
+<p>しかし、open関数が実装されているのは TBinaryProtocolクラスです。２つのインスタンスはできれば持ちたくない。面倒くさいし。</p>
+
+<p>コードを見ると、ThriftHiveClientクラスは引数として TBinaryProtocolインスタンスを受け取っています。
+じゃあ ThriftHiveClientクラスからもきっとopenメソッド呼べるよねって思いコードを追ってみると<code>getTransport</code>メソッドでTBinaryProtocol インスタンスが取得できました。</p>
+
+<h2>改良</h2>
+
+<p>というわけで、ThriftHiveClientを継承したクラス ThriftHiveClientEx を1発かましてみました。</p>
+
+<p>```php ThriftHiveClientEx.php
+&lt;?php</p>
+
+<p>/<em>*
+ * ThriftHiveClientEx
+ *
+ * @uses ThriftHiveClient
+ * @author noto
+ </em>/
+class ThriftHiveClientEx extends ThriftHiveClient {</p>
+
+<pre><code>/**
+ *  constructor
+ *
+ * @param mixed $input TSocket
+ * @param mixed $output
+ *
+ * @return void
+ */
+public function __construct($input, $output = null) {
+    parent::__construct($input, $output);
+}
+
+
+/**
+ * connection open
+ *
+ * @return void
+ */
+public function open() {
+    if (!$this-&gt;input_-&gt;getTransport()-&gt;isOpen()) {
+        $this-&gt;input_-&gt;getTransport()-&gt;open();
+    }
+}
+
+
+/**
+ * connection close
+ *
+ * @return void
+ */
+public function close() {
+    if ($this-&gt;input_-&gt;getTransport()-&gt;isOpen()) {
+        $this-&gt;input_-&gt;getTransport()-&gt;close();
+    }
+}
+
+
+/**
+ * execute HiveQL
+ *
+ * @param mixed $query HiveQL
+ * @return void
+ */
+public function execute($str) {
+
+    // あるクエリーの前に実行したいHQLが存在する為
+    // 「;」で区切って連続実行させる
+    $queries = preg_split('/;/', $str);
+
+    foreach ($queries as $query) {
+        $query = str_replace(array('\r\n', '\n', '\r'),  ' ', $query);
+        $query = ltrim($query);
+        if ($query == '') return false;
+
+        try {
+            parent::execute($query);
+        } catch (Exception $e) {
+            $msg = $e-&gt;getMessage();
+            $msg = "HiveExecuteException: Hive実行エラー ${msg}  実行クエリー:: ${query}";
+            throw new Exception($msg);
+        }
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>解説</h3>
+
+<p>openメソッドはTBinaryProtocolのopenメソッドをラップしてコネクションが貼られていない場合張るようにし、closeメソッドも同様にコネクションが破棄されていない場合、破棄するようにしています。</p>
+
+<p>executeメソッドは、Thrift経由でHQLを実行させる際に「;（セミコロン）」があるとエラーになってしまいますが、UDF等使用したい場合は、HiveQLを連続で実行させたいのでセミコロンで分割したものをループさせ実行しています。</p>
+
+<p>またThriftHiveClientクラスのexecuteはエラーが発生した場合、様々な例外を投げつけてくる為 全ての例外を一旦 ThriftHiveClientExで受け取って HiveExecuteException を投げつけてます。HiveExecuteExceptionは適当に実装するなどしてください。</p>
+
+<h3>使い方</h3>
+
+<p>使い方は、ThriftHiveClientと同じで TBinaryProtocolインスタンスを引数として受け取る必要があります。
+ThriftHiveClientEx.php はどこかで requiereなりincludeなりしてください。</p>
+
+<p>ここでは前回のコードと大して変わらないですが、ThriftHiveClientExインスタンスを返却するようなメソッドをかましてあげれば
+ThriftHiveClientExだけでコネクションの確立から実行までできるので管理はしやすいかなって思ってます。</p>
+
+<p>```php
+&lt;?php
+$GLOBALS[&lsquo;THRIFT_ROOT&rsquo;] = dirname(<strong>FILE</strong>) . &lsquo;/lib&rsquo;;
+require_once $GLOBALS[&lsquo;THRIFT_ROOT&rsquo;] . &lsquo;/packages/hive_service/ThriftHive.php&rsquo;;
+require_once $GLOBALS[&lsquo;THRIFT_ROOT&rsquo;] . &lsquo;/transport/TSocket.php&rsquo;;
+require_once $GLOBALS[&lsquo;THRIFT_ROOT&rsquo;] . &lsquo;/protocol/TBinaryProtocol.php&rsquo;;</p>
+
+<p>require_once $GLOBALS[&lsquo;THRIFT_ROOT&rsquo;] . &lsquo;/ThriftHiveClientEx.php&rsquo;;</p>
+
+<p>$transport = new TSocket(&lsquo;localhost&rsquo;,  10000);
+$protocol = new TBinaryProtocol($transport);
+$client = new ThriftHiveClientEx($protocol);
+$client->open();
+$client->execute(&lsquo;SHOW DATABASES&rsquo;);
+$client->close();
+```</p>
+
+<p>そろそろカテゴリーを整理整頓しないとまずい。。。</p>
+
+<h2>追記</h2>
+
+<p>githubにあげました。 <a href="https://github.com/garamon/php-thrift-hive-client" title="php-thrift-hive-client" target="_blank">php-thrift-hive-client</a></p>
+]]></content>
+  </entry>
+  
+</feed>

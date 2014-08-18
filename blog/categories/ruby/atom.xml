@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ruby | Code Life]]></title>
+  <title><![CDATA[Category: Ruby | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,11 +14,14 @@
 
   
   <entry>
-    <title type="html"><![CDATA[rbenv使うならこれもいれとけプラグイン4選]]></title>
+    <title type="html"><![CDATA[Rbenv使うならこれもいれとけプラグイン4選]]></title>
     <link href="http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/"/>
     <updated>2014-05-07T22:30:15+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin</id>
     <content type="html"><![CDATA[<p>複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。</p>
+
+<!--more-->
+
 
 <h2>ruby-build</h2>
 
@@ -94,6 +97,9 @@ $ git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-updat
 
 <p>世のRubyistはこんな環境で開発しているのか(いやない)ということで調べた。</p>
 
+<!--more-->
+
+
 <h2>環境</h2>
 
 <ul>
@@ -167,6 +173,257 @@ $ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグ
 <p><a href="https://www.vagrantup.com/blog/feature-preview-vagrant-1-5-rsync.html">Feature Preview: Rsync Synced Folders</a></p>
 
 <p><a href="http://docs.vagrantup.com/v2/getting-started/synced_folders.html">Synced Folders</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rubyで画像処理 【RMagick】]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/21/ruby-rmagick/"/>
+    <updated>2011-12-21T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/21/ruby-rmagick</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>リア充週間が終わって、腑抜けております。
+さて今回もRuby。
+今日はRubyをやってるとき、一番ロジックを
+考えるのが楽しかったRMagickです。</p>
+
+<!--more-->
+
+
+<p>RMagickとは、Ruby版のImageMagickです。
+<a href="http://www.imagemagick.org/RMagick/doc/" title="RMagick" target="_blank">RMagick</a></p>
+
+<p>画像ファイルをリサイズしたり、加工したりできます。
+それでは、サンプルソースを見てみましょう。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Ruby 1.8</li>
+<li>ImageMagick、RMagickがインストール済みであること</li>
+</ul>
+
+
+<h2>サンプル</h2>
+
+<p>リサイズとクロップとファイルサイズチェックのサンプルです。</p>
+
+<p>```ruby
+require &lsquo;RMagick&rsquo;</p>
+
+<h1>画像ファイルのパス指定</h1>
+
+<p>img_path = &ldquo;public/images/image.jpg&rdquo;</p>
+
+<h1>初期化</h1>
+
+<p>img = Magick::ImageList.new(img_path)</p>
+
+<h1>画像リサイズ (width, height)</h1>
+
+<p>img = img.resize_to_fit(100, 100 * img.rows / img.columns)</p>
+
+<p>if (img.rows &gt; 60) then</p>
+
+<pre><code>y = (img.rows - 60) / 2
+# 画像クロップ (x, y, width, height)
+img = img.crop(0, y, 100, 60)
+</code></pre>
+
+<p>end</p>
+
+<h1>画像ファイルサイズが大きい場合、</h1>
+
+<h1>圧縮率をかえて保存し直す</h1>
+
+<p>i = 90
+while i &gt; 5 do</p>
+
+<pre><code>if (File.size(img_path) &amp;gt;= 2000) then
+    img = img.write(img_path){img.quality = i}
+else
+    break
+end
+i = i - 10
+</code></pre>
+
+<p>end
+```</p>
+
+<p>大体はコメントで書いた通りです。
+画像のリサイズは横幅100pxで、元画像の比率を維持した場合です。</p>
+
+<p>クロップは縦幅が60pxより大きい場合、センターを中心に60px分抽出する例です。
+切り取る四角の頂点を左上を原点に指定します。
+例えば元画像のheightが100pxの場合、y = 20となり
+縦20pxから60px分クロップします。</p>
+
+<p>File.sizeのメソッドはRMagickではなくRubyのメソッド。
+ファイルサイズが想定より大きい場合、圧縮率（img.quality = i）を変更して保存し直します。
+iが圧縮率で100〜10%の間で圧縮します。
+10%ずつ下げて、最低レベルは10%ということ。</p>
+
+<p>以上です。
+今回はRMagickだったけど、PHP＋ImageMagickで同じことやっても
+基本はかわらないと思います。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyでXML出力しましょう]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/18/ruby-xml/"/>
+    <updated>2011-12-18T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/18/ruby-xml</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>今日はまたもやRuby！
+RubyOnRailsでXMLを出力してみましょう。</p>
+
+<!--more-->
+
+
+<p>RubyOnRailsでwebサービスを立ちあげた後、
+SEO対策のためsitemap.xmlを用意したりすると思います。
+ただ、フレームワークで作成したサイトの場合、
+staticでsitemap.xmlを用意する気はありません。
+そこで、sitemap.xml自体もフレームワークで出力しちゃおうと思います。</p>
+
+<h2>Controller</h2>
+
+<p>``` ruby controller/site_controller.rb
+class SiteController > ApplicationContoller
+  require &ldquo;builder/xmlmarkup&rdquo;</p>
+
+<p>  def sitemap</p>
+
+<pre><code>@xml = Builder::XmlMarkup.new
+render(:type =&gt; :rxml)
+</code></pre>
+
+<p>  end
+end
+```</p>
+
+<p>ポイントはHTMLではなくXMLと認識させることです。
+requireでライブラリを読み込むのは前回書いた通り。
+今回はxmlを出力するためのライブラリを読み込みます。
+xmlのフォーマットを利用できるように、XmlMarkup.new
+renderもちゃんと指定してください。</p>
+
+<h2>View</h2>
+
+<p>そしてViewはrenderでも指定した通り、
+通常はViewのファイル拡張子は.rhtmlのところを.rxmlにしましょう。
+view/sitemap.rxml</p>
+
+<p>```php view/sitemap.rxml
+@xml.instruct! :xml, :version => &ldquo;1.0&rdquo;
+@xml.urlset(:xmlns => &ldquo;<a href="http://www.sitemaps.org/schemas/sitemap/0.9">http://www.sitemaps.org/schemas/sitemap/0.9</a>&rdquo;) do</p>
+
+<pre><code>@xml.url do
+    @xml.loc("http://code-life.net");
+    @xml.lastmod("2011-12-17")
+    @xml.changefreq("daily")
+    @xml.priorty("0.8")
+end
+</code></pre>
+
+<p>end
+```</p>
+
+<h3>出力結果</h3>
+
+<p>``` xml
+&lt;?xml version=”1.0″ encoding=”UTF-8″?>
+<urlset xmlns=”http://www.sitemaps.org/schemas/sitemap/0.9″>
+<url></p>
+
+<pre><code>&lt;loc&gt;http://code-life.net/&lt;/loc&gt;
+&lt;lastmod&gt;2011-12-17&lt;/lastmod&gt;
+&lt;changefreq&gt;daily&lt;/changefreq&gt;
+&lt;priority&gt;0.8&lt;/priority&gt;
+</code></pre>
+
+<p></url>
+</urlset>
+```</p>
+
+<p>これでいけちゃいます！笑。
+viewのコードと出力結果を見比べてもらうとわかると思いますが、
+例えば@xml.testとするとタグが出力されます。
+タグの終了がいらない場合の場合「!」をつけましょう。</p>
+
+<p>そして、タグの中に子のタグを入れたい場合はdo〜endで囲みましょう。
+簡単ですね。
+時限公開なんかをしているサイトだったら特に簡単にsitemap.xmlが作れちゃいます。</p>
+
+<p>以上です。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyでMD5しましょう]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/14/md5-ruby/"/>
+    <updated>2011-12-14T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/14/md5-ruby</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>懲りずにRubyネタ。</p>
+
+<!--more-->
+
+
+<p>この前、<a href="/blog/2011/12/12/to-s-ruby/">Rubyならではのメソッド 【to_s編】</a>というのを書いたら、ツッコミが入りました。
+あれは別にRuby特有ではないと。
+確かにね。笑。</p>
+
+<p>ActionScriptのではNumber型からString型にするときは以下のようにします。</p>
+
+<p><code>as3
+value:Number = 3;
+trace(value.toString());
+</code></p>
+
+<h3>実行結果</h3>
+
+<p><code>
+3
+</code></p>
+
+<p>確かに似てる。。
+前回のは、phpのみ使う人目線で考えてました。
+とりあえず、to_sは進数変換もできるってのが特徴です。
+以上、前回の補足でした。笑。</p>
+
+<p>さて今日は、ちゃちゃっと簡単にRubyでMD5しちゃいましょう。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>ruby1.8</li>
+</ul>
+
+
+<p>``` ruby
+require &lsquo;digest/md5&rsquo;</p>
+
+<p>str = &ldquo;test&rdquo;
+p Digest::MD5.hexdigest(str)
+```</p>
+
+<h3>実行結果</h3>
+
+<p><code>
+098f6bcd4621d373cade4e832627b4f6
+</code></p>
+
+<p>ポイントはrequire。
+これで使うライブラリをちゃんと宣言してください。</p>
+
+<p>※digestはRuby自体に含まれるライブラリなので呼び出すだけです。</p>
+
+<p>以上です。</p>
 ]]></content>
   </entry>
   

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: cakephp | Code Life]]></title>
+  <title><![CDATA[Category: CakePHP | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/cakephp/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,81 +14,345 @@
 
   
   <entry>
-    <title type="html"><![CDATA[[CakePHP]モデルのコールバックを無効化にする]]></title>
-    <link href="http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback/"/>
-    <updated>2013-09-25T21:59:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback</id>
-    <content type="html"><![CDATA[<p>モデルの<a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html">コールバックメソッド</a>が様々ありますが、無効化したい場合があります。</p>
+    <title type="html"><![CDATA[CakePHP2 CssController Could Not Be Found が発生する場合]]></title>
+    <link href="http://blog.code-life.net/blog/2013/03/21/cakephp2-css-controller-could-not-be-found/"/>
+    <updated>2013-03-21T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/03/21/cakephp2-css-controller-could-not-be-found</id>
+    <content type="html"><![CDATA[<p>存在しないcssを指定してないか確認しましょう。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHP2 モデルからログインしているユーザー情報を取得する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/03/09/how-to-get-logged-in-user-in-model-cakephp/"/>
+    <updated>2013-03-09T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/03/09/how-to-get-logged-in-user-in-model-cakephp</id>
+    <content type="html"><![CDATA[<p>Modelからログインしているユーザー情報を取得したい場合があります。
+もちろん <code>$this-&gt;Auth-&gt;user()</code> では取得できないので一手間かけてあげます。</p>
 
-<p>find, save共に第２引数にcallbacksをキーとした配列を渡すことでモデルのコールバック実行の可否を伝えることが可能です。</p>
+<!--more-->
 
-<h2>find(beforeFind, afterFind共に無効化)</h2>
 
-<p>``` php
-$this->find(&lsquo;first&rsquo;, array(</p>
+<h2>環境</h2>
 
-<pre><code>'callbacks' =&gt; false
+<p>CakePHP 2.2.2</p>
+
+<h2>モデルからログインしているユーザー情報を取得する</h2>
+
+<p>AppModel.phpに以下のメソッドを追加します。</p>
+
+<p>やってることはAuthComponent内で行なっていることとそんなに大差はなく、
+キーの指定までは必要ないだろうと省いています。</p>
+
+<p>``` php AppModel.php
+protected function _getCurrentUser() {</p>
+
+<pre><code>App::uses('CakeSession', 'Model/Datasource');
+$Session = new CakeSession();
+
+$user = $Session-&gt;read('Auth.User');
+return $user;
+</code></pre>
+
+<p>}
+```</p>
+
+<p>これで <code>$this-&gt;_getCurrentUser()</code> を呼び出してあげればユーザー情報が取得できます。</p>
+
+<p>他の方法としては、AuthComponentのインスタンスを生成してuserメソッドをそのまま呼び出してもいいと思います。</p>
+
+<p>※2013/3/28 サンプルコード追記</p>
+
+<p>``` php AppModel.php
+protected function _getCurrentUser() {</p>
+
+<pre><code>App::uses('AuthComponent',  'Controller/Component');
+return AuthComponent::user();
+</code></pre>
+
+<p>}
+```</p>
+
+<p>参考というかパク(ry</p>
+
+<h2>参考</h2>
+
+<p><a href="http://stackoverflow.com/questions/2149990/cakephp-get-user-info-in-models">CakePHP: get user info in models</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CakePHP2] Htmlヘルパーで出力されるタグを変更する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/03/09/changing-the-tags-output-cakephp2/"/>
+    <updated>2013-03-09T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/03/09/changing-the-tags-output-cakephp2</id>
+    <content type="html"><![CDATA[<p>Htmlヘルパー便利ですよね。けど期待したタグが出力されない場合があります。
+出力されるタグを独自にカスタマイズする仕組みがあるのでそれを利用しましょう。</p>
+
+<!--more-->
+
+
+<h2>タグ定義ファイルを作成する</h2>
+
+<p>[install_dir]/app/Config 以下に tags.php を作成します。
+例えば、以下のように独自の定義をします。</p>
+
+<p>```php tags.php
+$config = array(</p>
+
+<pre><code>'tags' =&gt; array(
+    'css' =&gt; '&lt;link rel="%s" href="%s" %s&gt;',
+)
+</code></pre>
+
+<p>);
+```</p>
+
+<h2>タグ定義ファイルのロード</h2>
+
+<p>定義したタグを反映させるために、タグ定義ファイルを読みこませる必要があります。
+my_tags.phpとした場合は、tags.php を my_tags.phpに変えてください。</p>
+
+<p><code>php
+$this-&gt;Html-&gt;loadConfig('tags.php');
+</code></p>
+
+<h3>定義ファイルがphpファイルでない場合(iniファイルの場合)</h3>
+
+<p>第2引数にreaderクラス名を指定します。
+コアファイルを覗くとphpファイルとiniファイルはサポートされてるようです。</p>
+
+<p><code>php
+$this-&gt;Html-&gt;loadConfig(array('tags.ini', 'ini'));`
+</code></p>
+
+<h3>定義ファイルの場所がConfig直下にない場合</h3>
+
+<p>例えばタグ定義ファイルが [install_dir]/app/Config/tag/tags.php と配置されてる場合、
+第2引数にパスを指定します。</p>
+
+<p><code>php
+$this-&gt;Html-&gt;loadConfig('tags.php', APP . 'Config' . DS . 'tag');
+</code></p>
+
+<p>loadConfigメソッドではHtmlヘルパーに設定されている$_tagsと読み込まれた定義をmergeしているので
+元のタグを残したい場合は、名前の衝突が起きないよう注意が必要です。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#changing-the-tags-output-by-htmlhelper" title="Changing the tags output by HtmlHelper" target="_blank">Changing the tags output by HtmlHelper</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHP初学者が知るべき６つのこと]]></title>
+    <link href="http://blog.code-life.net/blog/2012/03/16/six-things-that-begginer-should-know-about-cakephp/"/>
+    <updated>2012-03-16T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/03/16/six-things-that-begginer-should-know-about-cakephp</id>
+    <content type="html"><![CDATA[<p>notoです。</p>
+
+<p>完全にタイトル詐欺です。</p>
+
+<p>これからCakePHPを学びたいと思ってる人が知ってたほうがいいことをまとめてみました。
+初心者向け(?)とは言い難い内容かもしれません。</p>
+
+<!--more-->
+
+
+<p>CakePHPの導入するメリットとしては、高速開発・日本語の情報量の多さかな。
+それだけでも導入する理由としては十分だとは思います。</p>
+
+<h2>ドキュメントを読もう</h2>
+
+<p>分からないことがあったら、まずはドキュメントを読みましょう。
+google先生に教えてもらうとしても、ブログの内容はアテにしてはいけません。疑ってかかりましょう。</p>
+
+<p>ブログを書いている人は、google先生ではないからです。ボクの書いた記事も間違いが多々あります!!</p>
+
+<p><a href="http://book.cakephp.org/2.0/en/index.html" title="Cookbook 2.x" target="_blank">Cookbook 2.x</a></p>
+
+<p>プログラミングを行うなら、英語はある程度は読めないとキツイです。これは覚悟しましょう。</p>
+
+<h2>プラグインを活用しよう</h2>
+
+<p>ブログを信用するなと言いましたが、国内だけでもCakePHPを利用されている方は多いと思います。
+それは開発するにあたって大きな強みとなります。</p>
+
+<p>またプラグインが豊富に揃っているので、まずはプラグインが存在するか確認してみましょう。</p>
+
+<p><a href="http://blog.verygoodtown.com/2010/12/cakephp-my-best-plugin/" title="CakePHPで普段使っているpluginをまとめてみた" target="_blank">CakePHPで普段使っているpluginをまとめてみた</a>
+<a href="http://1-byte.jp/2010/09/06/introduce_cakephp_plugins/" title="CakePHPプラグインのまとめ – 総括編" target="_blank">CakePHPプラグインのまとめ – 総括編</a></p>
+
+<p>CakePHP2.xに対応していないプラグインもあるので確認はしてください。</p>
+
+<p>オススメプラグインは</p>
+
+<p><a href="http://www.alaxos.ch/blaxos/pages/view/plugin_acl_2.0" title="ACL plugin for CakePHP2.0" target="_blank">ACL plugin for CakePHP2.0</a></p>
+
+<p>ACL(Access Control List)を管理することができます。</p>
+
+<p>ACLとは管理者はこのページを閲覧することができるけど、ユーザーは閲覧できないよと、権限によってアクセスをコントロールする設定のことです。
+CakePHPのACLはクソみたいに使いにくいので、このプラグインを利用しています。</p>
+
+<p>検証環境がCakePHP1.3.xですが導入手順を記載しています。
+<a href="/blog/2011-10-11-cakephp-acl-plugin">CakePHP ACL Pluginを使ってみる</a></p>
+
+<h2>CakePHPの情報を発信している人を押さえよう</h2>
+
+<p>CakePHPの記事を多く発信されている方のブログは押さえておきましょう。
+リリース情報、セキュリティホールが発見された場合、tips等多くの情報を発信されています。</p>
+
+<p><a href="http://d.hatena.ne.jp/hiromi2424/" title="24時間CakePHP" target="_blank">24時間CakePHP</a></p>
+
+<p><a href="http://blog.ecworks.jp/" title="ECWorks Blog" target="_blank">ECWorks Blog</a></p>
+
+<p><a href="http://www.1x1.jp/blog/" title="Shin x blog" target="_blank">Shin x blog</a></p>
+
+<h2>オープンソースを活用しよう</h2>
+
+<p>オープンソースとして公開されているコードをダウンロードしてコードを読みましょう。
+そして書き方を真似しましょう。コピペはダメです。自分で写経してください。体で覚えてください。</p>
+
+<p><a href="http://basercms.net/" title="BaserCMS" target="_blank">BaserCMS</a></p>
+
+<p><a href="http://croogo.org/" title="Croogo" target="_blank">Croogo</a></p>
+
+<h2>デバッグの方法を知ろう</h2>
+
+<p>debug_kitでもいいのですが、ステップ実行が利用出来る環境だと尚良いです。
+理由としては、CakePHPのコアコードを自然と見る機会が増える為です。ですので、ボクはIDEをオススメしています。</p>
+
+<p>自分が使いやすいツールを選択しましょう。</p>
+
+<h2>ベストプラクティスを知る</h2>
+
+<p>Controllerで行うべき処理なのかModelで行うべき処理なのかを意識しましょう。</p>
+
+<p><a href="http://old-journal.sooey.com/2008/03/26/717/" title="CakePHPを使ったMVC設計のベストプラクティス" target="_blank">CakePHPを使ったMVC設計のベストプラクティス</a></p>
+
+<p>※3/19 追記</p>
+
+<h2>テストを書こう</h2>
+
+<p>開発のプロセスは、データベース定義、コーディング（設計）だけではありません。
+テストがあります。デプロイもあるけど。。</p>
+
+<h3>テストをどうして行うのか</h3>
+
+<p>もちろん正常に動作するかを確認するためです。</p>
+
+<h3>どうしてテストコードを書く必要があるのか</h3>
+
+<p>巷では、テストコードがないコードはレガシーコードと呼ばれています。
+レガシーとは時代遅れとか古いとかそういった意味ですね。
+つまりはダサいと。</p>
+
+<p>テストコードがない場合（手動でテストを行った場合）を想像してみましょう。</p>
+
+<ul>
+<li>不具合を修正したが、同じ不具合が再発する。</li>
+<li>不具合を修正したが、別の機能で不具合が発生する。</li>
+<li>リファクタリングを行った為に、不具合が発生する。</li>
+<li>新しい機能を追加したら、別の機能に不具合が発生した。</li>
+</ul>
+
+
+<p>こういったことは、テストコード（自動テスト）があれば起こる割合は減ります。</p>
+
+<p>プログラマは不安症です。自分が作ったものは不安で不安でしょうがないです。少なくともボクは。
+常にテストが出来る状態をつくり、コードの振る舞いを明らかにして不安を取り除きましょう。</p>
+
+<h3>CakePHPはどうやってテストコードを書くの？</h3>
+
+<p>CakePHP2.xではテストフレームワークとしてPHPUnitを採用しています。(CakePHP1.xではSimpleTestが採用されています。)</p>
+
+<p>PHPUnitは、PHPのメジャーなフレームワーク ZendFrameWork Symfony2でも採用されており、テストフレームワークのデファクトスタンダードです。CakePHP以外のフレームワークを利用する際にもPHPUnitには、お世話になります。</p>
+
+<p>CakePHPでは、<a href="http://book.cakephp.org/2.0/en/development/testing.html" title="Testing" target="_blank">Testing</a>のドキュメントも充実しています。</p>
+
+<p>テストしやすいようにコーディングしていくと、自然と綺麗なコードになっていきますよ！
+テストコードの必要性については結構端折ってますが、書いたほうが自分も他人も幸せになれるのは間違いないです。</p>
+
+<h2>とりあえず読んでおいたほうがいい</h2>
+
+<p><a href="http://1-byte.jp/2011/03/09/10_things_you_must_know_about_cakephp/" title="CakePHP開発者が知るべき10のこと" target="_blank">CakePHP開発者が知るべき10のこと</a></p>
+
+<p><a href="http://d.hatena.ne.jp/kyoro353/20111223/1324589389" title="俺が勝手に考える正しいMVCの実装。モデルはデータAPI！" target="_blank">俺が勝手に考える正しいMVCの実装。モデルはデータAPI！</a></p>
+
+<p><a href="http://d.hatena.ne.jp/basuke/20111219" title="basuke の日記 フレームワークで語るMVCの話 : PHP Advent Calendar #19" target="_blank">basuke の日記 フレームワークで語るMVCの話 : PHP Advent Calendar #19</a></p>
+
+<p>偉そうに書きましたが、ボクも修行の日々です。少しでもお役に立てれば幸いです。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHP ContainableBehavior便利すぎ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/03/12/cakephp-containable-behavior/"/>
+    <updated>2012-03-12T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/03/12/cakephp-containable-behavior</id>
+    <content type="html"><![CDATA[<p>notoです。</p>
+
+<p>モデル間のアソシエーションが複雑な場合、findで取得するデータに無駄がある、取得したいデータが取得できないことがあります。
+そんな時は、ContainableBehaviorを利用すると幸せになれますよ。</p>
+
+<!--more-->
+
+
+<h2>検証環境</h2>
+
+<ul>
+<li>CakePHP1.3.x</li>
+</ul>
+
+
+<h2>ContainableBehavior</h2>
+
+<p>このビヘイビアは find を実行するときに関連したモデルを選別したり限定したりするために使用します。コンテイナブル(Containable)は、データベース中の不要なものを削減し、アプリケーションの速度やパフォーマンスを改善します。このクラスを使うと、ユーザに対するデータの検索とフィルタを、美しく一貫した方法で行うこともできます。</p>
+
+<p>複雑なモデル関連の場合、データを取得する際に、recursiveでスコープ(?)を広げたり、Modelをbind unbindします。
+recursive 2か1か。あれキーがないって怒られてる。そんなことがあると思います。</p>
+
+<p>そんなことを悩まずともContainableBehaviorを利用したらいいのです。</p>
+
+<h3>ContainableBehaviorを利用したフィルタリング</h3>
+
+<p>cookbookから引用させてもらいます。
+モデル間のアソシエーションが次のようになっているとします。</p>
+
+<p><code>php
+User-&gt;Post-&gt;PostAttachment-&gt;PostAttachmentHistory-&gt;HistoryNotes
+</code></p>
+
+<p>ContainableBehaviorを利用したフィルタリングの例です。</p>
+
+<p>```php
+$this->User->find(&lsquo;all&rsquo;, array(</p>
+
+<pre><code>'contain'=&gt;array(
+    'Post' =&gt; array(
+        'PostAttachment' =&gt; array(
+            'fields' =&gt; array('id', 'name'),
+            'PostAttachmentHistory' =&gt; array(
+                 'HistoryNotes' =&gt; array(
+                     'fields' =&gt; array('id', 'note')
+                  )
+             )
+         )
+    )
+ )
 </code></pre>
 
 <p>));
 ```</p>
 
-<h2>find(beforeFindのみ有効)</h2>
+<p>containを指定し、その中で取得したいフィールド、フィルタリングしたい条件を追加していきます。
+どのデータを取得したいのかコードから把握でき可読性もいいです。</p>
 
-<p>``` php
-$this->find(&lsquo;first&rsquo;, array(</p>
+<p>ContainableBehaviorそんなのデフォルトで使うでしょ。常識的に考えてって方はこれからもContainableBehaviorを、ContainableBehavior知らなかった方は是非利用してみてください。</p>
 
-<pre><code>'callbacks' =&gt; 'before'
-</code></pre>
+<h2>参考</h2>
 
-<p>));
-```</p>
-
-<h2>find(afterFindのみ有効)</h2>
-
-<p>``` php
-$this->find(&lsquo;first&rsquo;, array(</p>
-
-<pre><code>'callbacks' =&gt; 'after'
-</code></pre>
-
-<p>));
-```</p>
-
-<h2>save(beforeSave, afterSave共に無効化)</h2>
-
-<p>``` php
-$this->save($data, array(</p>
-
-<pre><code>'callbacks' =&gt; false
-</code></pre>
-
-<p>));
-```</p>
-
-<h2>save(beforeSaveのみ有効)</h2>
-
-<p>``` php
-$this->save($data, array(</p>
-
-<pre><code>'callbacks' =&gt; 'before'
-</code></pre>
-
-<p>));
-```</p>
-
-<h2>save(afterSaveのみ有効)</h2>
-
-<p>``` php
-$this->save($data, array(</p>
-
-<pre><code>'callbacks' =&gt; 'after'
-</code></pre>
-
-<p>));
-```</p>
-
-<p>という小ネタ。</p>
+<p><a href="http://book.cakephp.org/1.3/ja/The-Manual/Core-Behaviors/Containable.html">CakePHP コンテイナブル</a></p>
 ]]></content>
   </entry>
   

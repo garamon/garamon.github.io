@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Less | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/less/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-08-19T01:17:07+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[LESSの使い始めメモ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/04/28/start-using-less-css/"/>
+    <updated>2012-04-28T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/04/28/start-using-less-css</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>CSSのLESSデビューしようと思ったので、自分なりのメモです。</p>
+
+<!--more-->
+
+
+<h2>入れ子構造</h2>
+
+<p>長くなりやすい、CSSの要素指定を簡略化することができます。</p>
+
+<h3>CSS</h3>
+
+<p>```css</p>
+
+<h1>header li{</h1>
+
+<pre><code> float:left;
+ text-align:center;
+</code></pre>
+
+<p>}</p>
+
+<h1>header li a{</h1>
+
+<pre><code> display:block;
+ background-color:#ccc;
+</code></pre>
+
+<p>}</p>
+
+<h1>header li a:hover{</h1>
+
+<pre><code> color:#fff;
+ background-color:#000;
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>LESS</h3>
+
+<p>```css</p>
+
+<h1>header{</h1>
+
+<pre><code> li{
+      float:left;
+      text-align:center;
+      a{
+           display:block;
+           background-color:#ccc;
+           &amp;:hover{
+                color:#fff;
+                background-color:#000;
+           }
+      }
+ }
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>変数を使う</h2>
+
+<p>プログラム的には当たり前の、変数をCSSでも使えるようになります。</p>
+
+<h3>CSS</h3>
+
+<p>```css
+h1{</p>
+
+<pre><code> margin:10px;
+</code></pre>
+
+<p>}
+h2{</p>
+
+<pre><code> margin:10px;
+</code></pre>
+
+<p>}
+```</p>
+
+<h3>LESS</h3>
+
+<p>```css
+@mgn: 10px;
+h1{</p>
+
+<pre><code> margin:@mgn;
+</code></pre>
+
+<p>}
+h2{</p>
+
+<pre><code> margin:@mgn;
+</code></pre>
+
+<p>}
+```</p>
+
+<h2>引数・関数</h2>
+
+<h3>CSS</h3>
+
+<p>```css</p>
+
+<h1>header {</h1>
+
+<p>  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}</p>
+
+<h1>footer {</h1>
+
+<p>  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+```</p>
+
+<h3>LESS</h3>
+
+<p>```css
+.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}</p>
+
+<h1>header {</h1>
+
+<p>  .rounded-corners;
+}</p>
+
+<h1>footer {</h1>
+
+<p>  .rounded-corners(10px);
+}
+```</p>
+
+<h2>計算</h2>
+
+<h3>CSS</h3>
+
+<p>``` css</p>
+
+<h1>header {</h1>
+
+<p>  color: #333;
+  border-left: 1px;
+  border-right: 2px;
+}</p>
+
+<h1>footer {</h1>
+
+<p>  color: #114411;
+  border-color: #7d2717;
+}
+```</p>
+
+<h3>LESS</h3>
+
+<p>```css
+@the-border: 1px;
+@base-color: #111;
+@red:        #842210;</p>
+
+<h1>header {</h1>
+
+<p>  color: @base-color * 3;
+  border-left: @the-border;
+  border-right: @the-border * 2;
+}</p>
+
+<h1>footer {</h1>
+
+<p>  color: @base-color + #003300;
+  border-color: desaturate(@red, 10%);
+}
+```</p>
+
+<h2>LESSを適応する</h2>
+
+<p>Javascriptとかで適応する方法もあるみたいですが、
+LESSファイルをCSSコンパイルする方法が今のところは無難そうなので、下記の変換ツールを使ってCSSに変換します。
+<a href="http://lesstester.com/" target="_blank"><a href="http://lesstester.com/">http://lesstester.com/</a></a></p>
+
+<p>JSを読み込める環境であれば、下記のJSを適応させた上でLESSファイルを作成すればいいと思います。</p>
+
+<p>```html
+<link rel="stylesheet/less" type="text/css" href="styles.less"></p>
+
+<script src="less.js" type="text/javascript"></script>
+
+
+<p>```</p>
+
+<p>Downloads: <a href="http://lesscss.org/" target="_blank"><a href="http://lesscss.org/">http://lesscss.org/</a></a></p>
+
+<p>実業務で使う機会があるかというと、そうでもないんですが、個人的には積極的に使っていきたいところです。</p>
+]]></content>
+  </entry>
+  
+</feed>

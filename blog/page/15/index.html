@@ -1,0 +1,546 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="ActionScript3 AS3でFullScreenするときのまとめ おはようございます。iyamaです。 今回は簡単に、ActionScript3.0でFullScreenにする方法をまとめます。 Read on &rarr; ActionScript3 Fscommand iyamaです &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/blog/page/15/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-21T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/actionscript3/'>ActionScript3</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/11/21/fullscreen-as3/" itemprop="url">AS3でFullScreenするときのまとめ</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>おはようございます。iyamaです。</p>
+
+<p>今回は簡単に、ActionScript3.0でFullScreenにする方法をまとめます。</p>
+
+
+		
+		<a href="/blog/2011/11/21/fullscreen-as3/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-18T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/actionscript3/'>ActionScript3</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/11/18/fscommand-as3/" itemprop="url">Fscommand</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>iyamaです。
+今日はうっすら予告していたとおり、Flashのデスクトップアプリケーションを作成するときの覚え書きにします。</p>
+
+
+		
+		<a href="/blog/2011/11/18/fscommand-as3/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-17T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/11/17/redirect-referer/" itemprop="url">リダイレクトとリファラー</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>chakemiです。KAXAMLってxamlを編集するのに便利なエディタを見つけて、試してみました。</p>
+
+<p>アニメーションなんかも、xamlのレンダリング結果を確認しながら編集が出来るようで期待していたのですが、、、
+まともに実行出来ず、しまいには起動直後に、落ちてしまいました。
+最近、こんなのばっかですが、軽く調べてみると他にも同様の症状で断念している方もいらっしゃったのでとりあえず、自分もこれ以上追うのはやめてしばらく様子見でいます。</p>
+
+
+		
+		<a href="/blog/2011/11/17/redirect-referer/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-16T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/javascript/'>javascript</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/11/16/document-writescript/" itemprop="url">document.write(&quot;scr&quot;+&quot;ipt&quot;) ??</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>notoです。</p>
+
+<p>今日は小ネタです（いつも小ネタだけど）。
+最近のマイブームであるjavascriptのコードを眺めていたら見かけぬソースを発見しました。</p>
+
+
+		
+		<a href="/blog/2011/11/16/document-writescript/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-15T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/actionscript3/'>ActionScript3</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/11/15/flash-cross-domain/" itemprop="url">Flashのクロスドメインについて</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>iyamaです。</p>
+
+<p>前回、Flash→Javascriptの連携のところで、クロスドメインについて
+触れなかったため、notoさんからクレームが入っております。</p>
+
+<p>仕方ないので今回はcrossdomain.xmlについて書きます。</p>
+
+
+		
+		<a href="/blog/2011/11/15/flash-cross-domain/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-14T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/11/14/webm/" itemprop="url">Webmフォーマットについて整理してみた</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>chakemiです。</p>
+
+<p>notoさんと一緒にAndroid端末にてFlashPlayerを使った動画再生について色々調べていたのですが、そんな中、AodbeがAndroid向けのFlashPlayerの開発終了のニュース。。。</p>
+
+
+		
+		<a href="/blog/2011/11/14/webm/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-12T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/actionscript3/'>ActionScript3</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/11/12/external-interface-as3/" itemprop="url">FlashからJavaScript呼び出し</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>こんばんわiyamaです。
+今日はこの前notoさんにお願いされたFlashからJavascript呼び出しについて覚え書き。</p>
+
+
+		
+		<a href="/blog/2011/11/12/external-interface-as3/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-11T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/11/11/developer-program-for-playstation-suite-closed-beta-test/" itemprop="url">Developer Program for PlayStation Suite（Closed Beta Test）に申し込んでみた</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>chakemiです。メインで使用している携帯電話が古くなってきて、XperiaPlayに機種変更しようか迷ってます。
+そんな中、PlayStation Suite SDKのテスト版を11月下旬から提供すると発表したようです。</p>
+
+
+		
+		<a href="/blog/2011/11/11/developer-program-for-playstation-suite-closed-beta-test/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-10T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/cakephp/'>CakePHP</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/11/10/how-to-create-multiple-checkboxes-in-cakephp/" itemprop="url">CakePHP1.3 お手軽な複数チェックボックスの作り方</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>notoです。</p>
+
+<p>CakePHPでforeach内のチェックボックス作成をどうしたらいいものかと、悩んでおりましたところ。
+google先生がよさげな方法を教えてくれました。</p>
+
+
+		
+		<a href="/blog/2011/11/10/how-to-create-multiple-checkboxes-in-cakephp/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2011-11-09T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/actionscript3/'>ActionScript3</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2011/11/09/box2dflashas3/" itemprop="url">Box2DFlashAS3をお試し</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>こんばんわ。iyamaです。</p>
+
+<p>今日は<a href="http://wonderfl.net/">wonderfl</a>を使ってActionScriptで遊んでみようと思います。
+久々にwonderflのアカウント引っ張り出してきたよ。</p>
+
+<p>wonderflでサポートされている物理演算ライブラリのBox2DFlashAS3(2.0.2)を使ってみましょー。</p>
+
+
+		
+		<a href="/blog/2011/11/09/box2dflashas3/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+</div>
+<nav id="pagenavi">
+    
+        <a href="/blog/page/14/" class="prev">Prev</a>
+    
+    
+        <a href="/blog/page/16/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

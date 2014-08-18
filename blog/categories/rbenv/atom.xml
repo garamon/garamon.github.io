@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: rbenv | Code Life]]></title>
+  <title><![CDATA[Category: Rbenv | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/rbenv/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,11 +14,14 @@
 
   
   <entry>
-    <title type="html"><![CDATA[rbenv使うならこれもいれとけプラグイン4選]]></title>
+    <title type="html"><![CDATA[Rbenv使うならこれもいれとけプラグイン4選]]></title>
     <link href="http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/"/>
     <updated>2014-05-07T22:30:15+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin</id>
     <content type="html"><![CDATA[<p>複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。</p>
+
+<!--more-->
+
 
 <h2>ruby-build</h2>
 

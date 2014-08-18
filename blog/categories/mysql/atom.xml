@@ -4,7 +4,7 @@
   <title><![CDATA[Category: MySQL | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/mysql/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -20,6 +20,9 @@
     <id>http://blog.code-life.net/blog/2013/04/22/how-to-syntax-check-mysql-config-file</id>
     <content type="html"><![CDATA[<p>Apacheのconfigファイルの文法をチェックする方法として「configtest」があるが、
 MySQLの文法チェックはどうやるのか調べてみた。</p>
+
+<!--more-->
+
 
 <h2>MySQLのconfigファイルの文法をチェックする方法</h2>
 
@@ -73,6 +76,159 @@ WHERE
 |         662058 |
 +----------------+
 </code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MySQLチューニングツール 「mymemcheck」をCentOSにインストールする]]></title>
+    <link href="http://blog.code-life.net/blog/2012/06/12/install-mymemcheck-on-centos/"/>
+    <updated>2012-06-12T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/06/12/install-mymemcheck-on-centos</id>
+    <content type="html"><![CDATA[<p>notoです。</p>
+
+<p>MySQLのメモリ関係のチューニングをする際に、メモリの計算をするのが面倒くさいと思っていたら便利なツールがあるんですね。
+その名も「mymemcheck」KLab製の自家製ツールですが、<a href="http://dsas.blog.klab.org/archives/50860867.html" title="5分でできる、MySQLのメモリ関係のチューニング！" target="_blank">こちら</a> からダウンロードして利用することができます。</p>
+
+<p>mymemcheckは以下のチェックを行なってくれます。</p>
+
+<blockquote><p>my.cnfもしくはSHOW VARIABLESの結果を元に、以下の3つのチェックを行います。</p>
+
+<ul>
+<li>最低限必要な物理メモリの大きさ</li>
+<li>IA-32のLinuxでのヒープサイズの制限</li>
+<li>innodb_log_file_sizeの最大サイズ</li>
+</ul>
+</blockquote>
+
+<p>今回は、CentOS 5.7にインストールしてみます。</p>
+
+<!--more-->
+
+
+<h2>検証環境</h2>
+
+<ul>
+<li>CentOS 5.7</li>
+<li>perl 5.8.8</li>
+</ul>
+
+
+<h2>cpanmのインストール</h2>
+
+<p>mymemcheck はいくつかの perlモジュールを必要とします。最近のナウい人たちは、cpan よりも<a href="http://search.cpan.org/~miyagawa/App-cpanminus-1.5013/lib/App/cpanminus.pm" title="cpanm" target="_blank">cpanm</a> を利用するようなので、 cpanmを使ってモジュールをインストールします。</p>
+
+<p>cpan と cpanm の違いは、<a href="http://www.omakase.org/perl/cpanm.html" title="perlモジュールのinstallにcpanmを使う" target="_blank">perlモジュールのinstallにcpanmを使う</a> を参考にさせてもらいました。</p>
+
+<h3>インストール要件</h3>
+
+<p>perl 5.8 or later.</p>
+
+<ul>
+<li>&lsquo;tar&rsquo;; executable (bsdtar or GNU tar version 1.22 are rcommended) or Archive::Tar to unpack files.</li>
+<li>C compiler, if you want to build XS modules.</li>
+<li>make</li>
+<li>Module::Build (core in 5.10)</li>
+</ul>
+
+
+<h3>インストール</h3>
+
+<p><code>
+curl -L http://cpanmin.us | perl - --sudo App::cpanminus
+</code></p>
+
+<p>さくっと終了。</p>
+
+<p>インストールに失敗する場合は、恐らく Module::Buildがインストールされていないのでインストールを行なって下さい。</p>
+
+<p><code>
+yum install --enablerepo=rpmforge perl-Module-Build
+</code></p>
+
+<h2>依存モジュールのインストール</h2>
+
+<p>mymemcheck には、Readonly UNIVERSAL::require ２つのモジュールが必要なので先程インストールした cpanm からインストールを行います。</p>
+
+<p><code>
+cpanm install Readonly
+cpanm install UNIVERSAL::require
+</code></p>
+
+<p>これで、mymemcheck が動作する環境ができました。</p>
+
+<h2>mymemcheckのインストール</h2>
+
+<p>mymemcheck は、<a href="http://dsas.blog.klab.org/archives/50860867.html" title="5分でできる、MySQLのメモリ関係のチューニング！" target="_blank">こちら</a> からダウンロードして利用します。</p>
+
+<p><code>
+wget http://log.blog.klab.org/support/20061226/mymemcheck.gz
+gzip -d mymemcheck.gz
+chmod +x mymemcheck
+mv mymemcheck /usr/local/bin
+</code></p>
+
+<h2>動作確認</h2>
+
+<p>引数に、MySQL の設定ファイルを指定して利用します。</p>
+
+<p><code>
+mymemcheck /etc/my.cnf
+</code></p>
+
+<p><code>
+[ABORT] missing variables:
+  net_buffer_length
+  key_buffer_size
+  myisam_sort_buffer_size
+  innodb_additional_mem_pool_size
+  read_rnd_buffer_size
+  sort_buffer_size
+  read_buffer_size
+  max_connections
+  innodb_buffer_pool_size
+  innodb_log_buffer_size
+  innodb_log_files_in_group
+  join_buffer_size
+</code></p>
+
+<p>設定しろってことですね。。。
+これで、MySQLのチューニングも気兼ね無く行えます。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MySQLでdate型とtime型からtimestamp型にする]]></title>
+    <link href="http://blog.code-life.net/blog/2011/10/28/combine-date-and-time-mysql/"/>
+    <updated>2011-10-28T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/10/28/combine-date-and-time-mysql</id>
+    <content type="html"><![CDATA[<p>どうも。iyamaです。
+今日は焼肉だったので簡単な話題にしたいと思います。
+たぶん初めてのSQLネタです。</p>
+
+<!--more-->
+
+
+<p>久々にSQLを書いててプチはまりしたので覚え書き。</p>
+
+<p>SQLっていうか、MySQL限定の話ですが。。
+date型とtime型のカラムを合わせてtimestamp型にしたいとき、
+普通、以下のようにしがちですが</p>
+
+<p><code>sql
+TO_TIMESTAMP(`date`, `time`)
+</code></p>
+
+<p>MySQLではTO_TIMESTAMP使えません。
+知らなかったー。</p>
+
+<p>正解は以下。</p>
+
+<p><code>sql
+ADDTIME(`date`, `time`)
+</code></p>
+
+<p>あらら。これでいいのね。。
+これでtimestamp型のデータと比較したりできます。</p>
 ]]></content>
   </entry>
   

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: javascript | Code Life]]></title>
+  <title><![CDATA[Category: Javascript | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-12-09T23:07:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox</id>
     <content type="html"><![CDATA[<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
+
+<!--more-->
+
 
 <h2>環境</h2>
 
@@ -115,11 +118,14 @@ javascript好きになってきた今日この頃。</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[javascript オブジェクトのマージあれこれ]]></title>
+    <title type="html"><![CDATA[Javascript オブジェクトのマージあれこれ]]></title>
     <link href="http://blog.code-life.net/blog/2013/05/29/javascript-object-merge/"/>
     <updated>2013-05-29T22:45:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/05/29/javascript-object-merge</id>
     <content type="html"><![CDATA[<p>最近 javascriptを書く機会が少し増えてきたのでオブジェクトのマージ方法を備忘録的にメモ。</p>
+
+<!--more-->
+
 
 <h2>pure JS</h2>
 
@@ -316,11 +322,14 @@ console.log(obj1);</p>
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[mousemoveイベントにbindした処理の実行間隔を制御する]]></title>
+    <title type="html"><![CDATA[Mousemoveイベントにbindした処理の実行間隔を制御する]]></title>
     <link href="http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval/"/>
     <updated>2013-05-29T21:31:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval</id>
     <content type="html"><![CDATA[<p>制御するってのは言い過ぎですが、mousemoveイベントにbindした処理の実行間隔を空けたい場合、setIntervalで実行フラグのオン・オフを行い実行間隔を調整します。</p>
+
+<!--more-->
+
 
 <p>``` javascript</p>
 
@@ -356,6 +365,14 @@ console.log(obj1);</p>
     <updated>2013-04-29T00:13:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/04/29/install-node-on-centos</id>
     <content type="html"><![CDATA[<p>JavaScript力向上の為、node.jsで何か作ってみようと思いインストールしてみた。</p>
+
+<!--more-->
+
+
+
+
+<!--more-->
+
 
 <h2>環境</h2>
 
@@ -451,6 +468,93 @@ $ nvm alias default 0.10.5
 <h2>参考</h2>
 
 <p><a href="https://github.com/creationix/nvm">Node Version Manager</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQueryでページトップへ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/05/10/scroll-top-jquery/"/>
+    <updated>2012-05-10T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/05/10/scroll-top-jquery</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p><a href="/blog/2012/05/06/tab-menu-jquery" title="jQueryでタブメニュー">前回</a>に続き、jQueryネタです。
+ページトップへっていうリンククリックしたときに滑らかに移動させます。
+上に戻すだけの機能なら、jQueryのみで実現できます。</p>
+
+<!--more-->
+
+
+<h2>jQueryの読み込み</h2>
+
+<p>```html</p>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+<p>```</p>
+
+<p>例にならい、jQueryを読み込みます。</p>
+
+<h3>html</h3>
+
+<p>```
+<body class="top"></p>
+
+<p id="pageTop"><a href="#top">ページトップへ</a></p>
+
+
+<p></body>
+```</p>
+
+<p>bodyにclassでtopを付けておきます。
+Javascriptが無効のときもページ内リンクが有効になります。</p>
+
+<h3>Javascript</h3>
+
+<p>```javascript
+$(function(){
+  $(&ldquo;#pageTop a&rdquo;).click(function(){</p>
+
+<pre><code>$('html,body').animate({ scrollTop: $($(this).attr("href")).offset().top }, 'slow','swing');
+return false;
+</code></pre>
+
+<p>  })
+});
+```</p>
+
+<p>idで指定した「pageTop」内のアンカーリンクがクリックされた場合、スクロールでトップへ移動します。
+スクロールのアニメーション部分は下記の指定。</p>
+
+<p><code>
+animate(params, [duration], [easing], [callback])
+</code></p>
+
+<h4>duration</h4>
+
+<p>「slow」、「normal」、「fast」、「ミリ秒単位」、初期値は「normal」</p>
+
+<h4>easing</h4>
+
+<p>値の変化量を調節するカスタム関数の名前。
+初期で設定できるのは「linear」と「swing」。初期値は「swing」</p>
+
+<p>こちらを参考にさせて頂きました。
+<a href="http://semooh.jp/jquery/api/effects/animate/params,+options/" target="_blank"><a href="http://semooh.jp/jquery/api/effects/animate/params,+options/">http://semooh.jp/jquery/api/effects/animate/params,+options/</a></a></p>
+
+<h3>プラグインを使う</h3>
+
+<p>jQueryではないけど、よく使うプラグイン。</p>
+
+<ul>
+<li><a href="http://blog.webcreativepark.net/2007/07/12-143406.html" target="_blank">ページ内リンクをスマートにするsmoothScroll.js</a></li>
+<li><a href="http://coliss.com/articles/build-websites/operation/javascript/296.html" target="_blank">[JS]簡単に設置できるページ内をスムーズにスクロールできるスクリプト -Page Scroller ver.3</a></li>
+</ul>
+
+
+<p>Page Scrollerは高機能で、いろいろな動作設定が可能です。
+ちなみに、スマートフォンでも動くはずです。</p>
 ]]></content>
   </entry>
   

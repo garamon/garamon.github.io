@@ -1,0 +1,438 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>C# Windowsサービスを作る - Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="C# Windowsサービスを作る chakemiです。ここ最近、バックグラウンドで実行されるサービスについて調べていたので、
+ついでに、C#でWindowsサービスを作ってみました。 開発環境 VisualStudio2010
+WindowsXP SP3 Net Framework4 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/blog/2012/05/24/windows-service-c-sharp-1/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">C# Windowsサービスを作る</h1>
+	<div class="entry-content" itemprop="articleBody"><p><a href="http://twitter.com/j_sakemi">chakemi</a>です。ここ最近、バックグラウンドで実行されるサービスについて調べていたので、
+ついでに、C#でWindowsサービスを作ってみました。</p>
+
+<!--more-->
+
+
+<h2>開発環境</h2>
+
+<ul>
+<li>VisualStudio2010</li>
+<li>WindowsXP SP3 Net Framework4</li>
+</ul>
+
+
+<p>VisualStudioのウィザードからテンプレートを選択します。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-1-1.jpg"><img src="/images/2012/05/windows-service-c-sharp-1-1-300x207.jpg" width="300" height="207"></a></p>
+
+<p>Service1.csのデザイナ上で右クリックをし、「インストーラーの追加」を選択します。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-1-2.jpg"><img src="/images/2012/05/windows-service-c-sharp-1-2-300x156.jpg" width="300" height="156"></a></p>
+
+<p>すると、ProjectInstaller.csのデザイナが表示され、
+serviceProcessInstaller1とserviceInstaller1のコンポーネントが追加されます。</p>
+
+<p>次に、プロパティウィンドウでこれらのコンポーネントの設定をします。</p>
+
+<p><a href="http://msdn.microsoft.com/ja-jp/library/system.serviceprocess.serviceinstaller_properties">serviceInstaller1</a></p>
+
+<table border="1">
+  <tr>
+    <td>
+      Name
+    </td>
+    <td>
+      そのまんまですね。
+    </td>
+  </tr>
+  <tr>
+    <td>
+      DelayedAutoStart
+    </td>
+
+    <td>
+      他の自動的に開始されるサービスが実行されるまでサービスの開始を遅延するかどうかを示す値 サービスが自動開始でない限り無視される
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Description
+    </td>
+    <td>
+      サービスの説明
+    </td>
+  </tr>
+  <tr>
+    <td>
+      DisplayName
+    </td>
+    <td>
+      一覧での表示名
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Parent
+    </td>
+    <td>
+      インストーラーが属しているコレクションを格納しているインストーラー。
+    </td>
+  </tr>
+  <tr>
+    <td>
+      ServiceName
+    </td>
+    <td>
+      システムが使用する名前 Service1.csのプロパティServiceNameとあわせます。
+    </td>
+  </tr>
+  <tr>
+    <td>
+      StartType
+    </td>
+    <td>
+      サービスを開始する方法
+    </td>
+  </tr>
+</table>
+
+
+<p>リファレンスのまんまですね。。。</p>
+
+<p><a href="http://msdn.microsoft.com/ja-jp/library/by8cdy7y">serviceProcessInstaller1</a></p>
+
+<table border="1">
+  <tr>
+    <td>
+      Account
+    </td>
+
+    <td>
+      サービス アプリケーションを実行するときに使用するアカウントの種類
+    </td>
+  </tr>
+</table>
+
+
+<p>とりあえず、適当にサービスの説明と一覧での表示名を記述して、あとは、デフォルトのままで、AccountはUserにしときます。</p>
+
+<p>あとは、Service1.csの中に、OnStartメソッドとOnStopメソッドがあるので、起動と停止の際のイベントに対応した処理を書きますが
+ここまでしといて、これといったサービスを考えていなかったので、とりあえず何もしないサービスをビルドしてみます。</p>
+
+<p>すると、プロジェクトのbinフォルダにexeファイルが生成されるのでとりあえず、インストールしてみます。
+インストールには、.NET FrameworkのユーティリティのInstallUtilを使います。</p>
+
+<p>スタートメニューからVisualStudioコマンドプロンプトを起動して、</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>installutil "C:\～\bin\Debug\TestService.exe"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>と実行します。
+すると、「サービス ログインの設定」というポップアップダイアログが表示されます。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-1-3.jpg"><img src="/images/2012/05/windows-service-c-sharp-1-3-300x120.jpg" width="300" height="120"></a></p>
+
+<p>AccountはUserを指定しておいたので、ログインユーザーとパスワードを指定したいとこですが、
+ここで一点注意で、ユーザー名は「コンピュータ名￥ユーザー名」の形で入力します。</p>
+
+<p>無事、インストールが完了すれば、以下のように出力されます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Microsoft(R) .NET Framework Installation utility Version 4.0.30319.1
+</span><span class='line'>Copyright (c) Microsoft Corporation.  All rights reserved.
+</span><span class='line'>
+</span><span class='line'>トランザクションのインストールを実行中です。
+</span><span class='line'>
+</span><span class='line'>インストール段階を開始しています。
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>～省略～
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>サービス 'Service1' をインストールしています...
+</span><span class='line'>サービス 'Service1' は正常にインストールされました。
+</span><span class='line'>EventLog ソース Service1 をログ Application に作成しています...
+</span><span class='line'>
+</span><span class='line'>インストール段階が正常に完了しました。コミット段階を開始しています。
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>～省略～
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>コミット段階が正常に終了しました。</span></code></pre></td></tr></table></div></figure>
+
+
+<p>コンピュータの管理から見てみると、ちゃんと登録出来てます。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-1-4.jpg"><img src="/images/2012/05/windows-service-c-sharp-1-4-300x85.jpg" width="300" height="85"></a></p>
+
+<p>実際に、起動してみます。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-1-5.jpg"><img src="/images/2012/05/windows-service-c-sharp-1-5-300x269.jpg" width="300" height="269"></a></p>
+
+<p>ちゃんと起動出来ます。何も実行されませんが。。。
+最後に、アンインストールしときます。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>installutil "C:\～\bin\Debug\TestService.exe" /u
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>Microsoft(R) .NET Framework Installation utility Version 4.0.30319.1
+</span><span class='line'>Copyright (c) Microsoft Corporation.  All rights reserved.
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>アンインストールを開始します。
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>～省略～
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>EventLog ソース Service1 を削除しています。
+</span><span class='line'>サービス Service1 をシステムから削除しています...
+</span><span class='line'>サービス 'Service1' は正常にシステムから削除されました。
+</span><span class='line'>
+</span><span class='line'>アンインストールか完了しました。</span></code></pre></td></tr></table></div></figure>
+
+
+<p>最後の日本語がおかしいですが、無事アンインストール完了です。
+次回までに、実際に動かすサービスを考えておこうと思います。</p>
+</div>
+
+</article>
+
+	<div class="ads">
+    <script type="text/javascript"><!--
+    google_ad_client = "ca-pub-1004737269453987";
+    /* big banner */
+    google_ad_slot = "2274687956";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+</div>
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+        <div style="float:left">
+            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/05/24/windows-service-c-sharp-1/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </div>
+        
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+        
+        
+        <a class="addthis_button_tweet"></a>
+        
+        
+        <a class="addthis_counter addthis_pill_style"></a>
+    </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.code-life.net/blog/2012/05/24/windows-service-c-sharp-1/';
+        var disqus_url = 'http://blog.code-life.net/blog/2012/05/24/windows-service-c-sharp-1/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

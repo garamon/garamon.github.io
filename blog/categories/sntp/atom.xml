@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Sntp | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/sntp/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-08-19T01:17:07+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[コマンドラインからGmailのSMTPを使ってメールを送信する]]></title>
+    <link href="http://blog.code-life.net/blog/2012/02/23/how-to-send-email-from-command-line-using-gmail-smtp/"/>
+    <updated>2012-02-23T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/02/23/how-to-send-email-from-command-line-using-gmail-smtp</id>
+    <content type="html"><![CDATA[<p>chakemiです。引き続きネットワークのお勉強です。
+本日は、コマンドラインからGmailのSMTPサーバにログインしてメールを送信してみたいと思います。</p>
+
+<!--more-->
+
+
+<p>SMTP(Simple Mail Transfer Protocol)はサーバークライアント間のSMTPセッション上でコマンド・応答をやり取りする、対話型のプロトコルでネットワークのお勉強にはもってこいです。</p>
+
+<p>メールサーバを立ち上げた時なんかもtelnetを使用して動作確認したりします。
+本日は手頃のメールサーバが無かったため、Gmailを利用してみました。</p>
+
+<p>Gmailでは、<a href="http://support.google.com/mail/bin/answer.py?hl=ja&amp;answer=13287">こちら</a>にあるようにクライアント側で TLS か SSL が必要となります。</p>
+
+<p>なので、今回はCentOSでOpenSSLを利用しました。
+また、SMTP認証に必要なbase64でエンコードした文字列をPHPで生成しときます。</p>
+
+<p><code>php
+&lt;?php
+$string = ("user@gmail.com\000user@gmail.com\000password");
+echo base64_encode($string);
+echo ("\n");
+</code></p>
+
+<p>※ユーザー名がuser@gmail.com パスワードがpassword の時</p>
+
+
+<p>では、opensslコマンドでs_clientオプションを使ってTLSでサーバと接続します。</p>
+
+<p>```text
+[root@localhost ~]# openssl s_client -starttls smtp -crlf -connect smtp.gmail.com:587</p>
+
+<p>CONNECTED(00000003)</p>
+
+<p>～～省略～～</p>
+
+<p>250 ENHANCEDSTATUSCODES
+```</p>
+
+<p>250で接続成功の応答が返ってきたら
+セッションの開始HELOコマンドを送信ですが、このコマンドは古いため、拡張コマンドであるEHLOコマンドを使用します。</p>
+
+<p>```text
+EHLO localhost</p>
+
+<p>250-mx.google.com at your service, [xxx.xxx.xxx.xxx]
+250-SIZE 35882577
+250-8BITMIME
+250-AUTH LOGIN PLAIN XOAUTH
+250 ENHANCEDSTATUSCODES
+```</p>
+
+<p>返ってきた情報から、このサーバで利用できる拡張サービスがわかります。</p>
+
+<p>ここでは、認証にauth plainを使用します。</p>
+
+<p>```text
+AUTH PLAIN 先ほど生成したbase64文字列</p>
+
+<p>235 2.7.0 Accepted
+```</p>
+
+<p>認証が成功したらAcceptedが返ってきます。
+base64で生成した文字列に問題があると「デコードできない」や「認証失敗」といったメッセージが返ってきますので見直してください。</p>
+
+<p>ここからは、通常のtelnetで接続したときを同様</p>
+
+<p>```text
+mail from:<a href="&#109;&#97;&#105;&#108;&#116;&#x6f;&#x3a;&#x75;&#x73;&#101;&#x72;&#64;&#x67;&#109;&#x61;&#x69;&#108;&#x2e;&#x63;&#111;&#x6d;">&#x75;&#115;&#x65;&#114;&#64;&#x67;&#x6d;&#x61;&#105;&#108;&#46;&#x63;&#x6f;&#109;</a> ←送信者</p>
+
+<p>250 2.1.0 OK s10sm320554pbq.13</p>
+
+<p>rcpt to:<a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x63;&#x68;&#x61;&#x6b;&#101;&#x6d;&#105;&#x40;&#104;&#x6f;&#103;&#101;&#x2e;&#99;&#111;&#109;">&#99;&#104;&#97;&#107;&#101;&#x6d;&#x69;&#64;&#x68;&#x6f;&#x67;&#101;&#46;&#99;&#111;&#109;</a> ←宛先</p>
+
+<p>250 2.1.5 OK s10sm320554pbq.13</p>
+
+<p>data ←入力開始</p>
+
+<p>354  Go ahead s10sm320554pbq.13</p>
+
+<p>subject:test mail ←件名</p>
+
+<p>this is test mail ←本文</p>
+
+<p>. ←終端</p>
+
+<p>250 2.0.0 OK 1329968743 s10sm320554pbq.13</p>
+
+<p>quit ←セッション終了</p>
+
+<p>221 2.0.0 closing connection s10sm320554pbq.13
+```</p>
+
+<p>無事、メールが届いていたら成功</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[C#でSNTPから現在日時を取得]]></title>
+    <link href="http://blog.code-life.net/blog/2012/02/20/sntp-c-sharp/"/>
+    <updated>2012-02-20T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/02/20/sntp-c-sharp</id>
+    <content type="html"><![CDATA[<p>chakemiです。今回はC#でSNTPサーバから現在日時を取得してみたいと思います。
+SNTP(Simple Network Time Protocol)は、名前の通り簡易ネットワーク時刻プロトコルでNTPの仕様から複雑な部分を省略した形となっています。</p>
+
+<!--more-->
+
+
+<p>SNTPプロトコルについては、<a href="http://www.geocities.co.jp/SiliconValley/6876/rfc2030j.htm">こちら</a>や、<a href="http://www.venus.dti.ne.jp/~yoshi-o/NTP/NTP-SNTP_Format.html">こちら</a>を参考にしてください。ってか、自分も参考にさせて頂きました。</p>
+
+<h2>開発環境</h2>
+
+<ul>
+<li>WindowsXP Pro SP3</li>
+<li>VisualStudio2008</li>
+</ul>
+
+
+<p>では、さっそく。</p>
+
+<p>UDPクライアントを生成します。</p>
+
+<p><code>c#
+System.Net.Sockets.UdpClient sock;
+System.Net.IPEndPoint ipAny = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 0);
+sock = new System.Net.Sockets.UdpClient(ipAny);
+</code></p>
+
+<p>送信用パケットを生成し、送信します。
+SNTPサーバは、送られてきた要求パケットの中身を書き換えて、送り返してきます。</p>
+
+<p>```c#
+Byte[] s_data = new Byte[48];
+//LI, Version, Mode
+s_data[0] = 0xE3;
+//Stratum
+s_data<a href="http://www.geocities.co.jp/SiliconValley/6876/rfc2030j.htm">1</a> = 0;
+//Polling Interval
+s_data<a href="http://www.venus.dti.ne.jp/~yoshi-o/NTP/NTP-SNTP_Format.html">2</a> = 6;
+//Precision
+s_data[3] = 0xEC;</p>
+
+<p>sock.Send(s_data, s_data.GetLength(0), &ldquo;time.windows.com&rdquo;, 123);
+```</p>
+
+<p>タイムサーバにはWindowsXPのデフォルトで指定されたタイムサーバを利用させて頂きました。</p>
+
+<p>SNTPから返ってきたパケットを受信します。</p>
+
+<p><code>c#
+Byte[] r_data = sock.Receive(ref ipAny);
+</code></p>
+
+<p>タイムサーバは１９００年１月１日０時を基準に相対的な差を秒単位で、６４ビット符号無し固定小数点で返してきます。
+整数部の上位３２ビットを取得して、経過秒数を取得します。</p>
+
+<p>```c#
+long passSec;</p>
+
+<p>long b0 = (long)r_data[40];
+long b1 = (long)r_data[41];
+long b2 = (long)r_data[42];
+long b3 = (long)r_data[43];
+passSec = (b0 &lt;&lt; 24 | b1 &lt;&lt; 16) | (b2 &lt;&lt; 8 | b3);
+```</p>
+
+<p>基準時間に経過秒数を加えて、さらに日本標準時間にあわせます。</p>
+
+<p>```c#
+DateTime dateTime = new DateTime(1900, 1, 1);
+dateTime = dateTime.AddSeconds(passSec);</p>
+
+<p>dateTime = dateTime.AddHours(9);
+```</p>
+
+<p>以下、全文です。</p>
+
+<p>```c#
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;</p>
+
+<p>namespace testSNTPClient
+{</p>
+
+<pre><code>public partial class Form1 : Form
+{
+    public Form1()
+    {
+        InitializeComponent();
+    }
+
+    private void button1_Click(object sender, EventArgs e)
+    {
+        //UDP生成
+        System.Net.Sockets.UdpClient sock;
+        System.Net.IPEndPoint ipAny = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 0);
+        sock = new System.Net.Sockets.UdpClient(ipAny);
+
+        //Send UDP
+        Byte[] s_data = new Byte[48];
+        //LI, Version, Mode
+        s_data[0] = 0xE3;
+        //Stratum
+        s_data[1] = 0;
+        //Polling Interval
+        s_data[2] = 6;
+        //Precision
+        s_data[3] = 0xEC;
+
+        sock.Send(s_data, s_data.GetLength(0), "time.windows.com", 123);
+
+        //Recieve UDP
+        Byte[] r_data = sock.Receive(ref ipAny);
+
+        //1900/01/01から経過秒数
+        long passSec;    //全秒数
+
+        //Transmit Timestampの40バイト目からはじまる4バイトのデータ
+        long b0 = (long)r_data[40];
+        long b1 = (long)r_data[41];
+        long b2 = (long)r_data[42];
+        long b3 = (long)r_data[43];
+        passSec = (b0 &lt;&lt; 24 | b1 &lt;&lt; 16) | (b2 &lt;&lt; 8 | b3);
+
+        //基準時間に経過乗数を加える
+        DateTime dateTime = new DateTime(1900, 1, 1);
+        dateTime = dateTime.AddSeconds(passSec);
+        //日本標準時間にあわせる
+        dateTime = dateTime.AddHours(9);
+
+        label1.Text = dateTime.ToString();
+
+    }
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>ネットワークの遅延だとか考慮してません。。。
+外部のサーバへアクセスする際は、ご注意ください。</p>
+]]></content>
+  </entry>
+  
+</feed>

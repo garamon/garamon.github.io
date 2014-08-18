@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Compass | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/compass/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-08-19T01:17:07+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CompassでCSS]]></title>
+    <link href="http://blog.code-life.net/blog/2012/05/30/compass-css/"/>
+    <updated>2012-05-30T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/05/30/compass-css</id>
+    <content type="html"><![CDATA[<p>Yuuです。
+以前、<a href="/blog/2012/05/02/start-using-sass-css" title="Sassの使い始めメモ">Sassの記事</a>を書いたのですが、Compassのほうが便利そうだったので、切り替えました。</p>
+
+<!--more-->
+
+
+<p>Rubyは前回インストール済みなので、Compass入れるだけ。</p>
+
+<p><code>
+gem update --system
+gem install compass
+</code></p>
+
+<p>で、コマンド実行</p>
+
+<p><code>
+compass create
+</code></p>
+
+<p>これでファイルが生成されます。
+が、これ実行すると、なんかよくわからない感じでファイルが出力されます。
+自由にディレクトリ構成とかしたいですよね、ってことでconfigファイル作ります。</p>
+
+<p><code>ruby config.rb
+http_path = "/"
+css_dir = "CSSの出力場所"
+sass_dir = "SCSSの保存場所"
+images_dir = "画像の保存場所"
+javascripts_dir = "JavaScriptの保存場所"
+output_style = Sassの出力形式（:expanded or :nested or :compact or :compressed）
+line_comments = CSSにSCSSの行番号を出力するか（true or false）
+</code></p>
+
+<p>↓のような感じにしました。</p>
+
+<p><code>ruby config.rb
+http_path = "/"
+css_dir = "css"
+sass_dir = "_scss"
+images_dir = "/"
+javascripts_dir = "js"
+output_style = :expanded
+line_comments = false
+</code></p>
+
+<p>参考：<a href="http://www.skyward-design.net/blog/archives/000118.html" target="_blank">Compassを使ってSassのCSS出力を手軽にしよう｜Blog｜Skyward Design</a></p>
+
+<p>このconfig.rbを自分のサイト作成のディレクトリにおいて上げます。
+で、コマンドで下記を叩く。</p>
+
+<p><code>
+compass watch
+</code></p>
+
+<p>これでSCSSのファイルが編集され更新されたら、自動的にCSSを整形して出力してくれます。</p>
+
+<h2>Compassの機能</h2>
+
+<h3>インポート機能</h3>
+
+<p>creafixやらreset.cssをお手軽にインポートできます。</p>
+
+<p><code>css scss
+@import "compass/utilities/general/clearfix";
+.clearfix{
+  @include clearfix;
+}
+</code></p>
+
+<p><code>css css
+.clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}
+</code></p>
+
+<p>という感じでインポートするだけで終わり。</p>
+
+<h3>ベンダープレフィックス</h3>
+
+<p>スマートフォン対応サイト作るときに面倒なベンダープレフィックス。
+これも結構簡単に設定できます。</p>
+
+<p><code>css scss
+@import "compass/css3/border-radius";
+.border-radius {
+  @include border-radius;
+}
+</code></p>
+
+<p><code>css css
+.border-radius {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+</code></p>
+
+<p>デフォルト値が5pxなのでプレフィックス付きで5px出力されます。
+値を変えるなら</p>
+
+<p><code>css scss
+$default-border-radius:20px;
+</code></p>
+
+<p>という形で指定して、デフォルト値を変更するか、</p>
+
+<p><code>css scss
+@include border-radius(2px);
+</code></p>
+
+<p>という感じで個別の値を変更する感じです。
+これだけでとりあえず、作業効率はだいぶ上がりました。</p>
+
+<p>他にもmixinとかの機能やextendでクラス継承させたりもできるんですが、まだ完全に終えてないので徐々に覚えていこうと思います。</p>
+]]></content>
+  </entry>
+  
+</feed>

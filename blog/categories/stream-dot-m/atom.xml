@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: stream.m | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/stream-dot-m/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-08-19T01:17:07+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[stream.mを使ってwebmライブストリーミングで遊んでみた]]></title>
+    <link href="http://blog.code-life.net/blog/2011/10/24/stream-m-live-streaming-2/"/>
+    <updated>2011-10-24T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/10/24/stream-m-live-streaming-2</id>
+    <content type="html"><![CDATA[<p>chakemiです。
+前回、stream.mを使ってwebmフォーマットのライブストリーミングを試してみましたが
+vlc部分が不安定だし不便だったので、WindowsMediaエンコーダで試してみました。</p>
+
+<!--more-->
+
+
+<p>stream.mまわりは前回と変わりません。</p>
+
+<p>WindowsMediaエンコーダを起動したら適当にデバイスの設定、圧縮の設定をし
+出力設定で「エンコーダからプル」にチェックを入れ、ポートを指定します。</p>
+
+<p>ここでは、前回のvlcでも使用した8081ポートをしておきます。</p>
+
+<p>FFMpegのinputオプションを「HTTP越しのmms（Microsoft Media Server Protocol）」で接続します。</p>
+
+<p><code>
+C:\&gt;"ffmpeg.exe" -i mmsh://127.0.0.1:8081 -g 52 -acodec libvorbis -ab 64k -vcodec libvpx -vb 448k -f matroska http://localhost:8080/publish/first?password=secret
+</code></p>
+
+<p>当然ですが、WindowsMediaエンコーダでのエンコードビットレートより高い値でFFMpegをエンコードするとエラーになりますので、ご注意ください。</p>
+
+<p>実際、試してみると、やっぱり安定して配信出来ました。</p>
+
+<p>せっかくなので、HTML5のvideoタグとcanvasタグを使って
+frameキャプチャをしてみました。</p>
+
+<p>``` html
+<html>
+<head></p>
+
+<script type="text/javascript">
+
+var video;
+var copy;
+var copycanvas;
+
+function copyFrame(){
+    copycanvas = document.getElementById('sourcecopy');
+    copy = copycanvas.getContext('2d');
+    video = document.getElementById('sourcevideo');
+
+    copycanvas.width=video.videoWidth;
+    copycanvas.height=video.videoHeight;
+
+    copy.drawImage(video, 0, 0);
+}
+</script>
+
+
+<p></head>
+<body></p>
+
+<pre><code>&lt;video id="sourcevideo" src="http://192.168.1.113:8080/consume/first" autoplay&gt;&lt;/video&gt;
+&lt;canvas id="sourcecopy" width="320" height="240"&gt;&lt;/canvas&gt;
+&lt;input type="button" value="copy frame" onclick="copyFrame()" /&gt;
+</code></pre>
+
+<p></body>
+</html>
+```</p>
+
+<p>適当ですみません。。。</p>
+
+<p><a href="/images/2011/10/capture_webm.jpg"><img src="/images/2011/10/capture_webm-300x203.jpg" width="203" height="293"></a></p>
+
+<p>も少し面白いこと出来るようになれるよう頑張ります。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[stream.mを使ってwebmフォーマットのライブストリーミング 1]]></title>
+    <link href="http://blog.code-life.net/blog/2011/10/18/stream-m-live-streaming-1/"/>
+    <updated>2011-10-18T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/10/18/stream-m-live-streaming-1</id>
+    <content type="html"><![CDATA[<p>chakemiです。</p>
+
+<p>本日は、オープンソースのstream.mを使ってwebmフォーマットのライブストリーミングを行なってみました。</p>
+
+<!--more-->
+
+
+<p>stream.mはGPL V3のオープンソースで、HTML5のビデオタグとGoogleのwebmビデオフォーマットを使用して、ブラウザにライブストリーミング配信を可能とするソリューションだそうです。
+実際には、webmフォーマットへの変換にはffmpegを使用して、stream.mへpostしstream.mによってストリーミング配信されているようです。</p>
+
+<h2>構築環境</h2>
+
+<ul>
+<li>WindowsXP SP3</li>
+<li>vlc media player</li>
+<li>FFmpeg git-N-29196-ge61b83d</li>
+</ul>
+
+
+<p>stream.mはJAVAで書かれていて、WindowsでもLinuxでも動かせたので、FFmpegを一から準備するのが億劫で今回はWindowsで試してみました。
+エンコードで肝心な部分はlibvpxを使用する点で、FFmpegと言えばこの方、<a href="http://blog.k-tai-douga.com/article/44450160.html">あべちんさん</a>のサイトよりバイナリを頂戴致しました。
+<a href="http://blog.k-tai-douga.com/article/44450160.html">お気に入りの動画を携帯で見よう</a></p>
+
+<p>stream.mはこちらからダウンロードします。 <a href="http://code.google.com/p/stream-m/">http://code.google.com/p/stream-m/</a></p>
+
+<p>zipを解凍しましたら、「server.conf.sample」をエディタで開き、配信に使用するポート、ストリーム名、パスワード、同時接続数を指定し、ファイル名を「server.conf」に変更して保存します。</p>
+
+<p>```
+#</p>
+
+<h1>Sample configuration file</h1>
+
+<h1>Empty lines and lines starting with # and ; are ignored.</h1>
+
+<h1>Format:  =</h1>
+
+<h1>Syntactic elements (words) can be separated by linear whitepace.</h1>
+
+<p>#</p>
+
+<h1>server.port</h1>
+
+<h1>listening port</h1>
+
+<p>server.port = 8080</p>
+
+<h1>stream.</h1>
+
+<h1>if defined then a stream can be started with this name</h1>
+
+<p>streams.first = true</p>
+
+<h1>stream..password</h1>
+
+<h1>determines the password to accept the stream</h1>
+
+<p>streams.first.password = secret</p>
+
+<h1>stream..limit</h1>
+
+<h1>maximum number of clients for this stream</h1>
+
+<p>streams.first.limit = 100
+```</p>
+
+<p>今回はデフォルトのまま使用しました。</p>
+
+<p>準備が出来たら、コマンドプロンプトからサーバを起動。</p>
+
+<p><code>
+C:\Documents and Settings\Administrator&gt;java -cp lib/stream-m.jar StreamingServer server.conf
+Stating server on port: 8080
+</code></p>
+
+<p>次にライブエンコード部分ですが、FFmpegからwebmへエンコード出来る形式ならファイルでもデバイスでもソースに出来そうです。</p>
+
+<p>せっかくのライブストリームなので、例にならってwebカムのソースを配信してみました。
+まず、vlc Media Playerで音声のみストリーム変換を行ないます。</p>
+
+<p><code>
+C:\Documents and Settings\Administrator&gt;vlc.exe　-I dummy dshow:// --sout "#transcode{vcodec=none,acodec=mp3,ab=128,channels=2,samplerate=44100} :http{mux=ts,dst=127.0.0.1:8081/}" --dshow-vdev=none --no-sout-rtp-sap --no-sout-standard-sap --sout-keep
+</code></p>
+
+<p>次に、FFmpegでwebカムの映像とvlcからオーディオストリームをソースにして、webmへ変換→stream.mへpostします。</p>
+
+<p><code>
+C:\Documents and Settings\Administrator&gt;ffmpeg.exe -f vfwcap -r 16 -i 0 -i http://localhost:8081/ -g 52 -acodec libvorbis -ab 64k -vcodec libvpx -vb 448k -f matroska http://localhost:8080/publish/first?password=secret
+</code></p>
+
+<p>FFmpegのエンコードが無事開始されたら、stream.m側で「Segment found」と表示されると思います。</p>
+
+<p>これで配信が開始出来ました。</p>
+
+<p>ブラウザから「http://localhost:8080/consume/first」へアクセスすると、下のように確認ができます。</p>
+
+
+<p><a href="/images/2011/10/streamm_consume.jpg"><img src="/images/2011/10/streamm_consume-300x204.jpg" width="300" height="204"></a></p>
+
+<p>実際にHTML5で記述する際は、下記のように書きます。</p>
+
+<p><code>html
+&lt;video src="http://127.0.0.1:8080/consume/first" /&gt;
+</code></p>
+
+<p>また、stream.mには管理コンソール機能があります。
+ダウンロードしたパッケージ内にconsole.zipが同梱されているので解凍し、</p>
+
+<p>ブラウザから「http://127.0.0.1:8080/console/client.html」へアクセスします。</p>
+
+
+<p>設定したストリーム名とパスワードを入力し、ログインすると下のようにBandwidthや接続数が確認出来ます。</p>
+
+<p><a href="/images/2011/10/streamm_console.jpg"><img src="/images/2011/10/streamm_console-300x200.jpg" width="300" height="200"></a></p>
+
+<p>実際に配信してみましたが、バッファリング毎にノイズだけ発生しているような感じで、vlcのバージョンが古いのが原因かと思いましたが、突き詰められてません。</p>
+
+<p>ビデオソースもデバイスから入力しようと思ったら、FFmpegではvfwしか選択肢無いし、、、
+rtmpのストリームを食わせられるんじゃないかとも思うので、空いた時間に少し試してみたいと思います。</p>
+]]></content>
+  </entry>
+  
+</feed>

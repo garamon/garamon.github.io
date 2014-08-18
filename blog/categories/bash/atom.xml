@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: bash | Code Life]]></title>
+  <title><![CDATA[Category: Bash | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/bash/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[[bash]連番のディレクトリを作成する]]></title>
+    <title type="html"><![CDATA[[Bash]連番のディレクトリを作成する]]></title>
     <link href="http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories/"/>
     <updated>2013-12-18T22:22:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories</id>
@@ -34,6 +34,9 @@ $ mkdir dir_{1..15}
     <updated>2013-05-01T23:11:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/05/01/temporarily-ignore-alias</id>
     <content type="html"><![CDATA[<p>aliasは便利ですが、aliasを解除したコマンドを使用したい場合があります。</p>
+
+<!--more-->
+
 
 <p>そんなときは頭に \ (バックスラッシュ) を付けるとaliasを一時的に無効にしてくれます。</p>
 
@@ -55,6 +58,9 @@ $ \cp -f hoge/ piyo
     <content type="html"><![CDATA[<p>最近shellにハマってるので調べて便利そうなものをまとめてみます。</p>
 
 <p>タイトルに「1」と記載してますがシリーズ化するかは分かりません。たぶんしないでしょう&hellip;</p>
+
+<!--more-->
+
 
 <h2>cd コマンド 少しのスペルミスを自動で修正して実行してくれる</h2>
 

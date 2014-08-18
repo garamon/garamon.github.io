@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -19,6 +19,9 @@
     <updated>2014-05-07T22:30:15+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin</id>
     <content type="html"><![CDATA[<p>複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。</p>
+
+<!--more-->
+
 
 <h2>ruby-build</h2>
 
@@ -97,6 +100,9 @@
     <id>http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders</id>
     <content type="html"><![CDATA[<p>ドキュメントみてもgoogle先生に伺っても意外と情報がない。</p>
 
+<!--more-->
+
+
 <h2>環境</h2>
 
 <ul>
@@ -131,6 +137,9 @@
     <content type="html"><![CDATA[<p>最近Railsを触っているのだが、いかんせんWebrickの起動やレスポンスが遅い。</p>
 
 <p>世のRubyistはこんな環境で開発しているのか(いやない)ということで調べた。</p>
+
+<!--more-->
+
 
 <h2>環境</h2>
 
@@ -228,6 +237,9 @@ rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</cod
     <id>http://blog.code-life.net/blog/2014/02/07/install-vagrant-bash-completion-on-mac</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/kura/vagrant-bash-completion">vagrant-bash-completion</a>なるものを発見したのでインストールした。</p>
 
+<!--more-->
+
+
 <h2>環境</h2>
 
 <ul>
@@ -274,6 +286,9 @@ rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</cod
 <p>なにができるかっていうとVimのプラグイン<a href="https://github.com/Lokaltog/vim-easymotion">easymotion</a>的なことができる。</p>
 
 <p>ということでデモ。</p>
+
+<!--more-->
+
 
 <h2>Demo</h2>
 
@@ -346,6 +361,9 @@ homebrewのバグだそう。</p>
 
 <p>そこでサブディレクトリにインストールした場合のリダイレクト方法で少しハマったので共有しておく。</p>
 
+<!--more-->
+
+
 <h2>環境</h2>
 
 <p>Slim 2.4.0</p>
@@ -400,6 +418,9 @@ homebrewのバグだそう。</p>
     <updated>2013-12-19T22:45:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming</id>
     <content type="html"><![CDATA[<p><a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/">CentOSにm3u8-segmenterをインストールする</a>がほんのちょっぴり人気なので、FFMpeg単体でもセグメントできるよって話です。</p>
+
+<!--more-->
+
 
 <h2>FFMpegでSegment化</h2>
 
@@ -476,6 +497,11 @@ homebrewのバグだそう。</p>
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/meminfo
 </span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<!--more-->
 
 
 <h3>結果</h3>
@@ -609,6 +635,11 @@ homebrewのバグだそう。</p>
     <updated>2013-12-18T22:36:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value</id>
     <content type="html"><![CDATA[<p>連想配列を特定キーの同じ値でグルーピングする方法。</p>
+
+<!--more-->
+
+
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -801,6 +832,9 @@ homebrewのバグだそう。</p>
     <id>http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox</id>
     <content type="html"><![CDATA[<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
 
+<!--more-->
+
+
 <h2>環境</h2>
 
 <ul>
@@ -931,6 +965,9 @@ javascript好きになってきた今日この頃。</p>
     <id>http://blog.code-life.net/blog/2013/12/01/vagrant-configure-public-network</id>
     <content type="html"><![CDATA[<p>Vagrantでパブリックネットワークの設定をしようとしたところ、若干ハマったのでメモ。</p>
 
+<!--more-->
+
+
 <h2>環境</h2>
 
 <ul>
@@ -1002,6 +1039,11 @@ javascript好きになってきた今日この頃。</p>
 
 <p>vagrantから新規仮想マシンを作成し、ホストOSとゲストOSの共有ディレクトリの設定後、起動させたところ
 下記のエラーが出力された。</p>
+
+<!--more-->
+
+
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -1079,6 +1121,9 @@ javascript好きになってきた今日この頃。</p>
     <content type="html"><![CDATA[<p>モデルの<a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html">コールバックメソッド</a>が様々ありますが、無効化したい場合があります。</p>
 
 <p>find, save共に第２引数にcallbacksをキーとした配列を渡すことでモデルのコールバック実行の可否を伝えることが可能です。</p>
+
+<!--more-->
+
 
 <h2>find(beforeFind, afterFind共に無効化)</h2>
 
@@ -1159,6 +1204,9 @@ javascript好きになってきた今日この頃。</p>
 
 <p>エラー吐くどころかvagrant upもできない始末。
 <a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>自身もupdateしていたので反映させてみました。</p>
+
+<!--more-->
+
 
 <h2>環境</h2>
 
@@ -1271,6 +1319,9 @@ javascript好きになってきた今日この頃。</p>
 <p>似たプラグインで<a href="https://github.com/ryuzee/sahara">sahara</a>がありますが、sandboxモードで動作させることができるプラグインのようでスナップショットをとる機能はないようです。
 google先生に伺ってもsaharaの記事は多くヒットするのですが、vagrant-vbox-snapshotはあまりヒットしないのは需要がないんですかね。</p>
 
+<!--more-->
+
+
 <h2>環境</h2>
 
 <ul>
@@ -1368,6 +1419,9 @@ google先生に伺ってもsaharaの記事は多くヒットするのですが�
     <updated>2013-06-10T23:33:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/06/10/the-guest-additions-on-this-vm-do-not-match-the-installed-version-of-virtualbox-on-vagrant</id>
     <content type="html"><![CDATA[<p>遅ればせながらvagrantを触り始めました。今のところ単純なことしかしてないのでほとんど詰まるところはありませんが、仮想マシンを起動した際にVirtualBoxのバージョンとGuest additionsのバージョンが一致しないと怒られたのでその解決方法です。</p>
+
+<!--more-->
+
 
 <h2>環境</h2>
 
@@ -1604,6 +1658,9 @@ vagrant-vbguest の自動更新をOFFになるよう設定します。</p>
     <updated>2013-05-29T22:45:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/05/29/javascript-object-merge</id>
     <content type="html"><![CDATA[<p>最近 javascriptを書く機会が少し増えてきたのでオブジェクトのマージ方法を備忘録的にメモ。</p>
+
+<!--more-->
+
 
 <h2>pure JS</h2>
 
@@ -1876,6 +1933,11 @@ vagrant-vbguest の自動更新をOFFになるよう設定します。</p>
     <updated>2013-05-29T21:31:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval</id>
     <content type="html"><![CDATA[<p>制御するってのは言い過ぎですが、mousemoveイベントにbindした処理の実行間隔を空けたい場合、setIntervalで実行フラグのオン・オフを行い実行間隔を調整します。</p>
+
+<!--more-->
+
+
+
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>

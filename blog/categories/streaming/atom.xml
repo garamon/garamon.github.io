@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: streaming | Code Life]]></title>
+  <title><![CDATA[Category: Streaming | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/streaming/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<h2>環境</h2>
 
 <p>CentOS 6.3 x86_64</p>
+
+<!--more-->
+
 
 <h2>Require</h2>
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: unix | Code Life]]></title>
+  <title><![CDATA[Category: Unix | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/unix/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -20,6 +20,9 @@
     <id>http://blog.code-life.net/blog/2013/04/25/parallel-merging</id>
     <content type="html"><![CDATA[<p>2つのファイルを単純に結合するには「cat」コマンドを使えばいいですが、
 行ごとに結合をする場合 「paste」コマンドなるものがあることを知りました。</p>
+
+<!--more-->
+
 
 <h2>pasteコマンドを使ったファイルの連結</h2>
 

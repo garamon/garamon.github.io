@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Vim | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/vim/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-08-19T01:17:07+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Vim + Vdebug + Xdebug でPHPのリモートデバッグ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/10/01/vim-vdebug-xdebug/"/>
+    <updated>2012-10-01T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/10/01/vim-vdebug-xdebug</id>
+    <content type="html"><![CDATA[<p>最近はようやく本格的に vim を使ってコーディングするようになりましたが、まだまだ慣れない &amp; 微妙な不満があったりします。
+移動系がキーボードで全てできるのは、確かにかなり楽なように思えます。</p>
+
+<p>話が変わりますが新しく違う言語を勉強しようと思う時、何を一番初めに調べますか？
+構文はもちろん、インストール方法とか色々ありますよね。ボクが一番重要視してるのはデバッグ方法です。</p>
+
+<p>どうやってデバッグするか。まずその方法などを調べます。
+LL系言語の方は 変数を printしたりする方が多いらしいのですがボクはあまり好きではないので PHPの場合は Xdebugを利用してステップ実行させたりしてます。</p>
+
+<p>print させるのが嫌いな理由は一つです。</p>
+
+<p> 「コードを書かなくちゃいけない」</p>
+
+<p>これに尽きます。なんでデバッグするのにコード書くんだよ！って思ってます。</p>
+
+<p>前置きが長くなりましたが、素晴らしいプラグイン <a href="https://github.com/joonty/vdebug" title="vdebug" target="_blank">Vdebug</a> を見つけたので紹介します。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>CentOS 6.3</li>
+<li>PHP 5.3.16</li>
+<li>Vim 7.3 Python 2 support, +signs</li>
+</ul>
+
+
+<h2>Vim + Vdebug + Xdebug = awsome</h2>
+
+<p>phpenv + php-build で インストールしている場合は、デフォルトで xdebug がインストールされているはずです。
+yum で php を インストールした場合は、以下のコマンドでインストールしておきます。</p>
+
+<p><code>
+pecl install xdebug
+</code></p>
+
+<h3>Vdebug のインストール</h3>
+
+<p>vim のプラグイン管理は <a href="https://github.com/Shougo/neobundle.vim" title="neobundle" target="_blank">NeoBundle</a>を利用してるので vimrcに以下の一文を追加して :NeoBundleInstall するだけです。</p>
+
+<p><code>
+NeoBundle 'joonty/vdebug'
+</code></p>
+
+<h3>Xdebug の設定</h3>
+
+<h4>yum や pecl でインストールした場合</h4>
+
+<p>yum や pecl でインストールした場合は、 /etc/php.d/xdebug.ini を新規作成します。</p>
+
+<p><code>text /etc/php.d/xdebug.ini
+zend_extension=/usr/lib/php/modules/xdebug.so
+xdebug.remote_enable=on
+xdebug.remote_handler=dbgp
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+</code></p>
+
+<h4>phpenv + phpbuild でインストールした場合</h4>
+
+<p>~/.phpenv/versions/5.x.xx/etc/conf.d/xdebug.ini の編集を行います。</p>
+
+<p><code>text ~/.phpenv/versions/5.3.16/etc/conf.d/xdebug.ini
+zend_extension="/root/.phpenv/versions/5.3.16/lib/php/extensions/no-debug-non-zts-20090626/xdebug.so"
+html_errors=on
+xdebug.remote_enable=on
+xdebug.remote_handler=dbgp
+xdebug.remote_host=localhost
+xdebug.remote_port=9000
+</code></p>
+
+<h3>Vdebug の使い方</h3>
+
+<p>Vdebug は基本的にはインストールするだけで利用できます。ブラウザと連携させる場合は、エクステンション(アドオン)をインストールする必要があります。</p>
+
+<p>ボクはchromeを主に利用しているので、<a href="https://chrome.google.com/webstore/search/Xdebug%20helper" target="_blank">Xdebug helper</a> をインストールして使用しています。
+インストールするとアドレス入力部分に虫のアイコンが追加されます。</p>
+
+<p><a href="/images/2012/10/vim-vdebug-xdebug-1.png"><img src="/images/2012/10/vim-vdebug-xdebug-1-300x53.png" width="300" height="53"></a></p>
+
+<p>デバッグしたい場合、この虫のアイコンをクリックします。クリックすると虫が緑色に変わります。</p>
+
+<p><a href="/images/2012/10/vim-vdebug-xdebug-2.png"><img src="/images/2012/10/vim-vdebug-xdebug-2-300x45.png" width="300" height="45"></a></p>
+
+<p>これでブラウザ側の準備は整いました。次にvim側です。
+止めたい箇所に、ブレイクポイントを打ちます。デフォルトでは F10 でブレイクポイントを設定することができます。</p>
+
+<p>ブレイクポイントを打つと対象行がハイライト表示されます。</p>
+
+<p><a href="/images/2012/10/vim-vdebug-xdebug-3.png"><img src="/images/2012/10/vim-vdebug-xdebug-3-300x216.png" width="300" height="216"></a></p>
+
+<p>デバッガを起動させます。デフォルトでは F5 で起動します。起動後２０秒待機し、待機中にブラウザからアクセスします。
+正しく設定がされていると、下の画像のような画面に切り替わります。</p>
+
+<p><a href="/images/2012/10/vim-vdebug-xdebug-4.png"><img src="/images/2012/10/vim-vdebug-xdebug-4-300x225.png" width="300" height="225"></a></p>
+
+<p>左の画面がソースコード。
+右の画面が４つに分割されます。上から</p>
+
+<ul>
+<li>変数表示画面</li>
+<li>スタックトレース表示画面</li>
+<li>デバッグ情報表示画面</li>
+<li>デバッガーステータス画面</li>
+</ul>
+
+
+<p>と構成されています。</p>
+
+<p>あとはステップ実行させたり変数を評価したり思いのままです。デフォルトのキーマップは以下のようになっています。
+英語のままの所は、ちょっと良く分からないです。すいません。</p>
+
+<p><code>text
+&lt;F5&gt;: デバッガの起動 / 次のブレイクポイントまで移動
+&lt;F2&gt;: ステップオーバー
+&lt;F3&gt;: ステップイン
+&lt;F4&gt;: ステップアウト
+&lt;F6&gt;: デバッガの停止
+&lt;F7&gt;: デバッガーからデタッチ
+&lt;F9&gt;: カーソル行まで実行
+&lt;F10&gt;: ブレイクポイントの設定
+&lt;F11&gt;: show context variables (e.g. after "eval")
+&lt;F12&gt;: カーソル行の変数を評価
+:Breakpoint &lt;type&gt; &lt;args&gt;: 色んな種類のブレイクポイントが打てる。 (see :help VdebugBreakpoints)
+:VdebugEval &lt;code&gt;: &lt;code&gt;の変数を評価
+&lt;Leader&gt;e: evaluate the expression under visual highlight and display the result
+</code></p>
+
+<p>キーマップを変更したい場合は vimrcに以下のような設定を追加します。</p>
+
+<p><code>text ~/.vimrc
+let g:vdebug_keymap = {
+\    "run" : "&lt;F5&gt;",
+\    "run_to_cursor" : "&lt;F1&gt;",
+\    "step_over" : "&lt;F2&gt;",
+\    "step_into" : "&lt;F3&gt;",
+\    "step_out" : "&lt;F4&gt;",
+\    "close" : "&lt;F6&gt;",
+\    "detach" : "&lt;F7&gt;",
+\    "set_breakpoint" : "&lt;F10&gt;",
+\    "get_context" : "&lt;F11&gt;",
+\    "eval_under_cursor" : "&lt;F12&gt;",
+\}
+</code></p>
+
+<p>待機時間や port などを変更したい場合は以下のような設定を追加します。</p>
+
+<p><code>text ~/.vimrc
+let g:vdebug_options= {
+\    "port" : 9000,
+\    "server" : 'localhost',
+\    "timeout" : 20,
+\    "on_close" : 'detach',
+\    "break_on_open" : 1,
+\    "ide_key" : '',
+\    "remote_path" : "",
+\    "local_path" : "",
+\    "debug_window_level" : 0,
+\    "debug_file_level" : 0,
+\    "debug_file" : "",
+\}
+</code></p>
+
+<p>このオプションをみると完全にIDEのようなリモートデバッグができそうですね。
+まだ試していないので、今度試してみようと思います。</p>
+
+<h2>CLI PHPスクリプトのデバッグ方法</h2>
+
+<p>Unix Linux限定ですが、CLI上から実行するPHPスクリプトのデバッグ方法もあります。</p>
+
+<p>以下のスクリプトを作成し、php-xdebug 等という名前で保存します。php のパスは適時置き換えて下さい。</p>
+
+<p>```php php-xdebug</p>
+
+<h1>!/bin/bash</h1>
+
+<p>export XDEBUG_CONFIG=&ldquo;idekey=xdebug&rdquo;
+/usr/bin/php &ldquo;$@&rdquo;
+```</p>
+
+<p>作成したファイルに実行権限を与え、パスが通っている場所に移動させます。</p>
+
+<p><code>text
+$ chmod +x php-xdebug
+$ mv php-xdebug /usr/local/bin/
+</code></p>
+
+<p>デバッガを起動し、デバッグしたいスクリプトをphp-xdebugコマンドで実行すると同じようにデバッグすることができます。</p>
+
+<p><code>text
+$ php-xdebug test.php
+</code></p>
+
+<p>Vimでステップ実行させたい方 Vdebugかなりオススメですよ。是非使ってみて下さい!</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/joonty/vdebug/blob/master/doc/Vdebug.txt" title="Vdebug Doc" target="_blank">Vdebug Doc</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vimで複数行コメントアウトする方法]]></title>
+    <link href="http://blog.code-life.net/blog/2012/07/03/comment-out-multiple-lines-vim/"/>
+    <updated>2012-07-03T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/07/03/comment-out-multiple-lines-vim</id>
+    <content type="html"><![CDATA[<p>久しぶりに更新なのでリハビリがてら、軽いネタです。
+最近は Eclipseを封印し、なるべく Vimを使用するようにしています。そこで 最近知った複数行コメントアウトする方法です。</p>
+
+<!--more-->
+
+
+<h2>Vimで複数行コメントアウトする方法</h2>
+
+<p>まずは[C-v]で、矩形ビジュアルモードになり、コメントアウトしたい範囲を指定します。</p>
+
+<p><a href="/images/2012/07/comment-out-multiple-lines-vim-1.png"><img src="/images/2012/07/comment-out-multiple-lines-vim-1-300x222.png" width="300" height="222"></a></p>
+
+<p>コメントアウトしたい範囲を指定したら、<code>I</code>でインサートモードに変更します。通常は小文字の<code>i</code>ですが、大文字の<code>I</code>でインサートモードに移ります。
+インサートモードに移行後、コメントアウトを行います。</p>
+
+<p><a href="/images/2012/07/comment-out-multiple-lines-vim-2.png"><img src="/images/2012/07/comment-out-multiple-lines-vim-2-300x222.png" width="300" height="222"></a></p>
+
+<p>一行だけじゃん！と思わず、ここで <code>Esc</code> を入力しインサートモードを抜けると・・・</p>
+
+<p><a href="/images/2012/07/comment-out-multiple-lines-vim-3.png"><img src="/images/2012/07/comment-out-multiple-lines-vim-3-300x221.png" width="300" height="221"></a></p>
+
+<p>すこしラグがありますが、矩形ビジュアルモードで指定した範囲がコメントアウトされます。
+たぶんもっと簡単にコメントアウトするプラグインとかあるよね。きっと。訓練されたVimmer教えてください！</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Htaccess | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/htaccess/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-08-19T01:17:07+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Htaccessでモバイル端末リダイレクト]]></title>
+    <link href="http://blog.code-life.net/blog/2012/04/20/htaccess-redirect/"/>
+    <updated>2012-04-20T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/04/20/htaccess-redirect</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>サイトを閲覧するデバイスによって、jsやphp、htaccessで振り分けってのはよくあります。
+個人的にはhtaccessで制御したほうが楽なのでいつもそれでやっているので、今回はそれの備忘録です。</p>
+
+<!--more-->
+
+
+<h2>リダイレクト処理</h2>
+
+<h3>スマートフォン、フィーチャーフォンにリダイレクト</h3>
+
+<p>``` text
+<IfModule mod_rewrite.c>
+RewriteEngine On</p>
+
+<h1>スマートフォン</h1>
+
+<p>RewriteCond %{REQUEST_URI} !.jpg$
+RewriteCond %{REQUEST_URI} !.gif$
+RewriteCond %{REQUEST_URI} !.png$
+RewriteCond %{REQUEST_URI} !.ico$
+RewriteCond %{HTTP_USER_AGENT} !^(DoCoMo|J-PHONE|Vodafone|MOT-|SoftBank|Up.Browser|KDDI|PDXGW|DDIPOKET|WILLCOM|ASTEL|Nokia|L-mode) [NC]
+RewriteCond %{HTTP_USER_AGENT} (iPhone|iPod|Android.<em>Mobile|BlackBerry) [NC]
+RewriteRule ^(.</em>)$ /sp/ [R=301,L]</p>
+
+<h1>フィーチャーフォン</h1>
+
+<p>RewriteCond %{REQUEST_URI} !.jpg$
+RewriteCond %{REQUEST_URI} !.gif$
+RewriteCond %{REQUEST_URI} !.png$
+RewriteCond %{REQUEST_URI} !.ico$
+RewriteCond %{HTTP_USER_AGENT} ^(DoCoMo|J-PHONE|Vodafone|MOT-|SoftBank|Up.Browser|KDDI|PDXGW|DDIPOKET|WILLCOM|ASTEL|Nokia|L-mode) [NC]
+RewriteCond %{HTTP_USER_AGENT} !(iPhone|iPod|Android.<em>Mobile|BlackBerry) [NC]
+RewriteRule ^(.</em>)$ /fp/ [R=301,L]</p>
+
+<p></IfModule>
+```</p>
+
+<p>HTTP_USER_AGENTでディレクトリ先変えるってのは、よくやります。</p>
+
+<p>ただ、root階層にあるアイコン、画像、ファイルなんかもリダイレクトされてしまうので、それは回避してあげます。
+ここはサイト構成によって変える必要があると思います。
+端末ごとにリダイレクト処理の否定処理はいらないかなーとも思いますけど、一応。。。</p>
+
+<h3>スマートフォンPCサイト見れるようにする</h3>
+
+<p>to-Rさんのhtaccess振り分けを利用させて頂いてます。</p>
+
+<p><code>
+RewriteCond %{HTTP_USER_AGENT} (iPhone|iPod)
+RewriteCond %{QUERY_STRING} !mode=pc
+RewriteRule ^/$ /iphone/ [R]
+</code></p>
+
+<p>PC用とiPhone用のサイトを切り替える.htaccess</p>
+
+<p><a href="http://blog.webcreativepark.net/2010/07/08-121336.html" target="_blank"><a href="http://blog.webcreativepark.net/2010/07/08-121336.html">http://blog.webcreativepark.net/2010/07/08-121336.html</a></a></p>
+
+<p>RewriteCondの値は最初の記述に変更しています。</p>
+
+<p><code>
+RewriteCond %{QUERY_STRING} !mode=pc
+RewriteCond %{HTTP_USER_AGENT} !(iPhone|iPod|Android.*Mobile|BlackBerry) [NC]
+RewriteRule ^(.*)$ /sp/ [R=301,L]
+</code></p>
+
+<p>リファラーでもいいかなーとは思います。</p>
+
+<p><code>
+RewriteCond %{HTTP_REFERER} !/sp/.*$
+RewriteCond %{HTTP_USER_AGENT} !(iPhone|iPod|Android.*Mobile|BlackBerry) [NC]
+RewriteRule ^(.*)$ /sp/ [R=301,L]
+</code></p>
+
+<p>RewriteRuleの書き方を変えてあげないと、パラメータを保持していないと下層ページいったときリダイレクトします。
+さらに、index.htmlとかでアクセスしたとき、リダイレクト処理は走りませんのでご注意を。</p>
+
+<p>ここまで書いて、何が問題かというとパラメータ保持のやり方がまだ分かってないという。そんな折、to-Rさんでjsが配布されておりました。
+PCサイトとスマートフォンサイトを切り替える「Pc2Sp.js」
+<a href="http://blog.webcreativepark.net/2012/04/19-120731.html" target="_blank"><a href="http://blog.webcreativepark.net/2012/04/19-120731.html">http://blog.webcreativepark.net/2012/04/19-120731.html</a></a></p>
+
+<p>js切り替えですけど、次はちょっと試してみたいなーと思います。</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Phpunit | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/phpunit/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-08-19T01:17:07+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[PHPUnit 3.6をインストールする]]></title>
+    <link href="http://blog.code-life.net/blog/2012/01/09/install-phpunit-3-6/"/>
+    <updated>2012-01-09T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/01/09/install-phpunit-3-6</id>
+    <content type="html"><![CDATA[<p>notoです。</p>
+
+<p>UnitTestFrameWork PHPunitのインストール方法の備忘録です。</p>
+
+<!--more-->
+
+
+<h2>PHPUnit 3.6のインストール</h2>
+
+<h3>PHPUnit 3.6の推奨環境</h3>
+
+<ul>
+<li>PHP 5.3.8 以降</li>
+<li>Xdebug 2.1.2 以降</li>
+</ul>
+
+
+<p>php-pear、xdebugはインストールされているものとします。
+PHPUnitをインストールするためにphp-xmlパッケージが必要なので、インストールされているか確認します。</p>
+
+<p><code>
+$ rpm -q php-xml
+</code></p>
+
+<p>インストールされていない場合は、インストールを行います。</p>
+
+<p><code>
+$ yum install php-xml
+</code></p>
+
+<h3>PHPUnit3.6のインストール</h3>
+
+<p>以下の２つのコマンドを実行します。</p>
+
+<p><code>
+$ pear config-set auto_discover 1
+$ pear install pear.phpunit.de/PHPUnit
+</code></p>
+
+<p>インストール終了後、phpunitコマンドを実行し確認を行います。</p>
+
+<p><code>
+$ phpunit -v
+</code></p>
+]]></content>
+  </entry>
+  
+</feed>

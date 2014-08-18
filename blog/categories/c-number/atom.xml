@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: C# | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/c-number/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-08-19T01:17:07+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[LINUX上でC#アプリを実行してみた]]></title>
+    <link href="http://blog.code-life.net/blog/2011/09/22/c-sharp-linux/"/>
+    <updated>2011-09-22T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/09/22/c-sharp-linux</id>
+    <content type="html"><![CDATA[<p>chakemiです。会社からお家まで5分程度なんで、台風だってへっちゃらです。</p>
+
+<p>本日は、C#で作成したアプリを、monoを使ってLinux上で実行してみました。
+GUIアプリも試したかったので、デスクトップ環境にて検証しました。</p>
+
+<!--more-->
+
+
+<h2>開発環境</h2>
+
+<ul>
+<li>CentOS5.5 （Desktop-Gnome）</li>
+<li>VisualStudio2008（WindowsXP SP3）</li>
+</ul>
+
+
+<p>まず、monoのインストールですが、gcc、gcc++、bisonが必要なようで
+yumパッケージからインストールします。</p>
+
+<p>Gnome端末から</p>
+
+<p><code>
+[root@localhost ~]yum install gcc
+[root@localhost ~]yum install gcc-c++
+[root@localhost ~]yum install bison
+</code></p>
+
+<p>monoソースをダウンロードして</p>
+
+<p><code>
+[root@localhost ~]# wget http://ftp.novell.com/pub/mono/sources/mono/mono-2.10.2.tar.bz2
+[root@localhost ~]# bzip2 -dc mono-2.10.2.tar.bz2 | tar xvf -
+[root@localhost ~]# cd mono-2.10.2
+[root@localhost mono-2.10.2]# ./configure
+[root@localhost mono-2.10.2]# make
+↑めっちゃ時間かかりました。まぁ.netframeworkを移植してるわけですからねぇ～。。。
+[root@localhost mono-2.10.2]# make check
+[root@localhost mono-2.10.2]# make install
+</code></p>
+
+<p>んで、無事インストール完了</p>
+
+<p>```
+[root@localhost mono-2.10.2]# mono &mdash;version
+Mono JIT compiler version 2.10.2 (tarball 2011年  9月 21日 水曜日 23:59:08 JST)
+Copyright &copy; 2002-2011 Novell, Inc and Contributors. www.mono-project.com</p>
+
+<pre><code>    TLS:           __thread
+    SIGSEGV:       altstack
+    Notifications: epoll
+    Architecture:  x86
+    Disabled:      none
+    Misc:          softdebug
+    LLVM:          supported, not enabled.
+    GC:            Included Boehm (with typed GC and Parallel Mark)
+</code></pre>
+
+<p>```</p>
+
+<p>適当なコンソールアプリを作成してLinuxへ移し、実行してみました。</p>
+
+<p><code>
+[root@localhost mono-2.10.2]#mono helloworld.exe
+Hello, world
+</code></p>
+
+<p>おお～、動きました～！！
+しかし残念ながらFormを使ったアプリはmono-winformsがちゃんと動かず、実行できませんでした。</p>
+
+<p>時間が出来たらちゃんと原因追求したいと思います。</p>
+]]></content>
+  </entry>
+  
+</feed>

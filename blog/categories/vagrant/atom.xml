@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: vagrant | Code Life]]></title>
+  <title><![CDATA[Category: Vagrant | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/vagrant/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -19,6 +19,9 @@
     <updated>2014-04-14T21:06:31+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders</id>
     <content type="html"><![CDATA[<p>ドキュメントみてもgoogle先生に伺っても意外と情報がない。</p>
+
+<!--more-->
+
 
 <h2>環境</h2>
 
@@ -52,6 +55,9 @@ config.vm.synced_folder "../path_to_share2", "/share2"
     <content type="html"><![CDATA[<p>最近Railsを触っているのだが、いかんせんWebrickの起動やレスポンスが遅い。</p>
 
 <p>世のRubyistはこんな環境で開発しているのか(いやない)ということで調べた。</p>
+
+<!--more-->
+
 
 <h2>環境</h2>
 
@@ -136,6 +142,9 @@ $ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグ
     <id>http://blog.code-life.net/blog/2014/02/07/install-vagrant-bash-completion-on-mac</id>
     <content type="html"><![CDATA[<p><a href="https://github.com/kura/vagrant-bash-completion">vagrant-bash-completion</a>なるものを発見したのでインストールした。</p>
 
+<!--more-->
+
+
 <h2>環境</h2>
 
 <ul>
@@ -173,6 +182,9 @@ fi
     <updated>2013-12-01T15:39:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/12/01/vagrant-configure-public-network</id>
     <content type="html"><![CDATA[<p>Vagrantでパブリックネットワークの設定をしようとしたところ、若干ハマったのでメモ。</p>
+
+<!--more-->
+
 
 <h2>環境</h2>
 
@@ -243,6 +255,9 @@ xdebug.remote_connect_back = 1
 
 <p>vagrantから新規仮想マシンを作成し、ホストOSとゲストOSの共有ディレクトリの設定後、起動させたところ
 下記のエラーが出力された。</p>
+
+<!--more-->
+
 
 <p>``` sh
 The following SSH command responded with a non-zero exit status.

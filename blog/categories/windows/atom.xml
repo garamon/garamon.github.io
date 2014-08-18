@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: windows | Code Life]]></title>
+  <title><![CDATA[Category: Windows | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/windows/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,15 +14,74 @@
 
   
   <entry>
-    <title type="html"><![CDATA[ファイルリストを読み込んで目的のディレクトリにコピーする方法 in Windows]]></title>
-    <link href="http://blog.code-life.net/blog/2013/04/15/how-to-copy-list-of-filename-in-windows/"/>
-    <updated>2013-04-15T22:31:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/04/15/how-to-copy-list-of-filename-in-windows</id>
-    <content type="html"><![CDATA[<p>コマンドラインから以下を実行。リストファイル名とコピー先は適宜変更すること。</p>
+    <title type="html"><![CDATA[C#でWindows Media Player ActiveX コントロールを使う その5]]></title>
+    <link href="http://blog.code-life.net/blog/2011/09/24/how-to-use-windows-media-player-activex-controll-5/"/>
+    <updated>2011-09-24T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/09/24/how-to-use-windows-media-player-activex-controll-5</id>
+    <content type="html"><![CDATA[<p>chakemiです。3連休なのに仕事でなにも出来ません(T T)</p>
 
-<p><code>sh
-for /f %n in (listfile_path) do copy "%n" "destination"
-</code></p>
+<p>今日は、再びWindows Media Player ActiveX コントロールの小ネタを取り上げたいと思います。</p>
+
+<!--more-->
+
+
+<p>Windows Media Player ActiveX コントロールの基本的は使い方は以前のページを参考に。
+<a href="/blog/2011/09/02/how-to-use-windows-media-player-activex-controll-1">その1</a>
+<a href="/blog/2011/09/03/how-to-use-windows-media-player-activex-controll-2">その2</a>
+<a href="/blog/2011/09/05/how-to-use-windows-media-player-activex-controll-3">その3</a></p>
+
+<p>今回は、ストリーミング再生時のバッファリング状況を表示できるようにしたいと思います。</p>
+
+<p>基本的にいままでプロジェクトを改修、拡張で行いますが、今回は簡単にテストするために
+WindowsMediaEncoderを使ってライブストリームを再生しようと思うので
+前回の<a href="/blog/2011/09/08/how-to-use-windows-media-player-activex-controll-4">その4</a>の時に実装したシークバーの機能を削除しちゃいます。</p>
+
+<p>※理由は、ライブストリームなので、currentMedia.durationプロパティから
+動画の長さを取得することができないのでエラーが発生しちゃうからです。</p>
+
+<p>では、簡単に実装してみたいと思います。
+まず、axWindowsMediaPlayer1.URLプロパティの値をWindowsMediaEncoderへ接続するためのパスに変更します。</p>
+
+<p>FormにTimerコントロールを追加し、
+axWindowsMediaPlayer1コントロールにBufferingイベントを追加します。
+Bufferingイベントが開始されたら、追加したTimerを開始して
+Timerのイベントハンドラー内でバッファー状況を更新してあげれば完成。</p>
+
+<p>``` as3
+//WindowsMediaEncoderへ接続するためのパス
+axWindowsMediaPlayer1.URL = @&ldquo;<a href="http://192.168.1.113:8080">http://192.168.1.113:8080</a>&rdquo;;</p>
+
+<pre><code>～省略～
+</code></pre>
+
+<p>private void axWindowsMediaPlayer1_Buffering(object sender, _WMPOCXEvents_BufferingEvent e)
+{</p>
+
+<pre><code>if (e.start == true)
+{
+    timer2.Interval = 100;
+    timer2.Start();
+}
+else
+{
+    label3.Text = ("no buffer");
+    timer2.Stop();
+}
+</code></pre>
+
+<p>}</p>
+
+<p>private void timer2_Tick(object sender, EventArgs e)
+{</p>
+
+<pre><code>label3.Text = (axWindowsMediaPlayer1.network.bufferingProgress + "%");
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>axWindowsMediaPlayer1.network.bufferingCountプロパティなんかを使うとバッファリングを起こした回数なんかも拾えます。</p>
 ]]></content>
   </entry>
   

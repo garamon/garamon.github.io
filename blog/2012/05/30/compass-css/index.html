@@ -1,0 +1,368 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>CompassでCSS - Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="CompassでCSS Yuuです。
+以前、Sassの記事を書いたのですが、Compassのほうが便利そうだったので、切り替えました。 Rubyは前回インストール済みなので、Compass入れるだけ。 1
+2
+gem update --system
+gem install compass で、 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/blog/2012/05/30/compass-css/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">CompassでCSS</h1>
+	<div class="entry-content" itemprop="articleBody"><p>Yuuです。
+以前、<a href="/blog/2012/05/02/start-using-sass-css" title="Sassの使い始めメモ">Sassの記事</a>を書いたのですが、Compassのほうが便利そうだったので、切り替えました。</p>
+
+<!--more-->
+
+
+<p>Rubyは前回インストール済みなので、Compass入れるだけ。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>gem update --system
+</span><span class='line'>gem install compass</span></code></pre></td></tr></table></div></figure>
+
+
+<p>で、コマンド実行</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>compass create</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでファイルが生成されます。
+が、これ実行すると、なんかよくわからない感じでファイルが出力されます。
+自由にディレクトリ構成とかしたいですよね、ってことでconfigファイル作ります。</p>
+
+<figure class='code'><figcaption><span>config.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">http_path</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span>
+</span><span class='line'><span class="n">css_dir</span> <span class="o">=</span> <span class="s2">&quot;CSSの出力場所&quot;</span>
+</span><span class='line'><span class="n">sass_dir</span> <span class="o">=</span> <span class="s2">&quot;SCSSの保存場所&quot;</span>
+</span><span class='line'><span class="n">images_dir</span> <span class="o">=</span> <span class="s2">&quot;画像の保存場所&quot;</span>
+</span><span class='line'><span class="n">javascripts_dir</span> <span class="o">=</span> <span class="s2">&quot;JavaScriptの保存場所&quot;</span>
+</span><span class='line'><span class="n">output_style</span> <span class="o">=</span> <span class="no">Sass</span><span class="err">の出力形式（</span><span class="ss">:expanded</span> <span class="ow">or</span> <span class="ss">:nested</span> <span class="ow">or</span> <span class="ss">:compact</span> <span class="ow">or</span> <span class="ss">:compressed</span><span class="err">）</span>
+</span><span class='line'><span class="n">line_comments</span> <span class="o">=</span> <span class="no">CSS</span><span class="err">に</span><span class="no">SCSS</span><span class="err">の行番号を出力するか（</span><span class="kp">true</span> <span class="ow">or</span> <span class="kp">false</span><span class="err">）</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>↓のような感じにしました。</p>
+
+<figure class='code'><figcaption><span>config.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">http_path</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span>
+</span><span class='line'><span class="n">css_dir</span> <span class="o">=</span> <span class="s2">&quot;css&quot;</span>
+</span><span class='line'><span class="n">sass_dir</span> <span class="o">=</span> <span class="s2">&quot;_scss&quot;</span>
+</span><span class='line'><span class="n">images_dir</span> <span class="o">=</span> <span class="s2">&quot;/&quot;</span>
+</span><span class='line'><span class="n">javascripts_dir</span> <span class="o">=</span> <span class="s2">&quot;js&quot;</span>
+</span><span class='line'><span class="n">output_style</span> <span class="o">=</span> <span class="ss">:expanded</span>
+</span><span class='line'><span class="n">line_comments</span> <span class="o">=</span> <span class="kp">false</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>参考：<a href="http://www.skyward-design.net/blog/archives/000118.html" target="_blank">Compassを使ってSassのCSS出力を手軽にしよう｜Blog｜Skyward Design</a></p>
+
+<p>このconfig.rbを自分のサイト作成のディレクトリにおいて上げます。
+で、コマンドで下記を叩く。</p>
+
+<figure class='code'><figcaption><span>config.rb</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">compass</span> <span class="n">watch</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これでSCSSのファイルが編集され更新されたら、自動的にCSSを整形して出力してくれます。</p>
+
+<h2>Compassの機能</h2>
+
+<h3>インポート機能</h3>
+
+<p>creafixやらreset.cssをお手軽にインポートできます。</p>
+
+<figure class='code'><figcaption><span>scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@import</span> <span class="s2">&quot;compass/utilities/general/clearfix&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="nc">.clearfix</span><span class="p">{</span>
+</span><span class='line'>  <span class="o">@</span><span class="n">include</span> <span class="n">clearfix</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.clearfix</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">overflow</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">*</span><span class="n">zoom</span><span class="o">:</span> <span class="m">1</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>という感じでインポートするだけで終わり。</p>
+
+<h3>ベンダープレフィックス</h3>
+
+<p>スマートフォン対応サイト作るときに面倒なベンダープレフィックス。
+これも結構簡単に設定できます。</p>
+
+<figure class='code'><figcaption><span>scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@import</span> <span class="s2">&quot;compass/css3/border-radius&quot;</span><span class="p">;</span>
+</span><span class='line'><span class="nc">.border-radius</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">@</span><span class="n">include</span> <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<figure class='code'><figcaption><span>css</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="nc">.border-radius</span> <span class="p">{</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">webkit</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">moz</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">ms</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'>  <span class="o">-</span><span class="n">o</span><span class="o">-</span><span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">border</span><span class="o">-</span><span class="n">radius</span><span class="o">:</span> <span class="m">5px</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>デフォルト値が5pxなのでプレフィックス付きで5px出力されます。
+値を変えるなら</p>
+
+<figure class='code'><figcaption><span>scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="err">$</span><span class="nt">default-border-radius</span><span class="nd">:20px</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>という形で指定して、デフォルト値を変更するか、</p>
+
+<figure class='code'><figcaption><span>scss</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='css'><span class='line'><span class="k">@include</span> <span class="nt">border-radius</span><span class="o">(</span><span class="nt">2px</span><span class="o">)</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>という感じで個別の値を変更する感じです。
+これだけでとりあえず、作業効率はだいぶ上がりました。</p>
+
+<p>他にもmixinとかの機能やextendでクラス継承させたりもできるんですが、まだ完全に終えてないので徐々に覚えていこうと思います。</p>
+</div>
+
+</article>
+
+	<div class="ads">
+    <script type="text/javascript"><!--
+    google_ad_client = "ca-pub-1004737269453987";
+    /* big banner */
+    google_ad_slot = "2274687956";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript"
+    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+    </script>
+</div>
+<div class="share">
+    <div class="addthis_toolbox addthis_default_style ">
+        <div style="float:left">
+            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/05/30/compass-css/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
+            <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+        </div>
+        
+        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+        
+        
+        <a class="addthis_button_tweet"></a>
+        
+        
+        <a class="addthis_counter addthis_pill_style"></a>
+    </div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2014 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.code-life.net/blog/2012/05/30/compass-css/';
+        var disqus_url = 'http://blog.code-life.net/blog/2012/05/30/compass-css/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

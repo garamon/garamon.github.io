@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: mac | Code Life]]></title>
+  <title><![CDATA[Category: Mac | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -20,6 +20,9 @@
     <id>http://blog.code-life.net/blog/2013/04/25/parallel-merging</id>
     <content type="html"><![CDATA[<p>2つのファイルを単純に結合するには「cat」コマンドを使えばいいですが、
 行ごとに結合をする場合 「paste」コマンドなるものがあることを知りました。</p>
+
+<!--more-->
+
 
 <h2>pasteコマンドを使ったファイルの連結</h2>
 
@@ -83,6 +86,9 @@ CCC,333
     <content type="html"><![CDATA[<p>普段、開発環境は仮想マシン上にしか作らないのだが検証の必要があってローカルにPHPをインストールしようとしたところ
 コンパイル時に以下のエラーが発生した。</p>
 
+<!--more-->
+
+
 <h2>``` sh</h2>
 
 <h2>|  BUILD ERROR  |</h2>
@@ -126,6 +132,162 @@ OpenSSL 1.0.1e 11 Feb 2013</p>
 <p>```</p>
 
 <p>インストールできたついでに初めてコメントを書いてみたが自身の英語力がなくて泣けてくる。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Macで使ってるエディタ 【Geanyのその後】]]></title>
+    <link href="http://blog.code-life.net/blog/2012/01/11/fraise/"/>
+    <updated>2012-01-11T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/01/11/fraise</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>以前、Macでの開発環境を整えようと、
+エディタについて書きましたが、その続編です。</p>
+
+<!--more-->
+
+
+<p>前の記事は<a href="/blog/2011/12/06/geany/">こちら</a>
+今日は、Geanyの使い勝手とその後についてです。</p>
+
+<p>GeanyはWindowsにも入れて使ってます。
+Windows版のインストールはもっと簡単で、インストーラーをダウンロードしてきて実行するだけ。
+ただ、Windows版は初期起動がなぜか遅め。
+なんででしょう？ただのエディタなのになんで最初もっさり。
+起動してからも、コード入力始めだけ遅い。
+そこだけ改善されれば今のところ問題なしです。</p>
+
+<p>次に、肝心のMac版。
+アプリケーションにアイコンがどうしても追加されなくて、
+起動するのがなんか面倒で、実はあんまり使ってません。笑。
+でも、Mac版の方はWindows版で気になった初期起動の遅さも
+入力始めのもっさりもありません。
+やっぱりMacよりなエディタなんですかね？</p>
+
+<p>で、今はGeanyに代わってMacではFraiseっていうエディタ使ってます。</p>
+
+<p><a href="http://www.macupdate.com/app/mac/33751/fraise" title="Fraise" target="_blank">Fraise</a></p>
+
+<p>ちょっとつぶれた苺？のアイコンでかわいいです。
+インストールも簡単。コンパイル不要。
+言語別のカラーリングもかなりの種類に最初から対応していて、シンプルだし軽快。
+参考にさせてもらったサイトは以下。</p>
+
+<p><a href="http://wakabamac.blog95.fc2.com/blog-entry-1057.html" title="わかばマークのMacの備忘録 | Fraise" target="_blank">わかばマークのMacの備忘録 | Fraise</a></p>
+
+<p>Fraiseもまだまだ試し中なので、使い勝手は追々。
+他にもいいエディタとかIDEを見つけたらご報告します。
+以上です。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MacにGeanyをインストール]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/06/geany/"/>
+    <updated>2011-12-06T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/06/geany</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>最近、Macで開発環境を整えようと試行錯誤中。</p>
+
+<p>そこでエディタをいろいろ探してまして、今日はその一つ、Geanyを試します。</p>
+
+<!--more-->
+
+
+<p>もともと、サクラエディタ一つでだいたいこなしてたんですが、それもちょっと物足りない。。
+それからeclipseとかaptanaとかも手を出したけど、重たいし、仰々しい。</p>
+
+<p>actionscriptはサクラエディタ→Flash Professtionalのスクリプト →FlashDevelopと、ここで落ち着き中です。
+FlashDevelop的なのがいろんな言語対応であればいいのに。。といろいろ探していたら、IDEって結構いろいろありますね。</p>
+
+<p>で、今回はその中でも<a title="http://www.geany.org/" href="http://www.geany.org/" target="_blank">Geany</a>を試すことにしました。</p>
+
+<p>Geanyは魔法のランプのgeanyみたいです。 アイコンが魔法のランプ！笑。</p>
+
+<p>Windowsだと、本家サイトからインストーラーをDownloadしてきて、インストーラーを実行するだけ。
+既に日本語化もされててそのまま取り合えず使えます。</p>
+
+<p>では、Macでのインストール。</p>
+
+<p>まず本家サイトからgzファイルをDownloadします。
+ターミナルから解凍。
+./configureを実行したらエラー。
+Macになんも入れてなかったので、Xcode、MacPortsをインストール。</p>
+
+<p>もう一度やり直し。</p>
+
+<p><code>
+configure: error: The intltool scripts were not found.　Please install intltool*
+</code></p>
+
+<p>素直にMacPortsからintltoolをインストール。</p>
+
+<p><code>
+$ sudo port install intltool
+</code></p>
+
+<p>※結構時間かかります。</p>
+
+<p>さらにもう一度。</p>
+
+<p><code>
+configure: error: Package requirements (gtk+-2.0&gt;= 2.12 glib-2.0 &gt;= 2.16 gio-2.0 &gt;= 2.16)were not met: No package "gtk+-2.0"; found*
+</code></p>
+
+<p>必要なパッケージをインストール</p>
+
+<p><code>
+$ sudo port search gtk+-2.0 gtk-xfce-engine
+</code></p>
+
+<p><code>
+$ ./configure
+$ make
+$ sudo make install
+</code></p>
+
+<p>これでとりあえずインストールされます。
+でもなぜか私のところではアプリケーションのところに追加されない。。
+なぜ？笑。</p>
+
+<p>Geanyはターミナルもついてて、コード書いて実行の流れがスムーズ。
+あと、プラグインがあるので、いろいろと拡張も可能の様子。</p>
+
+<p>使い勝手についてはまた後日にします。
+それでは。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac bootcampのWindowsでのキーボードショートカット メモ]]></title>
+    <link href="http://blog.code-life.net/blog/2011/10/08/bootcamp-keyboard-mappings-windows/"/>
+    <updated>2011-10-08T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/10/08/bootcamp-keyboard-mappings-windows</id>
+    <content type="html"><![CDATA[<p>chakemiです。MacBook airを購入してもうすぐ一ヶ月になりますが、まったくMacOSを起動しておりません。。。
+本日は、bootcampのWindowsでのキーボードショートカットのメモ。</p>
+
+<!--more-->
+
+
+<h2>スクリーンキャプチャ</h2>
+
+<p><code>fn</code> + <code>左shift</code> + <code>F11</code>
+これで画面全体がキャプチャできます。</p>
+
+<p><code>fn</code> + <code>alt option</code> + <code>左shift</code> + <code>F11</code>
+でアクティブウィンドウのみキャプチャ。</p>
+
+<h2>半角/全角</h2>
+
+<p><code>caps</code>キー これ以外に <code>alt option</code> + <code>`@</code> でも切り替え可能。</p>
+
+<h2>delete</h2>
+
+<p>キーボードのdeleteキーはBSキーとして機能しますが、 <code>fn</code> + <code>delete</code> でdelete。</p>
+
+<p>他にも普段PCキーボードで使うようなものの代替があったら忘れないようにメモしよっ。</p>
 ]]></content>
   </entry>
   

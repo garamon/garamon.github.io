@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ffmpeg | Code Life]]></title>
+  <title><![CDATA[Category: Ffmpeg | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/ffmpeg/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-12-19T22:45:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming</id>
     <content type="html"><![CDATA[<p><a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/">CentOSにm3u8-segmenterをインストールする</a>がほんのちょっぴり人気なので、FFMpeg単体でもセグメントできるよって話です。</p>
+
+<!--more-->
+
 
 <h2>FFMpegでSegment化</h2>
 
@@ -84,6 +87,9 @@ ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
     <content type="html"><![CDATA[<p>CentOS 6.x系にインストールしたことはなかったので備忘録としてメモ。</p>
 
 <p>x264/AACのトランスコードだけできればいい環境を構築します。</p>
+
+<!--more-->
+
 
 <h2>環境</h2>
 
@@ -323,6 +329,53 @@ $ ffmpeg -i big_buck_bunny_480p_surround-fix.avi -s 400x300 \
 <p><a href="http://ffmpeg.org/trac/ffmpeg/wiki/CentosCompilationGuide#ffmpeg">Compile FFmpeg on CentOS 6.x</a></p>
 
 <p><a href="http://dev.classmethod.jp/cloud/amazon-linux-ffmpeg-encoding/">Amazon Linuxにffmpegを入れて動画エンコーディングする</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FFMPEGでサムネイルを作成する]]></title>
+    <link href="http://blog.code-life.net/blog/2012/02/28/create-thumbnail-ffmpeg/"/>
+    <updated>2012-02-28T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/02/28/create-thumbnail-ffmpeg</id>
+    <content type="html"><![CDATA[<p>notoです。</p>
+
+<p>FFMPEGで複数サムネイルを切りだしたところ、稀にグレー一色のJPGファイルが書き出されている現象があったので、備忘録的なメモです。</p>
+
+<!--more-->
+
+
+<p>問題があったコマンドです。</p>
+
+<p>``` php thumbnail.php
+$time   = &lsquo;00:00:10&rsquo;; // 秒または、HH:MM:SS[.xxx]形式
+$video  = &lsquo;hoge.mpg&rsquo;;
+$img    = &lsquo;hoge.jpg&rsquo;;</p>
+
+<p>$cmd = &ldquo;ffmpeg -ss $time -i $video -vcodec mjpeg -vframes 1 -an -f image2 $img&rdquo;;
+//コマンド ffmpeg -ss 00:00:10 -i hoge.mpg -vcodec mjpeg -vframes 1 -an -f image2 hoge.jpg
+exec($cmd);
+```</p>
+
+<p>このコマンドを実行すると以下のワーニングが発生し、切り出したJPEGファイルがグレー一色となります。</p>
+
+<p><code>text
+warning: first frame is no keyframe
+</code></p>
+
+<p>色々試してみたのですが、うまくいかず結局 ss オプションの代わりに、 itsoffset オプションを利用しました。</p>
+
+<p>```php thumbnail.php
+$time   = &lsquo;00:00:10&rsquo;; // 秒または、HH:MM:SS[.xxx]形式
+$video  = &lsquo;hoge.mpg&rsquo;;
+$img    = &lsquo;hoge.jpg&rsquo;;</p>
+
+<p>$cmd = &ldquo;ffmpeg -itsoffset &ndash;$time -i $video -vcodec mjpeg -vframes 1 -an -f image2 $img&rdquo;;
+//コマンド ffmpeg -itsoffset -00:00:10 -i hoge.mpg -vcodec mjpeg -vframes 1 -an -f image2 hoge.jpg
+exec($cmd);
+```</p>
+
+<p>この方法は確実にサムネイルを切りだすことができますが、切り出すまで時間がかかるというデメリットがあります。
+んーもっといい方法はないですかね。</p>
 ]]></content>
   </entry>
   

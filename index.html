@@ -9,7 +9,7 @@
 	<meta name="author" content="noto">
 
 	
-	<meta name="description" content="2014-05-07 rbenv, ruby rbenv使うならこれもいれとけプラグイン4選 複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。 ruby-build ruby-build 何するプラグイン? &hellip;">
+	<meta name="description" content="2014-05-07 rbenv, ruby Rbenv使うならこれもいれとけプラグイン4選 複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。 Read on &rarr; 2014-04-14 vagrant [ &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -129,80 +129,13 @@
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2014/05/07/recommended-rbenv-plugin/" itemprop="url">rbenv使うならこれもいれとけプラグイン4選</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/05/07/recommended-rbenv-plugin/" itemprop="url">Rbenv使うならこれもいれとけプラグイン4選</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<p>複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。</p>
 
-<h2>ruby-build</h2>
-
-<p><a href="https://github.com/sstephenson/ruby-build">ruby-build</a></p>
-
-<h3>何するプラグイン?</h3>
-
-<p>rubyのコンパイル &amp; インストール</p>
-
-<h3>インストール</h3>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>rbenv-default-gems</h2>
-
-<p><a href="https://github.com/sstephenson/rbenv-default-gems">rbenv-default-gems</a></p>
-
-<h3>何するプラグイン?</h3>
-
-<p>新しくrubyをインストールする際、~/.rbenv/default-gemsに記載してあるgemを自動的にインストールする</p>
-
-<figure class='code'><figcaption><span>ex) ~/.rbenv/default-gems</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>bundler
-</span><span class='line'>pry
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Installation</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>rbenv-gem-rehash</h2>
-
-<p><a href="https://github.com/sstephenson/rbenv-gem-rehash">rbenv-gem-rehash</a></p>
-
-<h3>何するプラグイン?</h3>
-
-<p>gemをインストール or アンインストールした際に自動的にrbenv rehashを行う</p>
-
-<h3>Installation</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>rbenv-update</h2>
-
-<p><a href="https://github.com/rkh/rbenv-update">rbenv-update</a></p>
-
-<h3>何するプラグイン?</h3>
-
-<p><code>rbenv update</code>と打てば rbenv &amp; rbenvプラグインをまとめて最新の状態にする</p>
-
-<h3>Installation</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>全部<a href="https://github.com/sstephenson/rbenv/wiki/Plugins#approved-plugins">wiki</a>に載ってるんすけどね。</p>
 
 		
-		
+		<a href="/blog/2014/05/07/recommended-rbenv-plugin/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -236,32 +169,9 @@
 	<div class="entry-content" itemprop="articleBody">
 		<p>ドキュメントみてもgoogle先生に伺っても意外と情報がない。</p>
 
-<h2>環境</h2>
-
-<ul>
-<li>Vagrant 1.5.2</li>
-</ul>
-
-
-<h2>複数の共有ディレクトリをマウントさせる</h2>
-
-<p>ただ複数書けばいいだけだった&hellip;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span> <span class="s2">&quot;../path_to_share1&quot;</span><span class="p">,</span> <span class="s2">&quot;/share1&quot;</span>
-</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span> <span class="s2">&quot;../path_to_share2&quot;</span><span class="p">,</span> <span class="s2">&quot;/share2&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>常識なんですかね。</p>
-
-<h2>参考</h2>
-
-<p><a href="http://docs.vagrantup.com/v2/synced-folders/basic_usage.html">Synced Folders</a></p>
 
 		
-		
+		<a href="/blog/2014/04/14/vagrant-multiple-synced-folders/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -297,95 +207,9 @@
 
 <p>世のRubyistはこんな環境で開発しているのか(いやない)ということで調べた。</p>
 
-<h2>環境</h2>
-
-<ul>
-<li>Ruby on Rails4</li>
-<li>ruby 2.1.1p76</li>
-<li>Vagrant 1.5.2</li>
-</ul>
-
-
-<h2>Webrickの設定を見直す</h2>
-
-<p>google先生に伺うと下記の解決方法が多かったがボクの環境では効果が見られなかった。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gem which webrick
-</span><span class='line'>/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb
-</span><span class='line'>
-</span><span class='line'><span class="nv">$ </span>vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb
-</span><span class='line'>
-</span><span class='line'>:DoNotReverseLookup <span class="o">=</span>&gt; nil
-</span><span class='line'>↓
-</span><span class='line'>:DoNotReverseLookup <span class="o">=</span>&gt; <span class="nb">true</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Vagrant Synced Foldersの設定</h2>
-
-<p>synced_folderを<code>nfs</code> にするとパフォーマンスの向上が期待できると何処かで見た記憶があったので</p>
-
-<p>ドキュメントを覗いてみると <code>rsync</code> がバージョン1.5から利用できるとのこと。
-使わない手はないと早速1.5に上げて試してみた。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span> <span class="s2">&quot;../target&quot;</span><span class="p">,</span> <span class="s2">&quot;/share&quot;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="s2">&quot;rsync&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>初回起動時は立ち上がるまで若干時間がかかったが、それ以降は遅いとは感じない。</p>
-
-<p>肝心のWebrickのレスポンス速度は劇的に上がった。今までと比べると爆速。</p>
-
-<h3>注意点</h3>
-
-<p>ホストOS側で変更した点がゲストOSに反映されない。
-rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</code> を実行する必要がある。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">vagrant</span> <span class="n">up</span>
-</span><span class='line'><span class="err">$</span> <span class="n">vagrant</span> <span class="n">rsync</span> <span class="c1">#１度きりの同期</span>
-</span><span class='line'><span class="ow">or</span>
-</span><span class='line'><span class="err">$</span> <span class="n">vagrant</span> <span class="n">rsync</span><span class="o">-</span><span class="n">auto</span> <span class="c1">#監視して変更があれば同期 若干タイムラグがある。</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>結局は&hellip;</h2>
-
-<p>rsyncで少し利用してみたが、同期のラグが気になった。
-変更してすぐに確認できないことがあるのでこの辺はストレスに感じる。</p>
-
-<p>また同期は一方方向 ホスト→ ゲストの為、仮想マシン上でコマンドを打ってファイルを作成しても
-ホストには反映されない。</p>
-
-<p>自分はゲストからコマンドを打つことが多いので困った点だった。
-こういった点はこれから改善されるのだと思う。</p>
-
-<p>ということでパフォーマンス的に問題がなかったので <code>nfs</code> に変更して開発している。</p>
-
-<hr />
-
-<p>追記 2014/04/15</p>
-
-<h2>参考</h2>
-
-<p><a href="https://www.vagrantup.com/blog/feature-preview-vagrant-1-5-rsync.html">Feature Preview: Rsync Synced Folders</a></p>
-
-<p><a href="http://docs.vagrantup.com/v2/getting-started/synced_folders.html">Synced Folders</a></p>
 
 		
-		
+		<a href="/blog/2014/04/14/rails-server-webrick-is-so-slow/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -419,42 +243,9 @@ rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</cod
 	<div class="entry-content" itemprop="articleBody">
 		<p><a href="https://github.com/kura/vagrant-bash-completion">vagrant-bash-completion</a>なるものを発見したのでインストールした。</p>
 
-<h2>環境</h2>
-
-<ul>
-<li>Mac OS X 10.9.1</li>
-<li>Vagrant 1.4.3</li>
-</ul>
-
-
-<h2>Installation</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>brew tap homebrew/completions
-</span><span class='line'><span class="nv">$ </span>brew install vagrant-completion
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>~/.bashrcに以下を追加して反映</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="sb">`</span>brew --prefix<span class="sb">`</span>/etc/bash_completion.d/vagrant <span class="o">]</span>; <span class="k">then</span>
-</span><span class='line'><span class="k">  </span><span class="nb">source</span> <span class="sb">`</span>brew --prefix<span class="sb">`</span>/etc/bash_completion.d/vagrant
-</span><span class='line'><span class="k">fi</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Vagrantコマンド・サブコマンドの補完が行われて幸福度が少し上がる。</p>
-
-<h2>参考</h2>
-
-<p><a href="https://github.com/kura/vagrant-bash-completion">vagrant-bash-completion</a></p>
 
 		
-		
+		<a href="/blog/2014/02/07/install-vagrant-bash-completion-on-mac/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -492,30 +283,9 @@ rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</cod
 
 <p>ということでデモ。</p>
 
-<h2>Demo</h2>
-
-<p>&ldquo;ctrl + ;&#8221;を入力、続けて任意の1文字を入力すると該当箇所にラベルが振られる。ハイライトされたアルファベットを入力するとその箇所に移動する。</p>
-
-<p><img src="/images/acejump.gif" width="600" height="400"></p>
-
-<h2>Install</h2>
-
-<p><code>Preferences</code> | <code>Plugins</code> | <code>Browse Repositories</code> | <code>AceJump</code> を選択しインストール</p>
-
-<h2>Keymap</h2>
-
-<p>キーマップが気に入らない場合は、</p>
-
-<p><code>Preferences</code> | <code>Keymap</code> | <code>Plug-ins</code> | <code>AceJump</code> | <code>Ace Jump</code> から好きなキーマップを割り当てることができる。</p>
-
-<p>AceJumpは WebStorm/PhpStorm, RubyMine, Pycharm等からも利用できるみたい。</p>
-
-<h2>参考</h2>
-
-<p><a href="http://johnlindquist.com/2012/08/14/ace_jump.html">ACE JUMP</a></p>
 
 		
-		
+		<a href="/blog/2014/01/06/using-vim-easymotion-in-intellij/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -545,7 +315,7 @@ rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</cod
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass/" itemprop="url">homebrew undefined method `to_sym&#8217; for nil:NilClass</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass/" itemprop="url">Homebrew Undefined Method `to_sym&#8217; for nil:NilClass</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<p>brew updateをしたところ、下記のエラーが出力された。</p>
 
@@ -615,54 +385,9 @@ homebrewのバグだそう。</p>
 
 <p>そこでサブディレクトリにインストールした場合のリダイレクト方法で少しハマったので共有しておく。</p>
 
-<h2>環境</h2>
-
-<p>Slim 2.4.0</p>
-
-<h2>getRootUriを利用する</h2>
-
-<p>Slim_Http_Request::getRootUriはサブディレクトリ名を返すのでそれを利用しリダイレクトを行う。</p>
-
-<p>ex) サブディレクトリ名がslimの場合、「/slim」という文字列を返す。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/index&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getRootUri</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;/hoge&#39;</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>urlForを利用する</h2>
-
-<p>Slimはrouteに任意の名前を割り当てることができ、urlForでURLを生成することができる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/index&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;index.php&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">})</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/edit&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlFor</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">));</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでインストール先がドキュメントルートだろうが、サブディレクトリだろうがコードを変える必要はなくなる。</p>
-
-<h2>参考</h2>
-
-<p><a href="http://docs.slimframework.com/#Route-Names">Slim Framework Documentation</a></p>
 
 		
-		
+		<a href="/blog/2014/01/06/redirecting-slim-application-from-subdirectory/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -696,71 +421,9 @@ homebrewのバグだそう。</p>
 	<div class="entry-content" itemprop="articleBody">
 		<p><a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/">CentOSにm3u8-segmenterをインストールする</a>がほんのちょっぴり人気なので、FFMpeg単体でもセグメントできるよって話です。</p>
 
-<h2>FFMpegでSegment化</h2>
-
-<p>コンテンツは既に準備されているものとし、セグメント化のみ行います。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>ffmpeg -i sample.mp4 -acodec copy -vcodec copy <span class="se">\</span>
-</span><span class='line'>  -vbsf h264_mp4toannexb <span class="se">\</span>
-</span><span class='line'>  -map 0 <span class="se">\</span>
-</span><span class='line'>  -f segment <span class="se">\</span>
-</span><span class='line'>  -segment_format mpegts <span class="se">\</span>
-</span><span class='line'>  -segment_time 5 <span class="se">\</span>
-</span><span class='line'>  -segment_list playlist.m3u8 <span class="se">\</span>
-</span><span class='line'>  -segment_list_flags -cache <span class="se">\</span>
-</span><span class='line'>  stream_%d.ts
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>オプションについて</h3>
-
-<ul>
-<li>-acodec copy -vcodec copy
-
-<ul>
-<li>コンテンツのコーデックをコピー。トランスコードは行われない。</li>
-</ul>
-</li>
-<li>-segment_time
-
-<ul>
-<li>分割秒数の設定。5秒を設定したとしても５秒ジャストでセグメント化されるわけではない。</li>
-</ul>
-</li>
-<li>-segment_list playlist.m3u8
-
-<ul>
-<li>プレイリストの出力先</li>
-</ul>
-</li>
-<li>-segment_list_flags -cache
-
-<ul>
-<li>キャッシュ(#EXT-X-ALLOW-CACHE)の無効化。デフォルトでは有効。</li>
-</ul>
-</li>
-</ul>
-
-
-<p>iPhoneやAndroidで再生し挙動を確認をしましたが、FFMpeg内蔵のsegmenterはm3u8-segmenterより優秀ですね。</p>
-
-<p>気が向いたらHLSの暗号化についても書こうかな。</p>
-
-<h2>参考</h2>
-
-<p><a href="http://rest-term.com/archives/3008/">NginxとFFmpegを利用したHTTP Live Streaming配信</a></p>
 
 		
-		
+		<a href="/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -799,131 +462,11 @@ homebrewのバグだそう。</p>
 </span></code></pre></td></tr></table></div></figure>
 
 
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>MemTotal:        1020532 kB
-</span><span class='line'>MemFree:          855980 kB
-</span><span class='line'>Buffers:           36860 kB
-</span><span class='line'>Cached:            59728 kB
-</span><span class='line'>
-</span><span class='line'>... 省略 ...
-</span><span class='line'>
-</span><span class='line'>HugePages_Free:        0
-</span><span class='line'>HugePages_Rsvd:        0
-</span><span class='line'>HugePages_Surp:        0
-</span><span class='line'>Hugepagesize:       2048 kB
-</span><span class='line'>DirectMap4k:        8128 kB
-</span><span class='line'>DirectMap2M:     1040384 kB
-</span></code></pre></td></tr></table></div></figure>
 
 
-<h2>バージョン確認</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /etc/redhat-release
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>CentOS release 6.4 (Final)
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>カーネルのバージョン確認</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/version
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>Linux version 2.6.32-358.2.1.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-3) (GCC) ) #1 SMP Wed Mar 13 00:26:49 UTC 2013
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こっちでも確認できる</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>uname -a
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>Linux localhost.localdomain 2.6.32-358.2.1.el6.x86_64 #1 SMP Wed Mar 13 00:26:49 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>CPU情報の確認</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/cpuinfo
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>processor   : 0
-</span><span class='line'>vendor_id   : GenuineIntel
-</span><span class='line'>cpu family  : 6
-</span><span class='line'>model       : 58
-</span><span class='line'>model name  : Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
-</span><span class='line'>stepping    : 9
-</span><span class='line'>cpu MHz     : 3405.814
-</span><span class='line'>cache size  : 6144 KB
-</span><span class='line'>fpu     : yes
-</span><span class='line'>fpu_exception   : yes
-</span><span class='line'>cpuid level : 5
-</span><span class='line'>wp      : yes
-</span><span class='line'>flags       : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx rdtscp lm constant_tsc up rep_good pni monitor ssse3 lahf_lm
-</span><span class='line'>bogomips    : 6811.62
-</span><span class='line'>clflush size    : 64
-</span><span class='line'>cache_alignment : 64
-</span><span class='line'>address sizes   : 36 bits physical,  48 bits virtual
-</span><span class='line'>power management:
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>地味に忘れる。</p>
 
 		
-		
+		<a href="/blog/2013/12/18/centos-linux-system-information/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -953,178 +496,13 @@ homebrewのバグだそう。</p>
 </div>
 		
 	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/12/18/php-group-array-by-value/" itemprop="url">[php]連想配列を特定のキーの同じ値でグルーピング</a></h1>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/18/php-group-array-by-value/" itemprop="url">[Php]連想配列を特定のキーの同じ値でグルーピング</a></h1>
 	<div class="entry-content" itemprop="articleBody">
 		<p>連想配列を特定キーの同じ値でグルーピングする方法。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$arr</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yamada&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;20&#39;</span>
-</span><span class='line'>    <span class="p">),</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;satou&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;20&#39;</span>
-</span><span class='line'>    <span class="p">),</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;suzuki&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;30&#39;</span>
-</span><span class='line'>    <span class="p">),</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tanaka&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;40&#39;</span>
-</span><span class='line'>    <span class="p">)</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">function</span> <span class="nf">groupArray</span><span class="p">(</span><span class="nv">$arr</span><span class="p">,</span> <span class="nv">$key</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$retval</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">foreach</span><span class="p">(</span><span class="nv">$arr</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$group</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">[</span><span class="nv">$key</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">]))</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">][]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="nv">$retval</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">var_dump</span><span class="p">(</span><span class="nx">groupArray</span><span class="p">(</span><span class="nv">$arr</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">array</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;yamada&quot;</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;20&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="s2">&quot;satou&quot;</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;20&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="p">[</span><span class="mi">30</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;suzuki&quot;</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;30&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="p">[</span><span class="mi">40</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;tanaka&quot;</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;40&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ageキーの同じ値でグルーピングされていることが確認できます。そもそも(ry</p>
 
 		
-		
+		<a href="/blog/2013/12/18/php-group-array-by-value/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

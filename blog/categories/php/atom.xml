@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: php | Code Life]]></title>
+  <title><![CDATA[Category: PHP | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-05-07T23:03:46+09:00</updated>
+  <updated>2014-08-19T01:17:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,345 +14,199 @@
 
   
   <entry>
-    <title type="html"><![CDATA[[Slim Framework]サブディレクトリにインストールした場合のリダイレクト方法]]></title>
-    <link href="http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory/"/>
-    <updated>2014-01-06T22:07:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory</id>
-    <content type="html"><![CDATA[<p>簡単なWebアプリを作る機会があったので、PHPのマイクロフレームワークの一つである<a href="http://docs.slimframework.com">Slim Framework</a>を触ってみた。</p>
+    <title type="html"><![CDATA[PHP5 引数の型を指定する]]></title>
+    <link href="http://blog.code-life.net/blog/2012/01/12/type-hinting-php/"/>
+    <updated>2012-01-12T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/01/12/type-hinting-php</id>
+    <content type="html"><![CDATA[<p>notoです。</p>
 
-<p>そこでサブディレクトリにインストールした場合のリダイレクト方法で少しハマったので共有しておく。</p>
+<p>オープンソースを眺めていると、引数で型を指定しているのを見かけたことありませんか？
+マニュアルをみると<a href="http://php.net/manual/ja/language.oop5.typehinting.php">タイプヒンティング</a>と呼ばれているようです。</p>
 
-<h2>環境</h2>
+<p>タイプヒンティングを軽く検証してみました。</p>
 
-<p>Slim 2.4.0</p>
+<!--more-->
 
-<h2>getRootUriを利用する</h2>
 
-<p>Slim_Http_Request::getRootUriはサブディレクトリ名を返すのでそれを利用しリダイレクトを行う。</p>
+<p>```php
+&lt;?php
+class Hoge {</p>
 
-<p>ex) サブディレクトリ名がslimの場合、「/slim」という文字列を返す。</p>
+<pre><code>private $animal;
 
-<p>``` php
-$app->get(&lsquo;/index&rsquo;,  function () use ($app) {</p>
-
-<pre><code>$app-&gt;redirect($app-&gt;request-&gt;getRootUri() . '/hoge' );
-</code></pre>
-
-<p>}
-```</p>
-
-<h2>urlForを利用する</h2>
-
-<p>Slimはrouteに任意の名前を割り当てることができ、urlForでURLを生成することができる。</p>
-
-<p>``` php
-$app->get(&lsquo;/index&rsquo;,  function () use ($app) {</p>
-
-<pre><code>$app-&gt;render('index.php');
-</code></pre>
-
-<p>})&ndash;>name(&lsquo;index&rsquo;);</p>
-
-<p>$app->get(&lsquo;/edit&rsquo;,  function () use ($app) {</p>
-
-<pre><code>$app-&gt;redirect($app-&gt;urlFor('index'));
-</code></pre>
-
-<p>}
-```</p>
-
-<p>これでインストール先がドキュメントルートだろうが、サブディレクトリだろうがコードを変える必要はなくなる。</p>
-
-<h2>参考</h2>
-
-<p><a href="http://docs.slimframework.com/#Route-Names">Slim Framework Documentation</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[php]連想配列を特定のキーの同じ値でグルーピング]]></title>
-    <link href="http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value/"/>
-    <updated>2013-12-18T22:36:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value</id>
-    <content type="html"><![CDATA[<p>連想配列を特定キーの同じ値でグルーピングする方法。</p>
-
-<p>``` php
-&lt;?php</p>
-
-<p>$arr = array(</p>
-
-<pre><code>array(
-    'name' =&gt; 'yamada',
-    'age'  =&gt; '20'
-),
-array(
-    'name' =&gt; 'satou',
-    'age'  =&gt; '20'
-),
-array(
-    'name' =&gt; 'suzuki',
-    'age'  =&gt; '30'
-),
-array(
-    'name' =&gt; 'tanaka',
-    'age'  =&gt; '40'
-)
-</code></pre>
-
-<p>);</p>
-
-<p>function groupArray($arr, $key) {</p>
-
-<pre><code>$retval = array();
-
-foreach($arr as $value) {
-    $group = $value[$key];
-
-    if (!isset($retval[$group])) {
-        $retval[$group] = array();
-    }
-
-    $retval[$group][] = $value;
+/**
+ * 渡せる型をLion型のみと制限する。
+ * @param Lion $lion
+ */
+public function setAnimal(Lion $lion){
+    $this-&gt;animal = $lion;
 }
 
-return $retval;
+public function howl(){
+    echo $this-&gt;animal-&gt;howl(), PHP_EOL;
+}
 </code></pre>
 
 <p>}</p>
 
-<p>var_dump(groupArray($arr, &lsquo;age&rsquo;));
-```</p>
+<p>class Lion {</p>
 
-<h3>結果</h3>
-
-<p>``` php</p>
-
-<p>array(3) {
-  [20]=>
-  array(2) {</p>
-
-<pre><code>[0]=&gt;
-array(2) {
-  ["name"]=&gt;
-  string(6) "yamada"
-  ["age"]=&gt;
-  string(2) "20"
-}
-[1]=&gt;
-array(2) {
-  ["name"]=&gt;
-  string(5) "satou"
-  ["age"]=&gt;
-  string(2) "20"
+<pre><code>public function howl(){
+    return 'がおー！';
 }
 </code></pre>
 
-<p>  }
-  [30]=>
-  array(1) {</p>
+<p>}</p>
 
-<pre><code>[0]=&gt;
-array(2) {
-  ["name"]=&gt;
-  string(6) "suzuki"
-  ["age"]=&gt;
-  string(2) "30"
+<p>class Cat {</p>
+
+<pre><code>public function howl(){
+    return 'にゃー';
 }
 </code></pre>
 
-<p>  }
-  [40]=>
-  array(1) {</p>
+<p>}</p>
 
-<pre><code>[0]=&gt;
-array(2) {
-  ["name"]=&gt;
-  string(6) "tanaka"
-  ["age"]=&gt;
-  string(2) "40"
-}
-</code></pre>
-
-<p>  }
-}
-```</p>
-
-<p>ageキーの同じ値でグルーピングされていることが確認できます。そもそも(ry</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CakePHP]モデルのコールバックを無効化にする]]></title>
-    <link href="http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback/"/>
-    <updated>2013-09-25T21:59:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback</id>
-    <content type="html"><![CDATA[<p>モデルの<a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html">コールバックメソッド</a>が様々ありますが、無効化したい場合があります。</p>
-
-<p>find, save共に第２引数にcallbacksをキーとした配列を渡すことでモデルのコールバック実行の可否を伝えることが可能です。</p>
-
-<h2>find(beforeFind, afterFind共に無効化)</h2>
-
-<p>``` php
-$this->find(&lsquo;first&rsquo;, array(</p>
-
-<pre><code>'callbacks' =&gt; false
-</code></pre>
-
-<p>));
-```</p>
-
-<h2>find(beforeFindのみ有効)</h2>
-
-<p>``` php
-$this->find(&lsquo;first&rsquo;, array(</p>
-
-<pre><code>'callbacks' =&gt; 'before'
-</code></pre>
-
-<p>));
-```</p>
-
-<h2>find(afterFindのみ有効)</h2>
-
-<p>``` php
-$this->find(&lsquo;first&rsquo;, array(</p>
-
-<pre><code>'callbacks' =&gt; 'after'
-</code></pre>
-
-<p>));
-```</p>
-
-<h2>save(beforeSave, afterSave共に無効化)</h2>
-
-<p>``` php
-$this->save($data, array(</p>
-
-<pre><code>'callbacks' =&gt; false
-</code></pre>
-
-<p>));
-```</p>
-
-<h2>save(beforeSaveのみ有効)</h2>
-
-<p>``` php
-$this->save($data, array(</p>
-
-<pre><code>'callbacks' =&gt; 'before'
-</code></pre>
-
-<p>));
-```</p>
-
-<h2>save(afterSaveのみ有効)</h2>
-
-<p>``` php
-$this->save($data, array(</p>
-
-<pre><code>'callbacks' =&gt; 'after'
-</code></pre>
-
-<p>));
-```</p>
-
-<p>という小ネタ。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[レスポンスヘッダのPHPのバージョン情報を隠す]]></title>
-    <link href="http://blog.code-life.net/blog/2013/04/24/hide-php-version/"/>
-    <updated>2013-04-24T22:33:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/04/24/hide-php-version</id>
-    <content type="html"><![CDATA[<p>ほんとに今更感があるが、ちょっとしたことでもブログに書いておこうと思う。</p>
-
-<p>親切心からかPHPはデフォルトでレスポンスヘッダにPHPのバージョン情報を出力しています。</p>
-
-<p><code>
-HTTP/1.1 200 OK
-Date: Wed,  24 Apr 2013 13:46:59 GMT
-Server: Apache
-X-Powered-By: PHP/5.2.0
-Content-Length: 2558
-Content-Type: text/html; charset=UTF-8
-</code></p>
-
-<h2>PHPのバージョン出力を抑制する</h2>
-
-<p>PHPのバージョン情報が出力されると、そのバージョンの脆弱性を狙った攻撃を受ける可能性がある為、PHPのバージョン情報を出力しないよう設定行います。</p>
-
-<p>php.ini に次の設定を加え、Apache or Nginx の再起動します。</p>
-
-<p><code>
-expose_php=Off
-</code></p>
-
-<h3>設定を加えた後のレスポンスヘッダ</h3>
-
-<p>```
-HTTP/1.1 200 OK
-Date: Wed,  24 Apr 2013 13:46:59 GMT
-Server: Apache
-Content-Length: 2558
-Content-Type: text/html; charset=UTF-8
-&hellip;</p>
+<p>$hoge = new Hoge();
+$hoge->setAnimal(new Cat());
+$hoge->howl();</p>
 
 <p>```</p>
 
-<p>バージョン情報が出力されていないことが確認できます。
-セキュリティ上 Webサーバのバージョン情報も抑制したほうがよいでしょう。</p>
+<p>setAnimalメソッドの引数をLion型に制限しています。定義方法は、クラス型 変数で定義します。
+Javaと同じですね。</p>
 
-<h2>ヘッダ情報の確認方法</h2>
+<p>Lion型を渡してねと定義されているsetAnimalメソッドにCat型を渡してみました。</p>
 
-<p>以下の方法で簡単にヘッダ情報を確認できます。</p>
-
-<p>wgetコマンドでも確認できますがmacはデフォルトではwgetコマンドがインストールされていないのでcurlを利用するのがいいと思います。Winはtelnet?</p>
-
-<p><code>
-curl -I http://hoge.com
+<p><code>sh 実行結果
+PHP Catchable fatal error:  Argument 1 passed to Hoge::setAnimal() must be an instance of Lion, instance of Cat given
 </code></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ld: library not found for -lltdl]]></title>
-    <link href="http://blog.code-life.net/blog/2013/04/22/ld-library-not-found-for-lltdl/"/>
-    <updated>2013-04-22T20:04:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/04/22/ld-library-not-found-for-lltdl</id>
-    <content type="html"><![CDATA[<p>MacでPHP5.3.24をインストールしようとしたらコンパイル時に以下のエラーが発生した。</p>
 
-<h2>``` sh</h2>
+<p>Cat型を渡すんじゃねーよ。Lion型寄越せと怒られます。
+ではLion型を渡してみます。</p>
 
-<h2>|  BUILD ERROR  |</h2>
+<p>```php
+&lt;?php
+class Hoge {</p>
 
-<p>Here are the last 10 lines from the log:</p>
+<pre><code>private $animal;
 
-<hr />
+/**
+ * 渡せる型をLion型のみと制限する。
+ * @param Lion $lion
+ */
+public function setAnimal(Lion $lion){
+    $this-&gt;animal = $lion;
+}
 
-<p>/var/tmp/php-build/source/5.3.24/Zend/zend_objects.c:96: warning: assignment discards qualifiers from pointer target type
-/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c: In function ‘zend_get_property_guard’:
-/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:301: warning: passing argument 3 of ‘zend_unmangle_property_name’ from incompatible pointer type
-/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:301: warning: passing argument 4 of ‘zend_unmangle_property_name’ from incompatible pointer type
-/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:304: warning: assignment discards qualifiers from pointer target type
-/var/tmp/php-build/source/5.3.24/sapi/apache2handler/sapi_apache2.c: In function ‘php_handler’:
-/var/tmp/php-build/source/5.3.24/sapi/apache2handler/sapi_apache2.c:675: warning: format ‘%u’ expects type ‘unsigned int’,  but argument 3 has type ‘size_t’
-ld: library not found for -lltdl
-collect2: ld returned 1 exit status</p>
+public function howl(){
+    echo $this-&gt;animal-&gt;howl(), PHP_EOL;
+}
+</code></pre>
 
-<h2>make: *** [libs/libphp5.bundle] Error 1</h2>
+<p>}</p>
+
+<p>class Lion {</p>
+
+<pre><code>public function howl(){
+    return 'がおー！';
+}
+</code></pre>
+
+<p>}</p>
+
+<p>class Cat {</p>
+
+<pre><code>public function howl(){
+    return 'にゃー';
+}
+</code></pre>
+
+<p>}</p>
+
+<p>$hoge = new Hoge();
+$hoge->setAnimal(new Lion());
+$hoge->howl();</p>
 
 <p>```</p>
 
-<h2>libtoolのインストール</h2>
-
-<p>昔Linuxで似たエラーを経験したことがあったので「libtool」をいれる。</p>
-
-<p><code>sh
-$ brew install libtool
+<p><code>sh 実行結果
+がおー！
 </code></p>
 
-<p>これで無事インストールができた。このブログ全然コード書いてないですね。</p>
+<p>Lion型が渡されたので、Fatal Errorが発生することなく正しく処理されました。</p>
+
+<p>もちろんインターフェースもいけますよ。</p>
+
+<p>```php
+&lt;?php
+class Hoge {</p>
+
+<pre><code>private $animals;
+
+/**
+ * 渡せる型をAnimal型のみと制限する。
+ * @param Animal $animal
+ */
+public function setAnimal(Animal $animal){
+    $this-&gt;animals[] = $animal;
+}
+
+public function howl(){
+    foreach ($this-&gt;animals as $animal) {
+        echo $animal-&gt;howl() , PHP_EOL;
+    }
+}
+</code></pre>
+
+<p>}</p>
+
+<p>class Lion implements Animal {</p>
+
+<pre><code>public function howl(){
+    return 'がおー！';
+}
+</code></pre>
+
+<p>}</p>
+
+<p>class Cat implements Animal {</p>
+
+<pre><code>public function howl(){
+    return 'にゃー';
+}
+</code></pre>
+
+<p>}</p>
+
+<p>interface Animal {</p>
+
+<pre><code>public function howl();
+</code></pre>
+
+<p>}</p>
+
+<p>$hoge = new Hoge();
+$hoge->setAnimal(new Lion());
+$hoge->setAnimal(new Cat());
+$hoge->howl();</p>
+
+<p>```</p>
+
+<p><code>sh 実行結果
+がおー！
+にゃー
+</code></p>
+
+<p>注意点としては、</p>
+
+<blockquote><p>タイプヒントは、object型やarray型 (PHP5.1以降) でのみ使用できます。 int および stringのような 通常の型でのタイプヒンティングはサポートされません。</p></blockquote>
+
+<p>array型縛れるのはいいですね。個人的にはphpでも型は意識すべきだと思っているので利用できるところは利用したいと思います。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://php.net/manual/ja/language.oop5.typehinting.php">タイプヒンティング</a></p>
 ]]></content>
   </entry>
   

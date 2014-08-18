@@ -9,7 +9,7 @@
 	<meta name="author" content="noto">
 
 	
-	<meta name="description" content="2013-04-14 streaming CentOSにm3u8-segmenterをインストールする 環境 CentOS 6.3 x86_64 Require ffmpegがインストール済みであること インストールしてない場合は、CentOS6. &hellip;">
+	<meta name="description" content="2013-04-14 streaming CentOSにm3u8-segmenterをインストールする 環境 CentOS 6.3 x86_64 Read on &rarr; 2013-04-14 linux CentOS6.x SCPコマンドが見つからない場合 CentOS6. &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -135,132 +135,9 @@
 
 <p>CentOS 6.3 x86_64</p>
 
-<h2>Require</h2>
-
-<p>ffmpegがインストール済みであること</p>
-
-<p>インストールしてない場合は、<a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-ffmpeg-on-centos6-x86-64/">CentOS6.xにFFmpegをインストールする</a>を参考にしてみてください。</p>
-
-<h2>m3u8-segmenterのインストール</h2>
-
-<p>この記事を見ている方は恐らくHLSの知識がある方が多いと思うので、HLSとはなんぞやという説明は省きます。</p>
-
-<p>オープンソースのsegmenterはいくつかありますが、今回は <a href="https://github.com/johnf/m3u8-segmenter">m3u8-segmenter</a>を試すことにします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> /usr/local/src/
-</span><span class='line'><span class="nv">$ </span>git clone https://github.com/johnf/m3u8-segmenter.git
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>m3u8-segmenter
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>Configure Error</h3>
-
-<p>configureを実行すると以下のエラーが発生</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>configure: error: Package requirements <span class="o">(</span>libavformat libavcodec libavutil<span class="o">)</span> were not met:
-</span><span class='line'>No package <span class="s1">&#39;libavformat&#39;</span> found
-</span><span class='line'>No package <span class="s1">&#39;libavcodec&#39;</span> found
-</span><span class='line'>No package <span class="s1">&#39;libavutil&#39;</span> found
-</span><span class='line'>
-</span><span class='line'>Consider adjusting the PKG_CONFIG_PATH environment variable <span class="k">if </span>you
-</span><span class='line'>installed software in a non-standard prefix.
-</span><span class='line'>
-</span><span class='line'>Alternatively,  you may <span class="nb">set </span>the environment variables FFMPEG_CFLAGS
-</span><span class='line'>and FFMPEG_LIBS to avoid the need to call pkg-config.
-</span><span class='line'>See the pkg-config man page <span class="k">for </span>more details.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以前、<a href="http://code-life.net/?p=2331">CentOSにHttpSegmenterをインストールする</a>でも似たエラーが発生してたので同じ方法で解決できる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">PKG_CONFIG_PATH</span><span class="o">=</span>/usr/local/lib/pkgconfig
-</span><span class='line'><span class="nv">$ </span>./configure
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>インストール</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>make
-</span><span class='line'><span class="nv">$ </span>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>segmentしてみる</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir tmp
-</span><span class='line'><span class="nv">$ </span>ffmpeg -i big_buck_bunny.mp4 -f mpegts - | <span class="se">\</span>
-</span><span class='line'>  m3u8-segmenter -i - -d 10 -p tmp/big_buck_bunny -m tmp/big_buck.m3u8 -u http://localhost/segment
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>簡単にオプションの説明をすると、</p>
-
-<dl>
-  <dt>オプション -d</dt>
-  <dd>何秒毎に分割するか。上記のコマンドの場合、10秒</dd>
-
-  <dt>オプション -p</dt>
-  <dd>分割されたtsファイルの出力先 & 出力ファイル名。出力先にbig_buck_bunny-1.ts &#8230; big_buck_bunny-50.ts &#8230; と連番でファイルが作成される</dd>
-
-  <dt>オプション -m</dt>
-  <dd>m3u8の出力先</dd>
-
-  <dt>オプション -u</dt>
-  <dd>m3u8に記載されるファイルのURL</dd>
-</dl>
-
-
-<h2>出力されたm3u8を確認する</h2>
-
-<p>現時点でのm3u8-segmenterは以下のようなm3u8ファイルを出力します。</p>
-
-<pre><code>#EXTM3U
-#EXT-X-TARGETDURATION:10
-#EXTINF:10,
-http://localhost/segmenttmp/big_buck_bunny-1.ts
-#EXTINF:10,
-http://localhost/segmenttmp/big_buck_bunny-2.ts
-#EXTINF:10,
-http://localhost/segmenttmp/big_buck_bunny-3.ts
-#EXTINF:10,
-
-・・・ 省略 ・・・
-
-http://localhost/segmenttmp/big_buck_bunny-58.ts
-#EXTINF:10,
-http://localhost/segmenttmp/big_buck_bunny-59.ts
-#EXT-X-ENDLIST
-</code></pre>
-
-<p>今まで試したオープンソースのsegmenterでは一番良い感じだと思います。</p>
-
-<h2>関連</h2>
-
-<p><a href="/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/">FFMpegでHttp Live Streaming(HLS)向けにセグメント化する</a></p>
 
 		
-		
+		<a href="/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -295,17 +172,9 @@ http://localhost/segmenttmp/big_buck_bunny-59.ts
 		<p>CentOS6.xをminimalで構成した場合、クライアントからscpコマンドを実行すると
 &ldquo;bash: scp: コマンドが見つかりません&#8221;と怒られる。</p>
 
-<p>以下のパッケージをインストールをすれば利用できるようになります。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install openssh-clients
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>以上。</p>
 
 		
-		
+		<a href="/blog/2013/04/14/scp-command-not-found-on-centos/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -341,328 +210,9 @@ http://localhost/segmenttmp/big_buck_bunny-59.ts
 
 <p>x264/AACのトランスコードだけできればいい環境を構築します。</p>
 
-<h2>環境</h2>
-
-<p>CentOS 6.3 x86_64</p>
-
-<p>バージョンの確認方法がわからない方は以下のコマンドで確認</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /etc/redhat-release
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>64bitかどうかの確認は以下のコマンドで確認</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>uname -a
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>必要なパッケージのインストール</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install autoconf automake make gcc gcc-c++ pkgconfig wget libtool zlib-devel
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>リポジトリの追加</h2>
-
-<p>gitやらもろもろ必要となるのでepelとDAG(RPMforge)をリポジトリに追加する。</p>
-
-<h3>リポジトリのダウンロード</h3>
-
-<p><a href="http://dl.fedoraproject.org/pub/epel/6/x86_64/">epel</a></p>
-
-<p><a href="http://pkgs.repoforge.org/rpmforge-release/">Dag(RPMforge)</a></p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
-</span><span class='line'><span class="nv">$ </span>wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>リポジトリの追加</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>rpm -Uvh epel-release-6-8.noarch.rpm rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>追加したリポジトリの使用制限をかける</h3>
-
-<p>追加したリポジトリの使用をする際は明示的に指定するよう制限をかける</p>
-
-<h4>epel</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vi /etc/yum.repos.d/epel.repo
-</span><span class='line'>
-</span><span class='line'><span class="o">[</span>epel<span class="o">]</span>
-</span><span class='line'><span class="nv">name</span><span class="o">=</span>Extra Packages <span class="k">for </span>Enterprise Linux 6 - <span class="nv">$basearch</span>
-</span><span class='line'><span class="c">#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch</span>
-</span><span class='line'><span class="nv">mirrorlist</span><span class="o">=</span>https://mirrors.fedoraproject.org/metalink?repo<span class="o">=</span>epel-6&amp;arch<span class="o">=</span><span class="nv">$basearch</span>
-</span><span class='line'><span class="nv">failovermethod</span><span class="o">=</span>priority
-</span><span class='line'><span class="nv">enabled</span><span class="o">=</span>0 ← 0に変更
-</span><span class='line'><span class="nv">gpgcheck</span><span class="o">=</span>1
-</span><span class='line'><span class="nv">gpgkey</span><span class="o">=</span>file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>DAG(RPMforge)</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vi /etc/yum.repos.d/rpmforge.repo
-</span><span class='line'>
-</span><span class='line'><span class="o">[</span>rpmforge<span class="o">]</span>
-</span><span class='line'><span class="nv">name</span> <span class="o">=</span> RHEL <span class="nv">$releasever</span> - RPMforge.net - dag
-</span><span class='line'><span class="nv">baseurl</span> <span class="o">=</span> http://apt.sw.be/redhat/el6/en/<span class="nv">$basearch</span>/rpmforge
-</span><span class='line'><span class="nv">mirrorlist</span> <span class="o">=</span> http://mirrorlist.repoforge.org/el6/mirrors-rpmforge
-</span><span class='line'><span class="c">#mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge</span>
-</span><span class='line'><span class="nv">enabled</span> <span class="o">=</span> 0 ← 0に変更
-</span><span class='line'><span class="nv">protect</span> <span class="o">=</span> 0
-</span><span class='line'><span class="nv">gpgkey</span> <span class="o">=</span> file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag
-</span><span class='line'><span class="nv">gpgcheck</span> <span class="o">=</span> 1
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>FFmpegのインストール</h2>
-
-<p>ソースコードからインストールするものが多いので作業ディレクトリを作成する</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir ~/ffmpeg-source
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>x264 FFmpegは最新版を利用するのでgitをインストール</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install --enablerepo<span class="o">=</span>epel git
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>YASM</h3>
-
-<p>アセンブラ x264 FFmpegで使用される</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>yum install --enablerepo<span class="o">=</span>epel yasm
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>X264のインストール</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/ffmpeg-source
-</span><span class='line'><span class="nv">$ </span>git clone git://git.videolan.org/x264.git
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>x264
-</span><span class='line'><span class="nv">$ </span>./configure --enable-shared --disable-asm
-</span><span class='line'><span class="nv">$ </span>make
-</span><span class='line'><span class="nv">$ </span>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>libfdk_aac</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/ffmpeg-source¬
-</span><span class='line'><span class="nv">$ </span>git clone --depth 1 git://github.com/mstorsjo/fdk-aac.git
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>fdk-aac
-</span><span class='line'><span class="nv">$ </span>autoreconf -fiv
-</span><span class='line'><span class="nv">$ </span>./configure
-</span><span class='line'><span class="nv">$ </span>make
-</span><span class='line'><span class="nv">$ </span>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>ライブラリの設定</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">export </span><span class="nv">LD_LIBRARY_PATH</span><span class="o">=</span>/usr/local/lib/
-</span><span class='line'><span class="nv">$ </span><span class="nb">echo</span> /usr/local/lib &gt; /etc/ld.so.conf.d/custom-libs.conf
-</span><span class='line'><span class="nv">$ </span>ldconfig
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>FFmpegのインストール</h3>
-
-<p>今回はver1.2をインストールします。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span><span class="nb">cd</span> ~/ffmpeg-source¬
-</span><span class='line'><span class="nv">$ </span>git clone git://source.ffmpeg.org/ffmpeg.git
-</span><span class='line'><span class="nv">$ </span><span class="nb">cd </span>ffmpeg
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ブランチ一覧の表示</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git branch -a
-</span><span class='line'>
-</span><span class='line'>* master
-</span><span class='line'>  remotes/origin/HEAD -&gt; origin/master
-</span><span class='line'>  remotes/origin/master
-</span><span class='line'>  remotes/origin/oldabi
-</span><span class='line'>  remotes/origin/release/0.10
-</span><span class='line'>  remotes/origin/release/0.11
-</span><span class='line'>  remotes/origin/release/0.5
-</span><span class='line'>  remotes/origin/release/0.6
-</span><span class='line'>  remotes/origin/release/0.7
-</span><span class='line'>  remotes/origin/release/0.8
-</span><span class='line'>  remotes/origin/release/0.9
-</span><span class='line'>  remotes/origin/release/1.0
-</span><span class='line'>  remotes/origin/release/1.1
-</span><span class='line'>  remotes/origin/release/1.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>1.2のブランチに切り替え</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git checkout -b n1.2 origin/release/1.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>切り替わっているか確認</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git branch
-</span><span class='line'>
-</span><span class='line'>  master
-</span><span class='line'>* n1.2
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>インストール</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>./configure --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libx264 <span class="se">\</span>
-</span><span class='line'>    --enable-shared --arch<span class="o">=</span>x86_64 --enable-pthreads
-</span><span class='line'><span class="nv">$ </span>make
-</span><span class='line'><span class="nv">$ </span>make install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h4>確認</h4>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ffmpeg -version
-</span><span class='line'>
-</span><span class='line'>ffmpeg version 1.2
-</span><span class='line'>built on Mar  3 2013 03:53:58 with gcc 4.4.6 <span class="o">(</span>GCC<span class="o">)</span> 20120305 <span class="o">(</span>Red Hat 4.4.6-4<span class="o">)</span>
-</span><span class='line'>configuration: --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libx264 --enable-shared --arch<span class="o">=</span>x86_64 --enable-pthreads
-</span><span class='line'>libavutil      52. 18.100 / 52. 18.100
-</span><span class='line'>libavcodec     54. 92.100 / 54. 92.100
-</span><span class='line'>libavformat    54. 63.104 / 54. 63.104
-</span><span class='line'>libavdevice    54.  3.103 / 54.  3.103
-</span><span class='line'>libavfilter     3. 42.103 /  3. 42.103
-</span><span class='line'>libswscale      2.  2.100 /  2.  2.100
-</span><span class='line'>libswresample   0. 17.102 /  0. 17.102
-</span><span class='line'>libpostproc    52.  2.100 / 52.  2.100
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>トランスコード</h2>
-
-<p>下記のコマンドでトランスコードしてみましたが、問題はなさそうです。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ffmpeg -i big_buck_bunny_480p_surround-fix.avi -s 400x300 <span class="se">\</span>
-</span><span class='line'>  -c:v libx264 -c:v libx264 -profile:v baseline -preset:v slower <span class="se">\</span>
-</span><span class='line'>  -b:v 300k -maxrate 300k -minrate 300k -bufsize 1835k <span class="se">\</span>
-</span><span class='line'>  -ac 2 -c:a libfdk_aac -b:a 128k big_buck_bunny.mp4
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>ライセンス</h2>
-
-<p>x.264 aacは商用で利用する際はライセンス料が発生するので注意して下さい。ライセンス気にしたくない方はAmazon Elastic TranceCoder使えばいいと思います。大抵のことはできますよ。</p>
-
-<p>あれ&hellip;Dag(RPMforge)使ってない&hellip;まぁ他のコーデックいれたりするとき使うのでいれとけばいいと思います。</p>
-
-<h2>参考</h2>
-
-<p><a href="http://wiki.razuna.com/display/ecp/FFMpeg+Installation+on+CentOS+and+RedHat">Install FFmpeg on CentOS or RedHat EL 6.x</a></p>
-
-<p><a href="http://ffmpeg.org/trac/ffmpeg/wiki/CentosCompilationGuide#ffmpeg">Compile FFmpeg on CentOS 6.x</a></p>
-
-<p><a href="http://dev.classmethod.jp/cloud/amazon-linux-ffmpeg-encoding/">Amazon Linuxにffmpegを入れて動画エンコーディングする</a></p>
 
 		
-		
+		<a href="/blog/2013/04/14/how-to-install-ffmpeg-on-centos6-x86-64/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -706,11 +256,247 @@ http://localhost/segmenttmp/big_buck_bunny-59.ts
 
 </article>
 
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-21T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/cakephp/'>CakePHP</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/03/21/cakephp2-css-controller-could-not-be-found/" itemprop="url">CakePHP2 CssController Could Not Be Found が発生する場合</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>存在しないcssを指定してないか確認しましょう。</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-09T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/cakephp/'>CakePHP</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/03/09/how-to-get-logged-in-user-in-model-cakephp/" itemprop="url">CakePHP2 モデルからログインしているユーザー情報を取得する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Modelからログインしているユーザー情報を取得したい場合があります。
+もちろん <code>$this-&gt;Auth-&gt;user()</code> では取得できないので一手間かけてあげます。</p>
+
+
+		
+		<a href="/blog/2013/03/09/how-to-get-logged-in-user-in-model-cakephp/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-09T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/cakephp/'>CakePHP</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/03/09/changing-the-tags-output-cakephp2/" itemprop="url">[CakePHP2] Htmlヘルパーで出力されるタグを変更する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Htmlヘルパー便利ですよね。けど期待したタグが出力されない場合があります。
+出力されるタグを独自にカスタマイズする仕組みがあるのでそれを利用しましょう。</p>
+
+
+		
+		<a href="/blog/2013/03/09/changing-the-tags-output-cakephp2/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-12T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hive/'>hive</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/12/12/php-thrifthiveclient/" itemprop="url">ThriftHiveClient を少し便利にしてみた</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>以前、<a href="/blog/2012/09/30/php-hiveql-hiveserver">HiveServerを使用してPHPからHiveQLを実行する</a>で、PHPから HiveQLを実行してみました。
+その際に、ThriftHiveClientの使い勝手が少し悪かったので改良を施してみました。</p>
+
+
+		
+		<a href="/blog/2012/12/12/php-thrifthiveclient/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-01T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/vim/'>vim</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/10/01/vim-vdebug-xdebug/" itemprop="url">Vim + Vdebug + Xdebug でPHPのリモートデバッグ</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近はようやく本格的に vim を使ってコーディングするようになりましたが、まだまだ慣れない &amp; 微妙な不満があったりします。
+移動系がキーボードで全てできるのは、確かにかなり楽なように思えます。</p>
+
+<p>話が変わりますが新しく違う言語を勉強しようと思う時、何を一番初めに調べますか？
+構文はもちろん、インストール方法とか色々ありますよね。ボクが一番重要視してるのはデバッグ方法です。</p>
+
+<p>どうやってデバッグするか。まずその方法などを調べます。
+LL系言語の方は 変数を printしたりする方が多いらしいのですがボクはあまり好きではないので PHPの場合は Xdebugを利用してステップ実行させたりしてます。</p>
+
+<p>print させるのが嫌いな理由は一つです。</p>
+
+<p> 「コードを書かなくちゃいけない」</p>
+
+<p>これに尽きます。なんでデバッグするのにコード書くんだよ！って思ってます。</p>
+
+<p>前置きが長くなりましたが、素晴らしいプラグイン <a href="https://github.com/joonty/vdebug" title="vdebug" target="_blank">Vdebug</a> を見つけたので紹介します。</p>
+
+
+		
+		<a href="/blog/2012/10/01/vim-vdebug-xdebug/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-30T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hadoop/'>Hadoop</a>, <a class='category' href='/blog/categories/hive/'>Hive</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/09/30/php-hiveql-hiveserver/" itemprop="url">HiveServerを使用してPHPからHiveQLを実行する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Hadoopを触る機会があり手探りで構築しているのですが PHP から HiveQLを実行させたいとgoogle先生に伺うと <a href="http://d.hatena.ne.jp/tagomoris/20110310/1299738606" title="HiveServerを使用してPythonやPerlからHiveQLを実行する" target="_blank">HiveServerを使用してPythonやPerlからHiveQLを実行する</a> の記事があったので、こちらを参考に試してみました。
+今回はHadoopのインストールから行います。</p>
+
+
+		
+		<a href="/blog/2012/09/30/php-hiveql-hiveserver/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
 </div>
 <nav id="pagenavi">
     
         <a href="/blog/page/3/" class="prev">Prev</a>
     
+    
+        <a href="/blog/page/5/" class="next">Next</a>
     
     <div class="center"><a href="/blog/archives">Blog Archives</a></div>
 </nav></div>
