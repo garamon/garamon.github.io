@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Ruby | Code Life]]></title>
+  <title><![CDATA[Category: ruby | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-20T00:20:05+09:00</updated>
+  <updated>2014-08-21T22:18:58+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Rbenv使うならこれもいれとけプラグイン4選]]></title>
+    <title type="html"><![CDATA[rbenv使うならこれもいれとけプラグイン4選]]></title>
     <link href="http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/"/>
     <updated>2014-05-07T22:30:15+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin</id>

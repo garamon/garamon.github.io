@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Bash | Code Life]]></title>
+  <title><![CDATA[Category: bash | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/bash/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-20T00:20:05+09:00</updated>
+  <updated>2014-08-21T22:18:58+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[[Bash]連番のディレクトリを作成する]]></title>
+    <title type="html"><![CDATA[[bash]連番のディレクトリを作成する]]></title>
     <link href="http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories/"/>
     <updated>2013-12-18T22:22:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories</id>

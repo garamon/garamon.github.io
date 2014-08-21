@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Htaccess | Code Life]]></title>
+  <title><![CDATA[Category: htaccess | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/htaccess/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-20T00:20:05+09:00</updated>
+  <updated>2014-08-21T22:18:58+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,7 +14,7 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Htaccessでモバイル端末リダイレクト]]></title>
+    <title type="html"><![CDATA[htaccessでモバイル端末リダイレクト]]></title>
     <link href="http://blog.code-life.net/blog/2012/04/20/htaccess-redirect/"/>
     <updated>2012-04-20T00:00:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2012/04/20/htaccess-redirect</id>
