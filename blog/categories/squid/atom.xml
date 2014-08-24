@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Squid | Code Life]]></title>
+  <title><![CDATA[Category: squid | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/squid/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -28,12 +28,10 @@ Proxyサーバ、キャッシュサーバとして利用されている Squid �
 
 <p>以下のコマンドで確認できる項目が一覧で表示されます。</p>
 
-<p><code>
-squidclient mgr:
-</code></p>
+<pre><code>squidclient mgr:
+</code></pre>
 
-<p><code>
-offline_toggle          Toggle offline_mode setting         hidden
+<pre><code>offline_toggle          Toggle offline_mode setting         hidden
 shutdown                Shut Down the Squid Process         hidden
 reconfigure             Reconfigure Squid                   hidden
 menu                    Cache Manager Menu                  public
@@ -80,20 +78,18 @@ carp                    CARP information                    public
 userhash                peer userhash information           public
 sourcehash              peer sourcehash information         public
 server_list             Peer Cache Statistics               public
-</code></p>
+</code></pre>
 
 <h2>キャッシュディレクトリの情報を確認する</h2>
 
 <p>以下のコマンドで、キャッシュが格納されているディレクトリ情報を確認することができます。</p>
 
-<p><code>
-squidclient mgr:storedir
-</code></p>
+<pre><code>squidclient mgr:storedir
+</code></pre>
 
 <p>キャッシュ容量や、現在 何％利用されているかを確認することができます。</p>
 
-<p>```
-HTTP/1.0 200 OK
+<pre><code>HTTP/1.0 200 OK
 Server: squid/3.1.10
 Mime-Version: 1.0
 Date: Sun, 20 May 2012 06:47:35 GMT
@@ -103,15 +99,15 @@ Last-Modified: Sun, 20 May 2012 06:47:35 GMT
 X-Cache: MISS from image.cache.com
 X-Cache-Lookup: MISS from image.cache.com:3128
 Via: 1.0 image.cache.com (squid/3.1.10)
-Connection: close</p>
+Connection: close
 
-<p>Store Directory Statistics:
+Store Directory Statistics:
 Store Entries          : 35
 Maximum Swap Size      : 102400 KB
 Current Store Swap Size:     1344 KB
-Current Capacity       : 1% used, 99% free</p>
+Current Capacity       : 1% used, 99% free
 
-<p>Store Directory #0 (ufs): /var/spool/squid
+Store Directory #0 (ufs): /var/spool/squid
 FS Block Size 4096 Bytes
 First level subdirectories: 16
 Second level subdirectories: 256
@@ -124,36 +120,31 @@ Filesystem Inodes in use: 61967/1150560 (5%)
 Flags: SELECTED
 Removal policy: lru
 LRU reference age: 1.36 days
-```</p>
+</code></pre>
 
 <h2>メモリ使用量を確認する</h2>
 
 <p>以下のコマンドで、メモリ使用量を確認することができます。</p>
 
-<p><code>
-squidclient mgr:mem
-</code></p>
+<pre><code>squidclient mgr:mem
+</code></pre>
 
-<p>```
-・・・省略・・・
+<pre><code>・・・省略・・・
 Cumulative allocated volume: 34.53 MB
 Current overhead: 24962 bytes (11.150%)
 Idle pool limit: 5.00 MB
 Total Pools created: 97
 Pools ever used:     78 (shown above)
 Currently in use:    53
-String Pool  Impact</p>
-
-<pre><code> (%strings)  (%volume)
-</code></pre>
-
-<p>Short Strings            100     99
+String Pool  Impact
+     (%strings)  (%volume)
+Short Strings            100     99
 Medium Strings           0   1
 Long Strings             0   0
-Other Strings            0   0</p>
+Other Strings            0   0
 
-<p>Large buffers: 0 (0 KB)
-```</p>
+Large buffers: 0 (0 KB)
+</code></pre>
 
 <p>検証時や、障害時に使えそうです。
 Squidの設定方法がまだよく分かっていないので、勉強したらブログに記載したいと思います。</p>

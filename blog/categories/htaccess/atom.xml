@@ -4,7 +4,7 @@
   <title><![CDATA[Category: htaccess | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/htaccess/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -30,32 +30,29 @@
 
 <h3>スマートフォン、フィーチャーフォンにリダイレクト</h3>
 
-<p>``` text
-<IfModule mod_rewrite.c>
-RewriteEngine On</p>
+<pre><code class="text">&lt;IfModule mod_rewrite.c&gt;
+RewriteEngine On
 
-<h1>スマートフォン</h1>
-
-<p>RewriteCond %{REQUEST_URI} !.jpg$
-RewriteCond %{REQUEST_URI} !.gif$
-RewriteCond %{REQUEST_URI} !.png$
-RewriteCond %{REQUEST_URI} !.ico$
+#スマートフォン
+RewriteCond %{REQUEST_URI} !\.jpg$
+RewriteCond %{REQUEST_URI} !\.gif$
+RewriteCond %{REQUEST_URI} !\.png$
+RewriteCond %{REQUEST_URI} !\.ico$
 RewriteCond %{HTTP_USER_AGENT} !^(DoCoMo|J-PHONE|Vodafone|MOT-|SoftBank|Up.Browser|KDDI|PDXGW|DDIPOKET|WILLCOM|ASTEL|Nokia|L-mode) [NC]
-RewriteCond %{HTTP_USER_AGENT} (iPhone|iPod|Android.<em>Mobile|BlackBerry) [NC]
-RewriteRule ^(.</em>)$ /sp/ [R=301,L]</p>
+RewriteCond %{HTTP_USER_AGENT} (iPhone|iPod|Android.*Mobile|BlackBerry) [NC]
+RewriteRule ^(.*)$ /sp/ [R=301,L]
 
-<h1>フィーチャーフォン</h1>
-
-<p>RewriteCond %{REQUEST_URI} !.jpg$
-RewriteCond %{REQUEST_URI} !.gif$
-RewriteCond %{REQUEST_URI} !.png$
-RewriteCond %{REQUEST_URI} !.ico$
+#フィーチャーフォン
+RewriteCond %{REQUEST_URI} !\.jpg$
+RewriteCond %{REQUEST_URI} !\.gif$
+RewriteCond %{REQUEST_URI} !\.png$
+RewriteCond %{REQUEST_URI} !\.ico$
 RewriteCond %{HTTP_USER_AGENT} ^(DoCoMo|J-PHONE|Vodafone|MOT-|SoftBank|Up.Browser|KDDI|PDXGW|DDIPOKET|WILLCOM|ASTEL|Nokia|L-mode) [NC]
-RewriteCond %{HTTP_USER_AGENT} !(iPhone|iPod|Android.<em>Mobile|BlackBerry) [NC]
-RewriteRule ^(.</em>)$ /fp/ [R=301,L]</p>
+RewriteCond %{HTTP_USER_AGENT} !(iPhone|iPod|Android.*Mobile|BlackBerry) [NC]
+RewriteRule ^(.*)$ /fp/ [R=301,L]
 
-<p></IfModule>
-```</p>
+&lt;/IfModule&gt;
+</code></pre>
 
 <p>HTTP_USER_AGENTでディレクトリ先変えるってのは、よくやります。</p>
 
@@ -67,11 +64,10 @@ RewriteRule ^(.</em>)$ /fp/ [R=301,L]</p>
 
 <p>to-Rさんのhtaccess振り分けを利用させて頂いてます。</p>
 
-<p><code>
-RewriteCond %{HTTP_USER_AGENT} (iPhone|iPod)
+<pre><code>RewriteCond %{HTTP_USER_AGENT} (iPhone|iPod)
 RewriteCond %{QUERY_STRING} !mode=pc
 RewriteRule ^/$ /iphone/ [R]
-</code></p>
+</code></pre>
 
 <p>PC用とiPhone用のサイトを切り替える.htaccess</p>
 
@@ -79,19 +75,17 @@ RewriteRule ^/$ /iphone/ [R]
 
 <p>RewriteCondの値は最初の記述に変更しています。</p>
 
-<p><code>
-RewriteCond %{QUERY_STRING} !mode=pc
+<pre><code>RewriteCond %{QUERY_STRING} !mode=pc
 RewriteCond %{HTTP_USER_AGENT} !(iPhone|iPod|Android.*Mobile|BlackBerry) [NC]
 RewriteRule ^(.*)$ /sp/ [R=301,L]
-</code></p>
+</code></pre>
 
 <p>リファラーでもいいかなーとは思います。</p>
 
-<p><code>
-RewriteCond %{HTTP_REFERER} !/sp/.*$
+<pre><code>RewriteCond %{HTTP_REFERER} !/sp/.*$
 RewriteCond %{HTTP_USER_AGENT} !(iPhone|iPod|Android.*Mobile|BlackBerry) [NC]
 RewriteRule ^(.*)$ /sp/ [R=301,L]
-</code></p>
+</code></pre>
 
 <p>RewriteRuleの書き方を変えてあげないと、パラメータを保持していないと下層ページいったときリダイレクトします。
 さらに、index.htmlとかでアクセスしたとき、リダイレクト処理は走りませんのでご注意を。</p>

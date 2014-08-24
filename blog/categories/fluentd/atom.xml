@@ -4,7 +4,7 @@
   <title><![CDATA[Category: fluentd | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/fluentd/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -41,91 +41,75 @@
 
 <h3>rbenvのインストール</h3>
 
-<p><code>
-$ cd
+<pre><code>$ cd
 $ git clone git://github.com/sstephenson/rbenv.git .rbenv
-</code></p>
+</code></pre>
 
 <p>ダウンロードが完了したら、bash_profileを編集します。
-PATHを通し、eval &lsquo;$(rbenv init &ndash;)&rsquo; を追加します。</p>
+PATHを通し、eval &lsquo;$(rbenv init -)&rsquo; を追加します。</p>
 
-<p>```
-$ vi ~/.bash_profile</p>
+<pre><code>$ vi ~/.bash_profile
 
-<p>PATH=&ldquo;$HOME/.rbenv/bin:$PATH:$HOME/bin&rdquo;
-eval &ldquo;$(rbenv init &ndash;)&rdquo;
-```</p>
+PATH="$HOME/.rbenv/bin:$PATH:$HOME/bin"
+eval "$(rbenv init -)"
+</code></pre>
 
 <p>サクッと反映
 反映させたら、rbenvコマンドが利用できるようになっていると思います。利用できない場合は、PATHがちゃんと通っているか確認してみてください。</p>
 
-<p><code>
-$ source ~/.bash_profile
-</code></p>
+<pre><code>$ source ~/.bash_profile
+</code></pre>
 
 <h3>rb-buildのインストール</h3>
 
-<p><code>
-$ mkdir -p ~/.rbenv/plugins
+<pre><code>$ mkdir -p ~/.rbenv/plugins
 $ cd ~/.rbenv/plugins
 $ git clone git://github.com/sstephenson/ruby-build.git
-</code></p>
+</code></pre>
 
 <h3>rubyのインストール</h3>
 
 <p>最新版をインストール</p>
 
-<p><code>
-$ rbenv install 1.9.3-p194
+<pre><code>$ rbenv install 1.9.3-p194
 $ rbenv global 1.9.3-p194
 $ rbenv rehash
-</code></p>
+</code></pre>
 
-<p><code>
-$ ruby -v
+<pre><code>$ ruby -v
 ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-linux]
-</code></p>
+</code></pre>
 
 <h2>fluentdのインストール</h2>
 
 <p>ruby のインストールもできたことなので、fluentd のインストールを行います。ここで若干つまずきました。</p>
 
-<p>```
-$ gem install fluentd
-ERROR:  Loading command: install (LoadError)</p>
-
-<pre><code>cannot load such file -- zlib
+<pre><code>$ gem install fluentd
+ERROR:  Loading command: install (LoadError)
+    cannot load such file -- zlib
+ERROR:  While executing gem ... (NameError)
+    uninitialized constant Gem::Commands::InstallCommand
 </code></pre>
-
-<p>ERROR:  While executing gem &hellip; (NameError)</p>
-
-<pre><code>uninitialized constant Gem::Commands::InstallCommand
-</code></pre>
-
-<p>```</p>
 
 <p>zlib がインストールされてないだと。。。と思い確認するとインストールされてたので、はいはい、zlib-devel zlib-devel ということでインストールします。</p>
 
-<p><code>
-$ yum install zlib-devel
-</code></p>
+<pre><code>$ yum install zlib-devel
+</code></pre>
 
 <p>先ほどインストールした ruby も一度アンインストールします。</p>
 
-<p><code>
-$rbenv uninstall 1.9.3-p194
+<pre><code>$rbenv uninstall 1.9.3-p194
 rbenv: remove /root/.rbenv/versions/1.9.3-p194? y
-</code></p>
+</code></pre>
 
 <p>再度 rubyをインストールし、fluentd のインストールを行います。</p>
 
-<p><code>
-$ rbenv install 1.9.3-p194
+<pre><code>$ rbenv install 1.9.3-p194
 $ rbenv global 1.9.3-p194
 $ rbenv rehash
 $ gem install fluentd
 $ rbenv rehash
-</code></p>
+</code></pre>
 
 <p>エラーもなく fluentd のインストールが行われたようです。</p>
 
@@ -133,11 +117,10 @@ $ rbenv rehash
 
 <p>問題なく fluentd が動作しているか確認を行います。</p>
 
-<p><code>
-$ fluentd --setup ./fluent
+<pre><code>$ fluentd --setup ./fluent
 $ fluentd -c ./fluent/fluent.conf -vv &amp;
 $ echo '{"json":"message"}' | fluent-cat debug.test
-</code></p>
+</code></pre>
 
 <p>最後のコマンドを打って以下の文言が出力されていたら正常にインストールされています。</p>
 
@@ -145,9 +128,8 @@ $ echo '{"json":"message"}' | fluent-cat debug.test
 
 <p>問題なく動作していることが確認できたので一応確認で作成したディレクトリを消去。</p>
 
-<p><code>
-rm -rf ./fluent
-</code></p>
+<pre><code>rm -rf ./fluent
+</code></pre>
 
 <p>ruby 勉強しようと思って、まだ何もしていないという。。。</p>
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: MySQL | Code Life]]></title>
+  <title><![CDATA[Category: mysql | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/mysql/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -28,15 +28,14 @@ MySQLの文法チェックはどうやるのか調べてみた。</p>
 
 <p>次のコマンドで再起動せずに文法をチェックできる。</p>
 
-<p>&mdash;defaults-file と &mdash;pid-file は適宜変更すること。</p>
+<p>&ndash;defaults-file と &ndash;pid-file は適宜変更すること。</p>
 
-<p><code>sh
-$ mysqld --help --verbose --skip-networking --defaults-file=&lt;path to my.cnf&gt; --pid-file=$(tempfile) 1&gt;/dev/null
-</code></p>
+<pre><code class="sh">$ mysqld --help --verbose --skip-networking --defaults-file=&lt;path to my.cnf&gt; --pid-file=$(tempfile) 1&gt;/dev/null
+</code></pre>
 
 <p>MySQLのhelpコマンドはヘルプ情報をコマンドライン上に表示しすぐに終了するが、configファイルは読みにいくようでそれを利用し文法のチェックを行う。</p>
 
-<p>また同じシステム上で既にMySQLが起動している場合、干渉することを避ける為 &mdash;skip-networking と &mdash;pid-file オプションを指定。</p>
+<p>また同じシステム上で既にMySQLが起動している場合、干渉することを避ける為 &ndash;skip-networking と &ndash;pid-file オプションを指定。</p>
 
 <h2>注意点</h2>
 
@@ -59,14 +58,13 @@ $ mysqld --help --verbose --skip-networking --defaults-file=&lt;path to my.cnf&g
     <id>http://blog.code-life.net/blog/2013/04/17/how-to-get-auto-increment-value-in-mysql</id>
     <content type="html"><![CDATA[<p>次のSQLを実行する</p>
 
-<p><code>mysql
-SELECT
+<pre><code class="mysql">SELECT
   AUTO_INCREMENT
 FROM
   INFORMATION_SCHEMA.TABLES
 WHERE
   table_name='hoge';
-</code></p>
+</code></pre>
 
 <p>結果</p>
 
@@ -133,26 +131,23 @@ WHERE
 
 <h3>インストール</h3>
 
-<p><code>
-curl -L http://cpanmin.us | perl - --sudo App::cpanminus
-</code></p>
+<pre><code>curl -L http://cpanmin.us | perl - --sudo App::cpanminus
+</code></pre>
 
 <p>さくっと終了。</p>
 
 <p>インストールに失敗する場合は、恐らく Module::Buildがインストールされていないのでインストールを行なって下さい。</p>
 
-<p><code>
-yum install --enablerepo=rpmforge perl-Module-Build
-</code></p>
+<pre><code>yum install --enablerepo=rpmforge perl-Module-Build
+</code></pre>
 
 <h2>依存モジュールのインストール</h2>
 
 <p>mymemcheck には、Readonly UNIVERSAL::require ２つのモジュールが必要なので先程インストールした cpanm からインストールを行います。</p>
 
-<p><code>
-cpanm install Readonly
+<pre><code>cpanm install Readonly
 cpanm install UNIVERSAL::require
-</code></p>
+</code></pre>
 
 <p>これで、mymemcheck が動作する環境ができました。</p>
 
@@ -160,23 +155,20 @@ cpanm install UNIVERSAL::require
 
 <p>mymemcheck は、<a href="http://dsas.blog.klab.org/archives/50860867.html" title="5分でできる、MySQLのメモリ関係のチューニング！" target="_blank">こちら</a> からダウンロードして利用します。</p>
 
-<p><code>
-wget http://log.blog.klab.org/support/20061226/mymemcheck.gz
+<pre><code>wget http://log.blog.klab.org/support/20061226/mymemcheck.gz
 gzip -d mymemcheck.gz
 chmod +x mymemcheck
 mv mymemcheck /usr/local/bin
-</code></p>
+</code></pre>
 
 <h2>動作確認</h2>
 
 <p>引数に、MySQL の設定ファイルを指定して利用します。</p>
 
-<p><code>
-mymemcheck /etc/my.cnf
-</code></p>
+<pre><code>mymemcheck /etc/my.cnf
+</code></pre>
 
-<p><code>
-[ABORT] missing variables:
+<pre><code>[ABORT] missing variables:
   net_buffer_length
   key_buffer_size
   myisam_sort_buffer_size
@@ -189,7 +181,7 @@ mymemcheck /etc/my.cnf
   innodb_log_buffer_size
   innodb_log_files_in_group
   join_buffer_size
-</code></p>
+</code></pre>
 
 <p>設定しろってことですね。。。
 これで、MySQLのチューニングも気兼ね無く行えます。</p>
@@ -214,18 +206,16 @@ mymemcheck /etc/my.cnf
 date型とtime型のカラムを合わせてtimestamp型にしたいとき、
 普通、以下のようにしがちですが</p>
 
-<p><code>sql
-TO_TIMESTAMP(`date`, `time`)
-</code></p>
+<pre><code class="sql">TO_TIMESTAMP(`date`, `time`)
+</code></pre>
 
 <p>MySQLではTO_TIMESTAMP使えません。
 知らなかったー。</p>
 
 <p>正解は以下。</p>
 
-<p><code>sql
-ADDTIME(`date`, `time`)
-</code></p>
+<pre><code class="sql">ADDTIME(`date`, `time`)
+</code></pre>
 
 <p>あらら。これでいいのね。。
 これでtimestamp型のデータと比較したりできます。</p>

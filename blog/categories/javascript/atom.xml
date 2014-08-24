@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -36,23 +36,17 @@
 
 <p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
 
-<p>``` html
+<p>&#8220;` html
 &lt;!DOCTYPE html>
 <html>
-<head></p>
-
-<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p></head>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
 <body>
-<form></p>
-
-<pre><code>&lt;input id="checkbox1" type="checkbox" name="example" value="hoge"&gt;
-&lt;label for="checkbox1"&gt;Sample CheckBox&lt;/label&gt;
-</code></pre>
-
-<p></form></p>
+<form>
+    <input id="checkbox1" type="checkbox" name="example" value="hoge">
+    <label for="checkbox1">Sample CheckBox</label>
+</form></p>
 
 <script type="text/javascript">
     (function() {
@@ -67,13 +61,13 @@
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <h2>triggerでイベントを発行</h2>
 
 <p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
 
-<p>``` javascript</p>
+<p>&#8220;` javascript</p>
 
 <script type="text/javascript">
     (function() {
@@ -86,15 +80,13 @@
 </script>
 
 
-<p>```</p>
+<pre><code>
+## イベントの発行元を判断する
 
-<h2>イベントの発行元を判断する</h2>
+trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。
 
-<p>trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。</p>
-
-<p>そんな時は以下のようにしておく。</p>
-
-<p>``` javascript</p>
+そんな時は以下のようにしておく。
+</code></pre>
 
 <script type="text/javascript">
     (function() {
@@ -110,7 +102,7 @@
 </script>
 
 
-<p>```</p>
+<p>&#8220;`</p>
 
 <p>ちなみにラジオボタンでも同じです。
 javascript好きになってきた今日この頃。</p>
@@ -131,183 +123,141 @@ javascript好きになってきた今日この頃。</p>
 
 <h3>通常のマージ</h3>
 
-<p>```javascript
-var merge = function (obj1, obj2) {</p>
-
-<pre><code>if (!obj2) {
-    obj2 = {};
-}
-for (var attrname in obj2) {
-    if (obj2.hasOwnProperty(attrname)) {
-        obj1[attrname] = obj2[attrname];
+<pre><code class="javascript">var merge = function (obj1, obj2) {
+    if (!obj2) {
+        obj2 = {};
     }
-}
+    for (var attrname in obj2) {
+        if (obj2.hasOwnProperty(attrname)) {
+            obj1[attrname] = obj2[attrname];
+        }
+    }
+};
+
+var obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: '00-0000-0000'
+};
+
+var obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+merge(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", city: "osaka", tel: "00-0000-0000", sex: "man"}
 </code></pre>
-
-<p>};</p>
-
-<p>var obj1 = {</p>
-
-<pre><code>name: 'pigmon',
-city: 'tokyo',
-tel: '00-0000-0000'
-</code></pre>
-
-<p>};</p>
-
-<p>var obj2 = {</p>
-
-<pre><code>name: 'garamon',
-city: 'osaka',
-sex: 'man'
-</code></pre>
-
-<p>};</p>
-
-<p>merge(obj1, obj2);
-console.log(obj1);</p>
-
-<p>// 実行結果
-=> {name: &ldquo;garamon&rdquo;, city: &ldquo;osaka&rdquo;, tel: &ldquo;00-0000-0000&rdquo;, sex: &ldquo;man&rdquo;}
-```</p>
 
 <h3>存在しないプロパティのみマージ</h3>
 
-<p>```javascript</p>
-
-<p>var merge = function (obj1, obj2) {</p>
-
-<pre><code>if (!obj2) {
-    obj2 = {};
-}
-for (var attrname in obj2) {
-    if (obj2.hasOwnProperty(attrname) &amp;&amp; !obj1.hasOwnProperty(attrname)) {
-        obj1[attrname] = obj2[attrname];
+<pre><code class="javascript">
+var merge = function (obj1, obj2) {
+    if (!obj2) {
+        obj2 = {};
     }
-}
+    for (var attrname in obj2) {
+        if (obj2.hasOwnProperty(attrname) &amp;&amp; !obj1.hasOwnProperty(attrname)) {
+            obj1[attrname] = obj2[attrname];
+        }
+    }
+};
+
+var obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: '00-0000-0000'
+};
+
+var obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+merge(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "pigmon", city: "tokyo", tel: "00-0000-0000", sex: "man"}
 </code></pre>
-
-<p>};</p>
-
-<p>var obj1 = {</p>
-
-<pre><code>name: 'pigmon',
-city: 'tokyo',
-tel: '00-0000-0000'
-</code></pre>
-
-<p>};</p>
-
-<p>var obj2 = {</p>
-
-<pre><code>name: 'garamon',
-city: 'osaka',
-sex: 'man'
-</code></pre>
-
-<p>};</p>
-
-<p>merge(obj1, obj2);
-console.log(obj1);</p>
-
-<p>// 実行結果
-=> {name: &ldquo;pigmon&rdquo;, city: &ldquo;tokyo&rdquo;, tel: &ldquo;00-0000-0000&rdquo;, sex: &ldquo;man&rdquo;}
-```</p>
 
 <h2>JQuery(1.9.1)</h2>
 
 <h3>通常のマージ</h3>
 
-<p>```javascript
-var obj1 = {</p>
+<pre><code class="javascript">var obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: '00-0000-0000'
+};
 
-<pre><code>name: 'pigmon',
-city: 'tokyo',
-tel: '00-0000-0000'
+var obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+$.extend(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", city: "osaka", tel: "00-0000-0000", sex: "man"}
 </code></pre>
-
-<p>};</p>
-
-<p>var obj2 = {</p>
-
-<pre><code>name: 'garamon',
-city: 'osaka',
-sex: 'man'
-</code></pre>
-
-<p>};</p>
-
-<p>$.extend(obj1, obj2);
-console.log(obj1);</p>
-
-<p>// 実行結果
-=> {name: &ldquo;garamon&rdquo;, city: &ldquo;osaka&rdquo;, tel: &ldquo;00-0000-0000&rdquo;, sex: &ldquo;man&rdquo;}</p>
-
-<p>```</p>
 
 <h3>再帰的にマージ</h3>
 
 <p>extendの第一引数にtrueを与えると再帰的にマージしてくれる</p>
 
-<p>```javascript</p>
+<pre><code class="javascript">
+var obj1 = {
+    name: 'pigmon',
+    address: {
+        city: 'tokyo',
+        tel: '00-0000-0000'
+    }
+};
 
-<p>var obj1 = {</p>
+var obj2 = {
+    name: 'garamon',
+    address: {
+        city: 'osaka'
+    }
+};
 
-<pre><code>name: 'pigmon',
-address: {
-    city: 'tokyo',
-    tel: '00-0000-0000'
-}
+$.extend(true, obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", address: {city: "osaka", tel: "00-0000-0000"}}
 </code></pre>
-
-<p>};</p>
-
-<p>var obj2 = {</p>
-
-<pre><code>name: 'garamon',
-address: {
-    city: 'osaka'
-}
-</code></pre>
-
-<p>};</p>
-
-<p>$.extend(true, obj1, obj2);
-console.log(obj1);</p>
-
-<p>// 実行結果
-=> {name: &ldquo;garamon&rdquo;, address: {city: &ldquo;osaka&rdquo;, tel: &ldquo;00-0000-0000&rdquo;}}
-```</p>
 
 <h2>underscore.js(1.4.3)</h2>
 
 <h3>通常のマージ</h3>
 
-<p>``` javascript
-obj1 = {</p>
+<pre><code class="javascript">obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: "00-0000-0000"
+};
 
-<pre><code>name: 'pigmon',
-city: 'tokyo',
-tel: "00-0000-0000"
+obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+_.extend(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", city: "osaka", tel: "00-0000-0000", sex: "man"}
 </code></pre>
-
-<p>};</p>
-
-<p>obj2 = {</p>
-
-<pre><code>name: 'garamon',
-city: 'osaka',
-sex: 'man'
-</code></pre>
-
-<p>};</p>
-
-<p>_.extend(obj1, obj2);
-console.log(obj1);</p>
-
-<p>// 実行結果
-=> {name: &ldquo;garamon&rdquo;, city: &ldquo;osaka&rdquo;, tel: &ldquo;00-0000-0000&rdquo;, sex: &ldquo;man&rdquo;}
-```</p>
 
 <p>ちなみにunderscore.jsでは再帰的にマージはしてくれないよう。</p>
 
@@ -331,25 +281,21 @@ console.log(obj1);</p>
 <!--more-->
 
 
-<p>``` javascript</p>
+<pre><code class="javascript">    (function() {
+        var enableHandler = true;
 
-<pre><code>(function() {
-    var enableHandler = true;
+        $("body").mousemove(function(e) {
+            if (enableHandler) {
+                // 何らかの処理
+                enableHandler = false;
+            }
+        });
 
-    $("body").mousemove(function(e) {
-        if (enableHandler) {
-            // 何らかの処理
-            enableHandler = false;
-        }
-    });
-
-    var timer = window.setInterval(function() {
-        enableHandler = true;
-    }, 100);
-})();
+        var timer = window.setInterval(function() {
+            enableHandler = true;
+        }, 100);
+    })();
 </code></pre>
-
-<p>```</p>
 
 <p>偉大なるは先人達の知恵。</p>
 
@@ -380,47 +326,41 @@ console.log(obj1);</p>
 
 <h2>依存パッケージのインストール</h2>
 
-<p><code>sh
-$ yum install git openssh-devel
-</code></p>
+<pre><code class="sh">$ yum install git openssh-devel
+</code></pre>
 
 <h2>nvm(node.jsバージョン管理)のインストール</h2>
 
 <p>node.jsのバージョン管理は<a href="https://github.com/creationix/nvm">nvm</a>の他に<a href="https://github.com/hokaccha/nodebrew">nodebrew</a>や<a href="https://github.com/ekalinin/nodeenv">nodeenv</a>があるらしいが、初めてなので安直にStarが多かったnvmを利用してみる。</p>
 
-<p><code>sh
-$ curl https://raw.github.com/creationix/nvm/master/install.sh | sh
-</code></p>
+<pre><code class="sh">$ curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+</code></pre>
 
 <p>~/.bash_profileを確認すると次の設定が追加されていた。</p>
 
-<p><code>
-[[ -s /root/.nvm/nvm.sh ]] &amp;&amp; . /root/.nvm/nvm.sh # This loads NVM
-</code></p>
+<pre><code>[[ -s /root/.nvm/nvm.sh ]] &amp;&amp; . /root/.nvm/nvm.sh # This loads NVM
+</code></pre>
 
 <h3>反映</h3>
 
 <p>ということで反映</p>
 
-<p><code>
-$ source ~/.bash_profile
-</code></p>
+<pre><code>$ source ~/.bash_profile
+</code></pre>
 
 <h2>サブコマンドの補完</h2>
 
 <p>nvmコマンドは使えるようになったが、サブコマンドの補完が効かないので以下の設定を ~/.bash_profile または ~/.bashrc に追加</p>
 
-<p><code>
-[[ -r $NVM_DIR/bash_completion ]] &amp;&amp; . $NVM_DIR/bash_completion
-</code></p>
+<pre><code>[[ -r $NVM_DIR/bash_completion ]] &amp;&amp; . $NVM_DIR/bash_completion
+</code></pre>
 
 <p>設定を反映させたら nvm [tab][tab] でサブコマンドの補完が効くようになる。</p>
 
-<p><code>
-$ nvm
+<pre><code>$ nvm
 alias          copy-packages  help           list           ls             run            uninstall      version
 clear-cache    deactivate     install        list-remote    ls-remote      unalias        use
-</code></p>
+</code></pre>
 
 <h2>node.jsのインストール</h2>
 
@@ -428,8 +368,7 @@ clear-cache    deactivate     install        list-remote    ls-remote      unali
 
 <h3>利用可能なバージョンの確認</h3>
 
-<p><code>sh
-$ nvm ls-remote
+<pre><code class="sh">$ nvm ls-remote
    v0.1.14     v0.1.29    v0.1.100      v0.3.3      v0.4.9      v0.6.0     v0.6.15      v0.7.8     v0.8.10      v0.9.1     v0.10.3
    v0.1.15     v0.1.30    v0.1.101      v0.3.4     v0.4.10      v0.6.1     v0.6.16      v0.7.9     v0.8.11      v0.9.2     v0.10.4
    v0.1.16     v0.1.31    v0.1.102      v0.3.5     v0.4.11      v0.6.2     v0.6.17     v0.7.10     v0.8.12      v0.9.3     v0.10.5
@@ -445,23 +384,21 @@ $ nvm ls-remote
    v0.1.26     v0.1.97      v0.3.0      v0.4.6      v0.5.8     v0.6.12      v0.7.5      v0.8.7     v0.8.22     v0.10.0
    v0.1.27     v0.1.98      v0.3.1      v0.4.7      v0.5.9     v0.6.13      v0.7.6      v0.8.8     v0.8.23     v0.10.1
    v0.1.28     v0.1.99      v0.3.2      v0.4.8     v0.5.10     v0.6.14      v0.7.7      v0.8.9      v0.9.0     v0.10.2
-</code></p>
+</code></pre>
 
 <p><a href="http://blog.nodejs.org/">release notes</a>を確認すると現時点ではv0.10.5がstableなのでこいつをインストールする。</p>
 
 <h3>v0.10.5のインストール</h3>
 
-<p><code>
-nvm install 0.10.5
-</code></p>
+<pre><code>nvm install 0.10.5
+</code></pre>
 
 <h3>Aliasの設定</h3>
 
 <p>新しくshellを立ち上げたり再起動をかけるとnvmの設定がリセットされるようなのでデフォルトのバージョンを設定する。</p>
 
-<p><code>
-$ nvm alias default 0.10.5
-</code></p>
+<pre><code>$ nvm alias default 0.10.5
+</code></pre>
 
 <p>とりあえずこんな感じで大丈夫なのかな。</p>
 
@@ -487,49 +424,43 @@ $ nvm alias default 0.10.5
 
 <h2>jQueryの読み込み</h2>
 
-<p>```html</p>
+<p>&#8220;`html</p>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 
-<p>```</p>
+<pre><code>
+例にならい、jQueryを読み込みます。
 
-<p>例にならい、jQueryを読み込みます。</p>
+### html
+</code></pre>
 
-<h3>html</h3>
-
-<p>```
-<body class="top"></p>
+<p><body class="top"></p>
 
 <p id="pageTop"><a href="#top">ページトップへ</a></p>
 
 
 <p></body>
-```</p>
+&#8220;`</p>
 
 <p>bodyにclassでtopを付けておきます。
 Javascriptが無効のときもページ内リンクが有効になります。</p>
 
 <h3>Javascript</h3>
 
-<p>```javascript
-$(function(){
-  $(&ldquo;#pageTop a&rdquo;).click(function(){</p>
-
-<pre><code>$('html,body').animate({ scrollTop: $($(this).attr("href")).offset().top }, 'slow','swing');
-return false;
-</code></pre>
-
-<p>  })
+<pre><code class="javascript">$(function(){
+  $("#pageTop a").click(function(){
+    $('html,body').animate({ scrollTop: $($(this).attr("href")).offset().top }, 'slow','swing');
+    return false;
+  })
 });
-```</p>
+</code></pre>
 
 <p>idで指定した「pageTop」内のアンカーリンクがクリックされた場合、スクロールでトップへ移動します。
 スクロールのアニメーション部分は下記の指定。</p>
 
-<p><code>
-animate(params, [duration], [easing], [callback])
-</code></p>
+<pre><code>animate(params, [duration], [easing], [callback])
+</code></pre>
 
 <h4>duration</h4>
 

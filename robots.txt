@@ -1,4 +1,4 @@
 User-agent: *
-Disallow: 
+Disallow:
 
-Sitemap: http://blog.code-life.net/sitemap.xml 
+Sitemap: http://blog.code-life.net/sitemap.xml

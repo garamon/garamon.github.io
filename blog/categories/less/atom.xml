@@ -4,7 +4,7 @@
   <title><![CDATA[Category: less | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/less/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -31,55 +31,37 @@
 
 <h3>CSS</h3>
 
-<p>```css</p>
-
-<h1>header li{</h1>
-
-<pre><code> float:left;
- text-align:center;
+<pre><code class="css">#header li{
+     float:left;
+     text-align:center;
+}
+#header li a{
+     display:block;
+     background-color:#ccc;
+}
+#header li a:hover{
+     color:#fff;
+     background-color:#000;
+}
 </code></pre>
-
-<p>}</p>
-
-<h1>header li a{</h1>
-
-<pre><code> display:block;
- background-color:#ccc;
-</code></pre>
-
-<p>}</p>
-
-<h1>header li a:hover{</h1>
-
-<pre><code> color:#fff;
- background-color:#000;
-</code></pre>
-
-<p>}
-```</p>
 
 <h3>LESS</h3>
 
-<p>```css</p>
-
-<h1>header{</h1>
-
-<pre><code> li{
-      float:left;
-      text-align:center;
-      a{
-           display:block;
-           background-color:#ccc;
-           &amp;:hover{
-                color:#fff;
-                background-color:#000;
-           }
-      }
- }
+<pre><code class="css">#header{
+     li{
+          float:left;
+          text-align:center;
+          a{
+               display:block;
+               background-color:#ccc;
+               &amp;:hover{
+                    color:#fff;
+                    background-color:#000;
+               }
+          }
+     }
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <h2>変数を使う</h2>
 
@@ -87,120 +69,86 @@
 
 <h3>CSS</h3>
 
-<p>```css
-h1{</p>
-
-<pre><code> margin:10px;
+<pre><code class="css">h1{
+     margin:10px;
+}
+h2{
+     margin:10px;
+}
 </code></pre>
-
-<p>}
-h2{</p>
-
-<pre><code> margin:10px;
-</code></pre>
-
-<p>}
-```</p>
 
 <h3>LESS</h3>
 
-<p>```css
-@mgn: 10px;
-h1{</p>
-
-<pre><code> margin:@mgn;
+<pre><code class="css">@mgn: 10px;
+h1{
+     margin:@mgn;
+}
+h2{
+     margin:@mgn;
+}
 </code></pre>
-
-<p>}
-h2{</p>
-
-<pre><code> margin:@mgn;
-</code></pre>
-
-<p>}
-```</p>
 
 <h2>引数・関数</h2>
 
 <h3>CSS</h3>
 
-<p>```css</p>
-
-<h1>header {</h1>
-
-<p>  border-radius: 5px;
+<pre><code class="css">#header {
+  border-radius: 5px;
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
-}</p>
-
-<h1>footer {</h1>
-
-<p>  border-radius: 10px;
+}
+#footer {
+  border-radius: 10px;
   -webkit-border-radius: 10px;
   -moz-border-radius: 10px;
 }
-```</p>
+</code></pre>
 
 <h3>LESS</h3>
 
-<p>```css
-.rounded-corners (@radius: 5px) {
+<pre><code class="css">.rounded-corners (@radius: 5px) {
   border-radius: @radius;
   -webkit-border-radius: @radius;
   -moz-border-radius: @radius;
-}</p>
-
-<h1>header {</h1>
-
-<p>  .rounded-corners;
-}</p>
-
-<h1>footer {</h1>
-
-<p>  .rounded-corners(10px);
 }
-```</p>
+#header {
+  .rounded-corners;
+}
+#footer {
+  .rounded-corners(10px);
+}
+</code></pre>
 
 <h2>計算</h2>
 
 <h3>CSS</h3>
 
-<p>``` css</p>
-
-<h1>header {</h1>
-
-<p>  color: #333;
+<pre><code class="css">#header {
+  color: #333;
   border-left: 1px;
   border-right: 2px;
-}</p>
-
-<h1>footer {</h1>
-
-<p>  color: #114411;
+}
+#footer {
+  color: #114411;
   border-color: #7d2717;
 }
-```</p>
+</code></pre>
 
 <h3>LESS</h3>
 
-<p>```css
-@the-border: 1px;
+<pre><code class="css">@the-border: 1px;
 @base-color: #111;
-@red:        #842210;</p>
-
-<h1>header {</h1>
-
-<p>  color: @base-color * 3;
+@red:        #842210;
+#header {
+  color: @base-color * 3;
   border-left: @the-border;
   border-right: @the-border * 2;
-}</p>
-
-<h1>footer {</h1>
-
-<p>  color: @base-color + #003300;
+}
+#footer {
+  color: @base-color + #003300;
   border-color: desaturate(@red, 10%);
 }
-```</p>
+</code></pre>
 
 <h2>LESSを適応する</h2>
 
@@ -210,13 +158,13 @@ LESSファイルをCSSコンパイルする方法が今のところは無難そ�
 
 <p>JSを読み込める環境であれば、下記のJSを適応させた上でLESSファイルを作成すればいいと思います。</p>
 
-<p>```html
+<p>&#8220;`html
 <link rel="stylesheet/less" type="text/css" href="styles.less"></p>
 
 <script src="less.js" type="text/javascript"></script>
 
 
-<p>```</p>
+<p>&#8220;`</p>
 
 <p>Downloads: <a href="http://lesscss.org/" target="_blank"><a href="http://lesscss.org/">http://lesscss.org/</a></a></p>
 

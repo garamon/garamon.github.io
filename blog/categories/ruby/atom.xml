@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/ruby/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -33,9 +33,8 @@
 
 <h3>インストール</h3>
 
-<p><code>
-$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-</code></p>
+<pre><code>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</code></pre>
 
 <h2>rbenv-default-gems</h2>
 
@@ -52,9 +51,8 @@ pry
 
 <h3>Installation</h3>
 
-<p><code>sh
-$ git clone https://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems
-</code></p>
+<pre><code class="sh">$ git clone https://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems
+</code></pre>
 
 <h2>rbenv-gem-rehash</h2>
 
@@ -66,9 +64,8 @@ $ git clone https://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugi
 
 <h3>Installation</h3>
 
-<p><code>sh
-$ git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
-</code></p>
+<pre><code class="sh">$ git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+</code></pre>
 
 <h2>rbenv-update</h2>
 
@@ -80,9 +77,8 @@ $ git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins
 
 <h3>Installation</h3>
 
-<p><code>sh
-$ git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
-</code></p>
+<pre><code class="sh">$ git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
+</code></pre>
 
 <p>全部<a href="https://github.com/sstephenson/rbenv/wiki/Plugins#approved-plugins">wiki</a>に載ってるんすけどね。</p>
 ]]></content>
@@ -113,16 +109,15 @@ $ git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-updat
 
 <p>google先生に伺うと下記の解決方法が多かったがボクの環境では効果が見られなかった。</p>
 
-<p>``` sh
-$ gem which webrick
-/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb</p>
+<pre><code class="sh">$ gem which webrick
+/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb
 
-<p>$ vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb</p>
+$ vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb
 
-<p>:DoNotReverseLookup => nil
+:DoNotReverseLookup =&gt; nil
 ↓
-:DoNotReverseLookup => true
-```</p>
+:DoNotReverseLookup =&gt; true
+</code></pre>
 
 <h2>Vagrant Synced Foldersの設定</h2>
 
@@ -131,9 +126,8 @@ $ gem which webrick
 <p>ドキュメントを覗いてみると <code>rsync</code> がバージョン1.5から利用できるとのこと。
 使わない手はないと早速1.5に上げて試してみた。</p>
 
-<p><code>ruby
-config.vm.synced_folder "../target", "/share", type: "rsync"
-</code></p>
+<pre><code class="ruby">config.vm.synced_folder "../target", "/share", type: "rsync"
+</code></pre>
 
 <p>初回起動時は立ち上がるまで若干時間がかかったが、それ以降は遅いとは感じない。</p>
 
@@ -144,12 +138,11 @@ config.vm.synced_folder "../target", "/share", type: "rsync"
 <p>ホストOS側で変更した点がゲストOSに反映されない。
 rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</code> を実行する必要がある。</p>
 
-<p><code>
-$ vagrant up
+<pre><code>$ vagrant up
 $ vagrant rsync #１度きりの同期
 or
 $ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグがある。
-</code></p>
+</code></pre>
 
 <h2>結局は&hellip;</h2>
 
@@ -209,47 +202,37 @@ $ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグ
 
 <p>リサイズとクロップとファイルサイズチェックのサンプルです。</p>
 
-<p>```ruby
-require &lsquo;RMagick&rsquo;</p>
+<pre><code class="ruby">require 'RMagick'
 
-<h1>画像ファイルのパス指定</h1>
+# 画像ファイルのパス指定
+img_path = "public/images/image.jpg"
 
-<p>img_path = &ldquo;public/images/image.jpg&rdquo;</p>
+# 初期化
+img = Magick::ImageList.new(img_path)
 
-<h1>初期化</h1>
+# 画像リサイズ (width, height)
+img = img.resize_to_fit(100, 100 * img.rows / img.columns)
 
-<p>img = Magick::ImageList.new(img_path)</p>
 
-<h1>画像リサイズ (width, height)</h1>
-
-<p>img = img.resize_to_fit(100, 100 * img.rows / img.columns)</p>
-
-<p>if (img.rows &gt; 60) then</p>
-
-<pre><code>y = (img.rows - 60) / 2
-# 画像クロップ (x, y, width, height)
-img = img.crop(0, y, 100, 60)
-</code></pre>
-
-<p>end</p>
-
-<h1>画像ファイルサイズが大きい場合、</h1>
-
-<h1>圧縮率をかえて保存し直す</h1>
-
-<p>i = 90
-while i &gt; 5 do</p>
-
-<pre><code>if (File.size(img_path) &amp;gt;= 2000) then
-    img = img.write(img_path){img.quality = i}
-else
-    break
+if (img.rows &amp;gt; 60) then
+    y = (img.rows - 60) / 2
+    # 画像クロップ (x, y, width, height)
+    img = img.crop(0, y, 100, 60)
 end
-i = i - 10
-</code></pre>
 
-<p>end
-```</p>
+
+# 画像ファイルサイズが大きい場合、
+# 圧縮率をかえて保存し直す
+i = 90
+while i &amp;gt; 5 do
+    if (File.size(img_path) &amp;gt;= 2000) then
+        img = img.write(img_path){img.quality = i}
+    else
+        break
+    end
+    i = i - 10
+end
+</code></pre>
 
 <p>大体はコメントで書いた通りです。
 画像のリサイズは横幅100pxで、元画像の比率を維持した場合です。</p>
@@ -291,19 +274,15 @@ staticでsitemap.xmlを用意する気はありません。
 
 <h2>Controller</h2>
 
-<p>``` ruby controller/site_controller.rb
-class SiteController > ApplicationContoller
-  require &ldquo;builder/xmlmarkup&rdquo;</p>
+<pre><code class="ruby controller/site_controller.rb">class SiteController &gt; ApplicationContoller
+  require "builder/xmlmarkup"
 
-<p>  def sitemap</p>
-
-<pre><code>@xml = Builder::XmlMarkup.new
-render(:type =&gt; :rxml)
-</code></pre>
-
-<p>  end
+  def sitemap
+    @xml = Builder::XmlMarkup.new
+    render(:type =&gt; :rxml)
+  end
 end
-```</p>
+</code></pre>
 
 <p>ポイントはHTMLではなくXMLと認識させることです。
 requireでライブラリを読み込むのは前回書いた通り。
@@ -317,37 +296,30 @@ renderもちゃんと指定してください。</p>
 通常はViewのファイル拡張子は.rhtmlのところを.rxmlにしましょう。
 view/sitemap.rxml</p>
 
-<p>```php view/sitemap.rxml
-@xml.instruct! :xml, :version => &ldquo;1.0&rdquo;
-@xml.urlset(:xmlns => &ldquo;<a href="http://www.sitemaps.org/schemas/sitemap/0.9">http://www.sitemaps.org/schemas/sitemap/0.9</a>&rdquo;) do</p>
+<pre><code class="php view/sitemap.rxml">@xml.instruct! :xml, :version =&gt; "1.0"
+@xml.urlset(:xmlns =&gt; "http://www.sitemaps.org/schemas/sitemap/0.9") do
 
-<pre><code>@xml.url do
-    @xml.loc("http://code-life.net");
-    @xml.lastmod("2011-12-17")
-    @xml.changefreq("daily")
-    @xml.priorty("0.8")
+    @xml.url do
+        @xml.loc("http://code-life.net");
+        @xml.lastmod("2011-12-17")
+        @xml.changefreq("daily")
+        @xml.priorty("0.8")
+    end
 end
 </code></pre>
 
-<p>end
-```</p>
-
 <h3>出力結果</h3>
 
-<p>``` xml
-&lt;?xml version=”1.0″ encoding=”UTF-8″?>
-<urlset xmlns=”http://www.sitemaps.org/schemas/sitemap/0.9″>
-<url></p>
-
-<pre><code>&lt;loc&gt;http://code-life.net/&lt;/loc&gt;
-&lt;lastmod&gt;2011-12-17&lt;/lastmod&gt;
-&lt;changefreq&gt;daily&lt;/changefreq&gt;
-&lt;priority&gt;0.8&lt;/priority&gt;
+<pre><code class="xml">&lt;?xml version=”1.0″ encoding=”UTF-8″?&gt;
+&lt;urlset xmlns=”http://www.sitemaps.org/schemas/sitemap/0.9″&gt;
+&lt;url&gt;
+    &lt;loc&gt;http://code-life.net/&lt;/loc&gt;
+    &lt;lastmod&gt;2011-12-17&lt;/lastmod&gt;
+    &lt;changefreq&gt;daily&lt;/changefreq&gt;
+    &lt;priority&gt;0.8&lt;/priority&gt;
+&lt;/url&gt;
+&lt;/urlset&gt;
 </code></pre>
-
-<p></url>
-</urlset>
-```</p>
 
 <p>これでいけちゃいます！笑。
 viewのコードと出力結果を見比べてもらうとわかると思いますが、
@@ -380,16 +352,14 @@ viewのコードと出力結果を見比べてもらうとわかると思いま�
 
 <p>ActionScriptのではNumber型からString型にするときは以下のようにします。</p>
 
-<p><code>as3
-value:Number = 3;
+<pre><code class="as3">value:Number = 3;
 trace(value.toString());
-</code></p>
+</code></pre>
 
 <h3>実行結果</h3>
 
-<p><code>
-3
-</code></p>
+<pre><code>3
+</code></pre>
 
 <p>確かに似てる。。
 前回のは、phpのみ使う人目線で考えてました。
@@ -405,18 +375,16 @@ trace(value.toString());
 </ul>
 
 
-<p>``` ruby
-require &lsquo;digest/md5&rsquo;</p>
+<pre><code class="ruby">require 'digest/md5'
 
-<p>str = &ldquo;test&rdquo;
+str = "test"
 p Digest::MD5.hexdigest(str)
-```</p>
+</code></pre>
 
 <h3>実行結果</h3>
 
-<p><code>
-098f6bcd4621d373cade4e832627b4f6
-</code></p>
+<pre><code>098f6bcd4621d373cade4e832627b4f6
+</code></pre>
 
 <p>ポイントはrequire。
 これで使うライブラリをちゃんと宣言してください。</p>

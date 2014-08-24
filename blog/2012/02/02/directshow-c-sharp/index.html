@@ -52,12 +52,9 @@
 		<div class="left-col">
 			<div class="intrude-less">
 			<header id="header" class="inner"><div class="profilepic">
-	<script src="/javascripts/md5.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-		});
-	</script>
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
 </div>
 <hgroup>
   <h1><a href="/">Code Life</a></h1>
@@ -134,40 +131,40 @@
 
 <p>usingディレクティブを追加します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="k">using</span> <span class="nn">QuartzTypeLib</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>適当に設置したボタンのクリックイベントに、再生の処理を書いてきます。
 はじめにフィルタグラフマネージャーを生成します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="n">FilgraphManager</span> <span class="n">filgraphManager</span> <span class="p">=</span> <span class="k">new</span> <span class="n">FilgraphManager</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>次に再生用グラフを作成生成します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="n">filgraphManager</span><span class="p">.</span><span class="n">RenderFile</span><span class="p">(</span><span class="n">openFileDialog</span><span class="p">.</span><span class="n">FileName</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>フィルタグラフマネージャーからインターフェースを取得します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="n">IBasicVideo</span> <span class="n">bv</span> <span class="p">=</span> <span class="p">(</span><span class="n">IBasicVideo</span><span class="p">)</span><span class="n">filgraphManager</span><span class="p">;</span>
 </span><span class='line'><span class="n">IVideoWindow</span> <span class="n">vw</span> <span class="p">=</span> <span class="p">(</span><span class="n">IVideoWindow</span><span class="p">)</span><span class="n">filgraphManager</span><span class="p">;</span>
 </span><span class='line'><span class="n">IMediaEventEx</span> <span class="n">mevent</span> <span class="p">=</span> <span class="p">(</span><span class="n">IMediaEventEx</span><span class="p">)</span><span class="n">filgraphManager</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>動画サイズを取得し、VideoWindowをアプリケーションウィンドウにアタッチします。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -177,12 +174,12 @@
 </span><span class='line'>
 </span><span class='line'><span class="n">vw</span><span class="p">.</span><span class="n">Owner</span> <span class="p">=</span> <span class="p">(</span><span class="kt">int</span><span class="p">)</span><span class="k">this</span><span class="p">.</span><span class="n">Handle</span><span class="p">;</span>
 </span><span class='line'><span class="n">vw</span><span class="p">.</span><span class="n">WindowStyle</span> <span class="p">=</span> <span class="m">0</span><span class="n">x40000000</span> <span class="p">|</span> <span class="m">0</span><span class="n">x4000000</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>VideoWindowを動画のサイズに設定し、アプリケーションウィンドウのサイズを変更します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -190,26 +187,26 @@
 </span><span class='line'><span class="k">this</span><span class="p">.</span><span class="n">Width</span> <span class="p">=</span> <span class="n">vx</span> <span class="p">+</span> <span class="m">2</span><span class="p">;</span>
 </span><span class='line'><span class="k">this</span><span class="p">.</span><span class="n">Height</span> <span class="p">=</span> <span class="n">vy</span> <span class="p">+</span> <span class="m">55</span><span class="p">;</span>
 </span><span class='line'><span class="n">button1</span><span class="p">.</span><span class="n">Location</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Point</span><span class="p">(</span><span class="n">button1</span><span class="p">.</span><span class="n">Location</span><span class="p">.</span><span class="n">X</span><span class="p">,</span> <span class="n">vy</span> <span class="p">+</span> <span class="m">2</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>イベント通知を受け取れるように所有者ウィンドウを設定します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="n">mevent</span><span class="p">.</span><span class="n">SetNotifyWindow</span><span class="p">((</span><span class="kt">int</span><span class="p">)</span><span class="k">this</span><span class="p">.</span><span class="n">Handle</span><span class="p">,</span> <span class="m">0</span><span class="n">x8000</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>グラフマネージャーを実行し、再生します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="n">filgraphManager</span><span class="p">.</span><span class="n">Run</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>以下、全体です。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -327,7 +324,7 @@
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>こんな感じで再生出来ました。</p>
@@ -346,26 +343,54 @@
     google_ad_height = 90;
     //-->
     </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 </div>
-<div class="share">
-    <div class="addthis_toolbox addthis_default_style ">
-        <div style="float:left">
-            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/02/02/directshow-c-sharp/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-            <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </div>
-        
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        
-        
-        <a class="addthis_button_tweet"></a>
-        
-        
-        <a class="addthis_counter addthis_pill_style"></a>
-    </div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/02/02/directshow-c-sharp/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
 </div>
 
 
@@ -414,6 +439,14 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 
 
 
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
 
 
   <script type="text/javascript">
@@ -425,6 +458,15 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
 
 
 

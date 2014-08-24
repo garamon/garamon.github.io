@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -52,17 +52,15 @@ LL系言語の方は 変数を printしたりする方が多いらしいので�
 <p>phpenv + php-build で インストールしている場合は、デフォルトで xdebug がインストールされているはずです。
 yum で php を インストールした場合は、以下のコマンドでインストールしておきます。</p>
 
-<p><code>
-pecl install xdebug
-</code></p>
+<pre><code>pecl install xdebug
+</code></pre>
 
 <h3>Vdebug のインストール</h3>
 
 <p>vim のプラグイン管理は <a href="https://github.com/Shougo/neobundle.vim" title="neobundle" target="_blank">NeoBundle</a>を利用してるので vimrcに以下の一文を追加して :NeoBundleInstall するだけです。</p>
 
-<p><code>
-NeoBundle 'joonty/vdebug'
-</code></p>
+<pre><code>NeoBundle 'joonty/vdebug'
+</code></pre>
 
 <h3>Xdebug の設定</h3>
 
@@ -70,13 +68,12 @@ NeoBundle 'joonty/vdebug'
 
 <p>yum や pecl でインストールした場合は、 /etc/php.d/xdebug.ini を新規作成します。</p>
 
-<p><code>text /etc/php.d/xdebug.ini
-zend_extension=/usr/lib/php/modules/xdebug.so
+<pre><code class="text /etc/php.d/xdebug.ini">zend_extension=/usr/lib/php/modules/xdebug.so
 xdebug.remote_enable=on
 xdebug.remote_handler=dbgp
 xdebug.remote_host=localhost
 xdebug.remote_port=9000
-</code></p>
+</code></pre>
 
 <h4>phpenv + phpbuild でインストールした場合</h4>
 
@@ -132,8 +129,7 @@ xdebug.remote_port=9000
 <p>あとはステップ実行させたり変数を評価したり思いのままです。デフォルトのキーマップは以下のようになっています。
 英語のままの所は、ちょっと良く分からないです。すいません。</p>
 
-<p><code>text
-&lt;F5&gt;: デバッガの起動 / 次のブレイクポイントまで移動
+<pre><code class="text">&lt;F5&gt;: デバッガの起動 / 次のブレイクポイントまで移動
 &lt;F2&gt;: ステップオーバー
 &lt;F3&gt;: ステップイン
 &lt;F4&gt;: ステップアウト
@@ -146,7 +142,7 @@ xdebug.remote_port=9000
 :Breakpoint &lt;type&gt; &lt;args&gt;: 色んな種類のブレイクポイントが打てる。 (see :help VdebugBreakpoints)
 :VdebugEval &lt;code&gt;: &lt;code&gt;の変数を評価
 &lt;Leader&gt;e: evaluate the expression under visual highlight and display the result
-</code></p>
+</code></pre>
 
 <p>キーマップを変更したい場合は vimrcに以下のような設定を追加します。</p>
 
@@ -192,26 +188,21 @@ let g:vdebug_options= {
 
 <p>以下のスクリプトを作成し、php-xdebug 等という名前で保存します。php のパスは適時置き換えて下さい。</p>
 
-<p>```php php-xdebug</p>
-
-<h1>!/bin/bash</h1>
-
-<p>export XDEBUG_CONFIG=&ldquo;idekey=xdebug&rdquo;
-/usr/bin/php &ldquo;$@&rdquo;
-```</p>
+<pre><code class="php php-xdebug">#!/bin/bash
+export XDEBUG_CONFIG="idekey=xdebug"
+/usr/bin/php "$@"
+</code></pre>
 
 <p>作成したファイルに実行権限を与え、パスが通っている場所に移動させます。</p>
 
-<p><code>text
-$ chmod +x php-xdebug
+<pre><code class="text">$ chmod +x php-xdebug
 $ mv php-xdebug /usr/local/bin/
-</code></p>
+</code></pre>
 
 <p>デバッガを起動し、デバッグしたいスクリプトをphp-xdebugコマンドで実行すると同じようにデバッグすることができます。</p>
 
-<p><code>text
-$ php-xdebug test.php
-</code></p>
+<pre><code class="text">$ php-xdebug test.php
+</code></pre>
 
 <p>Vimでステップ実行させたい方 Vdebugかなりオススメですよ。是非使ってみて下さい!</p>
 

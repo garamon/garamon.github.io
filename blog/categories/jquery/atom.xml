@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: JQuery | Code Life]]></title>
+  <title><![CDATA[Category: jquery | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -36,23 +36,17 @@
 
 <p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
 
-<p>``` html
+<p>&#8220;` html
 &lt;!DOCTYPE html>
 <html>
-<head></p>
-
-<pre><code>&lt;script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"&gt;&lt;/script&gt;
-</code></pre>
-
-<p></head>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
 <body>
-<form></p>
-
-<pre><code>&lt;input id="checkbox1" type="checkbox" name="example" value="hoge"&gt;
-&lt;label for="checkbox1"&gt;Sample CheckBox&lt;/label&gt;
-</code></pre>
-
-<p></form></p>
+<form>
+    <input id="checkbox1" type="checkbox" name="example" value="hoge">
+    <label for="checkbox1">Sample CheckBox</label>
+</form></p>
 
 <script type="text/javascript">
     (function() {
@@ -67,13 +61,13 @@
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <h2>triggerでイベントを発行</h2>
 
 <p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
 
-<p>``` javascript</p>
+<p>&#8220;` javascript</p>
 
 <script type="text/javascript">
     (function() {
@@ -86,15 +80,13 @@
 </script>
 
 
-<p>```</p>
+<pre><code>
+## イベントの発行元を判断する
 
-<h2>イベントの発行元を判断する</h2>
+trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。
 
-<p>trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。</p>
-
-<p>そんな時は以下のようにしておく。</p>
-
-<p>``` javascript</p>
+そんな時は以下のようにしておく。
+</code></pre>
 
 <script type="text/javascript">
     (function() {
@@ -110,7 +102,7 @@
 </script>
 
 
-<p>```</p>
+<p>&#8220;`</p>
 
 <p>ちなみにラジオボタンでも同じです。
 javascript好きになってきた今日この頃。</p>
@@ -133,49 +125,43 @@ javascript好きになってきた今日この頃。</p>
 
 <h2>jQueryの読み込み</h2>
 
-<p>```html</p>
+<p>&#8220;`html</p>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 
-<p>```</p>
+<pre><code>
+例にならい、jQueryを読み込みます。
 
-<p>例にならい、jQueryを読み込みます。</p>
+### html
+</code></pre>
 
-<h3>html</h3>
-
-<p>```
-<body class="top"></p>
+<p><body class="top"></p>
 
 <p id="pageTop"><a href="#top">ページトップへ</a></p>
 
 
 <p></body>
-```</p>
+&#8220;`</p>
 
 <p>bodyにclassでtopを付けておきます。
 Javascriptが無効のときもページ内リンクが有効になります。</p>
 
 <h3>Javascript</h3>
 
-<p>```javascript
-$(function(){
-  $(&ldquo;#pageTop a&rdquo;).click(function(){</p>
-
-<pre><code>$('html,body').animate({ scrollTop: $($(this).attr("href")).offset().top }, 'slow','swing');
-return false;
-</code></pre>
-
-<p>  })
+<pre><code class="javascript">$(function(){
+  $("#pageTop a").click(function(){
+    $('html,body').animate({ scrollTop: $($(this).attr("href")).offset().top }, 'slow','swing');
+    return false;
+  })
 });
-```</p>
+</code></pre>
 
 <p>idで指定した「pageTop」内のアンカーリンクがクリックされた場合、スクロールでトップへ移動します。
 スクロールのアニメーション部分は下記の指定。</p>
 
-<p><code>
-animate(params, [duration], [easing], [callback])
-</code></p>
+<pre><code>animate(params, [duration], [easing], [callback])
+</code></pre>
 
 <h4>duration</h4>
 
@@ -219,18 +205,16 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
 
 <h2>jQueryの読み込み</h2>
 
-<p>```html</p>
+<p>&#8220;`html</p>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
 
-<p>```</p>
+<pre><code>
+あらかじめ、jQueryをhtmlファイルに読み込んでおきます。
 
-<p>あらかじめ、jQueryをhtmlファイルに読み込んでおきます。</p>
-
-<h2>html</h2>
-
-<p>```html</p>
+## html
+</code></pre>
 
 <div id="tab">
   <ul class="tabNav">
@@ -246,32 +230,28 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
 </div>
 
 
-<p>```</p>
-
-<p>タブメニューとコンテンツ内容をそれぞれ記述します。
+<pre><code>
+タブメニューとコンテンツ内容をそれぞれ記述します。
 ポイントはclassで指定した「tabContents」
-このクラスをjQueryによって、表示の切り替えとして利用します。</p>
+このクラスをjQueryによって、表示の切り替えとして利用します。
 
-<h2>Javascript</h2>
+## Javascript
+</code></pre>
 
-<p>```javascript
-$(function() {
+<p>$(function() {
   $(&ldquo;#tab .tabContent&rdquo;).hide();
   $(&ldquo;#tab .tabNav li:first a&rdquo;).addClass(&ldquo;active&rdquo;).show();
   $(&ldquo;#tab .tabContent:first&rdquo;).show();
-  $(&ldquo;#tab .tabNav li&rdquo;).click(function() {</p>
-
-<pre><code>$("#tab .tabNav li a").removeClass("active");
-$(this).find("a").addClass("active");
-$("#tab .tabContent").hide();
-var activeTab = $(this).find("a").attr("href");
-$(activeTab).fadeIn();
-return false;
-</code></pre>
-
-<p>  });
+  $(&ldquo;#tab .tabNav li&rdquo;).click(function() {
+    $(&ldquo;#tab .tabNav li a&rdquo;).removeClass(&ldquo;active&rdquo;);
+    $(this).find(&ldquo;a&rdquo;).addClass(&ldquo;active&rdquo;);
+    $(&ldquo;#tab .tabContent&rdquo;).hide();
+    var activeTab = $(this).find(&ldquo;a&rdquo;).attr(&ldquo;href&rdquo;);
+    $(activeTab).fadeIn();
+    return false;
+  });
 });
-```</p>
+&#8220;`</p>
 
 <p>初めに、コンテンツ内容を非表示にします。
 次に、メニューの最初の項目にclassでactiveを追加します。
@@ -310,80 +290,69 @@ return false;
 
 <p>まずは、静的なページで表示してみる</p>
 
-<p>```html
-&lt;!DOCTYPE html>
-<html lang="ja" dir="ltr">
-<head>
-  <meta charset="UTF-8" />
-  <title>Google Maps</title>
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <style type="text/css"></p>
+<pre><code class="html">&lt;!DOCTYPE html&gt;
+&lt;html lang="ja" dir="ltr"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8" /&gt;
+  &lt;title&gt;Google Maps&lt;/title&gt;
+  &lt;meta name="viewport" content="initial-scale=1.0, user-scalable=no" /&gt;
+  &lt;style type="text/css"&gt;
+    #gmap { width:320px;height:320px; }
+  &lt;/style&gt;
+  &lt;script src="http://maps.google.com/maps/api/js?sensor=false"&gt;&lt;/script&gt;
+  &lt;script type="text/javascript"&gt;
+    function initialize() {
+      var latlng = new google.maps.LatLng(35.710635, 139.792692);
+      var myOptions = {
+        zoom: 15,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById("gmap"),myOptions);
 
-<pre><code>#gmap { width:320px;height:320px; }
+      var marker = new google.maps.Marker({
+        position: latlng,
+        map: map,
+        title:"かみなりもん"
+      });
+    };
+  &lt;/script&gt;
+&lt;/head&gt;
+&lt;body onload="initialize()"&gt;
+  &lt;div id="gmap"&gt;&lt;/div&gt;
+&lt;/body&gt;
+&lt;/html&gt;
 </code></pre>
-
-<p>  </style>
-  <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script type="text/javascript"></p>
-
-<pre><code>function initialize() {
-  var latlng = new google.maps.LatLng(35.710635, 139.792692);
-  var myOptions = {
-    zoom: 15,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map(document.getElementById("gmap"),myOptions);
-
-  var marker = new google.maps.Marker({
-    position: latlng,
-    map: map,
-    title:"かみなりもん"
-  });
-};
-</code></pre>
-
-<p>  </script>
-</head>
-<body onload="initialize()">
-  <div id="gmap"></div>
-</body>
-</html>
-```</p>
 
 <p><a href="http://jsdo.it/regret2721/pc3G" target="_blank">デモページ</a></p>
 
 <h3>jQuery Mobile</h3>
 
-<p>```html
+<p>&#8220;`html
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <title>Google Maps</title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <style type="text/css"></p>
-
-<pre><code>#gmap { width:320px;height:320px; }
-</code></pre>
-
-<p>  </style>
+  <style type="text/css">
+    #gmap { width:320px;height:320px; }
+  </style>
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
   <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
   <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script type="text/javascript"></p>
+  <script type="text/javascript">
+    function initialize() {
+      var latlng = new google.maps.LatLng(35.710635, 139.792692);
+      var myOptions = {
+        zoom: 15,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById(&ldquo;gmap&rdquo;),myOptions);</p>
 
-<pre><code>function initialize() {
-  var latlng = new google.maps.LatLng(35.710635, 139.792692);
-  var myOptions = {
-    zoom: 15,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map(document.getElementById("gmap"),myOptions);
-
-  var marker = new google.maps.Marker({
+<pre><code>  var marker = new google.maps.Marker({
     position: latlng,
     map: map,
     title:"かみなりもん"
@@ -414,41 +383,37 @@ return false;
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <p><a href="http://jsdo.it/regret2721/gbHB" target="_blank">デモページ</a></p>
 
 <h3>地図の大きさを100%指定にしてみる</h3>
 
-<p>```html
+<p>&#8220;`html
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <title>Google Maps</title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <style type="text/css"></p>
-
-<pre><code>#gmap { width:100%;height:100%; }
-</code></pre>
-
-<p>  </style>
+  <style type="text/css">
+    #gmap { width:100%;height:100%; }
+  </style>
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
   <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
   <script src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script type="text/javascript"></p>
+  <script type="text/javascript">
+    function initialize() {
+      var latlng = new google.maps.LatLng(35.710635, 139.792692);
+      var myOptions = {
+        zoom: 15,
+        center: latlng,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      };
+      var map = new google.maps.Map(document.getElementById(&ldquo;gmap&rdquo;),myOptions);</p>
 
-<pre><code>function initialize() {
-  var latlng = new google.maps.LatLng(35.710635, 139.792692);
-  var myOptions = {
-    zoom: 15,
-    center: latlng,
-    mapTypeId: google.maps.MapTypeId.ROADMAP
-  };
-  var map = new google.maps.Map(document.getElementById("gmap"),myOptions);
-
-  var marker = new google.maps.Marker({
+<pre><code>  var marker = new google.maps.Marker({
     position: latlng,
     map: map,
     title:"かみなりもん"
@@ -482,40 +447,36 @@ return false;
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <p><a href="http://jsdo.it/regret2721/unrq" target="_blank">デモページ</a></p>
 
-<p>```javascript</p>
+<p>&#8220;`javascript</p>
 
 
 
-<p>```</p>
+<pre><code>
+CSSを100%に変更
+</code></pre>
 
-<p>CSSを100%に変更</p>
-
-<p><code>javascript
-var pageHeight= $(document).height();
-$("#gmap").css("height",pageHeight);
-</code></p>
+<p>var pageHeight= $(document).height();
+$(&ldquo;#gmap&rdquo;).css(&ldquo;height&rdquo;,pageHeight);
+&#8220;`</p>
 
 <p>CSSでgmap要素を100%指定すると消えてしまったので、Javascriptでドキュメントの高さをgmapに設定</p>
 
 <h3>地図の大きさを100%でページ分割する</h3>
 
-<p>```html
+<p>&#8220;`html
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
   <meta charset="UTF-8" />
   <title>Google Maps</title>
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <style type="text/css"></p>
-
-<pre><code>#gmap { width:100%;height:100%; }
-</code></pre>
-
-<p>  </style>
+  <style type="text/css">
+    #gmap { width:100%;height:100%; }
+  </style>
   <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
   <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
   <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
@@ -583,19 +544,18 @@ $("#gmap").css("height",pageHeight);
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <p><a href="http://jsdo.it/regret2721/gBxa" target="_blank">デモページ</a></p>
 
-<p><code>html
-&lt;body onload="initialize()"&gt;
+<pre><code class="html">&lt;body onload="initialize()"&gt;
 ↓
 &lt;body&gt;
-</code></p>
+</code></pre>
 
 <p>スクリプトが全ページで実行されてしまうので、onloadの指定をやめました。</p>
 
-<p>```javascript</p>
+<p>&#8220;`javascript</p>
 
 <script type="text/javascript">
   function initialize() {
@@ -620,21 +580,20 @@ $("#gmap").css("height",pageHeight);
 </script>
 
 
-<p>```</p>
+<pre><code>
+script要素をhtmlコードのgmap下に移動。
+pageshowイベントを使用して、accessページのみ実行するように指定しています。
 
-<p>script要素をhtmlコードのgmap下に移動。
-pageshowイベントを使用して、accessページのみ実行するように指定しています。</p>
+この辺は、こちらのサイトを参考にさせて頂きました。
+&lt;a href="http://www.matsuaz.com/4_1/2011/06/18/1308334179361.html" target="_blank"&gt;http://www.matsuaz.com/4_1/2011/06/18/1308334179361.html&lt;/a&gt;
 
-<p>この辺は、こちらのサイトを参考にさせて頂きました。
-<a href="http://www.matsuaz.com/4_1/2011/06/18/1308334179361.html" target="_blank"><a href="http://www.matsuaz.com/4_1/2011/06/18/1308334179361.html">http://www.matsuaz.com/4_1/2011/06/18/1308334179361.html</a></a></p>
+ちなみに
+</code></pre>
 
-<p>ちなみに</p>
-
-<p><code>javascript
-$('#access').bind('pageshow',initialize);
+<p>$(&lsquo;#access&rsquo;).bind(&lsquo;pageshow&rsquo;,initialize);
 ↓
-$('#access').live('pageshow',initialize);
-</code></p>
+$(&lsquo;#access&rsquo;).live(&lsquo;pageshow&rsquo;,initialize);
+&#8220;`</p>
 
 <p>動的要素なので、bindをliveにすればHead内でも実行できました。</p>
 ]]></content>
@@ -678,7 +637,7 @@ $('#access').live('pageshow',initialize);
 
 <h2>初期テンプレート</h2>
 
-<p>```html
+<p>&#8220;`html
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -712,7 +671,7 @@ $('#access').live('pageshow',initialize);
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <p><a href="/images/2012/03/start-jquery-mobile-1.jpg"><img src="/images/2012/03/start-jquery-mobile-1.jpg" width="300" height="264"></a></p>
 
@@ -722,26 +681,22 @@ $('#access').live('pageshow',initialize);
 
 <p>エラーメッセージなどが英語だったりするので設定を変更するために下記のJSを読み込みます。</p>
 
-<p>```javascript</p>
+<p>&#8220;`javascript</p>
 
 <script src="jquery.mobile.init.js"></script>
 
 
-<p>```</p>
+<pre><code></code></pre>
 
-<p>```javascript
-$(document).bind(&lsquo;mobileinit&rsquo;, function(){</p>
-
-<pre><code>$.mobile.loadingMessage = '読み込み中';
-$.mobile.pageLoadErrorMessage = '読み込みに失敗しました';
-$.mobile.dialog.prototype.options.closeBtnText = '閉じる';
-$.mobile.selectmenu.prototype.options.closeText= '閉じる';
-$.mobile.listview.prototype.options.filterPlaceholder = '検索文字列';
-$.mobile.page.prototype.options.backBtnText = '戻る';
-</code></pre>
-
-<p>  });
-```</p>
+<p>$(document).bind(&lsquo;mobileinit&rsquo;, function(){
+    $.mobile.loadingMessage = &lsquo;読み込み中&rsquo;;
+    $.mobile.pageLoadErrorMessage = &lsquo;読み込みに失敗しました&rsquo;;
+    $.mobile.dialog.prototype.options.closeBtnText = &lsquo;閉じる&rsquo;;
+    $.mobile.selectmenu.prototype.options.closeText= &lsquo;閉じる&rsquo;;
+    $.mobile.listview.prototype.options.filterPlaceholder = &lsquo;検索文字列&rsquo;;
+    $.mobile.page.prototype.options.backBtnText = &lsquo;戻る&rsquo;;
+  });
+&#8220;`</p>
 
 <p>ポイントは、上記スクリプトをjQuery MobileのJS読み込み前に読み込むこと。</p>
 
@@ -751,8 +706,7 @@ $.mobile.page.prototype.options.backBtnText = '戻る';
 
 <p>文字数が要素内で一定値をオーバーすると、文字が省略されてしまうので、それをCSSで解除してあげる。</p>
 
-<p><code>css
-.ui-header .ui-title,
+<pre><code class="css">.ui-header .ui-title,
 .ui-footer .ui-title,
 .ui-btn-inner,
 .ui-li-heading,
@@ -761,13 +715,13 @@ $.mobile.page.prototype.options.backBtnText = '戻る';
   overflow: visible;
   white-space: normal;
 }
-</code></p>
+</code></pre>
 
 <h3>デザインを変更する</h3>
 
 <p>デフォルトのデザインをそのまま使う場合はあまりないので、それぞれのデザインをオリジナルなものに変更します。</p>
 
-<p>```html</p>
+<p>&#8220;`html</p>
 
 <div data-role="page" data-theme="f">
   <header data-role="header" data-theme="f">
@@ -787,9 +741,9 @@ $.mobile.page.prototype.options.backBtnText = '戻る';
 </div>
 
 
-<p>```</p>
+<p>&#8220;`</p>
 
-<p>data-theme=&ldquo;f"をそれぞれの要素に追加しました。</p>
+<p>data-theme=&ldquo;f&#8221;をそれぞれの要素に追加しました。</p>
 
 <p>data-themeによって、スタイルの切り替えが可能。
 jQuery Mobileでは、aからeまでのスタイルがセットされているので、何もスタイルがセットされていないf～zなど任意のスタイルを指定してあげれば、当然スタイルがセットされてないのでデザインが解除されます。</p>

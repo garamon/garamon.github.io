@@ -53,12 +53,9 @@ CakePHP2.0でもlog4phpを利用したかったので試しに組み込んでみ
 		<div class="left-col">
 			<div class="intrude-less">
 			<header id="header" class="inner"><div class="profilepic">
-	<script src="/javascripts/md5.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-		});
-	</script>
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
 </div>
 <hgroup>
   <h1><a href="/">Code Life</a></h1>
@@ -131,7 +128,7 @@ CakePHP2.0でもlog4phpを利用したかったので試しに組み込んでみ
 <p>CakePHP2.0では、以下のように利用したいloggerを指定することができるようになりました。
 そこで、これを利用してlog4phpを組み込んでいきます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -139,7 +136,7 @@ CakePHP2.0でもlog4phpを利用したかったので試しに組み込んでみ
 </span><span class='line'>    <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CustomLogger&#39;</span>
 </span><span class='line'>    <span class="c1">// ...</span>
 </span><span class='line'><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h2>log4phpの配置</h2>
@@ -149,7 +146,7 @@ CakePHP2.0でもlog4phpを利用したかったので試しに組み込んでみ
 
 <h3>ディレクトリ構造</h3>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -159,7 +156,7 @@ CakePHP2.0でもlog4phpを利用したかったので試しに組み込んでみ
 </span><span class='line'>    <span class="o">|</span><span class="nx">__Log</span>
 </span><span class='line'>       <span class="o">|</span><span class="nx">__Engine</span>
 </span><span class='line'>            <span class="o">|</span><span class="nx">__log4php</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>log4phpの指定</h3>
@@ -167,7 +164,7 @@ CakePHP2.0でもlog4phpを利用したかったので試しに組み込んでみ
 <p>もちろん配置しただけでは、利用できないのでlog4phpを使いたいぜ！と設定してあげる必要があります。
 記載する箇所は、bootstrap.php内になります。</p>
 
-<figure class='code'><figcaption><span>app/Config/bootstrap.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>app/Config/bootstrap.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -175,7 +172,7 @@ CakePHP2.0でもlog4phpを利用したかったので試しに組み込んでみ
 </span><span class='line'><span class="nx">CakeLog</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;log4php&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
 </span><span class='line'>    <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CustomLogger&#39;</span>
 </span><span class='line'><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>この設定をすることで、app/Lib/Log/Engine/以下のCustomLogger.phpを探しにいきます。
@@ -183,7 +180,7 @@ CustomLogger.phpをまだ作成していないので、次はCustomLogger.phpを
 
 <h3>CustomLoggerの作成</h3>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -337,12 +334,12 @@ CustomLogger.phpをまだ作成していないので、次はCustomLogger.phpを
 </span><span class='line'>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>ディレクトリ構造</h3>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -356,7 +353,7 @@ CustomLogger.phpをまだ作成していないので、次はCustomLogger.phpを
 </span><span class='line'>            <span class="o">|</span><span class="nx">__log4php</span>
 </span><span class='line'>            <span class="o">|</span>
 </span><span class='line'>            <span class="o">|</span><span class="nx">__CustomLogger</span><span class="o">.</span><span class="nx">php</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>CakeLogInterfaceは必ず継承してください。でないと$this->log();と書けないですからね。
@@ -366,7 +363,7 @@ CustomLogger.phpをまだ作成していないので、次はCustomLogger.phpを
 
 <p>コンストラクタに入るoptionは</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -378,7 +375,7 @@ CustomLogger.phpをまだ作成していないので、次はCustomLogger.phpを
 </span><span class='line'>    <span class="s1">&#39;properties_path&#39;</span> <span class="o">=&gt;</span> <span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/log4php.properties&#39;</span><span class="p">,</span>
 </span><span class='line'>    <span class="s1">&#39;name&#39;</span>            <span class="o">=&gt;</span> <span class="s1">&#39;noto&#39;</span>
 </span><span class='line'><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>log4php.propertiesの配置と設定</h3>
@@ -388,20 +385,20 @@ CustomLogger.phpをまだ作成していないので、次はCustomLogger.phpを
 
 <h4>ディレクトリ構造</h4>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">app</span>
 </span><span class='line'> <span class="o">|</span><span class="nx">__Config</span>
 </span><span class='line'>    <span class="o">|</span><span class="nx">__log4php</span><span class="o">.</span><span class="nx">properties</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h4>log4php.propertiesの設定</h4>
 
 <p>「log4php.properties　設定」とgoogle先生に伺えば色々出てくると思いますが、サンプルとして設定例を記載しておきます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -415,7 +412,7 @@ CustomLogger.phpをまだ作成していないので、次はCustomLogger.phpを
 </span><span class='line'><span class="nx">log4php</span><span class="o">.</span><span class="nx">appender</span><span class="o">.</span><span class="nx">R</span><span class="o">.</span><span class="nx">layout</span><span class="o">.</span><span class="nx">ConversionPattern</span><span class="o">=%</span><span class="nx">d</span> <span class="o">%-</span><span class="mi">5</span><span class="nx">p</span> <span class="o">-</span> <span class="o">%</span><span class="nx">m</span><span class="o">%</span><span class="nx">n</span>
 </span><span class='line'><span class="nx">log4php</span><span class="o">.</span><span class="nx">appender</span><span class="o">.</span><span class="nx">R</span><span class="o">.</span><span class="nx">MaxFileSize</span><span class="o">=</span><span class="mi">10240</span>
 </span><span class='line'><span class="nx">log4php</span><span class="o">.</span><span class="nx">appender</span><span class="o">.</span><span class="nx">R</span><span class="o">.</span><span class="nx">MaxBackupIndex</span><span class="o">=</span><span class="mi">5</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>これで$this->log(&lsquo;error&rsquo;)とすれば、内部ではlog4phpが動作することになります。
@@ -433,26 +430,54 @@ CakePHP1.3よりスマートに組み込めると思うのですが、どうで�
     google_ad_height = 90;
     //-->
     </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 </div>
-<div class="share">
-    <div class="addthis_toolbox addthis_default_style ">
-        <div style="float:left">
-            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2011/12/21/cakephp2-log4php/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-            <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </div>
-        
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        
-        
-        <a class="addthis_button_tweet"></a>
-        
-        
-        <a class="addthis_counter addthis_pill_style"></a>
-    </div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2011/12/21/cakephp2-log4php/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
 </div>
 
 
@@ -501,6 +526,14 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 
 
 
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
 
 
   <script type="text/javascript">
@@ -512,6 +545,15 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
 
 
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: hls | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/hls/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -27,8 +27,7 @@
 
 <p>コンテンツは既に準備されているものとし、セグメント化のみ行います。</p>
 
-<p><code>sh
-ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
+<pre><code class="sh">ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
   -vbsf h264_mp4toannexb \
   -map 0 \
   -f segment \
@@ -37,7 +36,7 @@ ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
   -segment_list playlist.m3u8 \
   -segment_list_flags -cache \
   stream_%d.ts
-</code></p>
+</code></pre>
 
 <h3>オプションについて</h3>
 
@@ -113,81 +112,73 @@ ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
 
 <p>※ダウンロードするファイルは ver2.6以上を利用すること。</p>
 
-<p><code>
-cd /usr/local/src
+<pre><code>cd /usr/local/src
 wget http://www.cmake.org/files/v2.8/cmake-2.8.8.tar.gz
 tar xzf cmake-2.8.8.tar.gz
 cd cmake-2.8.8/
 ./bootstrap
 make
 make install
-</code></p>
+</code></pre>
 
 <h2>環境変数の設定</h2>
 
 <p>~/.bash_profile または ~/.bashrc に以下を追記</p>
 
-<p><code>
-PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+<pre><code>PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 export PKG_CONFIG_PATH
-</code></p>
+</code></pre>
 
 <h3>確認</h3>
 
-<p><code>
-printenv PKG_CONFIG_PATH
-</code></p>
+<pre><code>printenv PKG_CONFIG_PATH
+</code></pre>
 
 <p>以下のパスが出力されていることを確認する。</p>
 
-<p><code>
-/usr/local/lib/pkgconfig
-</code></p>
+<pre><code>/usr/local/lib/pkgconfig
+</code></pre>
 
 <h2>httpsegmenterのインストール</h2>
 
-<p><code>
-cd /usr/local/src
+<pre><code>cd /usr/local/src
 git clone https://github.com/midnox/httpsegmenter
 cd httpsegmenter/
 cmake .
 make
 make install
-</code></p>
+</code></pre>
 
 <h3>httpsegmenterの確認</h3>
 
-<p><code>
-segmenter -h
-</code></p>
+<pre><code>segmenter -h
+</code></pre>
 
-<p>```
-Segmenter for HTTP Live Streaming v0.1
-part of HTTP-Live-Video-Stream-Segmenter-and-Distributor @ github</p>
+<pre><code>Segmenter for HTTP Live Streaming v0.1
+part of HTTP-Live-Video-Stream-Segmenter-and-Distributor @ github
 
-<p>Usage: segmenter -i infile [-d baseDir] [-f baseFileName] [-o playListFile.m3u8] [-l 10] [-a|-v] [-t]</p>
+Usage: segmenter -i infile [-d baseDir] [-f baseFileName] [-o playListFile.m3u8] [-l 10] [-a|-v] [-t]
 
-<p>Options (you can use &mdash; or &ndash; for short option prefix e.g. -i == &mdash;i):
+Options (you can use -- or - for short option prefix e.g. -i == --i):
 -i Input file. Required.
 -o Playlist file to create. Default is .m3u8
--d The base directory for files. Default is &lsquo;.&rsquo;
--f Segment files will be named &ndash;#. Default is
+-d The base directory for files. Default is '.'
+-f Segment files will be named -#. Default is
 -l The length of each segment. Default is 5
 -p The name of the encoding profile
 -u The URL prefix
 -t Enable id3 tagging code (EXPERIMENTAL)
--a audio only decode for &lt; 64k streams.
--v video only decode for &lt; 64k streams.</p>
+-a audio only decode for &amp;lt; 64k streams.
+-v video only decode for &amp;lt; 64k streams.
 
-<p>&mdash;version Print version details and exit.
--h,&mdash;help Print this info.
-```</p>
+--version Print version details and exit.
+-h,--help Print this info.
+</code></pre>
 
 <h2>httpsegmenterの利用方法</h2>
 
-<p><code>
-segmenter -i ~/test2.ts -d '.' -f stream2 -o stream2.m3u8 -l 10
-</code></p>
+<pre><code>segmenter -i ~/test2.ts -d '.' -f stream2 -o stream2.m3u8 -l 10
+</code></pre>
 
 <p>セグメント化されたtsファイルとm3u8ファイルが出力されていることが確認できます。</p>
 

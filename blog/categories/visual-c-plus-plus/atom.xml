@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Visual C++ | Code Life]]></title>
+  <title><![CDATA[Category: visual c++ | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/visual-c-plus-plus/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -43,36 +43,32 @@
 <p>インストールが完了したら、Plug-in Wizardをインストールします。
 インストールには、以下の3つのファイルを使用します。</p>
 
-<p><code>
-wmpwiz.ico
+<pre><code>wmpwiz.ico
 wmpwiz.vsdir
 wmpwiz.vsz
-</code></p>
+</code></pre>
 
 <p>デフォルトでは以下のフォルダから選択できます。</p>
 
-<p><code>
-C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\multimedia\WMP\Wizards\wmpwiz
-</code></p>
+<pre><code>C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\multimedia\WMP\Wizards\wmpwiz
+</code></pre>
 
 <p>選択した3つのファイルをVisualC++がインストールされているフォルダにコピーします。 デフォルトでは下記になります。</p>
 
-<p><code>
-C:\Program Files\Microsoft Visual Studio 10.0\VC\Express\VCProjects
-</code></p>
+<pre><code>C:\Program Files\Microsoft Visual Studio 10.0\VC\Express\VCProjects
+</code></pre>
 
 <p>コピーの際、wmpwiz.vszを念のため、Wmpwiz.vszにリネームしておきます。
 Wmpwiz.vszをメモ帳などで開き、下記の行を修正します。</p>
 
-<p>```
-Wizard=VsWizard.<VsWizardEngine version goes here>
+<pre><code>Wizard=VsWizard.&lt;VsWizardEngine version goes here&gt;
 ↓↓↓
-<font color="red">Wizard=VsWizard.VsWizardEngine.10.0</font></p>
+&lt;font color="red"&gt;Wizard=VsWizard.VsWizardEngine.10.0&lt;/font&gt;
 
-<p>Param=&ldquo;ABSOLUTE_PATH = <path to wmpwiz directory goes here>&rdquo;
+Param="ABSOLUTE_PATH = &lt;path to wmpwiz directory goes here&gt;"
 ↓↓↓
-<font color="red">Param=&ldquo;ABSOLUTE_PATH = C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\multimedia\WMP\Wizards\wmpwiz&rdquo;</font>
-```</p>
+&lt;font color="red"&gt;Param="ABSOLUTE_PATH = C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\multimedia\WMP\Wizards\wmpwiz"&lt;/font&gt;
+</code></pre>
 
 <p>これで、準備完了。
 VisualC++を起動すると、</p>

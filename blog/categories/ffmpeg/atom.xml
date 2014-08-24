@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ffmpeg | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/ffmpeg/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -27,8 +27,7 @@
 
 <p>コンテンツは既に準備されているものとし、セグメント化のみ行います。</p>
 
-<p><code>sh
-ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
+<pre><code class="sh">ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
   -vbsf h264_mp4toannexb \
   -map 0 \
   -f segment \
@@ -37,7 +36,7 @@ ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
   -segment_list playlist.m3u8 \
   -segment_list_flags -cache \
   stream_%d.ts
-</code></p>
+</code></pre>
 
 <h3>オプションについて</h3>
 
@@ -97,21 +96,18 @@ ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
 
 <p>バージョンの確認方法がわからない方は以下のコマンドで確認</p>
 
-<p><code>sh
-$ cat /etc/redhat-release
-</code></p>
+<pre><code class="sh">$ cat /etc/redhat-release
+</code></pre>
 
 <p>64bitかどうかの確認は以下のコマンドで確認</p>
 
-<p><code>
-$ uname -a
-</code></p>
+<pre><code>$ uname -a
+</code></pre>
 
 <h2>必要なパッケージのインストール</h2>
 
-<p><code>
-$ yum install autoconf automake make gcc gcc-c++ pkgconfig wget libtool zlib-devel
-</code></p>
+<pre><code>$ yum install autoconf automake make gcc gcc-c++ pkgconfig wget libtool zlib-devel
+</code></pre>
 
 <h2>リポジトリの追加</h2>
 
@@ -123,16 +119,14 @@ $ yum install autoconf automake make gcc gcc-c++ pkgconfig wget libtool zlib-dev
 
 <p><a href="http://pkgs.repoforge.org/rpmforge-release/">Dag(RPMforge)</a></p>
 
-<p><code>
-$ wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+<pre><code>$ wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
 $ wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
-</code></p>
+</code></pre>
 
 <h3>リポジトリの追加</h3>
 
-<p><code>
-$ rpm -Uvh epel-release-6-8.noarch.rpm rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
-</code></p>
+<pre><code>$ rpm -Uvh epel-release-6-8.noarch.rpm rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+</code></pre>
 
 <h3>追加したリポジトリの使用制限をかける</h3>
 
@@ -140,161 +134,137 @@ $ rpm -Uvh epel-release-6-8.noarch.rpm rpmforge-release-0.5.3-1.el6.rf.x86_64.rp
 
 <h4>epel</h4>
 
-<p>```
-$ vi /etc/yum.repos.d/epel.repo</p>
+<pre><code>$ vi /etc/yum.repos.d/epel.repo
 
-<p>[epel]
-name=Extra Packages for Enterprise Linux 6 &ndash; $basearch</p>
-
-<h1>baseurl=<a href="http://download.fedoraproject.org/pub/epel/6/$basearch">http://download.fedoraproject.org/pub/epel/6/$basearch</a></h1>
-
-<p>mirrorlist=<a href="https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch">https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch</a>
+[epel]
+name=Extra Packages for Enterprise Linux 6 - $basearch
+#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch
 failovermethod=priority
 enabled=0 ← 0に変更
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
-```</p>
+</code></pre>
 
 <h4>DAG(RPMforge)</h4>
 
-<p>```
-$ vi /etc/yum.repos.d/rpmforge.repo</p>
+<pre><code>$ vi /etc/yum.repos.d/rpmforge.repo
 
-<p>[rpmforge]
-name = RHEL $releasever &ndash; RPMforge.net &ndash; dag
-baseurl = <a href="http://apt.sw.be/redhat/el6/en/$basearch/rpmforge">http://apt.sw.be/redhat/el6/en/$basearch/rpmforge</a>
-mirrorlist = <a href="http://mirrorlist.repoforge.org/el6/mirrors-rpmforge">http://mirrorlist.repoforge.org/el6/mirrors-rpmforge</a></p>
-
-<h1>mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge</h1>
-
-<p>enabled = 0 ← 0に変更
+[rpmforge]
+name = RHEL $releasever - RPMforge.net - dag
+baseurl = http://apt.sw.be/redhat/el6/en/$basearch/rpmforge
+mirrorlist = http://mirrorlist.repoforge.org/el6/mirrors-rpmforge
+#mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge
+enabled = 0 ← 0に変更
 protect = 0
 gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag
 gpgcheck = 1
-```</p>
+</code></pre>
 
 <h2>FFmpegのインストール</h2>
 
 <p>ソースコードからインストールするものが多いので作業ディレクトリを作成する</p>
 
-<p><code>
-$ mkdir ~/ffmpeg-source
-</code></p>
+<pre><code>$ mkdir ~/ffmpeg-source
+</code></pre>
 
 <p>x264 FFmpegは最新版を利用するのでgitをインストール</p>
 
-<p><code>
-$ yum install --enablerepo=epel git
-</code></p>
+<pre><code>$ yum install --enablerepo=epel git
+</code></pre>
 
 <h3>YASM</h3>
 
 <p>アセンブラ x264 FFmpegで使用される</p>
 
-<p><code>
-$ yum install --enablerepo=epel yasm
-</code></p>
+<pre><code>$ yum install --enablerepo=epel yasm
+</code></pre>
 
 <h3>X264のインストール</h3>
 
-<p><code>
-$ cd ~/ffmpeg-source
+<pre><code>$ cd ~/ffmpeg-source
 $ git clone git://git.videolan.org/x264.git
 $ cd x264
 $ ./configure --enable-shared --disable-asm
 $ make
 $ make install
-</code></p>
+</code></pre>
 
 <h3>libfdk_aac</h3>
 
-<p><code>
-$ cd ~/ffmpeg-source¬
+<pre><code>$ cd ~/ffmpeg-source¬
 $ git clone --depth 1 git://github.com/mstorsjo/fdk-aac.git
 $ cd fdk-aac
 $ autoreconf -fiv
 $ ./configure
 $ make
 $ make install
-</code></p>
+</code></pre>
 
 <h3>ライブラリの設定</h3>
 
-<p><code>
-$ export LD_LIBRARY_PATH=/usr/local/lib/
+<pre><code>$ export LD_LIBRARY_PATH=/usr/local/lib/
 $ echo /usr/local/lib &gt; /etc/ld.so.conf.d/custom-libs.conf
 $ ldconfig
-</code></p>
+</code></pre>
 
 <h3>FFmpegのインストール</h3>
 
 <p>今回はver1.2をインストールします。</p>
 
-<p><code>
-$ cd ~/ffmpeg-source¬
+<pre><code>$ cd ~/ffmpeg-source¬
 $ git clone git://source.ffmpeg.org/ffmpeg.git
 $ cd ffmpeg
-</code></p>
+</code></pre>
 
 <p>ブランチ一覧の表示</p>
 
-<p>```
-$ git branch -a</p>
+<pre><code>$ git branch -a
 
-<ul>
-<li>master
-remotes/origin/HEAD &ndash;> origin/master
-remotes/origin/master
-remotes/origin/oldabi
-remotes/origin/release/0.10
-remotes/origin/release/0.11
-remotes/origin/release/0.5
-remotes/origin/release/0.6
-remotes/origin/release/0.7
-remotes/origin/release/0.8
-remotes/origin/release/0.9
-remotes/origin/release/1.0
-remotes/origin/release/1.1
-remotes/origin/release/1.2
-```</li>
-</ul>
-
+* master
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master
+  remotes/origin/oldabi
+  remotes/origin/release/0.10
+  remotes/origin/release/0.11
+  remotes/origin/release/0.5
+  remotes/origin/release/0.6
+  remotes/origin/release/0.7
+  remotes/origin/release/0.8
+  remotes/origin/release/0.9
+  remotes/origin/release/1.0
+  remotes/origin/release/1.1
+  remotes/origin/release/1.2
+</code></pre>
 
 <p>1.2のブランチに切り替え</p>
 
-<p><code>
-$ git checkout -b n1.2 origin/release/1.2
-</code></p>
+<pre><code>$ git checkout -b n1.2 origin/release/1.2
+</code></pre>
 
 <p>切り替わっているか確認</p>
 
-<p>```
-$ git branch</p>
+<pre><code>$ git branch
 
-<p>  master
+  master
 * n1.2
-```</p>
+</code></pre>
 
 <h4>インストール</h4>
 
-<p>```
-$ ./configure &mdash;enable-gpl &mdash;enable-nonfree &mdash;enable-libfdk_aac &mdash;enable-libx264 \</p>
-
-<pre><code>--enable-shared --arch=x86_64 --enable-pthreads
-</code></pre>
-
-<p>$ make
+<pre><code>$ ./configure --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libx264 \
+    --enable-shared --arch=x86_64 --enable-pthreads
+$ make
 $ make install
-```</p>
+</code></pre>
 
 <h4>確認</h4>
 
-<p>```
-$ ffmpeg -version</p>
+<pre><code>$ ffmpeg -version
 
-<p>ffmpeg version 1.2
+ffmpeg version 1.2
 built on Mar  3 2013 03:53:58 with gcc 4.4.6 (GCC) 20120305 (Red Hat 4.4.6-4)
-configuration: &mdash;enable-gpl &mdash;enable-nonfree &mdash;enable-libfdk_aac &mdash;enable-libx264 &mdash;enable-shared &mdash;arch=x86_64 &mdash;enable-pthreads
+configuration: --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libx264 --enable-shared --arch=x86_64 --enable-pthreads
 libavutil      52. 18.100 / 52. 18.100
 libavcodec     54. 92.100 / 54. 92.100
 libavformat    54. 63.104 / 54. 63.104
@@ -303,18 +273,17 @@ libavfilter     3. 42.103 /  3. 42.103
 libswscale      2.  2.100 /  2.  2.100
 libswresample   0. 17.102 /  0. 17.102
 libpostproc    52.  2.100 / 52.  2.100
-```</p>
+</code></pre>
 
 <h2>トランスコード</h2>
 
 <p>下記のコマンドでトランスコードしてみましたが、問題はなさそうです。</p>
 
-<p><code>
-$ ffmpeg -i big_buck_bunny_480p_surround-fix.avi -s 400x300 \
+<pre><code>$ ffmpeg -i big_buck_bunny_480p_surround-fix.avi -s 400x300 \
   -c:v libx264 -c:v libx264 -profile:v baseline -preset:v slower \
   -b:v 300k -maxrate 300k -minrate 300k -bufsize 1835k \
   -ac 2 -c:a libfdk_aac -b:a 128k big_buck_bunny.mp4
-</code></p>
+</code></pre>
 
 <h2>ライセンス</h2>
 
@@ -346,33 +315,30 @@ $ ffmpeg -i big_buck_bunny_480p_surround-fix.avi -s 400x300 \
 
 <p>問題があったコマンドです。</p>
 
-<p>``` php thumbnail.php
-$time   = &lsquo;00:00:10&rsquo;; // 秒または、HH:MM:SS[.xxx]形式
-$video  = &lsquo;hoge.mpg&rsquo;;
-$img    = &lsquo;hoge.jpg&rsquo;;</p>
+<pre><code class="php thumbnail.php">$time   = '00:00:10'; // 秒または、HH:MM:SS[.xxx]形式
+$video  = 'hoge.mpg';
+$img    = 'hoge.jpg';
 
-<p>$cmd = &ldquo;ffmpeg -ss $time -i $video -vcodec mjpeg -vframes 1 -an -f image2 $img&rdquo;;
+$cmd = "ffmpeg -ss $time -i $video -vcodec mjpeg -vframes 1 -an -f image2 $img";
 //コマンド ffmpeg -ss 00:00:10 -i hoge.mpg -vcodec mjpeg -vframes 1 -an -f image2 hoge.jpg
 exec($cmd);
-```</p>
+</code></pre>
 
 <p>このコマンドを実行すると以下のワーニングが発生し、切り出したJPEGファイルがグレー一色となります。</p>
 
-<p><code>text
-warning: first frame is no keyframe
-</code></p>
+<pre><code class="text">warning: first frame is no keyframe
+</code></pre>
 
 <p>色々試してみたのですが、うまくいかず結局 ss オプションの代わりに、 itsoffset オプションを利用しました。</p>
 
-<p>```php thumbnail.php
-$time   = &lsquo;00:00:10&rsquo;; // 秒または、HH:MM:SS[.xxx]形式
-$video  = &lsquo;hoge.mpg&rsquo;;
-$img    = &lsquo;hoge.jpg&rsquo;;</p>
+<pre><code class="php thumbnail.php">$time   = '00:00:10'; // 秒または、HH:MM:SS[.xxx]形式
+$video  = 'hoge.mpg';
+$img    = 'hoge.jpg';
 
-<p>$cmd = &ldquo;ffmpeg -itsoffset &ndash;$time -i $video -vcodec mjpeg -vframes 1 -an -f image2 $img&rdquo;;
+$cmd = "ffmpeg -itsoffset -$time -i $video -vcodec mjpeg -vframes 1 -an -f image2 $img";
 //コマンド ffmpeg -itsoffset -00:00:10 -i hoge.mpg -vcodec mjpeg -vframes 1 -an -f image2 hoge.jpg
 exec($cmd);
-```</p>
+</code></pre>
 
 <p>この方法は確実にサムネイルを切りだすことができますが、切り出すまで時間がかかるというデメリットがあります。
 んーもっといい方法はないですかね。</p>

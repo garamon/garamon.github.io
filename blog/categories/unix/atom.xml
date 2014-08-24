@@ -4,7 +4,7 @@
   <title><![CDATA[Category: unix | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/unix/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -28,9 +28,8 @@
 
 <p>fileAとfileBをpasteコマンドで連結します。</p>
 
-<p><code>sh
-$ paste fileA.txt fileB.txt &gt; fileC.txt
-</code></p>
+<pre><code class="sh">$ paste fileA.txt fileB.txt &gt; fileC.txt
+</code></pre>
 
 <p>fileA.txt
 <code>
@@ -61,9 +60,8 @@ CCC 333
 
 <h2>区切り文字をカンマに</h2>
 
-<p><code>
-$ paste -d , fileA.txt fileB.txt &gt; fileC.txt
-</code></p>
+<pre><code>$ paste -d , fileA.txt fileB.txt &gt; fileC.txt
+</code></pre>
 
 <h3>出力結果</h3>
 

@@ -53,12 +53,9 @@
 		<div class="left-col">
 			<div class="intrude-less">
 			<header id="header" class="inner"><div class="profilepic">
-	<script src="/javascripts/md5.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-		});
-	</script>
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
 </div>
 <hgroup>
   <h1><a href="/">Code Life</a></h1>
@@ -137,7 +134,7 @@
 
 <h2>初期テンプレート</h2>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -197,7 +194,7 @@
 </span><span class='line'><span class="nt">&lt;/div&gt;</span>
 </span><span class='line'><span class="nt">&lt;/body&gt;</span>
 </span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p><a href="/images/2012/03/start-jquery-mobile-1.jpg"><img src="/images/2012/03/start-jquery-mobile-1.jpg" width="300" height="264"></a></p>
@@ -208,14 +205,14 @@
 
 <p>エラーメッセージなどが英語だったりするので設定を変更するために下記のJSを読み込みます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">src</span><span class="o">=</span><span class="s2">&quot;jquery.mobile.init.js&quot;</span><span class="o">&gt;&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -231,7 +228,7 @@
 </span><span class='line'>    <span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">listview</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">filterPlaceholder</span> <span class="o">=</span> <span class="s1">&#39;検索文字列&#39;</span><span class="p">;</span>
 </span><span class='line'>    <span class="nx">$</span><span class="p">.</span><span class="nx">mobile</span><span class="p">.</span><span class="nx">page</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">options</span><span class="p">.</span><span class="nx">backBtnText</span> <span class="o">=</span> <span class="s1">&#39;戻る&#39;</span><span class="p">;</span>
 </span><span class='line'>  <span class="p">});</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>ポイントは、上記スクリプトをjQuery MobileのJS読み込み前に読み込むこと。</p>
@@ -242,7 +239,7 @@
 
 <p>文字数が要素内で一定値をオーバーすると、文字が省略されてしまうので、それをCSSで解除してあげる。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -260,14 +257,14 @@
 </span><span class='line'>  <span class="k">overflow</span><span class="o">:</span> <span class="k">visible</span><span class="p">;</span>
 </span><span class='line'>  <span class="k">white-space</span><span class="o">:</span> <span class="k">normal</span><span class="p">;</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>デザインを変更する</h3>
 
 <p>デフォルトのデザインをそのまま使う場合はあまりないので、それぞれのデザインをオリジナルなものに変更します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -299,10 +296,10 @@
 </span><span class='line'>    <span class="nt">&lt;h4&gt;</span>CopyRight <span class="ni">&amp;copy;</span> Code-life.net. All rights reserved.<span class="nt">&lt;/h4&gt;</span>
 </span><span class='line'>  <span class="nt">&lt;/footer&gt;</span>
 </span><span class='line'><span class="nt">&lt;/div&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
-<p>data-theme=&ldquo;f&#8221;をそれぞれの要素に追加しました。</p>
+<p>data-theme=&ldquo;f"をそれぞれの要素に追加しました。</p>
 
 <p>data-themeによって、スタイルの切り替えが可能。
 jQuery Mobileでは、aからeまでのスタイルがセットされているので、何もスタイルがセットされていないf～zなど任意のスタイルを指定してあげれば、当然スタイルがセットされてないのでデザインが解除されます。</p>
@@ -341,26 +338,54 @@ jQuery Mobileでは、aからeまでのスタイルがセットされている�
     google_ad_height = 90;
     //-->
     </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 </div>
-<div class="share">
-    <div class="addthis_toolbox addthis_default_style ">
-        <div style="float:left">
-            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/03/23/start-jquery-mobile/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-            <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </div>
-        
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        
-        
-        <a class="addthis_button_tweet"></a>
-        
-        
-        <a class="addthis_counter addthis_pill_style"></a>
-    </div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/03/23/start-jquery-mobile/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
 </div>
 
 
@@ -409,6 +434,14 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 
 
 
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
 
 
   <script type="text/javascript">
@@ -420,6 +453,15 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
 
 
 

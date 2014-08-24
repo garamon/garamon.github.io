@@ -4,7 +4,7 @@
   <title><![CDATA[Category: compass | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/compass/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -26,51 +26,46 @@
 
 <p>Rubyは前回インストール済みなので、Compass入れるだけ。</p>
 
-<p><code>
-gem update --system
+<pre><code>gem update --system
 gem install compass
-</code></p>
+</code></pre>
 
 <p>で、コマンド実行</p>
 
-<p><code>
-compass create
-</code></p>
+<pre><code>compass create
+</code></pre>
 
 <p>これでファイルが生成されます。
 が、これ実行すると、なんかよくわからない感じでファイルが出力されます。
 自由にディレクトリ構成とかしたいですよね、ってことでconfigファイル作ります。</p>
 
-<p><code>ruby config.rb
-http_path = "/"
+<pre><code class="ruby config.rb">http_path = "/"
 css_dir = "CSSの出力場所"
 sass_dir = "SCSSの保存場所"
 images_dir = "画像の保存場所"
 javascripts_dir = "JavaScriptの保存場所"
 output_style = Sassの出力形式（:expanded or :nested or :compact or :compressed）
 line_comments = CSSにSCSSの行番号を出力するか（true or false）
-</code></p>
+</code></pre>
 
 <p>↓のような感じにしました。</p>
 
-<p><code>ruby config.rb
-http_path = "/"
+<pre><code class="ruby config.rb">http_path = "/"
 css_dir = "css"
 sass_dir = "_scss"
 images_dir = "/"
 javascripts_dir = "js"
 output_style = :expanded
 line_comments = false
-</code></p>
+</code></pre>
 
 <p>参考：<a href="http://www.skyward-design.net/blog/archives/000118.html" target="_blank">Compassを使ってSassのCSS出力を手軽にしよう｜Blog｜Skyward Design</a></p>
 
 <p>このconfig.rbを自分のサイト作成のディレクトリにおいて上げます。
 で、コマンドで下記を叩く。</p>
 
-<p><code>
-compass watch
-</code></p>
+<pre><code>compass watch
+</code></pre>
 
 <p>これでSCSSのファイルが編集され更新されたら、自動的にCSSを整形して出力してくれます。</p>
 
@@ -80,19 +75,17 @@ compass watch
 
 <p>creafixやらreset.cssをお手軽にインポートできます。</p>
 
-<p><code>css scss
-@import "compass/utilities/general/clearfix";
+<pre><code class="css scss">@import "compass/utilities/general/clearfix";
 .clearfix{
   @include clearfix;
 }
-</code></p>
+</code></pre>
 
-<p><code>css css
-.clearfix {
+<pre><code class="css css">.clearfix {
   overflow: hidden;
   *zoom: 1;
 }
-</code></p>
+</code></pre>
 
 <p>という感じでインポートするだけで終わり。</p>
 
@@ -101,35 +94,31 @@ compass watch
 <p>スマートフォン対応サイト作るときに面倒なベンダープレフィックス。
 これも結構簡単に設定できます。</p>
 
-<p><code>css scss
-@import "compass/css3/border-radius";
+<pre><code class="css scss">@import "compass/css3/border-radius";
 .border-radius {
   @include border-radius;
 }
-</code></p>
+</code></pre>
 
-<p><code>css css
-.border-radius {
+<pre><code class="css css">.border-radius {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   -ms-border-radius: 5px;
   -o-border-radius: 5px;
   border-radius: 5px;
 }
-</code></p>
+</code></pre>
 
 <p>デフォルト値が5pxなのでプレフィックス付きで5px出力されます。
 値を変えるなら</p>
 
-<p><code>css scss
-$default-border-radius:20px;
-</code></p>
+<pre><code class="css scss">$default-border-radius:20px;
+</code></pre>
 
 <p>という形で指定して、デフォルト値を変更するか、</p>
 
-<p><code>css scss
-@include border-radius(2px);
-</code></p>
+<pre><code class="css scss">@include border-radius(2px);
+</code></pre>
 
 <p>という感じで個別の値を変更する感じです。
 これだけでとりあえず、作業効率はだいぶ上がりました。</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: stream.m | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/stream-dot-m/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -34,9 +34,8 @@ vlc部分が不安定だし不便だったので、WindowsMediaエンコーダ�
 
 <p>FFMpegのinputオプションを「HTTP越しのmms（Microsoft Media Server Protocol）」で接続します。</p>
 
-<p><code>
-C:\&gt;"ffmpeg.exe" -i mmsh://127.0.0.1:8081 -g 52 -acodec libvorbis -ab 64k -vcodec libvpx -vb 448k -f matroska http://localhost:8080/publish/first?password=secret
-</code></p>
+<pre><code>C:\&gt;"ffmpeg.exe" -i mmsh://127.0.0.1:8081 -g 52 -acodec libvorbis -ab 64k -vcodec libvpx -vb 448k -f matroska http://localhost:8080/publish/first?password=secret
+</code></pre>
 
 <p>当然ですが、WindowsMediaエンコーダでのエンコードビットレートより高い値でFFMpegをエンコードするとエラーになりますので、ご注意ください。</p>
 
@@ -45,7 +44,7 @@ C:\&gt;"ffmpeg.exe" -i mmsh://127.0.0.1:8081 -g 52 -acodec libvorbis -ab 64k -vc
 <p>せっかくなので、HTML5のvideoタグとcanvasタグを使って
 frameキャプチャをしてみました。</p>
 
-<p>``` html
+<p>&#8220;` html
 <html>
 <head></p>
 
@@ -69,16 +68,13 @@ function copyFrame(){
 
 
 <p></head>
-<body></p>
-
-<pre><code>&lt;video id="sourcevideo" src="http://192.168.1.113:8080/consume/first" autoplay&gt;&lt;/video&gt;
-&lt;canvas id="sourcecopy" width="320" height="240"&gt;&lt;/canvas&gt;
-&lt;input type="button" value="copy frame" onclick="copyFrame()" /&gt;
-</code></pre>
-
-<p></body>
+<body>
+    <video id="sourcevideo" src="http://192.168.1.113:8080/consume/first" autoplay></video>
+    <canvas id="sourcecopy" width="320" height="240"></canvas>
+    <input type="button" value="copy frame" onclick="copyFrame()" />
+</body>
 </html>
-```</p>
+&#8220;`</p>
 
 <p>適当ですみません。。。</p>
 
@@ -120,67 +116,50 @@ function copyFrame(){
 
 <p>zipを解凍しましたら、「server.conf.sample」をエディタで開き、配信に使用するポート、ストリーム名、パスワード、同時接続数を指定し、ファイル名を「server.conf」に変更して保存します。</p>
 
-<p>```
-#</p>
+<pre><code>#
+# Sample configuration file
+# Empty lines and lines starting with # and ; are ignored.
+# Format:  =
+# Syntactic elements (words) can be separated by linear whitepace.
+#
 
-<h1>Sample configuration file</h1>
+# server.port
+# listening port
+server.port = 8080
 
-<h1>Empty lines and lines starting with # and ; are ignored.</h1>
+# stream.
+# if defined then a stream can be started with this name
+streams.first = true
 
-<h1>Format:  =</h1>
+# stream..password
+# determines the password to accept the stream
+streams.first.password = secret
 
-<h1>Syntactic elements (words) can be separated by linear whitepace.</h1>
-
-<p>#</p>
-
-<h1>server.port</h1>
-
-<h1>listening port</h1>
-
-<p>server.port = 8080</p>
-
-<h1>stream.</h1>
-
-<h1>if defined then a stream can be started with this name</h1>
-
-<p>streams.first = true</p>
-
-<h1>stream..password</h1>
-
-<h1>determines the password to accept the stream</h1>
-
-<p>streams.first.password = secret</p>
-
-<h1>stream..limit</h1>
-
-<h1>maximum number of clients for this stream</h1>
-
-<p>streams.first.limit = 100
-```</p>
+# stream..limit
+# maximum number of clients for this stream
+streams.first.limit = 100
+</code></pre>
 
 <p>今回はデフォルトのまま使用しました。</p>
 
 <p>準備が出来たら、コマンドプロンプトからサーバを起動。</p>
 
-<p><code>
-C:\Documents and Settings\Administrator&gt;java -cp lib/stream-m.jar StreamingServer server.conf
+<pre><code>C:\Documents and Settings\Administrator&gt;java -cp lib/stream-m.jar StreamingServer server.conf
 Stating server on port: 8080
-</code></p>
+</code></pre>
 
 <p>次にライブエンコード部分ですが、FFmpegからwebmへエンコード出来る形式ならファイルでもデバイスでもソースに出来そうです。</p>
 
 <p>せっかくのライブストリームなので、例にならってwebカムのソースを配信してみました。
 まず、vlc Media Playerで音声のみストリーム変換を行ないます。</p>
 
-<p><code>
-C:\Documents and Settings\Administrator&gt;vlc.exe　-I dummy dshow:// --sout "#transcode{vcodec=none,acodec=mp3,ab=128,channels=2,samplerate=44100} :http{mux=ts,dst=127.0.0.1:8081/}" --dshow-vdev=none --no-sout-rtp-sap --no-sout-standard-sap --sout-keep
-</code></p>
+<pre><code>C:\Documents and Settings\Administrator&gt;vlc.exe　-I dummy dshow:// --sout "#transcode{vcodec=none,acodec=mp3,ab=128,channels=2,samplerate=44100} :http{mux=ts,dst=127.0.0.1:8081/}" --dshow-vdev=none --no-sout-rtp-sap --no-sout-standard-sap --sout-keep
+</code></pre>
 
 <p>次に、FFmpegでwebカムの映像とvlcからオーディオストリームをソースにして、webmへ変換→stream.mへpostします。</p>
 
-<p><code>
-C:\Documents and Settings\Administrator&gt;ffmpeg.exe -f vfwcap -r 16 -i 0 -i http://localhost:8081/ -g 52 -acodec libvorbis -ab 64k -vcodec libvpx -vb 448k -f matroska http://localhost:8080/publish/first?password=secret
-</code></p>
+<pre><code>C:\Documents and Settings\Administrator&gt;ffmpeg.exe -f vfwcap -r 16 -i 0 -i http://localhost:8081/ -g 52 -acodec libvorbis -ab 64k -vcodec libvpx -vb 448k -f matroska http://localhost:8080/publish/first?password=secret
+</code></pre>
 
 <p>FFmpegのエンコードが無事開始されたら、stream.m側で「Segment found」と表示されると思います。</p>
 
@@ -193,9 +172,8 @@ C:\Documents and Settings\Administrator&gt;ffmpeg.exe -f vfwcap -r 16 -i 0 -i ht
 
 <p>実際にHTML5で記述する際は、下記のように書きます。</p>
 
-<p><code>html
-&lt;video src="http://127.0.0.1:8080/consume/first" /&gt;
-</code></p>
+<pre><code class="html">&lt;video src="http://127.0.0.1:8080/consume/first" /&gt;
+</code></pre>
 
 <p>また、stream.mには管理コンソール機能があります。
 ダウンロードしたパッケージ内にconsole.zipが同梱されているので解凍し、</p>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: WordPress | Code Life]]></title>
+  <title><![CDATA[Category: wordpress | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/wordpress/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -28,23 +28,19 @@
 
 <h2>投稿画像をリンク付きで出力</h2>
 
-<p>```php
-&lt;?php</p>
-
-<pre><code> $images = get_children(array(
-      'post_parent' =&gt; $post-&gt;ID,
-      'post_type' =&gt; 'attachment',
-      'exclude' =&gt; get_post_thumbnail_id($post-&gt;ID),
-      'post_mime_type' =&gt; 'image'
- ));
- foreach ( $images as $attachment_id =&gt; $attachment ) {
-      $att_image_link = wp_get_attachment_link($attachment_id, 'thumbnail', true, false);
-      echo $att_image_link;
- }
+<pre><code class="php">&lt;?php
+     $images = get_children(array(
+          'post_parent' =&gt; $post-&gt;ID,
+          'post_type' =&gt; 'attachment',
+          'exclude' =&gt; get_post_thumbnail_id($post-&gt;ID),
+          'post_mime_type' =&gt; 'image'
+     ));
+     foreach ( $images as $attachment_id =&gt; $attachment ) {
+          $att_image_link = wp_get_attachment_link($attachment_id, 'thumbnail', true, false);
+          echo $att_image_link;
+     }
+?&gt;
 </code></pre>
-
-<p>?>
-```</p>
 
 <p>get_childrenで投稿の添付ファイルを取得。</p>
 
@@ -56,18 +52,14 @@
 <p>WPって、attachmentのimage.phpファイルとかの説明があまりないようなイメージなんですが、
 image.phpとかで表示するならこんな感じでしょうか。</p>
 
-<p>```php
-&lt;?php</p>
-
-<pre><code> if (wp_attachment_is_image($post-&gt;id)) {
-    $att_image = wp_get_attachment_image_src( $post-&gt;id, "full-size");
-    $att_image_name=$att_image[0];
-    echo '&lt;img src="' . $att_image_name .'" /&gt;';
- }
+<pre><code class="php">&lt;?php
+     if (wp_attachment_is_image($post-&gt;id)) {
+        $att_image = wp_get_attachment_image_src( $post-&gt;id, "full-size");
+        $att_image_name=$att_image[0];
+        echo '&lt;img src="' . $att_image_name .'" /&gt;';
+     }
+?&gt;
 </code></pre>
-
-<p>?>
-```</p>
 
 <p>wordpressはまだまだ勉強が足りないので、慣れていきたいところ。</p>
 ]]></content>

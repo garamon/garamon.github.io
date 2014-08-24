@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ExpressionEncoder | Code Life]]></title>
+  <title><![CDATA[Category: expressionencoder | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/expressionencoder/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -41,27 +41,24 @@ ExpressionEncoderでは、ジョブと呼ばれるエンコードセッション
 <p>ExpressionEncoderの基本的な使い方も理解できたとこで、<a href="/blog/2011/12/23/expression-encoder-sdk/">前回</a>(前々回か)のソースを見てみます。
 まず、MediaItemインスタンスを生成してビデオソースを登録します。</p>
 
-<p><code>c#
-MediaItem mediaItem = new MediaItem(@"C:\ruby.avi");
-</code></p>
+<pre><code class="c#">MediaItem mediaItem = new MediaItem(@"C:\ruby.avi");
+</code></pre>
 
 <p>Jobインスタンスを生成し、作成したMediaItemオブジェクトをjob.MediaItemsプロパティへ追加します。</p>
 
-<p><code>c#
-Job job = new Job();
+<pre><code class="c#">Job job = new Job();
 job.MediaItems.Add(mediaItem);
-</code></p>
+</code></pre>
 
 <p>出力先を指定して、エンコードを実行。</p>
 
-<p>```c#
-job.OutputDirectory = @&ldquo;C:\videoOutput&rdquo;;</p>
+<pre><code class="c#">job.OutputDirectory = @"C:\videoOutput";
 
-<p>Console.WriteLine(&ldquo;Encoding…c&rdquo;);
+Console.WriteLine("Encoding…c");
 job.Encode();
-Console.WriteLine(&ldquo;Finished encoding.&rdquo;);
+Console.WriteLine("Finished encoding.");
 job.Dispose();
-```</p>
+</code></pre>
 
 <p>今回は、エンコードの際にプロファイルを指定してエンコードを実行してみようと思います。</p>
 
@@ -76,7 +73,7 @@ ExpressionEncoderアプリケーションのエンコードタブから独自の
 
 <p>試しに作成したものがこんな感じ</p>
 
-<p>```xml
+<p>&#8220;`xml
 &lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;utf-16&rdquo;?></p>
 
 <!--Created with Expression Encoder version 4.0.1651.0-->
@@ -85,124 +82,117 @@ ExpressionEncoderアプリケーションのエンコードタブから独自の
 <p><Preset
   Version="4.0">
   <Job />
-  &lt;MediaFile</p>
-
-<pre><code>WindowsMediaProfileLanguage="ja-JP"
-VideoResizeMode="Letterbox"&gt;
-&lt;OutputFormat&gt;
-  &lt;WindowsMediaOutputFormat&gt;
-    &lt;AudioProfile&gt;
-      &lt;WmaAudioProfile
-        Codec="Wma"
-        Channels="2"
-        BitsPerSample="16"
-        SamplesPerSecond="44100"&gt;
-        &lt;Bitrate&gt;
-          &lt;ConstantBitrate
-            Bitrate="64"
-            IsTwoPass="False"
-            BufferWindow="00:00:00" /&gt;
-        &lt;/Bitrate&gt;
-      &lt;/WmaAudioProfile&gt;
-    &lt;/AudioProfile&gt;
-    &lt;VideoProfile&gt;
-      &lt;MainVC1VideoProfile
-        DifferentialQuantization="Off"
-        InLoopFilter="True"
-        MotionSearchRange="MacroblockAdaptive"
-        BFrameCount="1"
-        SmoothStreaming="False"
-        AdaptiveDeadZone="Conservative"
-        AdaptiveGop="True"
-        ClosedGop="True"
-        DenoiseFilter="False"
-        KeyFrameDistance="00:00:05"
-        MotionChromaSearch="LumaOnly"
-        MotionMatchMethod="SAD"
-        NoiseEdgeRemovalFilter="False"
-        OverlapSmoothingFilter="True"
-        MotionVectorCost="Static"
-        Complexity="Normal"
-        AutoFit="True"
-        Force16Pixels="False"
-        FrameRate="0"
-        SeparateFilesPerStream="False"
-        NumberOfEncoderThreads="0"&gt;
-        &lt;Streams
-          AutoSize="False"
-          FreezeSort="False"&gt;
-          &lt;StreamInfo
-            Size="512, 384"&gt;
-            &lt;Bitrate&gt;
-              &lt;ConstantBitrate
-                Bitrate="505"
+  <MediaFile
+    WindowsMediaProfileLanguage="ja-JP"
+    VideoResizeMode="Letterbox">
+    <OutputFormat>
+      <WindowsMediaOutputFormat>
+        <AudioProfile>
+          <WmaAudioProfile
+            Codec="Wma"
+            Channels="2"
+            BitsPerSample="16"
+            SamplesPerSecond="44100">
+            <Bitrate>
+              <ConstantBitrate
+                Bitrate="64"
                 IsTwoPass="False"
-                BufferWindow="00:00:05" /&gt;
-            &lt;/Bitrate&gt;
-          &lt;/StreamInfo&gt;
-        &lt;/Streams&gt;
-      &lt;/MainVC1VideoProfile&gt;
-    &lt;/VideoProfile&gt;
-  &lt;/WindowsMediaOutputFormat&gt;
-&lt;/OutputFormat&gt;
-</code></pre>
-
-<p>  </MediaFile>
+                BufferWindow="00:00:00" />
+            </Bitrate>
+          </WmaAudioProfile>
+        </AudioProfile>
+        <VideoProfile>
+          <MainVC1VideoProfile
+            DifferentialQuantization="Off"
+            InLoopFilter="True"
+            MotionSearchRange="MacroblockAdaptive"
+            BFrameCount="1"
+            SmoothStreaming="False"
+            AdaptiveDeadZone="Conservative"
+            AdaptiveGop="True"
+            ClosedGop="True"
+            DenoiseFilter="False"
+            KeyFrameDistance="00:00:05"
+            MotionChromaSearch="LumaOnly"
+            MotionMatchMethod="SAD"
+            NoiseEdgeRemovalFilter="False"
+            OverlapSmoothingFilter="True"
+            MotionVectorCost="Static"
+            Complexity="Normal"
+            AutoFit="True"
+            Force16Pixels="False"
+            FrameRate="0"
+            SeparateFilesPerStream="False"
+            NumberOfEncoderThreads="0">
+            <Streams
+              AutoSize="False"
+              FreezeSort="False">
+              <StreamInfo
+                Size="512, 384">
+                <Bitrate>
+                  <ConstantBitrate
+                    Bitrate="505"
+                    IsTwoPass="False"
+                    BufferWindow="00:00:05" />
+                </Bitrate>
+              </StreamInfo>
+            </Streams>
+          </MainVC1VideoProfile>
+        </VideoProfile>
+      </WindowsMediaOutputFormat>
+    </OutputFormat>
+  </MediaFile>
 </Preset>
-```
+&#8220;`
 ※ここでは、プリセットの細かい点に関しては触れません。</p>
 
 <p>では、試しに作成したプリセットを指定してエンコードを行なってみたいと思います。
 作成した.xmlファイルは実行ファイルと同一フォルダに保存してください。</p>
 
-<p>```c#
-using System;
+<pre><code class="c#">using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Expression.Encoder;</p>
+using Microsoft.Expression.Encoder;
 
-<p>namespace ConsoleApplication1
-{</p>
-
-<pre><code>class Program
+namespace ConsoleApplication1
 {
-
-
-    static void Main(string[] args)
+    class Program
     {
-        MediaItem mediaItem = new MediaItem(@"C:\ruby.avi");
 
-        //jobの生成
-        Job job = new Job();
-        job.MediaItems.Add(mediaItem);
 
-        //プリセット適用
-        job.ApplyPreset("codelife.xml");
+        static void Main(string[] args)
+        {
+            MediaItem mediaItem = new MediaItem(@"C:\ruby.avi");
 
-        //出力先
-        job.OutputDirectory = @"C:\videoOutput";
+            //jobの生成
+            Job job = new Job();
+            job.MediaItems.Add(mediaItem);
 
-        job.EncodeProgress += new EventHandler&lt;EncodeProgressEventArgs&gt;(OnProgress);
+            //プリセット適用
+            job.ApplyPreset("codelife.xml");
 
-        //エンコード
-        Console.WriteLine("Encoding…c");
-        job.Encode();
-        Console.WriteLine("Finished encoding.");
-        job.Dispose();
+            //出力先
+            job.OutputDirectory = @"C:\videoOutput";
+
+            job.EncodeProgress += new EventHandler&lt;EncodeProgressEventArgs&gt;(OnProgress);
+
+            //エンコード
+            Console.WriteLine("Encoding…c");
+            job.Encode();
+            Console.WriteLine("Finished encoding.");
+            job.Dispose();
+        }
+
+        static void OnProgress(object sender, EncodeProgressEventArgs e)
+        {
+            Console.Write("\b\b\b\b\b\b\b");
+            Console.Write("{0:F2}%", e.Progress);
+        }
+
     }
-
-    static void OnProgress(object sender, EncodeProgressEventArgs e)
-    {
-        Console.Write("\b\b\b\b\b\b\b");
-        Console.Write("{0:F2}%", e.Progress);
-    }
-
 }
 </code></pre>
-
-<p>}
-```</p>
 
 <p>プリセットに設定した通りにエンコード出来ました。</p>
 
@@ -254,42 +244,38 @@ using Microsoft.Expression.Encoder;</p>
 </ul>
 
 
-<p>```c#
-using System;
+<pre><code class="c#">using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using Microsoft.Expression.Encoder;</p>
+using Microsoft.Expression.Encoder;
 
-<p>namespace ConsoleApplication1
-{</p>
-
-<pre><code>class Program
+namespace ConsoleApplication1
 {
-
-
-    static void Main(string[] args)
+    class Program
     {
-        MediaItem mediaItem = new MediaItem(@"C:\ruby.avi");
 
-        //jobの生成
-        Job job = new Job();
-        job.MediaItems.Add(mediaItem);
 
-        //出力先
-        job.OutputDirectory = @"C:\videoOutput";
+        static void Main(string[] args)
+        {
+            MediaItem mediaItem = new MediaItem(@"C:\ruby.avi");
 
-        //エンコード
-        Console.WriteLine("Encoding…c");
-        job.Encode();
-        Console.WriteLine("Finished encoding.");
-        job.Dispose();
+            //jobの生成
+            Job job = new Job();
+            job.MediaItems.Add(mediaItem);
+
+            //出力先
+            job.OutputDirectory = @"C:\videoOutput";
+
+            //エンコード
+            Console.WriteLine("Encoding…c");
+            job.Encode();
+            Console.WriteLine("Finished encoding.");
+            job.Dispose();
+        }
     }
 }
 </code></pre>
-
-<p>}
-```</p>
 
 <p>VC-1コーデック(WVC1)でエンコードすることが出来ました。</p>
 ]]></content>

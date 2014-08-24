@@ -52,12 +52,9 @@
 		<div class="left-col">
 			<div class="intrude-less">
 			<header id="header" class="inner"><div class="profilepic">
-	<script src="/javascripts/md5.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-		});
-	</script>
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
 </div>
 <hgroup>
   <h1><a href="/">Code Life</a></h1>
@@ -129,7 +126,7 @@ SkypeAPIコマンドというものを使うようです。</p>
 
 <p>コマンドを実行するには、SendCommand()メソッドの引数にコマンドを渡しますが直接、記述はできないようで、CommandClassを使います。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -145,7 +142,7 @@ SkypeAPIコマンドというものを使うようです。</p>
 </span><span class='line'>    <span class="n">cd</span><span class="p">.</span><span class="n">Command</span> <span class="p">=</span> <span class="s">&quot;MINIMIZE&quot;</span><span class="p">;</span>
 </span><span class='line'>    <span class="n">axSkype1</span><span class="p">.</span><span class="n">SendCommand</span><span class="p">(</span><span class="n">cd</span><span class="p">);</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>Windowを最小化する「MINIMIZE」コマンドを実行して、邪魔なWindowを隠せるようになりました。</p>
@@ -158,7 +155,7 @@ SkypeAPIコマンドというものを使うようです。</p>
 <p>FormにlistBoxを追加して、そこにコンタクトリストを表示できるようにしたいと思います。
 コンタクトリストを取得するには、SkypeコンポーネントのFriendsプロパティからUserオブジェクトを取得します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -172,12 +169,12 @@ SkypeAPIコマンドというものを使うようです。</p>
 </span><span class='line'>        <span class="n">listBox1</span><span class="p">.</span><span class="n">Items</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="n">user</span><span class="p">.</span><span class="n">Handle</span><span class="p">);</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>フォームをロードするときに呼び出して、リストボックスに追加してみます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -195,7 +192,7 @@ SkypeAPIコマンドというものを使うようです。</p>
 </span><span class='line'>    <span class="n">axSkype1</span><span class="p">.</span><span class="n">Attach</span><span class="p">(</span><span class="m">8</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
 </span><span class='line'>    <span class="n">contactList</span><span class="p">();</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>これで、完成！！
@@ -206,7 +203,7 @@ SkypeAPIコマンドというものを使うようです。</p>
 
 <p>コード全体（適当に書いてたので名前空間をusingディレクティブで整理しました）</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -324,7 +321,7 @@ SkypeAPIコマンドというものを使うようです。</p>
 </span><span class='line'>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 </div>
 
@@ -339,26 +336,54 @@ SkypeAPIコマンドというものを使うようです。</p>
     google_ad_height = 90;
     //-->
     </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 </div>
-<div class="share">
-    <div class="addthis_toolbox addthis_default_style ">
-        <div style="float:left">
-            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2011/09/30/c-sharp-skype-api-3/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-            <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </div>
-        
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        
-        
-        <a class="addthis_button_tweet"></a>
-        
-        
-        <a class="addthis_counter addthis_pill_style"></a>
-    </div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2011/09/30/c-sharp-skype-api-3/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
 </div>
 
 
@@ -398,6 +423,14 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 
 
 
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
 
 
   <script type="text/javascript">
@@ -409,6 +442,15 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
 
 
 

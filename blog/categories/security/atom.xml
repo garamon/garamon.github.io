@@ -4,7 +4,7 @@
   <title><![CDATA[Category: security | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/security/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -25,14 +25,13 @@
 <!--more-->
 
 
-<p><code>
-HTTP/1.1 200 OK
+<pre><code>HTTP/1.1 200 OK
 Date: Wed,  24 Apr 2013 13:46:59 GMT
 Server: Apache
 X-Powered-By: PHP/5.2.0
 Content-Length: 2558
 Content-Type: text/html; charset=UTF-8
-</code></p>
+</code></pre>
 
 <h2>PHPのバージョン出力を抑制する</h2>
 
@@ -40,21 +39,18 @@ Content-Type: text/html; charset=UTF-8
 
 <p>php.ini に次の設定を加え、Apache or Nginx の再起動します。</p>
 
-<p><code>
-expose_php=Off
-</code></p>
+<pre><code>expose_php=Off
+</code></pre>
 
 <h3>設定を加えた後のレスポンスヘッダ</h3>
 
-<p>```
-HTTP/1.1 200 OK
+<pre><code>HTTP/1.1 200 OK
 Date: Wed,  24 Apr 2013 13:46:59 GMT
 Server: Apache
 Content-Length: 2558
 Content-Type: text/html; charset=UTF-8
-&hellip;</p>
-
-<p>```</p>
+...
+</code></pre>
 
 <p>バージョン情報が出力されていないことが確認できます。
 セキュリティ上 Webサーバのバージョン情報も抑制したほうがよいでしょう。</p>
@@ -65,9 +61,8 @@ Content-Type: text/html; charset=UTF-8
 
 <p>wgetコマンドでも確認できますがmacはデフォルトではwgetコマンドがインストールされていないのでcurlを利用するのがいいと思います。Winはtelnet?</p>
 
-<p><code>
-curl -I http://hoge.com
-</code></p>
+<pre><code>curl -I http://hoge.com
+</code></pre>
 ]]></content>
   </entry>
   

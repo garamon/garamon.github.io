@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -28,9 +28,8 @@
 
 <p>fileAとfileBをpasteコマンドで連結します。</p>
 
-<p><code>sh
-$ paste fileA.txt fileB.txt &gt; fileC.txt
-</code></p>
+<pre><code class="sh">$ paste fileA.txt fileB.txt &gt; fileC.txt
+</code></pre>
 
 <p>fileA.txt
 <code>
@@ -61,9 +60,8 @@ CCC 333
 
 <h2>区切り文字をカンマに</h2>
 
-<p><code>
-$ paste -d , fileA.txt fileB.txt &gt; fileC.txt
-</code></p>
+<pre><code>$ paste -d , fileA.txt fileB.txt &gt; fileC.txt
+</code></pre>
 
 <h3>出力結果</h3>
 
@@ -89,47 +87,37 @@ CCC,333
 <!--more-->
 
 
-<h2>``` sh</h2>
+<pre><code class="sh">-----------------
+|  BUILD ERROR  |
+-----------------
 
-<h2>|  BUILD ERROR  |</h2>
+Here are the last 10 lines from the log:
 
-<p>Here are the last 10 lines from the log:</p>
-
-<hr />
-
-<p>  &ldquo;_sk_shift&rdquo;, referenced from:</p>
-
-<pre><code>  _load_all_certs_from_file in openssl.o
+-----------------------------------------
+  "_sk_shift", referenced from:
+      _load_all_certs_from_file in openssl.o
+  "_sk_value", referenced from:
+      _zif_openssl_csr_new in openssl.o
+      _zif_openssl_pkcs7_verify in openssl.o
+      _php_openssl_parse_config in openssl.o
+      _php_openssl_sockop_set_option in xp_ssl.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [sapi/cli/php] Error 1
+-----------------------------------------
 </code></pre>
-
-<p>  &ldquo;_sk_value&rdquo;, referenced from:</p>
-
-<pre><code>  _zif_openssl_csr_new in openssl.o
-  _zif_openssl_pkcs7_verify in openssl.o
-  _php_openssl_parse_config in openssl.o
-  _php_openssl_sockop_set_option in xp_ssl.o
-</code></pre>
-
-<p>ld: symbol(s) not found for architecture x86_64
-clang: error: linker command failed with exit code 1 (use -v to see invocation)</p>
-
-<h2>make: *** [sapi/cli/php] Error 1</h2>
-
-<p>```</p>
 
 <p><a href="https://github.com/CHH/phpenv/issues/22#issuecomment-1672712://github.com/CHH/phpenv/issues/22#issuecomment-16727120">同様の現象</a>に悩んでる方がいてそのコメントにOpenSSLのバージョンあげろと書いてあったので
 その通りにしてみたらインストールできた。</p>
 
 <h2>OpenSSLのアップデート方法</h2>
 
-<p>``` sh
-$ brew install openssl
-$ brew link openssl &mdash;force
+<pre><code class="sh">$ brew install openssl
+$ brew link openssl --force
 $ exec $SHELL -l
 $ openssl version
-OpenSSL 1.0.1e 11 Feb 2013</p>
-
-<p>```</p>
+OpenSSL 1.0.1e 11 Feb 2013
+</code></pre>
 
 <p>インストールできたついでに初めてコメントを書いてみたが自身の英語力がなくて泣けてくる。</p>
 ]]></content>
@@ -218,35 +206,30 @@ Macになんも入れてなかったので、Xcode、MacPortsをインストー�
 
 <p>もう一度やり直し。</p>
 
-<p><code>
-configure: error: The intltool scripts were not found.　Please install intltool*
-</code></p>
+<pre><code>configure: error: The intltool scripts were not found.　Please install intltool*
+</code></pre>
 
 <p>素直にMacPortsからintltoolをインストール。</p>
 
-<p><code>
-$ sudo port install intltool
-</code></p>
+<pre><code>$ sudo port install intltool
+</code></pre>
 
 <p>※結構時間かかります。</p>
 
 <p>さらにもう一度。</p>
 
-<p><code>
-configure: error: Package requirements (gtk+-2.0&gt;= 2.12 glib-2.0 &gt;= 2.16 gio-2.0 &gt;= 2.16)were not met: No package "gtk+-2.0"; found*
-</code></p>
+<pre><code>configure: error: Package requirements (gtk+-2.0&gt;= 2.12 glib-2.0 &gt;= 2.16 gio-2.0 &gt;= 2.16)were not met: No package "gtk+-2.0"; found*
+</code></pre>
 
 <p>必要なパッケージをインストール</p>
 
-<p><code>
-$ sudo port search gtk+-2.0 gtk-xfce-engine
-</code></p>
+<pre><code>$ sudo port search gtk+-2.0 gtk-xfce-engine
+</code></pre>
 
-<p><code>
-$ ./configure
+<pre><code>$ ./configure
 $ make
 $ sudo make install
-</code></p>
+</code></pre>
 
 <p>これでとりあえずインストールされます。
 でもなぜか私のところではアプリケーションのところに追加されない。。

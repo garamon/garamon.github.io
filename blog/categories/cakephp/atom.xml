@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: CakePHP | Code Life]]></title>
+  <title><![CDATA[Category: cakephp | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/cakephp/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,64 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[[CakePHP]モデルのコールバックを無効化にする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback/"/>
+    <updated>2013-09-25T21:59:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback</id>
+    <content type="html"><![CDATA[<p>モデルの<a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html">コールバックメソッド</a>が様々ありますが、無効化したい場合があります。</p>
+
+<p>find, save共に第２引数にcallbacksをキーとした配列を渡すことでモデルのコールバック実行の可否を伝えることが可能です。</p>
+
+<!--more-->
+
+
+<h2>find(beforeFind, afterFind共に無効化)</h2>
+
+<pre><code class="php">$this-&gt;find('first', array(
+    'callbacks' =&gt; false
+));
+</code></pre>
+
+<h2>find(beforeFindのみ有効)</h2>
+
+<pre><code class="php">$this-&gt;find('first', array(
+    'callbacks' =&gt; 'before'
+));
+</code></pre>
+
+<h2>find(afterFindのみ有効)</h2>
+
+<pre><code class="php">$this-&gt;find('first', array(
+    'callbacks' =&gt; 'after'
+));
+</code></pre>
+
+<h2>save(beforeSave, afterSave共に無効化)</h2>
+
+<pre><code class="php">$this-&gt;save($data, array(
+    'callbacks' =&gt; false
+));
+</code></pre>
+
+<h2>save(beforeSaveのみ有効)</h2>
+
+<pre><code class="php">$this-&gt;save($data, array(
+    'callbacks' =&gt; 'before'
+));
+</code></pre>
+
+<h2>save(afterSaveのみ有効)</h2>
+
+<pre><code class="php">$this-&gt;save($data, array(
+    'callbacks' =&gt; 'after'
+));
+</code></pre>
+
+<p>という小ネタ。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CakePHP2 CssController could not be found が発生する場合]]></title>
@@ -44,18 +102,14 @@
 <p>やってることはAuthComponent内で行なっていることとそんなに大差はなく、
 キーの指定までは必要ないだろうと省いています。</p>
 
-<p>``` php AppModel.php
-protected function _getCurrentUser() {</p>
+<pre><code class="php AppModel.php">protected function _getCurrentUser() {
+    App::uses('CakeSession', 'Model/Datasource');
+    $Session = new CakeSession();
 
-<pre><code>App::uses('CakeSession', 'Model/Datasource');
-$Session = new CakeSession();
-
-$user = $Session-&gt;read('Auth.User');
-return $user;
+    $user = $Session-&gt;read('Auth.User');
+    return $user;
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <p>これで <code>$this-&gt;_getCurrentUser()</code> を呼び出してあげればユーザー情報が取得できます。</p>
 
@@ -63,15 +117,11 @@ return $user;
 
 <p>※2013/3/28 サンプルコード追記</p>
 
-<p>``` php AppModel.php
-protected function _getCurrentUser() {</p>
-
-<pre><code>App::uses('AuthComponent',  'Controller/Component');
-return AuthComponent::user();
+<pre><code class="php AppModel.php">protected function _getCurrentUser() {
+    App::uses('AuthComponent',  'Controller/Component');
+    return AuthComponent::user();
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <p>参考というかパク(ry</p>
 
@@ -97,43 +147,36 @@ return AuthComponent::user();
 <p>[install_dir]/app/Config 以下に tags.php を作成します。
 例えば、以下のように独自の定義をします。</p>
 
-<p>```php tags.php
-$config = array(</p>
-
-<pre><code>'tags' =&gt; array(
-    'css' =&gt; '&lt;link rel="%s" href="%s" %s&gt;',
-)
+<pre><code class="php tags.php">$config = array(
+    'tags' =&gt; array(
+        'css' =&gt; '&lt;link rel="%s" href="%s" %s&gt;',
+    )
+);
 </code></pre>
-
-<p>);
-```</p>
 
 <h2>タグ定義ファイルのロード</h2>
 
 <p>定義したタグを反映させるために、タグ定義ファイルを読みこませる必要があります。
 my_tags.phpとした場合は、tags.php を my_tags.phpに変えてください。</p>
 
-<p><code>php
-$this-&gt;Html-&gt;loadConfig('tags.php');
-</code></p>
+<pre><code class="php">$this-&gt;Html-&gt;loadConfig('tags.php');
+</code></pre>
 
 <h3>定義ファイルがphpファイルでない場合(iniファイルの場合)</h3>
 
 <p>第2引数にreaderクラス名を指定します。
 コアファイルを覗くとphpファイルとiniファイルはサポートされてるようです。</p>
 
-<p><code>php
-$this-&gt;Html-&gt;loadConfig(array('tags.ini', 'ini'));`
-</code></p>
+<pre><code class="php">$this-&gt;Html-&gt;loadConfig(array('tags.ini', 'ini'));`
+</code></pre>
 
 <h3>定義ファイルの場所がConfig直下にない場合</h3>
 
 <p>例えばタグ定義ファイルが [install_dir]/app/Config/tag/tags.php と配置されてる場合、
 第2引数にパスを指定します。</p>
 
-<p><code>php
-$this-&gt;Html-&gt;loadConfig('tags.php', APP . 'Config' . DS . 'tag');
-</code></p>
+<pre><code class="php">$this-&gt;Html-&gt;loadConfig('tags.php', APP . 'Config' . DS . 'tag');
+</code></pre>
 
 <p>loadConfigメソッドではHtmlヘルパーに設定されている$_tagsと読み込まれた定義をmergeしているので
 元のタグを残したい場合は、名前の衝突が起きないよう注意が必要です。</p>
@@ -282,77 +325,6 @@ CakePHPのACLはクソみたいに使いにくいので、このプラグイン�
 <p><a href="http://d.hatena.ne.jp/basuke/20111219" title="basuke の日記 フレームワークで語るMVCの話 : PHP Advent Calendar #19" target="_blank">basuke の日記 フレームワークで語るMVCの話 : PHP Advent Calendar #19</a></p>
 
 <p>偉そうに書きましたが、ボクも修行の日々です。少しでもお役に立てれば幸いです。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CakePHP ContainableBehavior便利すぎ]]></title>
-    <link href="http://blog.code-life.net/blog/2012/03/12/cakephp-containable-behavior/"/>
-    <updated>2012-03-12T00:00:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2012/03/12/cakephp-containable-behavior</id>
-    <content type="html"><![CDATA[<p>notoです。</p>
-
-<p>モデル間のアソシエーションが複雑な場合、findで取得するデータに無駄がある、取得したいデータが取得できないことがあります。
-そんな時は、ContainableBehaviorを利用すると幸せになれますよ。</p>
-
-<!--more-->
-
-
-<h2>検証環境</h2>
-
-<ul>
-<li>CakePHP1.3.x</li>
-</ul>
-
-
-<h2>ContainableBehavior</h2>
-
-<p>このビヘイビアは find を実行するときに関連したモデルを選別したり限定したりするために使用します。コンテイナブル(Containable)は、データベース中の不要なものを削減し、アプリケーションの速度やパフォーマンスを改善します。このクラスを使うと、ユーザに対するデータの検索とフィルタを、美しく一貫した方法で行うこともできます。</p>
-
-<p>複雑なモデル関連の場合、データを取得する際に、recursiveでスコープ(?)を広げたり、Modelをbind unbindします。
-recursive 2か1か。あれキーがないって怒られてる。そんなことがあると思います。</p>
-
-<p>そんなことを悩まずともContainableBehaviorを利用したらいいのです。</p>
-
-<h3>ContainableBehaviorを利用したフィルタリング</h3>
-
-<p>cookbookから引用させてもらいます。
-モデル間のアソシエーションが次のようになっているとします。</p>
-
-<p><code>php
-User-&gt;Post-&gt;PostAttachment-&gt;PostAttachmentHistory-&gt;HistoryNotes
-</code></p>
-
-<p>ContainableBehaviorを利用したフィルタリングの例です。</p>
-
-<p>```php
-$this->User->find(&lsquo;all&rsquo;, array(</p>
-
-<pre><code>'contain'=&gt;array(
-    'Post' =&gt; array(
-        'PostAttachment' =&gt; array(
-            'fields' =&gt; array('id', 'name'),
-            'PostAttachmentHistory' =&gt; array(
-                 'HistoryNotes' =&gt; array(
-                     'fields' =&gt; array('id', 'note')
-                  )
-             )
-         )
-    )
- )
-</code></pre>
-
-<p>));
-```</p>
-
-<p>containを指定し、その中で取得したいフィールド、フィルタリングしたい条件を追加していきます。
-どのデータを取得したいのかコードから把握でき可読性もいいです。</p>
-
-<p>ContainableBehaviorそんなのデフォルトで使うでしょ。常識的に考えてって方はこれからもContainableBehaviorを、ContainableBehavior知らなかった方は是非利用してみてください。</p>
-
-<h2>参考</h2>
-
-<p><a href="http://book.cakephp.org/1.3/ja/The-Manual/Core-Behaviors/Containable.html">CakePHP コンテイナブル</a></p>
 ]]></content>
   </entry>
   

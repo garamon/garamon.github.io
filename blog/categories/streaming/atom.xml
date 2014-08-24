@@ -4,7 +4,7 @@
   <title><![CDATA[Category: streaming | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/streaming/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -37,51 +37,46 @@
 
 <p>オープンソースのsegmenterはいくつかありますが、今回は <a href="https://github.com/johnf/m3u8-segmenter">m3u8-segmenter</a>を試すことにします。</p>
 
-<p><code>sh
-$ cd /usr/local/src/
+<pre><code class="sh">$ cd /usr/local/src/
 $ git clone https://github.com/johnf/m3u8-segmenter.git
 $ cd m3u8-segmenter
-</code></p>
+</code></pre>
 
 <h3>Configure Error</h3>
 
 <p>configureを実行すると以下のエラーが発生</p>
 
-<p>```
-configure: error: Package requirements (libavformat libavcodec libavutil) were not met:
-No package &lsquo;libavformat&rsquo; found
-No package &lsquo;libavcodec&rsquo; found
-No package &lsquo;libavutil&rsquo; found</p>
+<pre><code>configure: error: Package requirements (libavformat libavcodec libavutil) were not met:
+No package 'libavformat' found
+No package 'libavcodec' found
+No package 'libavutil' found
 
-<p>Consider adjusting the PKG_CONFIG_PATH environment variable if you
-installed software in a non-standard prefix.</p>
+Consider adjusting the PKG_CONFIG_PATH environment variable if you
+installed software in a non-standard prefix.
 
-<p>Alternatively,  you may set the environment variables FFMPEG_CFLAGS
+Alternatively,  you may set the environment variables FFMPEG_CFLAGS
 and FFMPEG_LIBS to avoid the need to call pkg-config.
 See the pkg-config man page for more details.
-```</p>
+</code></pre>
 
 <p>以前、<a href="http://code-life.net/?p=2331">CentOSにHttpSegmenterをインストールする</a>でも似たエラーが発生してたので同じ方法で解決できる。</p>
 
-<p><code>
-$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
+<pre><code>$ export PKG_CONFIG_PATH=/usr/local/lib/pkgconfig
 $ ./configure
-</code></p>
+</code></pre>
 
 <h3>インストール</h3>
 
-<p><code>
-$ make
+<pre><code>$ make
 $ make install
-</code></p>
+</code></pre>
 
 <h2>segmentしてみる</h2>
 
-<p><code>
-$ mkdir tmp
+<pre><code>$ mkdir tmp
 $ ffmpeg -i big_buck_bunny.mp4 -f mpegts - | \
   m3u8-segmenter -i - -d 10 -p tmp/big_buck_bunny -m tmp/big_buck.m3u8 -u http://localhost/segment
-</code></p>
+</code></pre>
 
 <p>簡単にオプションの説明をすると、</p>
 
@@ -90,7 +85,7 @@ $ ffmpeg -i big_buck_bunny.mp4 -f mpegts - | \
   <dd>何秒毎に分割するか。上記のコマンドの場合、10秒</dd>
 
   <dt>オプション -p</dt>
-  <dd>分割されたtsファイルの出力先 & 出力ファイル名。出力先にbig_buck_bunny-1.ts ... big_buck_bunny-50.ts ... と連番でファイルが作成される</dd>
+  <dd>分割されたtsファイルの出力先 & 出力ファイル名。出力先にbig_buck_bunny-1.ts &#8230; big_buck_bunny-50.ts &#8230; と連番でファイルが作成される</dd>
 
   <dt>オプション -m</dt>
   <dd>m3u8の出力先</dd>

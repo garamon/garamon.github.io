@@ -53,12 +53,9 @@
 		<div class="left-col">
 			<div class="intrude-less">
 			<header id="header" class="inner"><div class="profilepic">
-	<script src="/javascripts/md5.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-		});
-	</script>
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
 </div>
 <hgroup>
   <h1><a href="/">Code Life</a></h1>
@@ -129,36 +126,36 @@
 <p>クラスを含むファイル名は、アンダースコア区切りからアッパーキャメルケースへと変更。
 そもそもなんでクラス名とファイル名が違うんだと小一時間。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>CakePHP1系 : users_controllers.php
 </span><span class='line'>↓
-</span><span class='line'>CakePHP2.0 : UsersController.php</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>CakePHP2.0 : UsersController.php</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>コンポーネント</h3>
 
 <p>suffixとして「Component」が追加。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>CakePHP1系 : component/session.php
 </span><span class='line'>↓
-</span><span class='line'>CakePHP2.0 : Component/SessionComponent.php</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>CakePHP2.0 : Component/SessionComponent.php</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>ヘルパー</h3>
 
 <p>suffixとして「Helper」が追加。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>CakePHP1系 : helper/form.php
 </span><span class='line'>↓
-</span><span class='line'>CakePHP2.0 : Helper/FormHelper.php</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>CakePHP2.0 : Helper/FormHelper.php</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>クラスを含むフォルダ名</h3>
@@ -166,12 +163,12 @@
 <p>クラスを含むフォルダ名は、lowercaseからアッパーキャメルケースへと変更。
 「webroot」等のクラスを含まないフォルダ名は、lowercaseのまま。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>CakePHP1系 : controller
 </span><span class='line'>↓
-</span><span class='line'>CakePHP2.0 : Controller</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>CakePHP2.0 : Controller</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h2>アクセス修飾子</h2>
@@ -198,16 +195,16 @@
 <p>beforeFilterもしくは$componentsの配列内で設定。
 以下はbeforeFilterでの例:</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">Auth</span><span class="o">-&gt;</span><span class="na">authenticate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Form&#39;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>認証方式の複数指定</h3>
 
 <p>複数の認証方式を利用したい時は以下のように設定する。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -215,7 +212,7 @@
 </span><span class='line'>    <span class="s1">&#39;Form&#39;</span>  <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;userModel&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Users.User&#39;</span><span class="p">),</span>
 </span><span class='line'>    <span class="s1">&#39;Basic&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;userModel&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;Users.User&#39;</span><span class="p">)</span>
 </span><span class='line'><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>ログインメソッドのマニュアル化</h3>
@@ -223,7 +220,7 @@
 <p>上の例だとuserModelを2度宣言している。
 DRYなコードも書ける。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -233,14 +230,14 @@ DRYなコードも書ける。</p>
 </span><span class='line'>    <span class="s1">&#39;Form&#39;</span><span class="p">,</span>
 </span><span class='line'>    <span class="s1">&#39;Basic&#39;</span>
 </span><span class='line'><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>カスタム認証オブジェクトを作成する</h3>
 
 <p>BaseAuthenticateを継承してauthenticateメソッドをオーバーライドする。</p>
 
-<figure class='code'><figcaption><span>app/Controller/Component/Auth/OpenidAuthenticate.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>app/Controller/Component/Auth/OpenidAuthenticate.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -256,18 +253,18 @@ DRYなコードも書ける。</p>
 </span><span class='line'>        <span class="c1">// 認証処理を書く</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>カスタム認証オブジェクトを利用する</h3>
 
 <p>authenticateプロパティにセットするだけ。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
 </span><span class='line'>    <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Auth</span><span class="o">-&gt;</span><span class="na">authenticate</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;Openid&#39;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>ログインメソッドのマニュアル化</h3>
@@ -275,7 +272,7 @@ DRYなコードも書ける。</p>
 <p>CakePHP1系では、空のログインメソッドを用意してあげれば、AuthComponentが必要な機能を自動的に提供してくれた。
 CakePHP2.0では、手動で呼び出す必要がある。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -293,7 +290,7 @@ CakePHP2.0では、手動で呼び出す必要がある。</p>
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>パスワードのハッシュ化</h3>
@@ -301,7 +298,7 @@ CakePHP2.0では、手動で呼び出す必要がある。</p>
 <p>CakePHP2.0からパスワードは自動的にハッシュ化されない。
 レコードを保存する前にハッシュ化をする必要がある。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -315,7 +312,7 @@ CakePHP2.0では、手動で呼び出す必要がある。</p>
 </span><span class='line'>        <span class="k">return</span> <span class="k">true</span><span class="p">;</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>ダイジェスト認証の場合は、パスワードのハッシュ化の方法が違うので注意。</p>
@@ -327,7 +324,7 @@ CakePHP2.0では、繰り返し利用可能なセッショントークンも利�
 
 <p>セッショントークンの設定例：</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -341,7 +338,7 @@ CakePHP2.0では、繰り返し利用可能なセッショントークンも利�
 </span><span class='line'>        <span class="s1">&#39;csrfUseOnce&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
 </span><span class='line'>    <span class="p">)</span>
 </span><span class='line'><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h2>FormHelper</h2>
@@ -354,13 +351,13 @@ postLink() postButton()メソッド追加。POSTメソッドでリクエスト�
 <p>PHPUnitへと移行。
 テスト駆動開発入門買ったけど、読んでない。。。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">CakePHP1</span><span class="err">系</span> <span class="o">:</span> <span class="nx">SimpleTest</span>
 </span><span class='line'><span class="err">↓</span>
 </span><span class='line'><span class="nx">CakePHP2</span><span class="o">.</span><span class="mi">0</span> <span class="o">:</span> <span class="nx">PHPUnit</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h2>Request Responce</h2>
@@ -393,26 +390,54 @@ LT初めてだったので緊張して軽くテンパってましたが、無事
     google_ad_height = 90;
     //-->
     </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 </div>
-<div class="share">
-    <div class="addthis_toolbox addthis_default_style ">
-        <div style="float:left">
-            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2011/09/10/phpcon2011-lightning-talk/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-            <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </div>
-        
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        
-        
-        <a class="addthis_button_tweet"></a>
-        
-        
-        <a class="addthis_counter addthis_pill_style"></a>
-    </div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2011/09/10/phpcon2011-lightning-talk/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
 </div>
 
 
@@ -461,6 +486,14 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 
 
 
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
 
 
   <script type="text/javascript">
@@ -472,6 +505,15 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
 
 
 

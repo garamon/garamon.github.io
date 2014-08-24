@@ -52,12 +52,9 @@
 		<div class="left-col">
 			<div class="intrude-less">
 			<header id="header" class="inner"><div class="profilepic">
-	<script src="/javascripts/md5.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-		});
-	</script>
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
 </div>
 <hgroup>
   <h1><a href="/">Code Life</a></h1>
@@ -125,8 +122,8 @@
 <p>HadoopはJavaソフトウェアの為、Javaのインストールが必要となります。以下のコマンドでJavaのバージョンが低い、またはそもそもインストールされていない場合はインストールする必要があります。
 CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上です。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ java -version</span></code></pre></td></tr></table></div></figure>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ java -version</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" title="Java SE Downloads" target="_blank">Java SE Downloads</a> から　Java SE 6 Update xx　の　JDK を選択します。</p>
@@ -138,34 +135,34 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 
 <p>実行権限を与えて、インストールを行います。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ chmod a+x jdk-6uxx-linux-x64-rpm.bin
-</span><span class='line'>$ ./jdk-6uxx-linux-x64-rpm.bin</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>$ ./jdk-6uxx-linux-x64-rpm.bin</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>環境変数の設定</h3>
 
 <p>インストールが完了したら環境変数の設定を行います。どのユーザにおいてもその設定が反映するよう /etc/bashrc に以下を追加します。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ vi /etc/bashrc
 </span><span class='line'>
 </span><span class='line'>export JAVA_HOME=/usr/java/default
-</span><span class='line'>export PATH=$PATH:$JAVA_HOME/bin</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>export PATH=$PATH:$JAVA_HOME/bin</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>設定を反映させ、正しく設定されているか確認します。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ source ~/.bashrc
 </span><span class='line'>$ printenv JAVA_HOME
-</span><span class='line'>/usr/java/default</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>/usr/java/default</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h2>Hadoop のインストール</h2>
@@ -178,14 +175,14 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 
 <p>ボクの場合は、リポジトリを追加してyum でインストールします。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>wget -O /etc/yum.repos.d/cloudera-cdh3.repo http://archive.cloudera.com/redhat/6/x86_64/cdh/cloudera-cdh3.repo</span></code></pre></td></tr></table></div></figure>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -O /etc/yum.repos.d/cloudera-cdh3.repo http://archive.cloudera.com/redhat/6/x86_64/cdh/cloudera-cdh3.repo</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>CDH3にもバージョンがあり、CDH3u5 から WebHDFSがサポートされたようです。
 なるべく新しいもの使いたいよねということで CDH3u5 をインストールします。その為に先ほどダウンロードしたリポジトリの修正を行います。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -198,25 +195,25 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 </span><span class='line'>
 </span><span class='line'>↓ 変更
 </span><span class='line'>
-</span><span class='line'>mirrorlist=http://archive.cloudera.com/redhat/6/x86_64/cdh/3u5/mirrors</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>mirrorlist=http://archive.cloudera.com/redhat/6/x86_64/cdh/3u5/mirrors</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>インストール</h3>
 
 <p>修正したら Hadoop のインストールです。時間がかかるので適当に待ちましょう。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ yum install hadoop-0.20 hadoop-0.20-native
-</span><span class='line'>$ yum install hadoop-0.20-conf-pseudo hadoop-0.20-datanode  hadoop-hive-server</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>$ yum install hadoop-0.20-conf-pseudo hadoop-0.20-datanode  hadoop-hive-server</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>サービスの起動 &amp; 確認</h3>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ for service in /etc/init.d/hadoop-*; do sudo $service start; done
-</span><span class='line'>$ jps</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>$ jps</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>以下が表示されていることを確認します。</p>
@@ -234,7 +231,7 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 
 <p>実際に円周率を計算するサンプルを動作させてみます。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -243,14 +240,14 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 </span><span class='line'>
 </span><span class='line'>・・・　省略 ・・・
 </span><span class='line'>Job Finished in 29.955 seconds
-</span><span class='line'>Estimated value of Pi is 3.14100000000000000000</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>Estimated value of Pi is 3.14100000000000000000</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>ちゃんと動作していることが確認できましたね。Hadoopには HDFS(Hadoop分散ファイルシステム)を操作するコマンドがあるのですが、長ったらしいのでエイリアスを設定しておきます。</p>
 
 <h3>エイリアスの設定</h3>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -267,7 +264,7 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 </span><span class='line'>alias dfsrmr='/usr/lib/hadoop/bin/hadoop dfs -rmr'     # rm -r¬
 </span><span class='line'>alias dfsmkdir='/usr/lib/hadoop/bin/hadoop dfs -mkdir' # mkdir¬
 </span><span class='line'>alias dfsput='/usr/lib/hadoop/bin/hadoop dfs -put'     # HDFS に転送¬
-</span><span class='line'>alias dfsget='/usr/lib/hadoop/bin/hadoop dfs -get'     # HDFS から転送¬</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>alias dfsget='/usr/lib/hadoop/bin/hadoop dfs -get'     # HDFS から転送¬</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h2>Hiveの設定</h2>
@@ -282,19 +279,19 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 
 <p>MySQL JDBC Connectorのバージョンは現在の最新のものを利用してます。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /tmp
 </span><span class='line'>$ curl -L 'http://www.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.22.tar.gz/from/http://mysql.he.net/' | tar xz
-</span><span class='line'>$ cp mysql-connector-java-5.1.22/mysql-connector-java-5.1.22-bin.jar /usr/lib/hive/lib/</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>$ cp mysql-connector-java-5.1.22/mysql-connector-java-5.1.22-bin.jar /usr/lib/hive/lib/</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h4>metastoreデータベースの作成</h4>
 
 <p>mysqlにログインしDBを作成します。DB名、ユーザー名、パスワードは適時置き換えて下さい。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -307,7 +304,7 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 </span><span class='line'>
 </span><span class='line'>CREATE USER 'hiveuser'@'localhost' IDENTIFIED BY 'password';
 </span><span class='line'>GRANT SELECT,INSERT,UPDATE,DELETE ON metastore.* TO 'hiveuser'@'localhost';
-</span><span class='line'>REVOKE ALTER,CREATE ON metastore.* FROM 'hiveuser'@'localhost';</span></code></pre></td></tr></table></div></figure>
+</span><span class='line'>REVOKE ALTER,CREATE ON metastore.* FROM 'hiveuser'@'localhost';</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h3>Hiveの設定</h3>
@@ -315,13 +312,13 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 <p>MySQLのMetaStore用のDBを作成したら、Hiveの設定ファイルの編集を行います。
 ホスト名、DB名、ユーザー名、パスワードは先程作成した情報に合わせて下さい。</p>
 
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ vi /etc/hive/conf/hive-site.xml</span></code></pre></td></tr></table></div></figure>
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vi /etc/hive/conf/hive-site.xml</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 
 
-<figure class='code'><figcaption><span>/etc/hive/conf/hive-site.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/hive/conf/hive-site.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -379,7 +376,7 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 </span><span class='line'>  &lt;name&gt;datanucleus.fixedDatastore&lt;/name&gt;
 </span><span class='line'>  &lt;value&gt;true&lt;/value&gt;
 </span><span class='line'>&lt;/property&gt;
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>設定が完了したらHadoopを再起動します。</p>
@@ -392,16 +389,16 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 
 <p>まずは自身のワークスペースにライブラリをコピーします。</p>
 
-<figure class='code'><figcaption><span>/etc/hive/conf/hive-site.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/hive/conf/hive-site.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='text'><span class='line'>cp -a /usr/lib/hive/lib/php/* /my/workspace/thrift
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <h4>ディレクトリ構造の変更</h4>
 
 <p>packagesディレクトリの hive_metastore, hive_service, queryplan, serde が何故か入れ子になっている為、以下の構成に変更します。</p>
 
-<figure class='code'><figcaption><span>/etc/hive/conf/hive-site.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/hive/conf/hive-site.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -433,12 +430,12 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 </span><span class='line'>  ▾ serde/
 </span><span class='line'>  |- serde_constants.php
 </span><span class='line'>  |- serde_types.php
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>とりあえずはデータベース一覧を出力するだけの簡単なスクリプトを作成して実行してみます。</p>
 
-<figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -466,19 +463,19 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 </span><span class='line'>$client-&gt;execute(&#39;SHOW DATABASES&#39;);
 </span><span class='line'>var_dump($client-&gt;fetchAll());
 </span><span class='line'>$transport-&gt;close();
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>実行すると以下のエラーが出力されます。GLOBALはPHPの予約語と重複しているのでこれをコメントアウトします。</p>
 
-<figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='text'><span class='line'>PHP Parse error:  syntax error, unexpected &#39;GLOBAL&#39; (T_GLOBAL), expecting identifier (T_STRING) in /my/workspace/lib/packages/hive_metastore/hive_metastore_types.php on line 20
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 
 
-<figure class='code'><figcaption><span>lib/packages/hive_metastore/hive_metastore_types.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>lib/packages/hive_metastore/hive_metastore_types.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -490,20 +487,20 @@ CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上で�
 </span><span class='line'>  <span class="k">const</span> <span class="no">TABLE</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
 </span><span class='line'>  <span class="k">const</span> <span class="no">PARTITION</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
 </span><span class='line'>  <span class="k">const</span> <span class="no">COLUMN</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>再度実行するとまたエラーが発生します。</p>
 
-<figure class='code'><figcaption><span>lib/packages/hive_metastore/hive_metastore_types.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>lib/packages/hive_metastore/hive_metastore_types.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">PHP</span> <span class="nx">Fatal</span> <span class="nx">error</span><span class="o">:</span>  <span class="nx">Uncaught</span> <span class="nx">exception</span> <span class="s1">&#39;TException&#39;</span> <span class="nx">with</span> <span class="nx">message</span> <span class="s1">&#39;TSocket: timed out reading 4 bytes from localhost:10000&#39;</span> <span class="nx">in</span> <span class="o">/</span><span class="nx">my</span><span class="o">/</span><span class="nx">workspace</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">transport</span><span class="o">/</span><span class="nx">TSocket</span><span class="o">.</span><span class="nx">php</span><span class="o">:</span><span class="mi">228</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>エラーからソケットタイムアウトをしていることがわかります。
 TSocketクラスの関数でタイムアウトが設定できる &amp; デフォルトの設定だと短すぎる為、これを先程作成したスクリプトに追加します。</p>
 
-<figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -537,7 +534,7 @@ TSocketクラスの関数でタイムアウトが設定できる &amp; デフォ
 </span><span class='line'><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="s1">&#39;SHOW DATABASES&#39;</span><span class="p">);</span>
 </span><span class='line'><span class="nb">var_dump</span><span class="p">(</span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">());</span>
 </span><span class='line'><span class="nv">$transport</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>タイムアウトの設定を１０分に設定しました。そこまで複雑なHQLを実行することもないのでとりあえず良しとします。
@@ -545,7 +542,7 @@ TSocketクラスの関数でタイムアウトが設定できる &amp; デフォ
 
 <h4>実行結果</h4>
 
-<figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -557,7 +554,7 @@ TSocketクラスの関数でタイムアウトが設定できる &amp; デフォ
 </span><span class='line'>  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span>
 </span><span class='line'>  <span class="nx">string</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="s2">&quot;hoge&quot;</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>案外さっくりいけますね。実際に集計スクリプトを実装する場合は、ThriftHiveClientインスタンスを返却するようなクラスをひとつかましてあげればうまくいくかな。</p>
@@ -584,26 +581,54 @@ TSocketクラスの関数でタイムアウトが設定できる &amp; デフォ
     google_ad_height = 90;
     //-->
     </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 </div>
-<div class="share">
-    <div class="addthis_toolbox addthis_default_style ">
-        <div style="float:left">
-            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/09/30/php-hiveql-hiveserver/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-            <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </div>
-        
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        
-        
-        <a class="addthis_button_tweet"></a>
-        
-        
-        <a class="addthis_counter addthis_pill_style"></a>
-    </div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/09/30/php-hiveql-hiveserver/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
 </div>
 
 
@@ -643,6 +668,14 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 
 
 
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
 
 
   <script type="text/javascript">
@@ -654,6 +687,15 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
 
 
 

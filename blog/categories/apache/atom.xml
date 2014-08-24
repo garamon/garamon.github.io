@@ -4,7 +4,7 @@
   <title><![CDATA[Category: apache | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/apache/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -52,14 +52,12 @@
 <p>デフォルトでは ServerTokens OSと設定されています。
 wgetコマンドでレスポンスヘッダの情報を確認してみます。</p>
 
-<p><code>
-wget -S http://localhost
-</code></p>
+<pre><code>wget -S http://localhost
+</code></pre>
 
 <h4>レスポンスヘッダ</h4>
 
-<p><code>
-・・・中略・・・
+<pre><code>・・・中略・・・
   HTTP/1.1 200 OK
   Date: Tue, 24 Jan 2012 14:36:08 GMT
   Server: Apache/2.2.3 (CentOS)
@@ -67,11 +65,10 @@ wget -S http://localhost
   Connection: close
   Content-Type: text/html;charset=ISO-8859-1
 ・・・中略・・・
-</code></p>
+</code></pre>
 
-<p><code>
-Server: Apache/2.2.3 (CentOS)
-</code></p>
+<pre><code>Server: Apache/2.2.3 (CentOS)
+</code></pre>
 
 <p>ApacheのバージョンとOS情報が取得できます。</p>
 
@@ -79,8 +76,7 @@ Server: Apache/2.2.3 (CentOS)
 
 <h4>レスポンスヘッダ</h4>
 
-<p><code>
-・・・中略・・・
+<pre><code>・・・中略・・・
   HTTP/1.1 200 OK
   Date: Tue, 24 Jan 2012 14:42:50 GMT
   Server: Apache/2.2.3 (CentOS) DAV/2 PHP/5.3.9
@@ -88,11 +84,10 @@ Server: Apache/2.2.3 (CentOS)
   Connection: close
   Content-Type: text/html;charset=ISO-8859-1
 ・・・中略・・・
-</code></p>
+</code></pre>
 
-<p><code>
-Server: Apache/2.2.3 (CentOS) DAV/2 PHP/5.3.9
-</code></p>
+<pre><code>Server: Apache/2.2.3 (CentOS) DAV/2 PHP/5.3.9
+</code></pre>
 
 <p>Apacheのバージョン、OS情報、モジュール情報、PHPのバージョン丸見えである。</p>
 
@@ -100,8 +95,7 @@ Server: Apache/2.2.3 (CentOS) DAV/2 PHP/5.3.9
 
 <h4>レスポンスヘッダ</h4>
 
-<p><code>
-・・・中略・・・
+<pre><code>・・・中略・・・
   HTTP/1.1 200 OK
   Date: Tue, 24 Jan 2012 14:50:27 GMT
   Server: Apache
@@ -109,11 +103,10 @@ Server: Apache/2.2.3 (CentOS) DAV/2 PHP/5.3.9
   Connection: close
   Content-Type: text/html;charset=ISO-8859-1
 ・・・中略・・・
-</code></p>
+</code></pre>
 
-<p><code>
-Server: Apache
-</code></p>
+<pre><code>Server: Apache
+</code></pre>
 
 <p>Apacheを利用してることしか確認できません。</p>
 

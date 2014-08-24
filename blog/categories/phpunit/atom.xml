@@ -4,7 +4,7 @@
   <title><![CDATA[Category: phpunit | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/phpunit/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -38,30 +38,26 @@
 <p>php-pear、xdebugはインストールされているものとします。
 PHPUnitをインストールするためにphp-xmlパッケージが必要なので、インストールされているか確認します。</p>
 
-<p><code>
-$ rpm -q php-xml
-</code></p>
+<pre><code>$ rpm -q php-xml
+</code></pre>
 
 <p>インストールされていない場合は、インストールを行います。</p>
 
-<p><code>
-$ yum install php-xml
-</code></p>
+<pre><code>$ yum install php-xml
+</code></pre>
 
 <h3>PHPUnit3.6のインストール</h3>
 
 <p>以下の２つのコマンドを実行します。</p>
 
-<p><code>
-$ pear config-set auto_discover 1
+<pre><code>$ pear config-set auto_discover 1
 $ pear install pear.phpunit.de/PHPUnit
-</code></p>
+</code></pre>
 
 <p>インストール終了後、phpunitコマンドを実行し確認を行います。</p>
 
-<p><code>
-$ phpunit -v
-</code></p>
+<pre><code>$ phpunit -v
+</code></pre>
 ]]></content>
   </entry>
   

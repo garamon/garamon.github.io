@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: CentOS | Code Life]]></title>
+  <title><![CDATA[Category: centos | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/centos/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -20,79 +20,68 @@
     <id>http://blog.code-life.net/blog/2013/12/18/centos-linux-system-information</id>
     <content type="html"><![CDATA[<h2>メモリ情報の確認</h2>
 
-<p><code>sh
-$ cat /proc/meminfo
-</code></p>
+<pre><code class="sh">$ cat /proc/meminfo
+</code></pre>
 
 <!--more-->
 
 
 <h3>結果</h3>
 
-<p>``` text</p>
-
-<p>MemTotal:        1020532 kB
+<pre><code class="text">
+MemTotal:        1020532 kB
 MemFree:          855980 kB
 Buffers:           36860 kB
-Cached:            59728 kB</p>
+Cached:            59728 kB
 
-<p>&hellip; 省略 &hellip;</p>
+... 省略 ...
 
-<p>HugePages_Free:        0
+HugePages_Free:        0
 HugePages_Rsvd:        0
 HugePages_Surp:        0
 Hugepagesize:       2048 kB
 DirectMap4k:        8128 kB
-DirectMap2M:     1040384 kB</p>
-
-<p>```</p>
+DirectMap2M:     1040384 kB
+</code></pre>
 
 <h2>バージョン確認</h2>
 
-<p><code>sh
-$ cat /etc/redhat-release
-</code></p>
+<pre><code class="sh">$ cat /etc/redhat-release
+</code></pre>
 
 <h3>結果</h3>
 
-<p><code>text
-CentOS release 6.4 (Final)
-</code></p>
+<pre><code class="text">CentOS release 6.4 (Final)
+</code></pre>
 
 <h2>カーネルのバージョン確認</h2>
 
-<p><code>sh
-$ cat /proc/version
-</code></p>
+<pre><code class="sh">$ cat /proc/version
+</code></pre>
 
 <h3>結果</h3>
 
-<p><code>text
-Linux version 2.6.32-358.2.1.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-3) (GCC) ) #1 SMP Wed Mar 13 00:26:49 UTC 2013
-</code></p>
+<pre><code class="text">Linux version 2.6.32-358.2.1.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-3) (GCC) ) #1 SMP Wed Mar 13 00:26:49 UTC 2013
+</code></pre>
 
 <p>こっちでも確認できる</p>
 
-<p><code>sh
-$ uname -a
-</code></p>
+<pre><code class="sh">$ uname -a
+</code></pre>
 
 <h3>結果</h3>
 
-<p><code>text
-Linux localhost.localdomain 2.6.32-358.2.1.el6.x86_64 #1 SMP Wed Mar 13 00:26:49 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
-</code></p>
+<pre><code class="text">Linux localhost.localdomain 2.6.32-358.2.1.el6.x86_64 #1 SMP Wed Mar 13 00:26:49 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
+</code></pre>
 
 <h2>CPU情報の確認</h2>
 
-<p><code>sh
-$ cat /proc/cpuinfo
-</code></p>
+<pre><code class="sh">$ cat /proc/cpuinfo
+</code></pre>
 
 <h3>結果</h3>
 
-<p><code>text
-processor   : 0
+<pre><code class="text">processor   : 0
 vendor_id   : GenuineIntel
 cpu family  : 6
 model       : 58
@@ -110,7 +99,7 @@ clflush size    : 64
 cache_alignment : 64
 address sizes   : 36 bits physical,  48 bits virtual
 power management:
-</code></p>
+</code></pre>
 
 <p>地味に忘れる。</p>
 ]]></content>

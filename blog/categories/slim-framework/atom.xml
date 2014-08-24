@@ -4,7 +4,7 @@
   <title><![CDATA[Category: slim framework | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/slim-framework/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -35,34 +35,23 @@
 
 <p>ex) サブディレクトリ名がslimの場合、「/slim」という文字列を返す。</p>
 
-<p>``` php
-$app->get(&lsquo;/index&rsquo;,  function () use ($app) {</p>
-
-<pre><code>$app-&gt;redirect($app-&gt;request-&gt;getRootUri() . '/hoge' );
+<pre><code class="php">$app-&gt;get('/index',  function () use ($app) {
+    $app-&gt;redirect($app-&gt;request-&gt;getRootUri() . '/hoge' );
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <h2>urlForを利用する</h2>
 
 <p>Slimはrouteに任意の名前を割り当てることができ、urlForでURLを生成することができる。</p>
 
-<p>``` php
-$app->get(&lsquo;/index&rsquo;,  function () use ($app) {</p>
+<pre><code class="php">$app-&gt;get('/index',  function () use ($app) {
+    $app-&gt;render('index.php');
+})-&gt;name('index');
 
-<pre><code>$app-&gt;render('index.php');
+$app-&gt;get('/edit',  function () use ($app) {
+    $app-&gt;redirect($app-&gt;urlFor('index'));
+}
 </code></pre>
-
-<p>})&ndash;>name(&lsquo;index&rsquo;);</p>
-
-<p>$app->get(&lsquo;/edit&rsquo;,  function () use ($app) {</p>
-
-<pre><code>$app-&gt;redirect($app-&gt;urlFor('index'));
-</code></pre>
-
-<p>}
-```</p>
 
 <p>これでインストール先がドキュメントルートだろうが、サブディレクトリだろうがコードを変える必要はなくなる。</p>
 

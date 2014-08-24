@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vagrant | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/vagrant/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -34,10 +34,9 @@
 
 <p>ただ複数書けばいいだけだった&hellip;</p>
 
-<p><code>ruby
-config.vm.synced_folder "../path_to_share1", "/share1"
+<pre><code class="ruby">config.vm.synced_folder "../path_to_share1", "/share1"
 config.vm.synced_folder "../path_to_share2", "/share2"
-</code></p>
+</code></pre>
 
 <p>常識なんですかね。</p>
 
@@ -72,16 +71,15 @@ config.vm.synced_folder "../path_to_share2", "/share2"
 
 <p>google先生に伺うと下記の解決方法が多かったがボクの環境では効果が見られなかった。</p>
 
-<p>``` sh
-$ gem which webrick
-/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb</p>
+<pre><code class="sh">$ gem which webrick
+/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb
 
-<p>$ vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb</p>
+$ vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb
 
-<p>:DoNotReverseLookup => nil
+:DoNotReverseLookup =&gt; nil
 ↓
-:DoNotReverseLookup => true
-```</p>
+:DoNotReverseLookup =&gt; true
+</code></pre>
 
 <h2>Vagrant Synced Foldersの設定</h2>
 
@@ -90,9 +88,8 @@ $ gem which webrick
 <p>ドキュメントを覗いてみると <code>rsync</code> がバージョン1.5から利用できるとのこと。
 使わない手はないと早速1.5に上げて試してみた。</p>
 
-<p><code>ruby
-config.vm.synced_folder "../target", "/share", type: "rsync"
-</code></p>
+<pre><code class="ruby">config.vm.synced_folder "../target", "/share", type: "rsync"
+</code></pre>
 
 <p>初回起動時は立ち上がるまで若干時間がかかったが、それ以降は遅いとは感じない。</p>
 
@@ -103,12 +100,11 @@ config.vm.synced_folder "../target", "/share", type: "rsync"
 <p>ホストOS側で変更した点がゲストOSに反映されない。
 rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</code> を実行する必要がある。</p>
 
-<p><code>
-$ vagrant up
+<pre><code>$ vagrant up
 $ vagrant rsync #１度きりの同期
 or
 $ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグがある。
-</code></p>
+</code></pre>
 
 <h2>結局は&hellip;</h2>
 
@@ -155,18 +151,16 @@ $ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグ
 
 <h2>Installation</h2>
 
-<p><code>sh
-$ brew tap homebrew/completions
+<pre><code class="sh">$ brew tap homebrew/completions
 $ brew install vagrant-completion
-</code></p>
+</code></pre>
 
 <p>~/.bashrcに以下を追加して反映</p>
 
-<p><code>sh
-if [ -f `brew --prefix`/etc/bash_completion.d/vagrant ]; then
+<pre><code class="sh">if [ -f `brew --prefix`/etc/bash_completion.d/vagrant ]; then
   source `brew --prefix`/etc/bash_completion.d/vagrant
 fi
-</code></p>
+</code></pre>
 
 <p>Vagrantコマンド・サブコマンドの補完が行われて幸福度が少し上がる。</p>
 
@@ -197,9 +191,8 @@ fi
 
 <p><a href="http://docs.vagrantup.com/v2/networking/public_network.html">公式のドキュメント</a>通りに設定し、vagrant reload すれば設定が反映されます。</p>
 
-<p><code>ruby
-config.vm.network :public_network,  :bridge =&gt; 'en1: Wi-Fi (AirPort)'
-</code></p>
+<pre><code class="ruby">config.vm.network :public_network,  :bridge =&gt; 'en1: Wi-Fi (AirPort)'
+</code></pre>
 
 <h2>Xdubug</h2>
 
@@ -211,9 +204,8 @@ config.vm.network :public_network,  :bridge =&gt; 'en1: Wi-Fi (AirPort)'
 
 <p>xdubug.ini もしくは php.iniに以下の一文を追加</p>
 
-<p><code>sh
-xdebug.remote_connect_back = 1
-</code></p>
+<pre><code class="sh">xdebug.remote_connect_back = 1
+</code></pre>
 
 <p>Xdebug使ってる人は要注意です。</p>
 
@@ -259,48 +251,43 @@ xdebug.remote_connect_back = 1
 <!--more-->
 
 
-<p>``` sh
-The following SSH command responded with a non-zero exit status.
-Vagrant assumes that this means the command failed!</p>
+<pre><code class="sh">The following SSH command responded with a non-zero exit status.
+Vagrant assumes that this means the command failed!
 
-<p>mount -t vboxsf -o uid=<code>id -u vagrant</code>,gid=<code>getent group vagrant | cut -d: -f3</code> /share /share</p>
+mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` /share /share
 
-<p>Stdout from the command:</p>
+Stdout from the command:
 
-<p>Stderr from the command:</p>
 
-<p>/sbin/mount.vboxsf: mounting failed with the error: No such device
-```</p>
+
+Stderr from the command:
+
+/sbin/mount.vboxsf: mounting failed with the error: No such device
+</code></pre>
 
 <p>Guest additionsが正常にインストールされていないようなので /var/log/vboxadd-install.log を確認する。</p>
 
-<p>```
-test -e include/linux/autoconf.h -a -e include/config/auto.conf || (            \</p>
-
-<pre><code>    echo;                                                           \
-    echo "  ERROR: Kernel configuration is invalid.";               \
-    echo "         include/linux/autoconf.h or include/config/auto.conf are missing.";      \
-    echo "         Run 'make oldconfig &amp;&amp; make prepare' on kernel src to fix it.";  \
-    echo;                                                           \
-    /bin/false)
+<pre><code>test -e include/linux/autoconf.h -a -e include/config/auto.conf || (            \
+        echo;                                                           \
+        echo "  ERROR: Kernel configuration is invalid.";               \
+        echo "         include/linux/autoconf.h or include/config/auto.conf are missing.";      \
+        echo "         Run 'make oldconfig &amp;&amp; make prepare' on kernel src to fix it.";  \
+        echo;                                                           \
+        /bin/false)
 </code></pre>
-
-<p>```</p>
 
 <p>automake, autoconf がインストールされてない&hellip;</p>
 
-<p><code>sh
-$ sudo yum install automake autoconf
-</code></p>
+<pre><code class="sh">$ sudo yum install automake autoconf
+</code></pre>
 
 <h2>Guest additionsの再インストール</h2>
 
 <p>ログアウト後</p>
 
-<p><code>sh
-$ vagrant vbguest --do install # requier vagrant-vbguest
+<pre><code class="sh">$ vagrant vbguest --do install # requier vagrant-vbguest
 $ vagrant reload
-</code></p>
+</code></pre>
 
 <p>これで共有設定が反映される。</p>
 ]]></content>

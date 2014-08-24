@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sass | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/sass/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -38,10 +38,9 @@
 
 <h3>Rubyがインストールされたか確認。</h3>
 
-<p><code>
-ruby -v
+<pre><code>ruby -v
 ruby 1.9.3p194 (2012-04-20) [i386-mingw32]
-</code></p>
+</code></pre>
 
 <p>バージョン情報が表示されれば、無事インストールされてます。</p>
 
@@ -49,15 +48,13 @@ ruby 1.9.3p194 (2012-04-20) [i386-mingw32]
 
 <p>次にgemをアップデートします。</p>
 
-<p><code>
-gem update --system
-</code></p>
+<pre><code>gem update --system
+</code></pre>
 
 <h3>gemでSassをインストール</h3>
 
-<p><code>
-gem install sass
-</code></p>
+<pre><code>gem install sass
+</code></pre>
 
 <p>インストールが終われば、Sassを使う環境が構築できました。</p>
 
@@ -69,38 +66,29 @@ gem install sass
 記述したファイルを「C:\Documents and Settings\hogehoge」以下に「test.scss」という名前を付けて保存します。
 hogehogeはお使いのパソコンのユーザー名になります。</p>
 
-<p>```css test.scss
-$mgn: 10px;
-h1{</p>
-
-<pre><code> margin:$mgn;
+<pre><code class="css test.scss">$mgn: 10px;
+h1{
+     margin:$mgn;
+}
+h2{
+     margin:$mgn;
+}
 </code></pre>
-
-<p>}
-h2{</p>
-
-<pre><code> margin:$mgn;
-</code></pre>
-
-<p>}
-```</p>
 
 <h3>コンパイルする</h3>
 
-<p><code>
-sass test.scss test.css
-</code></p>
+<pre><code>sass test.scss test.css
+</code></pre>
 
 <p>コマンドプロンプトで上記コマンドを打ちます。
 特に問題なく実行されれば、「test.scss」と同じところに「test.css」というファイルが出力されます。</p>
 
-<p>```css test.css
-h1 {
-  margin: 10px; }</p>
-
-<p>h2 {
+<pre><code class="css test.css">h1 {
   margin: 10px; }
-```</p>
+
+h2 {
+  margin: 10px; }
+</code></pre>
 
 <p>無事生成されていれば、Sassが使えるようになりました。</p>
 

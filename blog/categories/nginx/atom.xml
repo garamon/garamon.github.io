@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Nginx | Code Life]]></title>
+  <title><![CDATA[Category: nginx | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/nginx/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -42,11 +42,10 @@
 
 <h3>Nginxのアンインストール</h3>
 
-<p><code>
-[root@www ~]# rpm -q nginx
+<pre><code>[root@www ~]# rpm -q nginx
 nginx-1.2.0-1.el6.x86_64
 [root@www ~]# rpm -e nginx-1.2.0-1
-</code></p>
+</code></pre>
 
 <h2>Cache Purgeモジュールを追加する</h2>
 
@@ -56,148 +55,130 @@ nginx-1.2.0-1.el6.x86_64
 
 <h4>必要なパッケージのインストール</h4>
 
-<p><code>
-yum install rpm-build perl-ExtUtils-Embed
-</code></p>
+<pre><code>yum install rpm-build perl-ExtUtils-Embed
+</code></pre>
 
 <h4>ビルドユーザーの作成</h4>
 
 <p>rpmbuildはシステムにダメージを与える可能性があるので、専用のユーザーを作成します。</p>
 
-<p><code>
-useradd rpmbuilder
+<pre><code>useradd rpmbuilder
 passwd rpmbuilder
 [パスワード応答]
-</code></p>
+</code></pre>
 
 <h4>sudoの設定</h4>
 
 <p>sudoできるよう設定を行います。</p>
 
-<p><code>
-visudo
+<pre><code>visudo
 rpmbuilder ALL=(ALL) ALL ← 追加
-</code></p>
+</code></pre>
 
 <h4>ビルド環境の準備</h4>
 
-<p><code>
-su rpmbuilder
+<pre><code>su rpmbuilder
 mkdir -p ~/rpm/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
-</code></p>
+</code></pre>
 
 <h4>設定ファイルの作成</h4>
 
 <p>rpmbuildの際に参照される設定ファイルを新規作成します。</p>
 
-<p><code>
-echo '%_topdir %(echo $HOME)/rpm' &amp;gt; ~/.rpmmacros
-</code>
-これでrpmbuildの準備が完了です。</p>
+<pre><code>echo '%_topdir %(echo $HOME)/rpm' &amp;gt; ~/.rpmmacros
+</code></pre>
+
+<p>これでrpmbuildの準備が完了です。</p>
 
 <h3>src.rpmのダウンロード &amp; インストール</h3>
 
 <p>ここからは、全てrpmbuilderで作業を行います。</p>
 
-<p><code>
-cd /usr/local/src
+<pre><code>cd /usr/local/src
 wget http://dl.fedoraproject.org/pub/epel/6/SRPMS/nginx-1.0.15-1.el6.src.rpm
 sudo rpm -Uvh nginx-1.0.15-1.el6.src.rpm
-</code></p>
+</code></pre>
 
 <h3>最新ソースのダウンロード</h3>
 
 <p>Nginx と、Nginx Cache Purgeモジュールの最新のソースコードをダウンロードします。</p>
 
-<p><code>
-cd ~/rpm/SOURCES/
+<pre><code>cd ~/rpm/SOURCES/
 wget http://nginx.org/download/nginx-1.2.0.tar.gz
 wget http://labs.frickle.com/files/ngx_cache_purge-1.5.tar.gz
-</code></p>
+</code></pre>
 
 <h3>specファイルの編集</h3>
 
 <p>specファイルの編集を行います。行うことはCache Purgeモジュールを追加することと、必要のないモジュールの無効化です。
 specファイルはsrc.rpmをインストールした際に、~/rpm/SPECS 以下に作成されるのでこれを編集していきます。</p>
 
-<p><code>
-$ vi nginx.spec
-</code></p>
+<pre><code>$ vi nginx.spec
+</code></pre>
 
-<p>```text nginx.spec</p>
+<pre><code class="text nginx.spec">#追加。Cache Purgeモジュールのバージョン定義
+%global nginx_cache_purge_version 1.5
 
-<h1>追加。Cache Purgeモジュールのバージョン定義</h1>
+#追加 ソースコードの指定、ダウンロードしたファイルと名前が一致するように。
+Source8: ngx_cache_purge-%{nginx_cache_purge_version}.tar.gz
 
-<p>%global nginx_cache_purge_version 1.5</p>
+#以下はコメントアウト
+#Patch0: nginx-auto-cc-gcc.patch
+#%patch0 -p0
 
-<h1>追加 ソースコードの指定、ダウンロードしたファイルと名前が一致するように。</h1>
+#追加 cache purgeのソースコードの展開
+%setup -T -D -a 8
 
-<p>Source8: ngx_cache_purge-%{nginx_cache_purge_version}.tar.gz</p>
-
-<h1>以下はコメントアウト</h1>
-
-<h1>Patch0: nginx-auto-cc-gcc.patch</h1>
-
-<h1>%patch0 -p0</h1>
-
-<h1>追加 cache purgeのソースコードの展開</h1>
-
-<p>%setup -T -D -a 8</p>
-
-<h1>configure オプション</h1>
-
-<p>./configure \
-&mdash;prefix=%{nginx_datadir} \
-&mdash;sbin-path=%{<em>sbindir}/nginx \
-&mdash;conf-path=%{nginx_confdir}/nginx.conf \
-&mdash;error-log-path=%{nginx_logdir}/error.log \
-&mdash;http-log-path=%{nginx_logdir}/access.log \
-&mdash;http-client-body-temp-path=%{nginx_home_tmp}/client_body \
-&mdash;http-proxy-temp-path=%{nginx_home_tmp}/proxy \
-&mdash;http-fastcgi-temp-path=%{nginx_home_tmp}/fastcgi \
-&mdash;http-uwsgi-temp-path=%{nginx_home_tmp}/uwsgi \
-&mdash;http-scgi-temp-path=%{nginx_home_tmp}/scgi \
-&mdash;pid-path=%{</em>localstatedir}/run/nginx.pid \
-&mdash;lock-path=%{<em>localstatedir}/lock/subsys/nginx \
-&mdash;user=%{nginx_user} \
-&mdash;group=%{nginx_group} \
-&mdash;with-http_stub_status_module \
-&mdash;with-http_perl_module \
-&mdash;with-http_gzip_static_module \
-&mdash;without-http_autoindex_module \
-&mdash;without-http_geo_module \
-&mdash;without-http_map_module \
-&mdash;without-http_referer_module \
-&mdash;without-http_limit_conn_module \
-&mdash;without-http_limit_req_module \
-&mdash;without-http_browser_module \
-&mdash;add-module=%{</em>builddir}/nginx-%{version}/ngx_cache_purge-%{nginx_cache_purge_version}
-```</p>
+#configure オプション
+./configure \
+--prefix=%{nginx_datadir} \
+--sbin-path=%{_sbindir}/nginx \
+--conf-path=%{nginx_confdir}/nginx.conf \
+--error-log-path=%{nginx_logdir}/error.log \
+--http-log-path=%{nginx_logdir}/access.log \
+--http-client-body-temp-path=%{nginx_home_tmp}/client_body \
+--http-proxy-temp-path=%{nginx_home_tmp}/proxy \
+--http-fastcgi-temp-path=%{nginx_home_tmp}/fastcgi \
+--http-uwsgi-temp-path=%{nginx_home_tmp}/uwsgi \
+--http-scgi-temp-path=%{nginx_home_tmp}/scgi \
+--pid-path=%{_localstatedir}/run/nginx.pid \
+--lock-path=%{_localstatedir}/lock/subsys/nginx \
+--user=%{nginx_user} \
+--group=%{nginx_group} \
+--with-http_stub_status_module \
+--with-http_perl_module \
+--with-http_gzip_static_module \
+--without-http_autoindex_module \
+--without-http_geo_module \
+--without-http_map_module \
+--without-http_referer_module \
+--without-http_limit_conn_module \
+--without-http_limit_req_module \
+--without-http_browser_module \
+--add-module=%{_builddir}/nginx-%{version}/ngx_cache_purge-%{nginx_cache_purge_version}
+</code></pre>
 
 <p>最初は without-http_limit_zone_moduleを指定していたのですが、ビルドを行ったら以下のエラーが出力されたので、without-http_limit_conn_moduleに変更しました。</p>
 
-<p><code>sh
-Errors: total 0 client-timo 0 socket-timo 0 connrefused 0 connreset 0
+<pre><code class="sh">Errors: total 0 client-timo 0 socket-timo 0 connrefused 0 connreset 0
 Errors: fd-unavail 0 addrunavail 0 ftab-full 0 other "--without-http_limit_zone_module" option is deprecated, use the "--without-http_limit_conn_module" option instead
-</code></p>
+</code></pre>
 
 <h3>ビルド &amp; インストール</h3>
 
-<p>```sh
-rpmbuild -ba nginx.spec</p>
+<pre><code class="sh">rpmbuild -ba nginx.spec
 
-<p>cd ~/rpm/RPMS/x86_64
+cd ~/rpm/RPMS/x86_64
 sudo rpm -Uvh nginx-1.2.0-1.el6.x86_64.rpm
-```</p>
+</code></pre>
 
 <h3>確認</h3>
 
 <p>ngx_cache_purgeが組み込まれているか確認します。</p>
 
-<p><code>sh
-nginx -V
+<pre><code class="sh">nginx -V
 configure arguments: --prefix=/usr/share/nginx --sbin-path=/usr/sbin/nginx --conf-path=/etc/nginx/nginx.conf --error-log-path=/var/log/nginx/error.log --http-log-path=/var/log/nginx/access.log --http-client-body-temp-path=/var/lib/nginx/tmp/client_body --http-proxy-temp-path=/var/lib/nginx/tmp/proxy --http-fastcgi-temp-path=/var/lib/nginx/tmp/fastcgi --http-uwsgi-temp-path=/var/lib/nginx/tmp/uwsgi --http-scgi-temp-path=/var/lib/nginx/tmp/scgi --pid-path=/var/run/nginx.pid --lock-path=/var/lock/subsys/nginx --user=nginx --group=nginx --with-http_stub_status_module --with-http_perl_module --with-http_gzip_static_module --without-http_autoindex_module --without-http_geo_module --without-http_map_module --without-http_referer_module --without-http_limit_conn_module --without-http_limit_req_module --without-http_browser_module --add-module=/home/mars/rpm/BUILD/nginx-1.2.0/ngx_cache_purge-1.5
-</code></p>
+</code></pre>
 
 <h2>参考</h2>
 

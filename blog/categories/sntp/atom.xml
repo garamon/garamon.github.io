@@ -4,7 +4,7 @@
   <title><![CDATA[Category: sntp | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/sntp/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -34,81 +34,76 @@
 <p>なので、今回はCentOSでOpenSSLを利用しました。
 また、SMTP認証に必要なbase64でエンコードした文字列をPHPで生成しときます。</p>
 
-<p><code>php
-&lt;?php
+<pre><code class="php">&lt;?php
 $string = ("user@gmail.com\000user@gmail.com\000password");
 echo base64_encode($string);
 echo ("\n");
-</code></p>
+</code></pre>
 
 <p>※ユーザー名がuser@gmail.com パスワードがpassword の時</p>
 
 
 <p>では、opensslコマンドでs_clientオプションを使ってTLSでサーバと接続します。</p>
 
-<p>```text
-[root@localhost ~]# openssl s_client -starttls smtp -crlf -connect smtp.gmail.com:587</p>
+<pre><code class="text">[root@localhost ~]# openssl s_client -starttls smtp -crlf -connect smtp.gmail.com:587
 
-<p>CONNECTED(00000003)</p>
+CONNECTED(00000003)
 
-<p>～～省略～～</p>
+～～省略～～
 
-<p>250 ENHANCEDSTATUSCODES
-```</p>
+250 ENHANCEDSTATUSCODES
+</code></pre>
 
 <p>250で接続成功の応答が返ってきたら
 セッションの開始HELOコマンドを送信ですが、このコマンドは古いため、拡張コマンドであるEHLOコマンドを使用します。</p>
 
-<p>```text
-EHLO localhost</p>
+<pre><code class="text">EHLO localhost
 
-<p>250-mx.google.com at your service, [xxx.xxx.xxx.xxx]
+250-mx.google.com at your service, [xxx.xxx.xxx.xxx]
 250-SIZE 35882577
 250-8BITMIME
 250-AUTH LOGIN PLAIN XOAUTH
 250 ENHANCEDSTATUSCODES
-```</p>
+</code></pre>
 
 <p>返ってきた情報から、このサーバで利用できる拡張サービスがわかります。</p>
 
 <p>ここでは、認証にauth plainを使用します。</p>
 
-<p>```text
-AUTH PLAIN 先ほど生成したbase64文字列</p>
+<pre><code class="text">AUTH PLAIN 先ほど生成したbase64文字列
 
-<p>235 2.7.0 Accepted
-```</p>
+235 2.7.0 Accepted
+</code></pre>
 
 <p>認証が成功したらAcceptedが返ってきます。
 base64で生成した文字列に問題があると「デコードできない」や「認証失敗」といったメッセージが返ってきますので見直してください。</p>
 
 <p>ここからは、通常のtelnetで接続したときを同様</p>
 
-<p>```text
-mail from:<a href="&#x6d;&#x61;&#x69;&#108;&#x74;&#111;&#58;&#117;&#x73;&#101;&#114;&#64;&#103;&#109;&#97;&#105;&#x6c;&#x2e;&#x63;&#x6f;&#109;">&#117;&#x73;&#x65;&#x72;&#64;&#x67;&#x6d;&#x61;&#105;&#x6c;&#46;&#x63;&#x6f;&#x6d;</a> ←送信者</p>
+<pre><code class="text">mail from:&lt;user@gmail.com&gt; ←送信者
 
-<p>250 2.1.0 OK s10sm320554pbq.13</p>
+250 2.1.0 OK s10sm320554pbq.13
 
-<p>rcpt to:<a href="&#x6d;&#x61;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#x63;&#104;&#x61;&#x6b;&#101;&#109;&#x69;&#64;&#x68;&#x6f;&#103;&#x65;&#x2e;&#x63;&#x6f;&#109;">&#x63;&#104;&#97;&#107;&#x65;&#109;&#x69;&#64;&#x68;&#111;&#x67;&#101;&#x2e;&#x63;&#x6f;&#109;</a> ←宛先</p>
+rcpt to:&lt;chakemi@hoge.com&gt; ←宛先
 
-<p>250 2.1.5 OK s10sm320554pbq.13</p>
+250 2.1.5 OK s10sm320554pbq.13
 
-<p>data ←入力開始</p>
+data ←入力開始
 
-<p>354  Go ahead s10sm320554pbq.13</p>
+354  Go ahead s10sm320554pbq.13
 
-<p>subject:test mail ←件名</p>
+subject:test mail ←件名
 
-<p>this is test mail ←本文</p>
+this is test mail ←本文
 
-<p>. ←終端</p>
+. ←終端
 
-<p>250 2.0.0 OK 1329968743 s10sm320554pbq.13</p>
+250 2.0.0 OK 1329968743 s10sm320554pbq.13
 
-<p>quit ←セッション終了</p>
+quit ←セッション終了
 
-<p>221 2.0.0 closing connection s10sm320554pbq.13
-```</p>
+221 2.0.0 closing connection s10sm320554pbq.13
+</code></pre>
 
 <p>無事、メールが届いていたら成功</p>
 ]]></content>
@@ -139,128 +134,119 @@ SNTP(Simple Network Time Protocol)は、名前の通り簡易ネットワーク�
 
 <p>UDPクライアントを生成します。</p>
 
-<p><code>c#
-System.Net.Sockets.UdpClient sock;
+<pre><code class="c#">System.Net.Sockets.UdpClient sock;
 System.Net.IPEndPoint ipAny = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 0);
 sock = new System.Net.Sockets.UdpClient(ipAny);
-</code></p>
+</code></pre>
 
 <p>送信用パケットを生成し、送信します。
 SNTPサーバは、送られてきた要求パケットの中身を書き換えて、送り返してきます。</p>
 
-<p>```c#
-Byte[] s_data = new Byte[48];
+<pre><code class="c#">Byte[] s_data = new Byte[48];
 //LI, Version, Mode
 s_data[0] = 0xE3;
 //Stratum
-s_data<a href="http://www.geocities.co.jp/SiliconValley/6876/rfc2030j.htm">1</a> = 0;
+s_data[1] = 0;
 //Polling Interval
-s_data<a href="http://www.venus.dti.ne.jp/~yoshi-o/NTP/NTP-SNTP_Format.html">2</a> = 6;
+s_data[2] = 6;
 //Precision
-s_data[3] = 0xEC;</p>
+s_data[3] = 0xEC;
 
-<p>sock.Send(s_data, s_data.GetLength(0), &ldquo;time.windows.com&rdquo;, 123);
-```</p>
+sock.Send(s_data, s_data.GetLength(0), "time.windows.com", 123);
+</code></pre>
 
 <p>タイムサーバにはWindowsXPのデフォルトで指定されたタイムサーバを利用させて頂きました。</p>
 
 <p>SNTPから返ってきたパケットを受信します。</p>
 
-<p><code>c#
-Byte[] r_data = sock.Receive(ref ipAny);
-</code></p>
+<pre><code class="c#">Byte[] r_data = sock.Receive(ref ipAny);
+</code></pre>
 
 <p>タイムサーバは１９００年１月１日０時を基準に相対的な差を秒単位で、６４ビット符号無し固定小数点で返してきます。
 整数部の上位３２ビットを取得して、経過秒数を取得します。</p>
 
-<p>```c#
-long passSec;</p>
+<pre><code class="c#">long passSec;
 
-<p>long b0 = (long)r_data[40];
+long b0 = (long)r_data[40];
 long b1 = (long)r_data[41];
 long b2 = (long)r_data[42];
 long b3 = (long)r_data[43];
 passSec = (b0 &lt;&lt; 24 | b1 &lt;&lt; 16) | (b2 &lt;&lt; 8 | b3);
-```</p>
+</code></pre>
 
 <p>基準時間に経過秒数を加えて、さらに日本標準時間にあわせます。</p>
 
-<p>```c#
-DateTime dateTime = new DateTime(1900, 1, 1);
-dateTime = dateTime.AddSeconds(passSec);</p>
+<pre><code class="c#">DateTime dateTime = new DateTime(1900, 1, 1);
+dateTime = dateTime.AddSeconds(passSec);
 
-<p>dateTime = dateTime.AddHours(9);
-```</p>
+dateTime = dateTime.AddHours(9);
+</code></pre>
 
 <p>以下、全文です。</p>
 
-<p>```c#
-using System;
+<pre><code class="c#">using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Windows.Forms;</p>
+using System.Windows.Forms;
 
-<p>namespace testSNTPClient
-{</p>
-
-<pre><code>public partial class Form1 : Form
+namespace testSNTPClient
 {
-    public Form1()
+    public partial class Form1 : Form
     {
-        InitializeComponent();
-    }
+        public Form1()
+        {
+            InitializeComponent();
+        }
 
-    private void button1_Click(object sender, EventArgs e)
-    {
-        //UDP生成
-        System.Net.Sockets.UdpClient sock;
-        System.Net.IPEndPoint ipAny = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 0);
-        sock = new System.Net.Sockets.UdpClient(ipAny);
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //UDP生成
+            System.Net.Sockets.UdpClient sock;
+            System.Net.IPEndPoint ipAny = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 0);
+            sock = new System.Net.Sockets.UdpClient(ipAny);
 
-        //Send UDP
-        Byte[] s_data = new Byte[48];
-        //LI, Version, Mode
-        s_data[0] = 0xE3;
-        //Stratum
-        s_data[1] = 0;
-        //Polling Interval
-        s_data[2] = 6;
-        //Precision
-        s_data[3] = 0xEC;
+            //Send UDP
+            Byte[] s_data = new Byte[48];
+            //LI, Version, Mode
+            s_data[0] = 0xE3;
+            //Stratum
+            s_data[1] = 0;
+            //Polling Interval
+            s_data[2] = 6;
+            //Precision
+            s_data[3] = 0xEC;
 
-        sock.Send(s_data, s_data.GetLength(0), "time.windows.com", 123);
+            sock.Send(s_data, s_data.GetLength(0), "time.windows.com", 123);
 
-        //Recieve UDP
-        Byte[] r_data = sock.Receive(ref ipAny);
+            //Recieve UDP
+            Byte[] r_data = sock.Receive(ref ipAny);
 
-        //1900/01/01から経過秒数
-        long passSec;    //全秒数
+            //1900/01/01から経過秒数
+            long passSec;    //全秒数
 
-        //Transmit Timestampの40バイト目からはじまる4バイトのデータ
-        long b0 = (long)r_data[40];
-        long b1 = (long)r_data[41];
-        long b2 = (long)r_data[42];
-        long b3 = (long)r_data[43];
-        passSec = (b0 &lt;&lt; 24 | b1 &lt;&lt; 16) | (b2 &lt;&lt; 8 | b3);
+            //Transmit Timestampの40バイト目からはじまる4バイトのデータ
+            long b0 = (long)r_data[40];
+            long b1 = (long)r_data[41];
+            long b2 = (long)r_data[42];
+            long b3 = (long)r_data[43];
+            passSec = (b0 &lt;&lt; 24 | b1 &lt;&lt; 16) | (b2 &lt;&lt; 8 | b3);
 
-        //基準時間に経過乗数を加える
-        DateTime dateTime = new DateTime(1900, 1, 1);
-        dateTime = dateTime.AddSeconds(passSec);
-        //日本標準時間にあわせる
-        dateTime = dateTime.AddHours(9);
+            //基準時間に経過乗数を加える
+            DateTime dateTime = new DateTime(1900, 1, 1);
+            dateTime = dateTime.AddSeconds(passSec);
+            //日本標準時間にあわせる
+            dateTime = dateTime.AddHours(9);
 
-        label1.Text = dateTime.ToString();
+            label1.Text = dateTime.ToString();
 
+        }
     }
 }
 </code></pre>
-
-<p>}
-```</p>
 
 <p>ネットワークの遅延だとか考慮してません。。。
 外部のサーバへアクセスする際は、ご注意ください。</p>

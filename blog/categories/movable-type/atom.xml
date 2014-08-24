@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Movable Type | Code Life]]></title>
+  <title><![CDATA[Category: movable type | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/movable-type/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -28,15 +28,15 @@
 
 <h2>通常の最新記事10件呼び出し</h2>
 
-<p>```html
+<p>&#8220;`html
 <MTEntries lastn="10">
 <MTEntriesHeader></p>
 
 <div class="hfeed">
     <h1>ブログ記事</h1>
 </MTEntriesHeader>
-    <div class="hentry entry" id="entry-<mt:EntryID>">
-        <h2 class="entry-title"><a rel="bookmark" href="<mt:Var name="permalink">"><$MTEntryTitle$></a></h2>
+    <div class="hentry entry" id="entry-<mt:EntryID>&#8221;>
+        <h2 class="entry-title"><a rel="bookmark" href="<mt:Var name="permalink">&#8221;><$MTEntryTitle$></a></h2>
         <div class="entry-content">
             <$MTEntryBody$>
         </div>
@@ -47,38 +47,35 @@
 
 <p></MTEntriesFooter>
 </MTEntries>
-```</p>
+&#8220;`</p>
 
 <h2>最新記事10件呼び出しつつ、表示は5件でページ分割</h2>
 
-<p>```html</p>
+<p>&#8220;`html</p>
 
 <!-- ▼MTKeitaiPaginateBreakが5回実行されたらページ分割 -->
 
 
 <p><MTKeitaiPaginate break_tags="" max_sections="5">
-<MTEntries lastn="10"></p>
-
-<pre><code>&lt;MTEntriesHeader&gt;
-    &lt;div class="hfeed"&gt;
-        &lt;h1&gt;ブログ記事&lt;/h1&gt;
-&lt;/MTEntriesHeader&gt;
-    &lt;div class="hentry entry" id="entry-&lt;mt:EntryID&gt;"&gt;
-        &lt;h2 class="entry-title"&gt;&lt;a rel="bookmark" href="&lt;mt:Var name="permalink"&gt;"&gt;&lt;$MTEntryTitle$&gt;&lt;/a&gt;&lt;/h2&gt;
-        &lt;div class="entry-content"&gt;
-            &lt;$MTEntryBody$&gt;
-        &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;!-- ▼ページの分割タグ --&gt;
-    &lt;$MTKeitaiPaginateBreak$&gt;
-&lt;MTEntriesFooter&gt;
-    &lt;/div&gt;
-&lt;/MTEntriesFooter&gt;
-</code></pre>
-
-<p></MTEntries>
+<MTEntries lastn="10">
+    <MTEntriesHeader>
+        <div class="hfeed">
+            <h1>ブログ記事</h1>
+    </MTEntriesHeader>
+        <div class="hentry entry" id="entry-<mt:EntryID>&ldquo;>
+            <h2 class="entry-title"><a rel="bookmark" href="<mt:Var name="permalink">&rdquo;>&lt;$MTEntryTitle$></a></h2>
+            <div class="entry-content">
+                &lt;$MTEntryBody$>
+            </div>
+        </div>
+        <!-- ▼ページの分割タグ -->
+        &lt;$MTKeitaiPaginateBreak$>
+    <MTEntriesFooter>
+        </div>
+    </MTEntriesFooter>
+</MTEntries>
 </MTKeitaiPaginate>
-```</p>
+&#8220;`</p>
 
 <p>MTKeitaiPaginateでEntriesを囲んでいます。
 で、分割したいところでを使用しています。</p>
@@ -88,49 +85,45 @@
 <p>これだけだと、ページナビゲーションが出力されないので、
 ナビゲーション部分を記述してあげます。</p>
 
-<p>```html
-<MTKeitaiIfMultiplePages></p>
+<pre><code class="html">&lt;MTKeitaiIfMultiplePages&gt;
+    &lt;!-- ▼現在のページと総ページ数 --&gt;
+    &lt;$MTKeitaiCurrentPageNum$&gt;/&lt;$MTKeitaiLastPageNum$&gt;&lt;br /&gt;
 
-<pre><code>&lt;!-- ▼現在のページと総ページ数 --&gt;
-&lt;$MTKeitaiCurrentPageNum$&gt;/&lt;$MTKeitaiLastPageNum$&gt;&lt;br /&gt;
+    &lt;!-- ▼前のページがあったら出力 --&gt;
+    &lt;MTKeitaiIfHasPreviousPage&gt;
+        &lt;a href="&lt;$MTKeitaiPreviousPageLink$&gt;"&gt;&lt;前の記事&lt;/a&gt;
+    &lt;/MTKeitaiIfHasPreviousPage&gt;
 
-&lt;!-- ▼前のページがあったら出力 --&gt;
-&lt;MTKeitaiIfHasPreviousPage&gt;
-    &lt;a href="&lt;$MTKeitaiPreviousPageLink$&gt;"&gt;&lt;前の記事&lt;/a&gt;
-&lt;/MTKeitaiIfHasPreviousPage&gt;
+    &lt;!-- ▼次のページがあったら出力 --&gt;
+    &lt;MTKeitaiIfHasNextPage&gt;
+        &lt;a href="&lt;$MTKeitaiNextPageLink$&gt;"&gt;次の記事&gt;&lt;/a&gt;
+    &lt;/MTKeitaiIfHasNextPage&gt;
 
-&lt;!-- ▼次のページがあったら出力 --&gt;
-&lt;MTKeitaiIfHasNextPage&gt;
-    &lt;a href="&lt;$MTKeitaiNextPageLink$&gt;"&gt;次の記事&gt;&lt;/a&gt;
-&lt;/MTKeitaiIfHasNextPage&gt;
+    &lt;!-- ▼ページナビゲーションの表示 --&gt;
+    &lt;MTKeitaiPages&gt;
 
-&lt;!-- ▼ページナビゲーションの表示 --&gt;
-&lt;MTKeitaiPages&gt;
+        &lt;MTKeitaiIfPagesCurrent&gt;
+            &lt;$MTKeitaiPagesNum$&gt;
+        &lt;MTKeitaiElse&gt;
+            &lt;a href="&lt;$MTKeitaiPagesLink$&gt;"&gt;&lt;$MTKeitaiPagesNum$&gt;&lt;/a&gt;
+        &lt;/MTKeitaiElse&gt;
+        &lt;/MTKeitaiIfPagesCurrent&gt;
 
-    &lt;MTKeitaiIfPagesCurrent&gt;
-        &lt;$MTKeitaiPagesNum$&gt;
-    &lt;MTKeitaiElse&gt;
-        &lt;a href="&lt;$MTKeitaiPagesLink$&gt;"&gt;&lt;$MTKeitaiPagesNum$&gt;&lt;/a&gt;
-    &lt;/MTKeitaiElse&gt;
-    &lt;/MTKeitaiIfPagesCurrent&gt;
+        &lt;!-- ▼ページナビゲーションの区切り指定 --&gt;
+        &lt;MTKeitaiPagesSeparator&gt; | &lt;/MTKeitaiPagesSeparator&gt;
+    &lt;/MTKeitaiPages&gt;
 
-    &lt;!-- ▼ページナビゲーションの区切り指定 --&gt;
-    &lt;MTKeitaiPagesSeparator&gt; | &lt;/MTKeitaiPagesSeparator&gt;
-&lt;/MTKeitaiPages&gt;
+    &lt;!-- ▼一番最初のページへのリンク --&gt;
+    &lt;MTKeitaiIfHasPreviousPage&gt;
+        &lt;a href="&lt;$MTKeitaiFirstPageLink$&gt;"&gt;&lt;&lt;&lt;/a&gt;
+    &lt;/MTKeitaiIfHasPreviousPage&gt;
 
-&lt;!-- ▼一番最初のページへのリンク --&gt;
-&lt;MTKeitaiIfHasPreviousPage&gt;
-    &lt;a href="&lt;$MTKeitaiFirstPageLink$&gt;"&gt;&lt;&lt;&lt;/a&gt;
-&lt;/MTKeitaiIfHasPreviousPage&gt;
-
-&lt;!-- ▼一番最後のページへのリンク --&gt;
-&lt;MTKeitaiIfHasNextPage&gt;
-    &lt;a href="&lt;$MTKeitaiLastPageLink$&gt;"&gt;&gt;&gt;&lt;/a&gt;
-&lt;/MTKeitaiIfHasNextPage&gt;
+    &lt;!-- ▼一番最後のページへのリンク --&gt;
+    &lt;MTKeitaiIfHasNextPage&gt;
+        &lt;a href="&lt;$MTKeitaiLastPageLink$&gt;"&gt;&gt;&gt;&lt;/a&gt;
+    &lt;/MTKeitaiIfHasNextPage&gt;
+&lt;/MTKeitaiIfMultiplePages&gt;
 </code></pre>
-
-<p></MTKeitaiIfMultiplePages>
-```</p>
 
 <p>基本的な機能は、<a href="http://www.sixapart.jp/movabletype/plugins/mtpaginate.html" target="_blank">MTPaginate</a>と同様の機能です。ただ、ケータイキットプラグイン使えば、簡単にページ分割できますって感じで。
 どこのコンテンツで使うのかっていうと、携帯サイトだとニュースとかで出番が多かったりします。</p>
@@ -168,7 +161,7 @@
 <p>MTAppjQuery とは、Movable Type 5 の管理画面を jQuery でカスタマイズしやすくするプラグインです。</p>
 
 <p><a href="https://twitter.com/tinybeans" target="_blank">@tinybeans</a>さん
-Download：<a href="http://www.tinybeans.net/blog/download/mt-plugin/mtapp-jquery.html" target="_blank">MTAppjQuery &ndash; Movable Type 5 の管理画面をjQueryでカスタマイズしやすくするプラグイン</a></p>
+Download：<a href="http://www.tinybeans.net/blog/download/mt-plugin/mtapp-jquery.html" target="_blank">MTAppjQuery - Movable Type 5 の管理画面をjQueryでカスタマイズしやすくするプラグイン</a></p>
 
 <h3>MTAppjQueryPlusとは？</h3>
 
@@ -233,37 +226,36 @@ MTAppjQueryPlusの<code>$.fn.MTAppTableConverter</code>を使ってみようと�
 </ol>
 
 
-<p>```html</p>
+<p>&#8220;`html</p>
 
 <script src="http://blog.code-life.net/mt/mt-static/plugins/MTAppjQueryPlus/MTAppjQueryPlus.js" type="text/javascript"></script>
 
 
-<p>```</p>
+<pre><code>
+※リンクパスはMTをインストールしたフォルダに変更してください。
 
-<p>※リンクパスはMTをインストールしたフォルダに変更してください。</p>
+### カスタムフィールドの作成
 
-<h3>カスタムフィールドの作成</h3>
+$.fn.MTAppTableConverterは 複数行のテキストエリアに対してのみ使用可能ということなので、
+ブログ記事に対してカスタムフィールドを追加します。
 
-<p>$.fn.MTAppTableConverterは 複数行のテキストエリアに対してのみ使用可能ということなので、
-ブログ記事に対してカスタムフィールドを追加します。</p>
+[<img src="/images/2012/04/mtappjqueryplus-movable-type-1-300x204.png" width="300" height="204">][2]
 
-<p><a href="/images/2012/04/mtappjqueryplus-movable-type-1.png"><img src="/images/2012/04/mtappjqueryplus-movable-type-1-300x204.png" width="300" height="204"></a></p>
+ブログ記事画面で設定したカスタムフィールドを表示させます。
 
-<p>ブログ記事画面で設定したカスタムフィールドを表示させます。</p>
+[<img src="/images/2012/04/mtappjqueryplus-movable-type-2-300x270.jpg" width="300" height="270">][3]
 
-<p><a href="/images/2012/04/mtappjqueryplus-movable-type-2.jpg"><img src="/images/2012/04/mtappjqueryplus-movable-type-2-300x270.jpg" width="300" height="270"></a></p>
+### user.jsに処理を記述する
 
-<h3>user.jsに処理を記述する</h3>
+場所：/mt/mt-static/plugins/_MTAppjQuery/js/user.js
+</code></pre>
 
-<p>場所：/mt/mt-static/plugins/_MTAppjQuery/js/user.js</p>
-
-<p><code>javascript
-$("#customfield_xxx").MTAppTableConverter({
+<p>$(&ldquo;#customfield_xxx&rdquo;).MTAppTableConverter({
 colcnt:2, //列数
-type:'text/textarea',
-thead:' 項目 内容 '
+type:&lsquo;text/textarea&rsquo;,
+thead:&lsquo; 項目 内容 &rsquo;
 });
-</code></p>
+&#8220;`</p>
 
 <p>※<code>#customfield_xxx</code>の、xxxはカスタムフィールドのベースネーム</p>
 
@@ -277,7 +269,7 @@ thead:' 項目 内容 '
 
 <p>こちらは、READMEのサンプルを使用させてもらいました。</p>
 
-<p>```html</p>
+<p>&#8220;`html</p>
 
 <table>
 <mt:ignore>/* 対象とするフィールド名の指定 */</mt:ignore>
@@ -301,7 +293,7 @@ thead:' 項目 内容 '
 </table>
 
 
-<p>```</p>
+<p>&#8220;`</p>
 
 <p><code>split="##"</code>で入力された値を分割しています。</p>
 
@@ -331,11 +323,8 @@ thead:' 項目 内容 '
 <!--more-->
 
 
-<p>```</p>
-
-<h1>yum -y install perl-Crypt-DSA perl-IPC-Run perl-Archive-Zip perl-Cache perl-HTML-Parser perl-Crypt-SSLeay perl-GD perl-Archive-Tar perl-XML-Parser perl-IO-Compress perl-XML-Atom ImageMagick-perl perl-Mail-Sendmail</h1>
-
-<p>```</p>
+<pre><code># yum -y install perl-Crypt-DSA perl-IPC-Run perl-Archive-Zip perl-Cache perl-HTML-Parser perl-Crypt-SSLeay perl-GD perl-Archive-Tar perl-XML-Parser perl-IO-Compress perl-XML-Atom ImageMagick-perl perl-Mail-Sendmail
+</code></pre>
 
 <p>最初CPANで一つ一つやってたのですが、失敗しまくり。</p>
 
@@ -401,32 +390,27 @@ thead:' 項目 内容 '
 
 <p>通常であれば、</p>
 
-<p><code>html
-&lt;$mt:CustomField01$&gt;
+<pre><code class="html">&lt;$mt:CustomField01$&gt;
 &lt;$mt:CustomField02$&gt;
 &lt;$mt:CustomField03$&gt;
 &lt;$mt:CustomField04$&gt;
 &lt;$mt:CustomField05$&gt;
 &lt;$mt:CustomField06$&gt;
-</code></p>
+</code></pre>
 
 <p>という感じで表示できると思います。</p>
 
 <p>でも、これが100個とかだったら100行書かなくてはなりません。
 ということでこれを一括で表示します。</p>
 
-<p>```html
-&lt;mt:Entries lastn=&ldquo;1&rdquo;>
-  &lt;mt:EntryCustomFields></p>
-
-<pre><code>&lt;mt:If tag="EntryCustomFieldValue"&gt;
-  &lt;$MTEntryCustomFieldName$&gt;
-&lt;/mt:If&gt;
+<pre><code class="html">&lt;mt:Entries lastn="1"&gt;
+  &lt;mt:EntryCustomFields&gt;
+    &lt;mt:If tag="EntryCustomFieldValue"&gt;
+      &lt;$MTEntryCustomFieldName$&gt;
+    &lt;/mt:If&gt;
+  &lt;/mt:EntryCustomFields&gt;
+&lt;/mt:Entries&gt;
 </code></pre>
-
-<p>  &lt;/mt:EntryCustomFields>
-&lt;/mt:Entries>
-```</p>
 
 <p>最新エントリー1件のカスタムフィールド情報を取得して表示しています。
 というか、テンプレートタグに書いてありましたね。
@@ -456,14 +440,12 @@ thead:' 項目 内容 '
 
 <h3>呼び出し元</h3>
 
-<p><code>html
-&lt;mt:include module="モジュール" device="SmartPhone"&gt;
-</code></p>
+<pre><code class="html">&lt;mt:include module="モジュール" device="SmartPhone"&gt;
+</code></pre>
 
 <h3>呼び出し内容</h3>
 
-<p><code>html
-&lt;mt:If name="device" eq="SmartPhone"&gt;
+<pre><code class="html">&lt;mt:If name="device" eq="SmartPhone"&gt;
   &lt;!-- スマートフォンの内容 --&gt;
 &lt;mt:ElseIf eq="FeaturePhone"&gt;
   &lt;!-- フィーチャーフォンの内容 --&gt;
@@ -472,7 +454,7 @@ thead:' 項目 内容 '
 &lt;mt:Else&gt;
   &lt;!-- その他 --&gt;
 &lt;/mt:If&gt;
-</code></p>
+</code></pre>
 
 <h2>解説</h2>
 

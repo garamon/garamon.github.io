@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: DarwinStreamingServer | Code Life]]></title>
+  <title><![CDATA[Category: darwinstreamingserver | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/darwinstreamingserver/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -33,59 +33,53 @@
 
 <p>まず、DarwinStreamingServer(以後DSS)をLINUXでコンパイルするため必要なgcc-c++をインストールします。</p>
 
-<p><code>
-[root@localhost ~]# yum install gcc-c++
-</code></p>
+<pre><code>[root@localhost ~]# yum install gcc-c++
+</code></pre>
 
 <p>次にDSS実行に必要なユーザーとグループを作成しておきます。</p>
 
-<p><code>
-[root@localhost ~]# groupadd qtss
+<pre><code>[root@localhost ~]# groupadd qtss
 [root@localhost ~]# useradd qtss -g qtss
-</code></p>
+</code></pre>
 
 <p>DSSのソースをダウンロードして展開します。</p>
 
-<p><code>
-[root@localhost ~]# wget http://dss.macosforge.org/downloads/DarwinStreamingSrvr6.0.3-Source.tar
+<pre><code>[root@localhost ~]# wget http://dss.macosforge.org/downloads/DarwinStreamingSrvr6.0.3-Source.tar
 [root@localhost ~]# tar xvf DarwinStreamingSrvr6.0.3-Source.tar
-</code></p>
+</code></pre>
 
 <p>有志によって作成されているLINUX用のpatchをダウンロードし設定します。</p>
 
-<p><code>
-[root@localhost ~]# wget http://www.abrahamsson.com/dss-6.0.3.patch
+<pre><code>[root@localhost ~]# wget http://www.abrahamsson.com/dss-6.0.3.patch
 [root@localhost ~]# patch -p0 &lt; dss-6.0.3.patch
-</code></p>
+</code></pre>
 
 <h2>インストール</h2>
 
-<p><code>
-[root@localhost ~]# cd DarwinStreamingSrvr6.0.3-Source
+<pre><code>[root@localhost ~]# cd DarwinStreamingSrvr6.0.3-Source
 [root@localhost DarwinStreamingSrvr6.0.3-Source]# ./buildtarball
 [root@localhost DarwinStreamingSrvr6.0.3-Source]# cd DarwinStreamingSrvr-Linux
 [root@localhost DarwinStreamingSrvr-Linux]# ./Install
-</code>
-adminユーザーとパスワードの設定を求められます。</p>
+</code></pre>
 
-<p>```
-In order to administer the Darwin Streaming Server you must create an administrator user [Note: The administrator user name cannot contain spaces, or single or double quote characters, and cannot be more than 255 characters long].
-Please enter a new administrator user name:</p>
+<p>adminユーザーとパスワードの設定を求められます。</p>
 
-<p>You must also enter a password for the administrator user [Note: The administrator password cannot contain spaces, or quotes, either single or double, and cannot be more than 80 characters long].
-Please enter a new administrator Password:</p>
+<pre><code>In order to administer the Darwin Streaming Server you must create an administrator user [Note: The administrator user name cannot contain spaces, or single or double quote characters, and cannot be more than 255 characters long].
+Please enter a new administrator user name:
 
-<p>Re-enter the new administrator password:
-```</p>
+You must also enter a password for the administrator user [Note: The administrator password cannot contain spaces, or quotes, either single or double, and cannot be more than 80 characters long].
+Please enter a new administrator Password:
+
+Re-enter the new administrator password:
+</code></pre>
 
 <p>無事にインストールが完了したら下記3つのプロセスが起動しているか確認します。</p>
 
-<p><code>
-[root@localhost DarwinStreamingSrvr-Linux]# ps -aux
+<pre><code>[root@localhost DarwinStreamingSrvr-Linux]# ps -aux
 root     20297  0.0  0.1   4452   456 ?        Ss   04:16   0:00 /usr/local/sbin/DarwinStreamingServer
 qtss     20298  0.1  0.8  45860  2124 ?        Sl   04:16   0:00 /usr/local/sbin/DarwinStreamingServer
 qtss     20299  0.0  1.7  13520  4360 ?        Ss   04:16   0:00 /usr/bin/perl /usr/local/sbin/streamingadminserver.pl
-</code></p>
+</code></pre>
 
 <p>webインターフェース http://localhost:1220/ にアクセスして先ほど作成したadminユーザーでログインします。</p>
 

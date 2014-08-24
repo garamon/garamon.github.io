@@ -53,12 +53,9 @@ SNTP(Simple Network Time Protocol)は、名前の通り簡易ネットワーク�
 		<div class="left-col">
 			<div class="intrude-less">
 			<header id="header" class="inner"><div class="profilepic">
-	<script src="/javascripts/md5.js"></script>
-	<script type="text/javascript">
-		$(function(){
-			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("noto.code.life@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
-		});
-	</script>
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
 </div>
 <hgroup>
   <h1><a href="/">Code Life</a></h1>
@@ -124,19 +121,19 @@ SNTP(Simple Network Time Protocol)は、名前の通り簡易ネットワーク�
 
 <p>UDPクライアントを生成します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">Sockets</span><span class="p">.</span><span class="n">UdpClient</span> <span class="n">sock</span><span class="p">;</span>
 </span><span class='line'><span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">IPEndPoint</span> <span class="n">ipAny</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">IPEndPoint</span><span class="p">(</span><span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">IPAddress</span><span class="p">.</span><span class="n">Any</span><span class="p">,</span> <span class="m">0</span><span class="p">);</span>
 </span><span class='line'><span class="n">sock</span> <span class="p">=</span> <span class="k">new</span> <span class="n">System</span><span class="p">.</span><span class="n">Net</span><span class="p">.</span><span class="n">Sockets</span><span class="p">.</span><span class="n">UdpClient</span><span class="p">(</span><span class="n">ipAny</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>送信用パケットを生成し、送信します。
 SNTPサーバは、送られてきた要求パケットの中身を書き換えて、送り返してきます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -158,22 +155,22 @@ SNTPサーバは、送られてきた要求パケットの中身を書き換え�
 </span><span class='line'><span class="n">s_data</span><span class="p">[</span><span class="m">3</span><span class="p">]</span> <span class="p">=</span> <span class="m">0</span><span class="n">xEC</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">sock</span><span class="p">.</span><span class="n">Send</span><span class="p">(</span><span class="n">s_data</span><span class="p">,</span> <span class="n">s_data</span><span class="p">.</span><span class="n">GetLength</span><span class="p">(</span><span class="m">0</span><span class="p">),</span> <span class="s">&quot;time.windows.com&quot;</span><span class="p">,</span> <span class="m">123</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>タイムサーバにはWindowsXPのデフォルトで指定されたタイムサーバを利用させて頂きました。</p>
 
 <p>SNTPから返ってきたパケットを受信します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 </pre></td><td class='code'><pre><code class='c#'><span class='line'><span class="n">Byte</span><span class="p">[]</span> <span class="n">r_data</span> <span class="p">=</span> <span class="n">sock</span><span class="p">.</span><span class="n">Receive</span><span class="p">(</span><span class="k">ref</span> <span class="n">ipAny</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>タイムサーバは１９００年１月１日０時を基準に相対的な差を秒単位で、６４ビット符号無し固定小数点で返してきます。
 整数部の上位３２ビットを取得して、経過秒数を取得します。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -187,12 +184,12 @@ SNTPサーバは、送られてきた要求パケットの中身を書き換え�
 </span><span class='line'><span class="kt">long</span> <span class="n">b2</span> <span class="p">=</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">r_data</span><span class="p">[</span><span class="m">42</span><span class="p">];</span>
 </span><span class='line'><span class="kt">long</span> <span class="n">b3</span> <span class="p">=</span> <span class="p">(</span><span class="kt">long</span><span class="p">)</span><span class="n">r_data</span><span class="p">[</span><span class="m">43</span><span class="p">];</span>
 </span><span class='line'><span class="n">passSec</span> <span class="p">=</span> <span class="p">(</span><span class="n">b0</span> <span class="p">&lt;&lt;</span> <span class="m">24</span> <span class="p">|</span> <span class="n">b1</span> <span class="p">&lt;&lt;</span> <span class="m">16</span><span class="p">)</span> <span class="p">|</span> <span class="p">(</span><span class="n">b2</span> <span class="p">&lt;&lt;</span> <span class="m">8</span> <span class="p">|</span> <span class="n">b3</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>基準時間に経過秒数を加えて、さらに日本標準時間にあわせます。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -200,12 +197,12 @@ SNTPサーバは、送られてきた要求パケットの中身を書き換え�
 </span><span class='line'><span class="n">dateTime</span> <span class="p">=</span> <span class="n">dateTime</span><span class="p">.</span><span class="n">AddSeconds</span><span class="p">(</span><span class="n">passSec</span><span class="p">);</span>
 </span><span class='line'>
 </span><span class='line'><span class="n">dateTime</span> <span class="p">=</span> <span class="n">dateTime</span><span class="p">.</span><span class="n">AddHours</span><span class="p">(</span><span class="m">9</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>以下、全文です。</p>
 
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -329,7 +326,7 @@ SNTPサーバは、送られてきた要求パケットの中身を書き換え�
 </span><span class='line'>        <span class="p">}</span>
 </span><span class='line'>    <span class="p">}</span>
 </span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
 
 
 <p>ネットワークの遅延だとか考慮してません。。。
@@ -347,26 +344,54 @@ SNTPサーバは、送られてきた要求パケットの中身を書き換え�
     google_ad_height = 90;
     //-->
     </script>
-    <script type="text/javascript"
-    src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
-    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
 </div>
-<div class="share">
-    <div class="addthis_toolbox addthis_default_style ">
-        <div style="float:left">
-            <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/02/20/sntp-c-sharp/" class="hatena-bookmark-button" data-hatena-bookmark-layout="standard" title="このエントリーをはてなブックマークに追加"><img src="http://b.st-hatena.com/images/entry-button/button-only.gif" alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;" /></a>
-            <script type="text/javascript" src="http://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
-        </div>
-        
-        <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-        
-        
-        <a class="addthis_button_tweet"></a>
-        
-        
-        <a class="addthis_counter addthis_pill_style"></a>
-    </div>
-  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/02/20/sntp-c-sharp/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
 </div>
 
 
@@ -415,6 +440,14 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
 
 
 
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
 
 
   <script type="text/javascript">
@@ -426,6 +459,15 @@ Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Sha
       document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
     })();
   </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
 
 
 

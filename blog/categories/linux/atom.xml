@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -19,16 +19,15 @@
     <updated>2013-04-14T22:32:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/04/14/scp-command-not-found-on-centos</id>
     <content type="html"><![CDATA[<p>CentOS6.xをminimalで構成した場合、クライアントからscpコマンドを実行すると
-&ldquo;bash: scp: コマンドが見つかりません"と怒られる。</p>
+&ldquo;bash: scp: コマンドが見つかりません&#8221;と怒られる。</p>
 
 <!--more-->
 
 
 <p>以下のパッケージをインストールをすれば利用できるようになります。</p>
 
-<p><code>sh
-$ yum install openssh-clients
-</code></p>
+<pre><code class="sh">$ yum install openssh-clients
+</code></pre>
 
 <p>以上。</p>
 ]]></content>
@@ -54,59 +53,53 @@ $ yum install openssh-clients
 
 <p>まず、DarwinStreamingServer(以後DSS)をLINUXでコンパイルするため必要なgcc-c++をインストールします。</p>
 
-<p><code>
-[root@localhost ~]# yum install gcc-c++
-</code></p>
+<pre><code>[root@localhost ~]# yum install gcc-c++
+</code></pre>
 
 <p>次にDSS実行に必要なユーザーとグループを作成しておきます。</p>
 
-<p><code>
-[root@localhost ~]# groupadd qtss
+<pre><code>[root@localhost ~]# groupadd qtss
 [root@localhost ~]# useradd qtss -g qtss
-</code></p>
+</code></pre>
 
 <p>DSSのソースをダウンロードして展開します。</p>
 
-<p><code>
-[root@localhost ~]# wget http://dss.macosforge.org/downloads/DarwinStreamingSrvr6.0.3-Source.tar
+<pre><code>[root@localhost ~]# wget http://dss.macosforge.org/downloads/DarwinStreamingSrvr6.0.3-Source.tar
 [root@localhost ~]# tar xvf DarwinStreamingSrvr6.0.3-Source.tar
-</code></p>
+</code></pre>
 
 <p>有志によって作成されているLINUX用のpatchをダウンロードし設定します。</p>
 
-<p><code>
-[root@localhost ~]# wget http://www.abrahamsson.com/dss-6.0.3.patch
+<pre><code>[root@localhost ~]# wget http://www.abrahamsson.com/dss-6.0.3.patch
 [root@localhost ~]# patch -p0 &lt; dss-6.0.3.patch
-</code></p>
+</code></pre>
 
 <h2>インストール</h2>
 
-<p><code>
-[root@localhost ~]# cd DarwinStreamingSrvr6.0.3-Source
+<pre><code>[root@localhost ~]# cd DarwinStreamingSrvr6.0.3-Source
 [root@localhost DarwinStreamingSrvr6.0.3-Source]# ./buildtarball
 [root@localhost DarwinStreamingSrvr6.0.3-Source]# cd DarwinStreamingSrvr-Linux
 [root@localhost DarwinStreamingSrvr-Linux]# ./Install
-</code>
-adminユーザーとパスワードの設定を求められます。</p>
+</code></pre>
 
-<p>```
-In order to administer the Darwin Streaming Server you must create an administrator user [Note: The administrator user name cannot contain spaces, or single or double quote characters, and cannot be more than 255 characters long].
-Please enter a new administrator user name:</p>
+<p>adminユーザーとパスワードの設定を求められます。</p>
 
-<p>You must also enter a password for the administrator user [Note: The administrator password cannot contain spaces, or quotes, either single or double, and cannot be more than 80 characters long].
-Please enter a new administrator Password:</p>
+<pre><code>In order to administer the Darwin Streaming Server you must create an administrator user [Note: The administrator user name cannot contain spaces, or single or double quote characters, and cannot be more than 255 characters long].
+Please enter a new administrator user name:
 
-<p>Re-enter the new administrator password:
-```</p>
+You must also enter a password for the administrator user [Note: The administrator password cannot contain spaces, or quotes, either single or double, and cannot be more than 80 characters long].
+Please enter a new administrator Password:
+
+Re-enter the new administrator password:
+</code></pre>
 
 <p>無事にインストールが完了したら下記3つのプロセスが起動しているか確認します。</p>
 
-<p><code>
-[root@localhost DarwinStreamingSrvr-Linux]# ps -aux
+<pre><code>[root@localhost DarwinStreamingSrvr-Linux]# ps -aux
 root     20297  0.0  0.1   4452   456 ?        Ss   04:16   0:00 /usr/local/sbin/DarwinStreamingServer
 qtss     20298  0.1  0.8  45860  2124 ?        Sl   04:16   0:00 /usr/local/sbin/DarwinStreamingServer
 qtss     20299  0.0  1.7  13520  4360 ?        Ss   04:16   0:00 /usr/bin/perl /usr/local/sbin/streamingadminserver.pl
-</code></p>
+</code></pre>
 
 <p>webインターフェース http://localhost:1220/ にアクセスして先ほど作成したadminユーザーでログインします。</p>
 
@@ -151,16 +144,14 @@ yumパッケージからインストールします。</p>
 
 <p>Gnome端末から</p>
 
-<p><code>
-[root@localhost ~]yum install gcc
+<pre><code>[root@localhost ~]yum install gcc
 [root@localhost ~]yum install gcc-c++
 [root@localhost ~]yum install bison
-</code></p>
+</code></pre>
 
 <p>monoソースをダウンロードして</p>
 
-<p><code>
-[root@localhost ~]# wget http://ftp.novell.com/pub/mono/sources/mono/mono-2.10.2.tar.bz2
+<pre><code>[root@localhost ~]# wget http://ftp.novell.com/pub/mono/sources/mono/mono-2.10.2.tar.bz2
 [root@localhost ~]# bzip2 -dc mono-2.10.2.tar.bz2 | tar xvf -
 [root@localhost ~]# cd mono-2.10.2
 [root@localhost mono-2.10.2]# ./configure
@@ -168,33 +159,28 @@ yumパッケージからインストールします。</p>
 ↑めっちゃ時間かかりました。まぁ.netframeworkを移植してるわけですからねぇ～。。。
 [root@localhost mono-2.10.2]# make check
 [root@localhost mono-2.10.2]# make install
-</code></p>
+</code></pre>
 
 <p>んで、無事インストール完了</p>
 
-<p>```
-[root@localhost mono-2.10.2]# mono &mdash;version
+<pre><code>[root@localhost mono-2.10.2]# mono --version
 Mono JIT compiler version 2.10.2 (tarball 2011年  9月 21日 水曜日 23:59:08 JST)
-Copyright &copy; 2002-2011 Novell, Inc and Contributors. www.mono-project.com</p>
-
-<pre><code>    TLS:           __thread
-    SIGSEGV:       altstack
-    Notifications: epoll
-    Architecture:  x86
-    Disabled:      none
-    Misc:          softdebug
-    LLVM:          supported, not enabled.
-    GC:            Included Boehm (with typed GC and Parallel Mark)
+Copyright (C) 2002-2011 Novell, Inc and Contributors. www.mono-project.com
+        TLS:           __thread
+        SIGSEGV:       altstack
+        Notifications: epoll
+        Architecture:  x86
+        Disabled:      none
+        Misc:          softdebug
+        LLVM:          supported, not enabled.
+        GC:            Included Boehm (with typed GC and Parallel Mark)
 </code></pre>
-
-<p>```</p>
 
 <p>適当なコンソールアプリを作成してLinuxへ移し、実行してみました。</p>
 
-<p><code>
-[root@localhost mono-2.10.2]#mono helloworld.exe
+<pre><code>[root@localhost mono-2.10.2]#mono helloworld.exe
 Hello, world
-</code></p>
+</code></pre>
 
 <p>おお～、動きました～！！
 しかし残念ながらFormを使ったアプリはmono-winformsがちゃんと動かず、実行できませんでした。</p>

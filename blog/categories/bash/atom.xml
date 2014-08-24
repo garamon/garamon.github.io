@@ -4,7 +4,7 @@
   <title><![CDATA[Category: bash | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/bash/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -20,9 +20,8 @@
     <id>http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories</id>
     <content type="html"><![CDATA[<p>dir_1, dir_2, dir_3&hellip;と連番でディレクトリを作成したい場合は以下で一発。</p>
 
-<p><code>sh
-$ mkdir dir_{1..15}
-</code></p>
+<pre><code class="sh">$ mkdir dir_{1..15}
+</code></pre>
 
 <p>普段書かないので普通に忘れる。</p>
 ]]></content>
@@ -42,9 +41,8 @@ $ mkdir dir_{1..15}
 
 <h2>一時的にaliasを無効にする</h2>
 
-<p><code>sh
-$ \cp -f hoge/ piyo
-</code></p>
+<pre><code class="sh">$ \cp -f hoge/ piyo
+</code></pre>
 
 <p>知らんかった&hellip;</p>
 ]]></content>
@@ -66,9 +64,8 @@ $ \cp -f hoge/ piyo
 
 <p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
 
-<p><code>sh
-$ shopt -s cdspell
-</code></p>
+<pre><code class="sh">$ shopt -s cdspell
+</code></pre>
 
 <p>ex)
 <code>
@@ -86,9 +83,8 @@ Dropbox/Public
 
 <p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
 
-<p><code>
-$ shopt -s histverify
-</code></p>
+<pre><code>$ shopt -s histverify
+</code></pre>
 
 <p>ex)
 <code>
@@ -103,9 +99,8 @@ rake preview
 
 <p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
 
-<p><code>
-$ export HISTCONTROL=ignoredups
-</code></p>
+<pre><code>$ export HISTCONTROL=ignoredups
+</code></pre>
 
 <p>historyの最後の行と同じコマンドは記録されません。</p>
 
@@ -113,23 +108,20 @@ $ export HISTCONTROL=ignoredups
 
 <p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
 
-<p><code>
-$ export HISTCONTROL=ignorespace
-</code></p>
+<pre><code>$ export HISTCONTROL=ignorespace
+</code></pre>
 
 <p>ignoredups ignorespace 両方を指定したい場合</p>
 
-<p><code>
-$ export HISTCONTROL=ignoreboth
-</code></p>
+<pre><code>$ export HISTCONTROL=ignoreboth
+</code></pre>
 
 <h2>EOF (Ctrl-D) 入力の許可数を設定する</h2>
 
 <p>次の一文を ~/.bashrc または ~/.bash_profile に記載</p>
 
-<p><code>
-$ export IGNOREEOF=5
-</code></p>
+<pre><code>$ export IGNOREEOF=5
+</code></pre>
 
 <p>デフォルトでは Ctrl-D を一度押すとログアウトしてしまいますが、IGNOREEOFを設定することでその回数を任意に決めることができます。</p>
 
@@ -139,30 +131,27 @@ $ export IGNOREEOF=5
 
 <p>通常のコピー</p>
 
-<p><code>
-$ cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.back
-</code></p>
+<pre><code>$ cp /etc/httpd/conf/httpd.conf /etc/httpd/conf/httpd.conf.back
+</code></pre>
 
 <p>もっと短く書けます。</p>
 
-<p><code>
-$ cp /etc/httpd/conf/httpd.conf{,.back}
-</code></p>
+<pre><code>$ cp /etc/httpd/conf/httpd.conf{,.back}
+</code></pre>
 
 <h2>ディレクトリを複数作成する</h2>
 
 <p>上記と同じ方法で複数のディレクトリを作成することできます。</p>
 
-<p>```
-$ mkdir -p ~/rpm/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
-$ ll ~/rpm/</p>
+<pre><code>$ mkdir -p ~/rpm/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+$ ll ~/rpm/
 
-<p>drwxr-xr-x  2 noto  staff  68  4 17 00:19 BUILD
+drwxr-xr-x  2 noto  staff  68  4 17 00:19 BUILD
 drwxr-xr-x  2 noto  staff  68  4 17 00:19 RPMS
 drwxr-xr-x  2 noto  staff  68  4 17 00:19 SOURCES
 drwxr-xr-x  2 noto  staff  68  4 17 00:19 SPECS
 drwxr-xr-x  2 noto  staff  68  4 17 00:19 SRPMS
-```</p>
+</code></pre>
 
 <h2>参考</h2>
 

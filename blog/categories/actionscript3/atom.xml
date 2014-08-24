@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: ActionScript3 | Code Life]]></title>
+  <title><![CDATA[Category: actionscript3 | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/actionscript3/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -31,23 +31,18 @@
 
 <p>例）Aが真、または、Bが真のときCを真にする。（※A、B、Cは変数）</p>
 
-<p>```as3
-if (A == true || B == true) {</p>
-
-<pre><code>C = true;
+<pre><code class="as3">if (A == true || B == true) {
+    C = true;
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <p>※上記はPHPとかActionScriptで想像してください。</p>
 
 <p>もちろんActionScriptでも論理演算子は使えるのですが、
 最近オープンソースのコードを読んでて以下みたいのが出てきたんです。</p>
 
-<p><code>as3
-A ||= B;
-</code></p>
+<pre><code class="as3">A ||= B;
+</code></pre>
 
 <p>！？
 まず驚いたのは、こんな演算子ActionScriptでも使えんの？</p>
@@ -58,9 +53,8 @@ A ||= B;
 
 <p>上記をしっかり書くと以下のような感じ。(A、Bは変数)</p>
 
-<p><code>as3
-A = A || B;
-</code></p>
+<pre><code class="as3">A = A || B;
+</code></pre>
 
 <p>Aが真の場合、AにはAが返り、それ以外の場合はAにBが返ります。
 ※AとBは任意の型。Booleanじゃなくても使えるけど、片方がBooleanだとブール値になります。</p>
@@ -72,11 +66,10 @@ A = A || B;
 
 <p>今回の例はOR(||)で説明しましたが、もちろんAND(&amp;&amp;)もあります。</p>
 
-<p>```as3
-A &amp;&amp;= B;</p>
+<pre><code class="as3">A &amp;&amp;= B;
 
-<p>A = A &amp;&amp; B;
-```</p>
+A = A &amp;&amp; B;
+</code></pre>
 
 <p>Aが偽の場合、AにはAを返し、それ以外の場合はAにBが返ります。
 うーん。文字で書くとややこしい。</p>
@@ -111,29 +104,25 @@ A &amp;&amp;= B;</p>
 </ul>
 
 
-<p>```as3 Main.as
-import flash.events.Event;
+<pre><code class="as3 Main.as">import flash.events.Event;
 import flash.net.NetConnection;
-import flash.net.NetStream;</p>
+import flash.net.NetStream;
 
-<p>// ns = NetStream、stream = (ファイル名) のとき
+// ns = NetStream、stream = (ファイル名) のとき
 ns.play(stream);
-stage.addEventListener(Event.ENTER_FRAME, onEnterFrameHandler);</p>
+stage.addEventListener(Event.ENTER_FRAME, onEnterFrameHandler);
 
-<p>/<em>*
+/**
  * onEnterFrameHandler
  * @param    event
- </em>/
-private function onEnterFrameHandler(event:Event):void {</p>
-
-<pre><code>// duration = 動画尺（ミリ秒）とする
-if ((Math.ceil(ns.time * 10) / 10) &gt;= (Math.floor(duration * 10) / 10)) {
-    // 再生終了！！
+ */
+private function onEnterFrameHandler(event:Event):void {
+    // duration = 動画尺（ミリ秒）とする
+    if ((Math.ceil(ns.time * 10) / 10) &gt;= (Math.floor(duration * 10) / 10)) {
+        // 再生終了！！
+    }
 }
 </code></pre>
-
-<p>}
-```</p>
 
 <p>結構はしょっている部分多いです。
 NetConnectionとNetStreamがある程度分かっている前提です。
@@ -223,49 +212,41 @@ DelayExecutorを使わない場合はこんな感じ。</p>
 
 <h2>通常</h2>
 
-<p>```as3
-import flash.events.TimerEvent;
-import flash.utils.Timer;</p>
+<pre><code class="as3">import flash.events.TimerEvent;
+import flash.utils.Timer;
 
-<p>// n秒後に1回実行
+// n秒後に1回実行
 var timer:Timer = new Timer(n * 1000, 1);
 timer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
-timer.start();</p>
+timer.start();
 
-<p>/<em>*
+/**
  * onTimerComplete
  * @param event
- </em>/
-private function onTimerComplete(event:TimerEvent):void {</p>
-
-<pre><code>// n秒後に実行させたい処理
-timer.removeEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
+ */
+private function onTimerComplete(event:TimerEvent):void {
+    // n秒後に実行させたい処理
+    timer.removeEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <h2>DelayExecutor</h2>
 
-<p>```as3
-import DelayExecutor;
+<pre><code class="as3">import DelayExecutor;
 import flash.events.TimerEvent;
-import flash.utils.Timer;</p>
+import flash.utils.Timer;
 
-<p>// n秒後に1回実行
-DelayExecutor.register(onTimerFunc, n * 1000).start();</p>
+// n秒後に1回実行
+DelayExecutor.register(onTimerFunc, n * 1000).start();
 
-<p>/<em>*
+/**
  * onTimerFunc
  * @param exe
- </em>/
-private function onTimerFunc(exe:DelayExecutor):void {</p>
-
-<pre><code>// n秒後に実行させたい処理
+ */
+private function onTimerFunc(exe:DelayExecutor):void {
+    // n秒後に実行させたい処理
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <p>ちょっとスマートでしょ。
 忘れがちなremoveEventListnerをしなくてもいいってこともよいのです。</p>
@@ -298,17 +279,16 @@ SWFでのパラメーター取得についてです。</p>
 
 <h3>ActionScript</h3>
 
-<p><code>as3
-var param:Object = loaderInfo.parameters;
+<pre><code class="as3">var param:Object = loaderInfo.parameters;
 var key:String = param["key"];
-</code></p>
+</code></pre>
 
 <p>最初、どうしてもとっつきにくいのがloaderInfo。デフォルトで使えます。
 外部の画像ファイルのサイズをとるときもloaderInfo系のライブラリを使いますー。</p>
 
 <h3>HTML</h3>
 
-<p>```</p>
+<p>&#8220;`</p>
 
 <!-- ※一部抜粋 -->
 
@@ -319,7 +299,7 @@ var key:String = param["key"];
 
 
 <p><a href="test.swf?key=test">リンクで開く場合</a>
-```</p>
+&#8220;`</p>
 
 <p>一般的にはFlashVarsで値を渡します。
 またはGETでSWFに直接渡してもいけるはず。</p>

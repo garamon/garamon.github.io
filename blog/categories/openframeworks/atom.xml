@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: openFrameworks | Code Life]]></title>
+  <title><![CDATA[Category: openframeworks | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/openframeworks/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -32,31 +32,24 @@ graphicsExampleプロジェクトをビルドしてみます。</p>
 graphicsExampleをビルドすると以下のような
 メッセージが出て、先に進まなかったんです。</p>
 
-<p>```
-▼openFrameworks
-  ▼ofQuickTimePlayer.cpp</p>
-
-<pre><code>Semantic Issue
-Use of undeclared identifier &amp;#8216;DisposeGWorld&amp;#8217;
-Semantic Issue
-Use of undeclared identifier &amp;#8216;GetWorldPixMap&amp;#8217;
-Semantic Issue
-Use of undeclared identifier &amp;#8216;SetGWorld&amp;#8217;
-Semantic Issue
-Use of undeclared identifier &amp;#8216;DisposeGWorld&amp;#8217;
+<pre><code>▼openFrameworks
+  ▼ofQuickTimePlayer.cpp
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;DisposeGWorld&amp;#8217;
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;GetWorldPixMap&amp;#8217;
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;SetGWorld&amp;#8217;
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;DisposeGWorld&amp;#8217;
+  ▼ofQuickTimeGrabber.cpp
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;MacSetRect&amp;#8217;
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;GetGWorldPixMap&amp;#8217;
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;SetGWorld&amp;#8217;
 </code></pre>
-
-<p>  ▼ofQuickTimeGrabber.cpp</p>
-
-<pre><code>Semantic Issue
-Use of undeclared identifier &amp;#8216;MacSetRect&amp;#8217;
-Semantic Issue
-Use of undeclared identifier &amp;#8216;GetGWorldPixMap&amp;#8217;
-Semantic Issue
-Use of undeclared identifier &amp;#8216;SetGWorld&amp;#8217;
-</code></pre>
-
-<p>```</p>
 
 <p>がっつりでてたんです。
 ところが、サンプルたちを別のフォルダーに移動してから開いて
@@ -120,22 +113,18 @@ apps > examples にサンプルプロジェクトがたくさんあります。
 
 <p>openFrameworksのプロジェクトは以下のような構成になっています。</p>
 
-<p>```
-[graphicsExample] ※プロジェクトのフォルダー
+<pre><code>[graphicsExample] ※プロジェクトのフォルダー
   |
-  +&ndash; [bin]
-  +&ndash; graphicsExample.xcodeproj
-  +&ndash; openFrameworkds-Info.plist
-  +&ndash; Project.xcconfig
-  +&ndash; [src]</p>
-
-<pre><code>  |
-  +- main.cpp
-  +- testApp.cpp
-  +- testApp.h
+  +- [bin]
+  +- graphicsExample.xcodeproj
+  +- openFrameworkds-Info.plist
+  +- Project.xcconfig
+  +- [src]
+      |
+      +- main.cpp
+      +- testApp.cpp
+      +- testApp.h
 </code></pre>
-
-<p>```</p>
 
 <p>大事なのはsrcフォルダー以下。
 main.cppが実行され、testApp.cppが呼び出されます。
@@ -146,22 +135,18 @@ graphicsExample.xcodeprojを開きます。
 Xcodeからプロジェクトのツリーを見てみると、
 実フォルダー内のファイルの他に以下のように表示されます。</p>
 
-<p>```
-▼[graphicsExample]
+<pre><code>▼[graphicsExample]
   openFrameworks-Info.plist
   Project.xcconfig
-  ▼[src]</p>
-
-<pre><code>main.cpp
-testApp.cpp
-testApp.h
-</code></pre>
-
-<p>  ▼[openFrameworks]
+  ▼[src]
+    main.cpp
+    testApp.cpp
+    testApp.h
+  ▼[openFrameworks]
   ▼[addons]
   ▼[frameworks]
   graphicsExampleDebug.app
-```</p>
+</code></pre>
 
 <p>追加されているフォルダーの部分がopenFrameworksのテンプレートというか
 フレームワークの部分になります。</p>

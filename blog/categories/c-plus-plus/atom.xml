@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: C++ | Code Life]]></title>
+  <title><![CDATA[Category: c++ | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/c-plus-plus/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-21T22:18:58+09:00</updated>
+  <updated>2014-08-24T21:15:49+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -47,52 +47,46 @@ IMediaEventのWaitForCompletionメソッドを呼び出して、再生が完了�
 
 <p>以下、サンプルコード。</p>
 
-<p>``` c++</p>
+<pre><code class="c++">#include &lt;dshow.h&gt;
+#include &lt;iostream&gt;
 
-<h1>include &lt;dshow.h></h1>
+using namespace std;
 
-<h1>include <iostream></h1>
+int main(void)
+{
+    cout &lt;&lt; "[Enter]キーで再生" &lt;&lt; endl;
+    getchar();
 
-<p>using namespace std;</p>
+    CoInitialize(NULL);
 
-<p>int main(void)
-{</p>
+    IGraphBuilder *pGraph;
+    IMediaControl *pMediaControl;
+    IMediaEvent *pEvent;
 
-<pre><code>cout &lt;&lt; "[Enter]キーで再生" &lt;&lt; endl;
-getchar();
+    CoCreateInstance(CLSID_FilterGraph, NULL, CLSCTX_INPROC_SERVER,
+        IID_IGraphBuilder, (void **)&amp;pGraph);
+    pGraph-&gt;QueryInterface(IID_IMediaControl, (void **)&amp;pMediaControl);
+    pGraph-&gt;QueryInterface(IID_IMediaEvent, (void **)&amp;pEvent);
 
-CoInitialize(NULL);
+    //グラフ作成
+    pGraph-&gt;RenderFile(L"C:\\test.webm", NULL);
 
-IGraphBuilder *pGraph;
-IMediaControl *pMediaControl;
-IMediaEvent *pEvent;
+    //グラフ実行
+    pMediaControl-&gt;Run();
 
-CoCreateInstance(CLSID_FilterGraph, NULL, CLSCTX_INPROC_SERVER,
-    IID_IGraphBuilder, (void **)&amp;pGraph);
-pGraph-&gt;QueryInterface(IID_IMediaControl, (void **)&amp;pMediaControl);
-pGraph-&gt;QueryInterface(IID_IMediaEvent, (void **)&amp;pEvent);
+    //終了待ち
+    long evCode;
+    pEvent-&gt;WaitForCompletion(INFINITE, &amp;evCode);
 
-//グラフ作成
-pGraph-&gt;RenderFile(L"C:\\test.webm", NULL);
+    //開放
+    pMediaControl-&gt;Release();
+    pEvent-&gt;Release();
+    pGraph-&gt;Release();
+    CoUninitialize();
 
-//グラフ実行
-pMediaControl-&gt;Run();
-
-//終了待ち
-long evCode;
-pEvent-&gt;WaitForCompletion(INFINITE, &amp;evCode);
-
-//開放
-pMediaControl-&gt;Release();
-pEvent-&gt;Release();
-pGraph-&gt;Release();
-CoUninitialize();
-
-return 0;
+    return 0;
+}
 </code></pre>
-
-<p>}
-```</p>
 
 <p>※このサンプルは全く例外処理をしていないのでご注意ください。</p>
 
