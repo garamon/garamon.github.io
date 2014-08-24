@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Cakephp | Code Life]]></title>
+  <title><![CDATA[Category: cakephp | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/cakephp/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-24T22:33:18+09:00</updated>
+  <updated>2014-08-24T22:42:12+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -72,7 +72,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[CakePHP2 CssController Could Not Be Found が発生する場合]]></title>
+    <title type="html"><![CDATA[CakePHP2 CssController could not be found が発生する場合]]></title>
     <link href="http://blog.code-life.net/blog/2013/03/21/cakephp2-css-controller-could-not-be-found/"/>
     <updated>2013-03-21T00:00:00+09:00</updated>
     <id>http://blog.code-life.net/blog/2013/03/21/cakephp2-css-controller-could-not-be-found</id>
