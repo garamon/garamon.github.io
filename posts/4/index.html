@@ -9,8 +9,15 @@
 	<meta name="author" content="noto">
 
 	
-	<meta name="description" content="windows ファイルリストを読み込んで目的のディレクトリにコピーする方法 in Windows コマンドラインから以下を実行。リストファイル名とコピー先は適宜変更すること。 1
-for /f %n in (listfile_path) do copy &quot;%n&quot; &quot &hellip;">
+	<meta name="description" content="mysql AUTO INCREMENTの現在の値を確認する 次のSQLを実行する 1
+2
+3
+4
+5
+6
+SELECT AUTO_INCREMENT
+FROM INFORMATION_SCHEMA.TABLES
+WHERE table_name=&#39;hoge&#39;; 結果 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -101,6 +108,103 @@ for /f %n in (listfile_path) do copy &quot;%n&quot; &quot &hellip;">
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-17T20:15:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>mysql</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/17/how-to-get-auto-increment-value-in-mysql/" itemprop="url">AUTO INCREMENTの現在の値を確認する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>次のSQLを実行する</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='mysql'><span class='line'><span class="k">SELECT</span>
+</span><span class='line'>  <span class="kp">AUTO_INCREMENT</span>
+</span><span class='line'><span class="k">FROM</span>
+</span><span class='line'>  <span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="kp">TABLES</span>
+</span><span class='line'><span class="k">WHERE</span>
+</span><span class='line'>  <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;hoge&#39;</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果</p>
+
+<pre><code>+----------------+
+| AUTO_INCREMENT |
++----------------+
+|         662058 |
++----------------+
+</code></pre>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-04-16T23:40:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/bash/'>bash</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/04/16/bash-hack-tips/" itemprop="url">Bash Hack & Tips 1</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近shellにハマってるので調べて便利そうなものをまとめてみます。</p>
+
+<p>タイトルに「1」と記載してますがシリーズ化するかは分かりません。たぶんしないでしょう&hellip;</p>
+
+
+		
+		<a href="/blog/2013/04/16/bash-hack-tips/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -401,94 +505,6 @@ for /f %n in (listfile_path) do copy &quot;%n&quot; &quot &hellip;">
 
 		
 		<a href="/blog/2013/03/09/changing-the-tags-output-cakephp2/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-12T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/hive/'>hive</a>, <a class='category' href='/blog/categories/php/'>php</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/12/12/php-thrifthiveclient/" itemprop="url">ThriftHiveClient を少し便利にしてみた</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>以前、<a href="/blog/2012/09/30/php-hiveql-hiveserver">HiveServerを使用してPHPからHiveQLを実行する</a>で、PHPから HiveQLを実行してみました。
-その際に、ThriftHiveClientの使い勝手が少し悪かったので改良を施してみました。</p>
-
-
-		
-		<a href="/blog/2012/12/12/php-thrifthiveclient/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-10-01T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/vim/'>vim</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/10/01/vim-vdebug-xdebug/" itemprop="url">Vim + Vdebug + Xdebug でPHPのリモートデバッグ</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>最近はようやく本格的に vim を使ってコーディングするようになりましたが、まだまだ慣れない &amp; 微妙な不満があったりします。
-移動系がキーボードで全てできるのは、確かにかなり楽なように思えます。</p>
-
-<p>話が変わりますが新しく違う言語を勉強しようと思う時、何を一番初めに調べますか？
-構文はもちろん、インストール方法とか色々ありますよね。ボクが一番重要視してるのはデバッグ方法です。</p>
-
-<p>どうやってデバッグするか。まずその方法などを調べます。
-LL系言語の方は 変数を printしたりする方が多いらしいのですがボクはあまり好きではないので PHPの場合は Xdebugを利用してステップ実行させたりしてます。</p>
-
-<p>print させるのが嫌いな理由は一つです。</p>
-
-<p> 「コードを書かなくちゃいけない」</p>
-
-<p>これに尽きます。なんでデバッグするのにコード書くんだよ！って思ってます。</p>
-
-<p>前置きが長くなりましたが、素晴らしいプラグイン <a href="https://github.com/joonty/vdebug" title="vdebug" target="_blank">Vdebug</a> を見つけたので紹介します。</p>
-
-
-		
-		<a href="/blog/2012/10/01/vim-vdebug-xdebug/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

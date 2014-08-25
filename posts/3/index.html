@@ -9,7 +9,7 @@
 	<meta name="author" content="noto">
 
 	
-	<meta name="description" content="javascript mousemoveイベントにbindした処理の実行間隔を制御する 制御するってのは言い過ぎですが、mousemoveイベントにbindした処理の実行間隔を空けたい場合、setIntervalで実行フラグのオン・オフを行い実行間隔を調整します。 Read on &rarr; &hellip;">
+	<meta name="description" content="vagrant [Vagrant] VirtualBoxのバージョンとGuest additionsのバージョンが合わない場合の対処法 遅ればせながらvagrantを触り始めました。今のところ単純なことしかしてないのでほとんど詰まるところはありませんが、 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +100,78 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-06-10T23:33:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/vagrant/'>vagrant</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/06/10/the-guest-additions-on-this-vm-do-not-match-the-installed-version-of-virtualbox-on-vagrant/" itemprop="url">[Vagrant] VirtualBoxのバージョンとGuest additionsのバージョンが合わない場合の対処法</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>遅ればせながらvagrantを触り始めました。今のところ単純なことしかしてないのでほとんど詰まるところはありませんが、仮想マシンを起動した際にVirtualBoxのバージョンとGuest additionsのバージョンが一致しないと怒られたのでその解決方法です。</p>
+
+
+		
+		<a href="/blog/2013/06/10/the-guest-additions-on-this-vm-do-not-match-the-installed-version-of-virtualbox-on-vagrant/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-05-29T22:45:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/javascript/'>javascript</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/05/29/javascript-object-merge/" itemprop="url">javascript オブジェクトのマージあれこれ</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近 javascriptを書く機会が少し増えてきたのでオブジェクトのマージ方法を備忘録的にメモ。</p>
+
+
+		
+		<a href="/blog/2013/05/29/javascript-object-merge/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -390,103 +462,6 @@ MySQLの文法チェックはどうやるのか調べてみた。</p>
 
 		
 		<a href="/blog/2013/04/22/php-compilation-failed-on-mac-osx/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-17T20:15:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/mysql/'>mysql</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/04/17/how-to-get-auto-increment-value-in-mysql/" itemprop="url">AUTO INCREMENTの現在の値を確認する</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>次のSQLを実行する</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='mysql'><span class='line'><span class="k">SELECT</span>
-</span><span class='line'>  <span class="kp">AUTO_INCREMENT</span>
-</span><span class='line'><span class="k">FROM</span>
-</span><span class='line'>  <span class="n">INFORMATION_SCHEMA</span><span class="p">.</span><span class="kp">TABLES</span>
-</span><span class='line'><span class="k">WHERE</span>
-</span><span class='line'>  <span class="n">table_name</span><span class="o">=</span><span class="s1">&#39;hoge&#39;</span><span class="p">;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>結果</p>
-
-<pre><code>+----------------+
-| AUTO_INCREMENT |
-+----------------+
-|         662058 |
-+----------------+
-</code></pre>
-
-		
-		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-04-16T23:40:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/bash/'>bash</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2013/04/16/bash-hack-tips/" itemprop="url">Bash Hack & Tips 1</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>最近shellにハマってるので調べて便利そうなものをまとめてみます。</p>
-
-<p>タイトルに「1」と記載してますがシリーズ化するかは分かりません。たぶんしないでしょう&hellip;</p>
-
-
-		
-		<a href="/blog/2013/04/16/bash-hack-tips/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
