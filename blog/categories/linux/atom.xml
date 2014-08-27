@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-25T22:19:50+09:00</updated>
+  <updated>2014-08-28T01:04:12+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,47 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 新規ユーザーのホームディレクトリの雛形設定]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/27/linux-skelton-directory/"/>
+    <updated>2014-08-27T17:54:17+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/27/linux-skelton-directory</id>
+    <content type="html"><![CDATA[<p>useraddコマンドで新規ユーザーを作成するとホームディレクトリ内に下記のようないくつかの設定ファイルが既に存在している。</p>
+
+<!--more-->
+
+
+<pre><code>.
+├── .bash_logout
+├── .bash_profile
+└── .bashrc
+</code></pre>
+
+<p>これらのファイルは、<code>/etc/skel</code>内のファイルがコピーされたもので、<code>/etc/skel</code>内にファイルを追加、変更を行うと
+新規ユーザーのホームディレクトリの雛形を作成することができる。</p>
+
+<h2>雛形ディレクトリを変更する</h2>
+
+<p>デフォルトでは<code>/etc/skel</code>だが、useraddの設定ファイル<code>/etc/default/useradd</code>に指定することで変更することができる。</p>
+
+<pre><code>$ sudo vi /etc/default/useradd
+
+# useradd defaults file
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=/bin/bash
+SKEL=/etc/skel ← ここを変える
+CREATE_MAIL_SPOOL=yes
+</code></pre>
+
+<h2>参考</h2>
+
+<p><a href="http://linuxg.net/the-unix-and-linux-skeleton-directory-etcskel/">The Unix and Linux skeleton directory: /etc/skel</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CentOS6.x SCPコマンドが見つからない場合]]></title>
