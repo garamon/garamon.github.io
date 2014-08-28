@@ -9,7 +9,8 @@
 	<meta name="author" content="noto">
 
 	
-	<meta name="description" content="nginx Nginx にCache Purgeモジュールを追加する notoです。 Nginxはリバースプロキシを利用してキャッシュを行う機能がデフォルトで組み込まれていますが、そのキャッシュを削除する機能がありません。 そこで、サードパーティーモジュールのひとつである Cache &hellip;">
+	<meta name="description" content="mysql MySQLチューニングツール 「mymemcheck」をCentOSにインストールする notoです。 MySQLのメモリ関係のチューニングをする際に、メモリの計算をするのが面倒くさいと思っていたら便利なツールがあるんですね。
+その名も「mymemcheck」 &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -100,6 +101,97 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-12T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>mysql</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/06/12/install-mymemcheck-on-centos/" itemprop="url">MySQLチューニングツール 「mymemcheck」をCentOSにインストールする</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>notoです。</p>
+
+<p>MySQLのメモリ関係のチューニングをする際に、メモリの計算をするのが面倒くさいと思っていたら便利なツールがあるんですね。
+その名も「mymemcheck」KLab製の自家製ツールですが、<a href="http://dsas.blog.klab.org/archives/50860867.html" title="5分でできる、MySQLのメモリ関係のチューニング！" target="_blank">こちら</a> からダウンロードして利用することができます。</p>
+
+<p>mymemcheckは以下のチェックを行なってくれます。</p>
+
+<blockquote><p>my.cnfもしくはSHOW VARIABLESの結果を元に、以下の3つのチェックを行います。</p>
+
+<ul>
+<li>最低限必要な物理メモリの大きさ</li>
+<li>IA-32のLinuxでのヒープサイズの制限</li>
+<li>innodb_log_file_sizeの最大サイズ</li>
+</ul>
+</blockquote>
+
+<p>今回は、CentOS 5.7にインストールしてみます。</p>
+
+
+		
+		<a href="/blog/2012/06/12/install-mymemcheck-on-centos/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-11T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/movable-type/'>movable type</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/06/11/movable-type-mtkeitaipaginate/" itemprop="url">【MT】ケータイキットのMTKeitaiPaginateタグで記事分割</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Yuuです。</p>
+
+<p>最近サーバ構築と見積もり・提案書しかやってないので、あまりコード書いてない今日この頃。
+かと思ってたら、MT案件が来てしまったので、思い出しを兼ねて、ケータイキットでよく使うページ分割タグです。</p>
+
+
+		
+		<a href="/blog/2012/06/11/movable-type-mtkeitaipaginate/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
@@ -393,86 +485,6 @@ cookpadの「tofu」のような画像キャッシュサーバを作る機会が
 
 		
 		<a href="/blog/2012/05/10/scroll-top-jquery/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-06T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/jquery/'>jquery</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/05/06/tab-menu-jquery/" itemprop="url">jQueryでタブメニュー</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>Yuuです。</p>
-
-<p>今日は、jQueryのみでタブ切り替え（フェード付）の実装です。
-jQueryのみで実装できるので、簡単な切り替えのみならお手軽感満載。</p>
-
-
-		
-		<a href="/blog/2012/05/06/tab-menu-jquery/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-05-03T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/hls/'>hls</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/05/03/how-to-install-httpsegmenter-on-centos/" itemprop="url">CentOSにHttpSegmenterをインストールする</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<p>notoです。</p>
-
-<p>instagram が facebook に約10億ドルで買収され、動画の instagram と呼ばれている viddy が資金調達ラウンドでかなりの資金を集めてるみたいですね。
-世は動画時代 真っ盛りです。</p>
-
-<p>そういうわけで（？）、HttpSegmenter のインストール方法の備忘録です。</p>
-
-
-		
-		<a href="/blog/2012/05/03/how-to-install-httpsegmenter-on-centos/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

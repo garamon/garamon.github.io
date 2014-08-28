@@ -4,7 +4,7 @@
   <title><![CDATA[Category: linux | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/linux/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-28T01:04:12+09:00</updated>
+  <updated>2014-08-28T22:20:14+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[rsync sshポートを指定する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/28/change-ssh-port-when-using-rsync/"/>
+    <updated>2014-08-28T16:52:28+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/28/change-ssh-port-when-using-rsync</id>
+    <content type="html"><![CDATA[<p>rsyncは一般的にはデフォルトでsshを利用するよう設定されているがeオプションで変更することができる。</p>
+
+<!--more-->
+
+
+<pre><code>$ rsync -av -e 'ssh -p 10022' ~/path_to_local/files/ user@hostname:~/path_to_remote/files/
+</code></pre>
+
+<p>eオプションでなく環境変数 <code>RSYNC_RSH</code> に設定しても同じことができる。</p>
+
+<blockquote><p>You can also choose the remote shell program using the RSYNC_RSH environment variable,  which accepts the same range of values as -e.</p>
+
+<p>引用元: <cite><a href="http://rsync.samba.org/ftp/rsync/rsync.html">rsync</a><cite></p></blockquote>
+
+<pre><code>$ export RSYNC_RSH="ssh -p 10022"
+$ rsync -av ~/path_to_local/files/ user@hostname:~/path_to_remote/files/
+</code></pre>
+
+<h2>参考</h2>
+
+<p><a href="http://rsync.samba.org/ftp/rsync/rsync.html">rsync</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux 新規ユーザーのホームディレクトリの雛形設定]]></title>

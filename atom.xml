@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-28T01:04:12+09:00</updated>
+  <updated>2014-08-28T22:20:14+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,76 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MySQLWorkbench テーブル毎にストレージエンジンを変更する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/28/how-to-change-storage-engine-mysql-work-bench/"/>
+    <updated>2014-08-28T18:24:52+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/28/how-to-change-storage-engine-mysql-work-bench</id>
+    <content type="html"><![CDATA[<p>いつからかテーブルのストレージエンジンの項目がどこにあるのか、とても分かりにくくなった。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>MacOS X 10.9</li>
+<li>MySQLWorkbench 6.1</li>
+</ul>
+
+
+<h2>テーブルのストレージエンジンを変更する</h2>
+
+<p>テーブルの詳細を表示し</p>
+
+<p><a href="http://blog.code-life.net/images/2014/08/mysql-work-bench-1.png"><img src="http://blog.code-life.net/images/2014/08/mysql-work-bench-1-500x121.png" width="500" height="121"></a></p>
+
+<p>すると</p>
+
+<p><a href="http://blog.code-life.net/images/2014/08/mysql-work-bench-2.png"><img src="http://blog.code-life.net/images/2014/08/mysql-work-bench-2-500x121.png" width="500" height="121"></a></p>
+
+<p>ストレージエンジンのセレクトボックスが表示される。分りにくい。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://stackoverflow.com/questions/10085203/mysql-workbench-eer-diagramm-how-to-change-storage-engine">MySQL Workbench EER Diagramm - how to change storage engine?</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[rsync sshポートを指定する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/28/change-ssh-port-when-using-rsync/"/>
+    <updated>2014-08-28T16:52:28+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/28/change-ssh-port-when-using-rsync</id>
+    <content type="html"><![CDATA[<p>rsyncは一般的にはデフォルトでsshを利用するよう設定されているがeオプションで変更することができる。</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rsync -av -e 'ssh -p 10022' ~/path_to_local/files/ user@hostname:~/path_to_remote/files/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>eオプションでなく環境変数 <code>RSYNC_RSH</code> に設定しても同じことができる。</p>
+
+<blockquote><p>You can also choose the remote shell program using the RSYNC_RSH environment variable,  which accepts the same range of values as -e.</p>
+
+<p>引用元: <cite><a href="http://rsync.samba.org/ftp/rsync/rsync.html">rsync</a><cite></p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ export RSYNC_RSH="ssh -p 10022"
+</span><span class='line'>$ rsync -av ~/path_to_local/files/ user@hostname:~/path_to_remote/files/</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考</h2>
+
+<p><a href="http://rsync.samba.org/ftp/rsync/rsync.html">rsync</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Linux 新規ユーザーのホームディレクトリの雛形設定]]></title>
@@ -1236,202 +1306,6 @@ javascript好きになってきた今日この頃。</p>
 
 
 <p>これで共有設定が反映される。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CakePHP]モデルのコールバックを無効化にする]]></title>
-    <link href="http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback/"/>
-    <updated>2013-09-25T21:59:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback</id>
-    <content type="html"><![CDATA[<p>モデルの<a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html">コールバックメソッド</a>が様々ありますが、無効化したい場合があります。</p>
-
-<p>find, save共に第２引数にcallbacksをキーとした配列を渡すことでモデルのコールバック実行の可否を伝えることが可能です。</p>
-
-<!--more-->
-
-
-<h2>find(beforeFind, afterFind共に無効化)</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
-</span><span class='line'><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>find(beforeFindのみ有効)</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span>
-</span><span class='line'><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>find(afterFindのみ有効)</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">&#39;first&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;after&#39;</span>
-</span><span class='line'><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>save(beforeSave, afterSave共に無効化)</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span>
-</span><span class='line'><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>save(beforeSaveのみ有効)</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;before&#39;</span>
-</span><span class='line'><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>save(afterSaveのみ有効)</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>    <span class="s1">&#39;callbacks&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;after&#39;</span>
-</span><span class='line'><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>という小ネタ。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Vagrant1.2.2から1.3.2にあげたらvagrant-vbguestが動作しない]]></title>
-    <link href="http://blog.code-life.net/blog/2013/09/18/vagrant-vbguest-update/"/>
-    <updated>2013-09-18T21:57:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/09/18/vagrant-vbguest-update</id>
-    <content type="html"><![CDATA[<p>久しぶりに<a href="http://www.vagrantup.com/">Vagrant</a>を触ったついでにupdateした結果 <a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>がエラー吐く。</p>
-
-<p>エラー吐くどころかvagrant upもできない始末。
-<a href="https://github.com/dotless-de/vagrant-vbguest">vagrant-vbguest</a>自身もupdateしていたので反映させてみました。</p>
-
-<!--more-->
-
-
-<h2>環境</h2>
-
-<ul>
-<li>Mac OS X 10.8</li>
-<li>Vagrant 1.3.2</li>
-<li>Virtual Box 4.2.18</li>
-<li>ruby 1.9.3p392</li>
-</ul>
-
-
-<h2>エラー内容</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>/Users/noto/.vagrant.d/gems/gems/vagrant-vbguest-0.8.0/lib/vagrant-vbguest/vagrant_compat.rb:7:in <span class="sb">`</span>&lt;top <span class="o">(</span>required<span class="o">)</span>&gt;<span class="s1">&#39;: undefined method `[]&#39;</span> <span class="k">for </span>nil:NilClass <span class="o">(</span>NoMethodError<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Global Configuration</h2>
-
-<p><a href="http://blog.code-life.net/blog/2013/06/10/the-guest-additions-on-this-vm-do-not-match-the-installed-version-of-virtualbox-on-vagrant/">以前</a>設定したグローバルの設定をコメントアウト</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vi ~/.vagrant.d/Vagrantfile
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="c1">#Vagrant.configure(&quot;2&quot;) do |config|</span>
-</span><span class='line'><span class="c1">#  require &#39;vagrant-vbguest&#39; unless defined? config.vbguest</span>
-</span><span class='line'><span class="c1">#  config.vbguest.auto_update = false</span>
-</span><span class='line'><span class="c1">#end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Update vagrant-vbguest</h2>
-
-<p>さくっと一発</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant plugin update vagrant-vbguest
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Global Configuration再び</h2>
-
-<p>updateが完了したら、globalの設定のコメントを外します。これでエラーの出力がなくなるはずです。</p>
-
-<p>ちなみに<a href="https://github.com/dotless-de/vagrant-vbguest/blob/master/Readme.md">README</a>に記載されてる設定では以前と同様にエラーになりました。</p>
-
-<h3>エラーの内容はこちら</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>Vagrant failed to initialize at a very early stage:
-</span><span class='line'>
-</span><span class='line'>There was an error loading a Vagrantfile. The file being loaded
-</span><span class='line'>and the error message are shown below. This is usually caused by
-</span><span class='line'>a syntax error.
-</span><span class='line'>
-</span><span class='line'>Path: /Users/noto/.vagrant.d/Vagrantfile
-</span><span class='line'>Message: uninitialized constant VagrantVbguest::Config
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p><a href="https://github.com/dotless-de/vagrant-vbguest/issues/73">uninitialized constant VagrantVbguest::Config when using global configuration</a>でも同じこと言われてます。</p>
-
-<h2>Guest Additionsのバージョン確認</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant up <span class="c"># 起動させていないなら</span>
-</span><span class='line'><span class="nv">$ </span>vagrant vbguest --status
-</span><span class='line'>GuestAdditions versions on your host <span class="o">(</span>4.2.18<span class="o">)</span> and guest <span class="o">(</span>4.2.12<span class="o">)</span> <span class="k">do </span>not match.
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Update Guestadditions</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant up <span class="c"># 起動させていないなら</span>
-</span><span class='line'><span class="nv">$ </span>vagrant vbguest --do install
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>設定すべて外してstatusとdoコマンド利用すればいいんじゃないかなと思ってきました。</p>
 ]]></content>
   </entry>
   
