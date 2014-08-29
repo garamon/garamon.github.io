@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-28T22:20:14+09:00</updated>
+  <updated>2014-08-30T01:48:14+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,155 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHP2.x クエリーログを取得する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2/"/>
+    <updated>2014-08-29T10:58:40+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2</id>
+    <content type="html"><![CDATA[<p>どんなクエリが発行されているか確認したい場合があった際のメモ</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>CakePHP 2.5.2</li>
+<li>MySQL 5.5.30</li>
+</ul>
+
+
+<h2>注意</h2>
+
+<p>この方法でクエリーログが取得できるのはデバッグレベル2の場合のみ</p>
+
+<h2>クエリーログを取得する</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$log</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="p">{</span><span class="nv">$Model</span><span class="p">}</span><span class="o">-&gt;</span><span class="na">getDataSource</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getLog</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>第１引数は、ソートの有無。trueの場合はtook(ms)で降順ソート</li>
+<li>第2引数では、クエリーを格納している変数の初期化を行うか否か</li>
+</ul>
+
+
+<h3>返却値</h3>
+
+<p>以下のデータ構造で返却される。</p>
+
+<figure class='code'><figcaption><span>sample value</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">Array</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>    <span class="p">[</span><span class="nb">log</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>        <span class="p">(</span>
+</span><span class='line'>            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>                <span class="p">(</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">query</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">SELECT</span> <span class="sb">`username`</span> <span class="nx">FROM</span> <span class="sb">`users`</span>  <span class="k">AS</span> <span class="sb">`User`</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">params</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>                        <span class="p">(</span>
+</span><span class='line'>                        <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">affected</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">numRows</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">took</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>                <span class="p">(</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">query</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">SELECT</span> <span class="sb">`name`</span> <span class="nx">FROM</span> <span class="sb">`groups`</span>  <span class="k">AS</span> <span class="sb">`Group`</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">params</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>                        <span class="p">(</span>
+</span><span class='line'>                        <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">affected</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">numRows</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">took</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>        <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="nb">count</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+</span><span class='line'>    <span class="p">[</span><span class="nb">time</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>getLog</code>が行っている処理内容</p>
+
+<figure class='code'><figcaption><span>lib/Cake/Model/Datasource/DboSource.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * Get the query log as an array.</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> * @param boolean $sorted Get the queries sorted by time taken, defaults to false.</span>
+</span><span class='line'><span class="sd"> * @param boolean $clear If True the existing log will cleared.</span>
+</span><span class='line'><span class="sd"> * @return array Array of queries run as an array</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">getLog</span><span class="p">(</span><span class="nv">$sorted</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span> <span class="nv">$clear</span> <span class="o">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$sorted</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$log</span> <span class="o">=</span> <span class="nx">sortByKey</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_queriesLog</span><span class="p">,</span> <span class="s1">&#39;took&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">,</span> <span class="nx">SORT_NUMERIC</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$log</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_queriesLog</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$clear</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_queriesLog</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;log&#39;</span> <span class="o">=&gt;</span> <span class="nv">$log</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_queriesCnt</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_queriesTime</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MySQLWorkbench テーブル毎にストレージエンジンを変更する]]></title>
@@ -1202,110 +1351,6 @@ javascript好きになってきた今日この頃。</p>
 <p><a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a></p>
 
 <p><a href="http://stackoverflow.com/questions/18241065/auto-setting-xdebug-remote-host-ip-address-with-vagrant-puppet">Auto setting xdebug.remote_host ip address with vagrant/puppet</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Vagrant]共有ディレクトリのマウントが失敗する]]></title>
-    <link href="http://blog.code-life.net/blog/2013/09/26/vagrant-mounting-failed/"/>
-    <updated>2013-09-26T22:58:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/09/26/vagrant-mounting-failed</id>
-    <content type="html"><![CDATA[<h2>環境</h2>
-
-<ul>
-<li><p>HOST</p>
-
-<ul>
-<li>Mac OS X 10.8</li>
-<li>Vagrant 1.3.2</li>
-<li>Virtual Box 4.2.18</li>
-<li>ruby 1.9.3p392</li>
-</ul>
-</li>
-<li><p>GUEST</p>
-
-<ul>
-<li>CentOS 6.3 minimal</li>
-</ul>
-</li>
-</ul>
-
-
-<h2>エラー内容</h2>
-
-<p>vagrantから新規仮想マシンを作成し、ホストOSとゲストOSの共有ディレクトリの設定後、起動させたところ
-下記のエラーが出力された。</p>
-
-<!--more-->
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>The following SSH <span class="nb">command </span>responded with a non-zero <span class="nb">exit </span>status.
-</span><span class='line'>Vagrant assumes that this means the <span class="nb">command </span>failed!
-</span><span class='line'>
-</span><span class='line'>mount -t vboxsf -o <span class="nv">uid</span><span class="o">=</span><span class="sb">`</span>id -u vagrant<span class="sb">`</span>,gid<span class="o">=</span><span class="sb">`</span>getent group vagrant | cut -d: -f3<span class="sb">`</span> /share /share
-</span><span class='line'>
-</span><span class='line'>Stdout from the <span class="nb">command</span>:
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'>Stderr from the <span class="nb">command</span>:
-</span><span class='line'>
-</span><span class='line'>/sbin/mount.vboxsf: mounting failed with the error: No such device
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Guest additionsが正常にインストールされていないようなので /var/log/vboxadd-install.log を確認する。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nb">test</span> -e include/linux/autoconf.h -a -e include/config/auto.conf <span class="o">||</span> <span class="o">(</span>            <span class="se">\</span>
-</span><span class='line'>        <span class="nb">echo</span>;                                                           <span class="se">\</span>
-</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;  ERROR: Kernel configuration is invalid.&quot;</span>;               <span class="se">\</span>
-</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;         include/linux/autoconf.h or include/config/auto.conf are missing.&quot;</span>;      <span class="se">\</span>
-</span><span class='line'>        <span class="nb">echo</span> <span class="s2">&quot;         Run &#39;make oldconfig &amp;&amp; make prepare&#39; on kernel src to fix it.&quot;</span>;  <span class="se">\</span>
-</span><span class='line'>        <span class="nb">echo</span>;                                                           <span class="se">\</span>
-</span><span class='line'>        /bin/false<span class="o">)</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>automake, autoconf がインストールされてない&hellip;</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>sudo yum install automake autoconf
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Guest additionsの再インストール</h2>
-
-<p>ログアウト後</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>vagrant vbguest --do install <span class="c"># requier vagrant-vbguest</span>
-</span><span class='line'><span class="nv">$ </span>vagrant reload
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これで共有設定が反映される。</p>
 ]]></content>
   </entry>
   

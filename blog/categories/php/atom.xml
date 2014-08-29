@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-28T22:20:14+09:00</updated>
+  <updated>2014-08-30T01:48:14+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHP2.x クエリーログを取得する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2/"/>
+    <updated>2014-08-29T10:58:40+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2</id>
+    <content type="html"><![CDATA[<p>どんなクエリが発行されているか確認したい場合があった際のメモ</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>CakePHP 2.5.2</li>
+<li>MySQL 5.5.30</li>
+</ul>
+
+
+<h2>注意</h2>
+
+<p>この方法でクエリーログが取得できるのはデバッグレベル2の場合のみ</p>
+
+<h2>クエリーログを取得する</h2>
+
+<pre><code class="php">$log = $this-&gt;{$Model}-&gt;getDataSource()-&gt;getLog(false, false);
+</code></pre>
+
+<ul>
+<li>第１引数は、ソートの有無。trueの場合はtook(ms)で降順ソート</li>
+<li>第2引数では、クエリーを格納している変数の初期化を行うか否か</li>
+</ul>
+
+
+<h3>返却値</h3>
+
+<p>以下のデータ構造で返却される。</p>
+
+<pre><code class="php sample value">Array
+(
+    [log] =&gt; Array
+        (
+            [0] =&gt; Array
+                (
+                    [query] =&gt; SELECT `username` FROM `users`  AS `User`
+                    [params] =&gt; Array
+                        (
+                        )
+
+                    [affected] =&gt; 1
+                    [numRows] =&gt; 1
+                    [took] =&gt; 1
+                )
+
+            [1] =&gt; Array
+                (
+                    [query] =&gt; SELECT `name` FROM `groups`  AS `Group`
+                    [params] =&gt; Array
+                        (
+                        )
+
+                    [affected] =&gt; 1
+                    [numRows] =&gt; 1
+                    [took] =&gt; 0
+                )
+        )
+
+    [count] =&gt; 2
+    [time] =&gt; 1
+)
+</code></pre>
+
+<p><code>getLog</code>が行っている処理内容</p>
+
+<pre><code class="php lib/Cake/Model/Datasource/DboSource.php">/**
+ * Get the query log as an array.
+ *
+ * @param boolean $sorted Get the queries sorted by time taken, defaults to false.
+ * @param boolean $clear If True the existing log will cleared.
+ * @return array Array of queries run as an array
+ */
+public function getLog($sorted = false, $clear = true) {
+    if ($sorted) {
+        $log = sortByKey($this-&gt;_queriesLog, 'took', 'desc', SORT_NUMERIC);
+    } else {
+        $log = $this-&gt;_queriesLog;
+    }
+    if ($clear) {
+        $this-&gt;_queriesLog = array();
+    }
+    return array('log' =&gt; $log, 'count' =&gt; $this-&gt;_queriesCnt, 'time' =&gt; $this-&gt;_queriesTime);
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[Slim Framework]サブディレクトリにインストールした場合のリダイレクト方法]]></title>
@@ -268,47 +363,6 @@ Content-Type: text/html; charset=UTF-8
 
 <pre><code>curl -I http://hoge.com
 </code></pre>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[ld: library not found for -lltdl]]></title>
-    <link href="http://blog.code-life.net/blog/2013/04/22/ld-library-not-found-for-lltdl/"/>
-    <updated>2013-04-22T20:04:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/04/22/ld-library-not-found-for-lltdl</id>
-    <content type="html"><![CDATA[<p>MacでPHP5.3.24をインストールしようとしたらコンパイル時に以下のエラーが発生した。</p>
-
-<!--more-->
-
-
-<pre><code class="sh">-----------------
-|  BUILD ERROR  |
------------------
-
-Here are the last 10 lines from the log:
-
------------------------------------------
-/var/tmp/php-build/source/5.3.24/Zend/zend_objects.c:96: warning: assignment discards qualifiers from pointer target type
-/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c: In function ‘zend_get_property_guard’:
-/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:301: warning: passing argument 3 of ‘zend_unmangle_property_name’ from incompatible pointer type
-/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:301: warning: passing argument 4 of ‘zend_unmangle_property_name’ from incompatible pointer type
-/var/tmp/php-build/source/5.3.24/Zend/zend_object_handlers.c:304: warning: assignment discards qualifiers from pointer target type
-/var/tmp/php-build/source/5.3.24/sapi/apache2handler/sapi_apache2.c: In function ‘php_handler’:
-/var/tmp/php-build/source/5.3.24/sapi/apache2handler/sapi_apache2.c:675: warning: format ‘%u’ expects type ‘unsigned int’,  but argument 3 has type ‘size_t’
-ld: library not found for -lltdl
-collect2: ld returned 1 exit status
-make: *** [libs/libphp5.bundle] Error 1
------------------------------------------
-</code></pre>
-
-<h2>libtoolのインストール</h2>
-
-<p>昔Linuxで似たエラーを経験したことがあったので「libtool」をいれる。</p>
-
-<pre><code class="sh">$ brew install libtool
-</code></pre>
-
-<p>これで無事インストールができた。このブログ全然コード書いてないですね。</p>
 ]]></content>
   </entry>
   

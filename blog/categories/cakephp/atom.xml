@@ -4,7 +4,7 @@
   <title><![CDATA[Category: cakephp | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/cakephp/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-28T22:20:14+09:00</updated>
+  <updated>2014-08-30T01:48:14+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,101 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHP2.x クエリーログを取得する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2/"/>
+    <updated>2014-08-29T10:58:40+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2</id>
+    <content type="html"><![CDATA[<p>どんなクエリが発行されているか確認したい場合があった際のメモ</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>CakePHP 2.5.2</li>
+<li>MySQL 5.5.30</li>
+</ul>
+
+
+<h2>注意</h2>
+
+<p>この方法でクエリーログが取得できるのはデバッグレベル2の場合のみ</p>
+
+<h2>クエリーログを取得する</h2>
+
+<pre><code class="php">$log = $this-&gt;{$Model}-&gt;getDataSource()-&gt;getLog(false, false);
+</code></pre>
+
+<ul>
+<li>第１引数は、ソートの有無。trueの場合はtook(ms)で降順ソート</li>
+<li>第2引数では、クエリーを格納している変数の初期化を行うか否か</li>
+</ul>
+
+
+<h3>返却値</h3>
+
+<p>以下のデータ構造で返却される。</p>
+
+<pre><code class="php sample value">Array
+(
+    [log] =&gt; Array
+        (
+            [0] =&gt; Array
+                (
+                    [query] =&gt; SELECT `username` FROM `users`  AS `User`
+                    [params] =&gt; Array
+                        (
+                        )
+
+                    [affected] =&gt; 1
+                    [numRows] =&gt; 1
+                    [took] =&gt; 1
+                )
+
+            [1] =&gt; Array
+                (
+                    [query] =&gt; SELECT `name` FROM `groups`  AS `Group`
+                    [params] =&gt; Array
+                        (
+                        )
+
+                    [affected] =&gt; 1
+                    [numRows] =&gt; 1
+                    [took] =&gt; 0
+                )
+        )
+
+    [count] =&gt; 2
+    [time] =&gt; 1
+)
+</code></pre>
+
+<p><code>getLog</code>が行っている処理内容</p>
+
+<pre><code class="php lib/Cake/Model/Datasource/DboSource.php">/**
+ * Get the query log as an array.
+ *
+ * @param boolean $sorted Get the queries sorted by time taken, defaults to false.
+ * @param boolean $clear If True the existing log will cleared.
+ * @return array Array of queries run as an array
+ */
+public function getLog($sorted = false, $clear = true) {
+    if ($sorted) {
+        $log = sortByKey($this-&gt;_queriesLog, 'took', 'desc', SORT_NUMERIC);
+    } else {
+        $log = $this-&gt;_queriesLog;
+    }
+    if ($clear) {
+        $this-&gt;_queriesLog = array();
+    }
+    return array('log' =&gt; $log, 'count' =&gt; $this-&gt;_queriesCnt, 'time' =&gt; $this-&gt;_queriesTime);
+}
+</code></pre>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[[CakePHP]モデルのコールバックを無効化にする]]></title>
@@ -184,147 +279,6 @@ my_tags.phpとした場合は、tags.php を my_tags.phpに変えてください
 <h2>参考</h2>
 
 <p><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#changing-the-tags-output-by-htmlhelper" title="Changing the tags output by HtmlHelper" target="_blank">Changing the tags output by HtmlHelper</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[CakePHP初学者が知るべき６つのこと]]></title>
-    <link href="http://blog.code-life.net/blog/2012/03/16/six-things-that-begginer-should-know-about-cakephp/"/>
-    <updated>2012-03-16T00:00:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2012/03/16/six-things-that-begginer-should-know-about-cakephp</id>
-    <content type="html"><![CDATA[<p>notoです。</p>
-
-<p>完全にタイトル詐欺です。</p>
-
-<p>これからCakePHPを学びたいと思ってる人が知ってたほうがいいことをまとめてみました。
-初心者向け(?)とは言い難い内容かもしれません。</p>
-
-<!--more-->
-
-
-<p>CakePHPの導入するメリットとしては、高速開発・日本語の情報量の多さかな。
-それだけでも導入する理由としては十分だとは思います。</p>
-
-<h2>ドキュメントを読もう</h2>
-
-<p>分からないことがあったら、まずはドキュメントを読みましょう。
-google先生に教えてもらうとしても、ブログの内容はアテにしてはいけません。疑ってかかりましょう。</p>
-
-<p>ブログを書いている人は、google先生ではないからです。ボクの書いた記事も間違いが多々あります!!</p>
-
-<p><a href="http://book.cakephp.org/2.0/en/index.html" title="Cookbook 2.x" target="_blank">Cookbook 2.x</a></p>
-
-<p>プログラミングを行うなら、英語はある程度は読めないとキツイです。これは覚悟しましょう。</p>
-
-<h2>プラグインを活用しよう</h2>
-
-<p>ブログを信用するなと言いましたが、国内だけでもCakePHPを利用されている方は多いと思います。
-それは開発するにあたって大きな強みとなります。</p>
-
-<p>またプラグインが豊富に揃っているので、まずはプラグインが存在するか確認してみましょう。</p>
-
-<p><a href="http://blog.verygoodtown.com/2010/12/cakephp-my-best-plugin/" title="CakePHPで普段使っているpluginをまとめてみた" target="_blank">CakePHPで普段使っているpluginをまとめてみた</a>
-<a href="http://1-byte.jp/2010/09/06/introduce_cakephp_plugins/" title="CakePHPプラグインのまとめ – 総括編" target="_blank">CakePHPプラグインのまとめ – 総括編</a></p>
-
-<p>CakePHP2.xに対応していないプラグインもあるので確認はしてください。</p>
-
-<p>オススメプラグインは</p>
-
-<p><a href="http://www.alaxos.ch/blaxos/pages/view/plugin_acl_2.0" title="ACL plugin for CakePHP2.0" target="_blank">ACL plugin for CakePHP2.0</a></p>
-
-<p>ACL(Access Control List)を管理することができます。</p>
-
-<p>ACLとは管理者はこのページを閲覧することができるけど、ユーザーは閲覧できないよと、権限によってアクセスをコントロールする設定のことです。
-CakePHPのACLはクソみたいに使いにくいので、このプラグインを利用しています。</p>
-
-<p>検証環境がCakePHP1.3.xですが導入手順を記載しています。
-<a href="/blog/2011-10-11-cakephp-acl-plugin">CakePHP ACL Pluginを使ってみる</a></p>
-
-<h2>CakePHPの情報を発信している人を押さえよう</h2>
-
-<p>CakePHPの記事を多く発信されている方のブログは押さえておきましょう。
-リリース情報、セキュリティホールが発見された場合、tips等多くの情報を発信されています。</p>
-
-<p><a href="http://d.hatena.ne.jp/hiromi2424/" title="24時間CakePHP" target="_blank">24時間CakePHP</a></p>
-
-<p><a href="http://blog.ecworks.jp/" title="ECWorks Blog" target="_blank">ECWorks Blog</a></p>
-
-<p><a href="http://www.1x1.jp/blog/" title="Shin x blog" target="_blank">Shin x blog</a></p>
-
-<h2>オープンソースを活用しよう</h2>
-
-<p>オープンソースとして公開されているコードをダウンロードしてコードを読みましょう。
-そして書き方を真似しましょう。コピペはダメです。自分で写経してください。体で覚えてください。</p>
-
-<p><a href="http://basercms.net/" title="BaserCMS" target="_blank">BaserCMS</a></p>
-
-<p><a href="http://croogo.org/" title="Croogo" target="_blank">Croogo</a></p>
-
-<h2>デバッグの方法を知ろう</h2>
-
-<p>debug_kitでもいいのですが、ステップ実行が利用出来る環境だと尚良いです。
-理由としては、CakePHPのコアコードを自然と見る機会が増える為です。ですので、ボクはIDEをオススメしています。</p>
-
-<p>自分が使いやすいツールを選択しましょう。</p>
-
-<h2>ベストプラクティスを知る</h2>
-
-<p>Controllerで行うべき処理なのかModelで行うべき処理なのかを意識しましょう。</p>
-
-<p><a href="http://old-journal.sooey.com/2008/03/26/717/" title="CakePHPを使ったMVC設計のベストプラクティス" target="_blank">CakePHPを使ったMVC設計のベストプラクティス</a></p>
-
-<p>※3/19 追記</p>
-
-<h2>テストを書こう</h2>
-
-<p>開発のプロセスは、データベース定義、コーディング（設計）だけではありません。
-テストがあります。デプロイもあるけど。。</p>
-
-<h3>テストをどうして行うのか</h3>
-
-<p>もちろん正常に動作するかを確認するためです。</p>
-
-<h3>どうしてテストコードを書く必要があるのか</h3>
-
-<p>巷では、テストコードがないコードはレガシーコードと呼ばれています。
-レガシーとは時代遅れとか古いとかそういった意味ですね。
-つまりはダサいと。</p>
-
-<p>テストコードがない場合（手動でテストを行った場合）を想像してみましょう。</p>
-
-<ul>
-<li>不具合を修正したが、同じ不具合が再発する。</li>
-<li>不具合を修正したが、別の機能で不具合が発生する。</li>
-<li>リファクタリングを行った為に、不具合が発生する。</li>
-<li>新しい機能を追加したら、別の機能に不具合が発生した。</li>
-</ul>
-
-
-<p>こういったことは、テストコード（自動テスト）があれば起こる割合は減ります。</p>
-
-<p>プログラマは不安症です。自分が作ったものは不安で不安でしょうがないです。少なくともボクは。
-常にテストが出来る状態をつくり、コードの振る舞いを明らかにして不安を取り除きましょう。</p>
-
-<h3>CakePHPはどうやってテストコードを書くの？</h3>
-
-<p>CakePHP2.xではテストフレームワークとしてPHPUnitを採用しています。(CakePHP1.xではSimpleTestが採用されています。)</p>
-
-<p>PHPUnitは、PHPのメジャーなフレームワーク ZendFrameWork Symfony2でも採用されており、テストフレームワークのデファクトスタンダードです。CakePHP以外のフレームワークを利用する際にもPHPUnitには、お世話になります。</p>
-
-<p>CakePHPでは、<a href="http://book.cakephp.org/2.0/en/development/testing.html" title="Testing" target="_blank">Testing</a>のドキュメントも充実しています。</p>
-
-<p>テストしやすいようにコーディングしていくと、自然と綺麗なコードになっていきますよ！
-テストコードの必要性については結構端折ってますが、書いたほうが自分も他人も幸せになれるのは間違いないです。</p>
-
-<h2>とりあえず読んでおいたほうがいい</h2>
-
-<p><a href="http://1-byte.jp/2011/03/09/10_things_you_must_know_about_cakephp/" title="CakePHP開発者が知るべき10のこと" target="_blank">CakePHP開発者が知るべき10のこと</a></p>
-
-<p><a href="http://d.hatena.ne.jp/kyoro353/20111223/1324589389" title="俺が勝手に考える正しいMVCの実装。モデルはデータAPI！" target="_blank">俺が勝手に考える正しいMVCの実装。モデルはデータAPI！</a></p>
-
-<p><a href="http://d.hatena.ne.jp/basuke/20111219" title="basuke の日記 フレームワークで語るMVCの話 : PHP Advent Calendar #19" target="_blank">basuke の日記 フレームワークで語るMVCの話 : PHP Advent Calendar #19</a></p>
-
-<p>偉そうに書きましたが、ボクも修行の日々です。少しでもお役に立てれば幸いです。</p>
 ]]></content>
   </entry>
   

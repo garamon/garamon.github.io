@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2/</loc>
+    <lastmod>2014-08-29T10:58:40+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.code-life.net/blog/2014/08/28/how-to-change-storage-engine-mysql-work-bench/</loc>
     <lastmod>2014-08-28T18:24:52+09:00</lastmod>
     <priority>0.8</priority>
@@ -1271,21 +1277,21 @@
   
   <url>
     <loc>http://blog.code-life.net/blog/archives/</loc>
-    <lastmod>2014-08-28T22:20:14+09:00</lastmod>
+    <lastmod>2014-08-30T01:48:14+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://blog.code-life.net/</loc>
-    <lastmod>2014-08-28T22:20:14+09:00</lastmod>
+    <lastmod>2014-08-30T01:48:14+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://blog.code-life.net/blog/categories/</loc>
-    <lastmod>2014-08-28T22:20:14+09:00</lastmod>
+    <lastmod>2014-08-30T01:48:14+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
