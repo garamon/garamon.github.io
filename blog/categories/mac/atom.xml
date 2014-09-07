@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-07T22:04:12+09:00</updated>
+  <updated>2014-09-07T23:04:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mac メニューバーにカレンダーを表示させるDay-Oが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/07/mac-day-o/"/>
+    <updated>2014-09-07T22:11:08+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/07/mac-day-o</id>
+    <content type="html"><![CDATA[<p>しばらく前から<a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Day-O</a>を利用している。 メニューバーから日付が確認できてなかなか便利。</p>
+
+<!--more-->
+
+
+<p><img src="/images/2014/09/mac-day-o-1.png"></p>
+
+<p>日付をクリックすると以下のような表示となる。</p>
+
+<p><img src="/images/2014/09/mac-day-o-2.png"></p>
+
+<p><code>Preference</code>から日付のフォーマットを変更することもできる。</p>
+
+<p>デフォルトの日付&amp;時刻と別にDay-Oの表示されていたのでデフォルトはOFFに、またカレンダーを確認するだけに利用してたDashboardも<a href="http://www.bresink.com/osx/TinkerTool.html">TinkerTool</a>で無効にした。</p>
+
+<p><a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Download Day-O</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac OS X Mavericks メニューバーに表示されているユーザー名を隠す]]></title>
@@ -198,79 +222,6 @@ Windows版のインストールはもっと簡単で、インストーラーを�
 <p>Fraiseもまだまだ試し中なので、使い勝手は追々。
 他にもいいエディタとかIDEを見つけたらご報告します。
 以上です。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[MacにGeanyをインストール]]></title>
-    <link href="http://blog.code-life.net/blog/2011/12/06/geany/"/>
-    <updated>2011-12-06T00:00:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2011/12/06/geany</id>
-    <content type="html"><![CDATA[<p>iyamaです。</p>
-
-<p>最近、Macで開発環境を整えようと試行錯誤中。</p>
-
-<p>そこでエディタをいろいろ探してまして、今日はその一つ、Geanyを試します。</p>
-
-<!--more-->
-
-
-<p>もともと、サクラエディタ一つでだいたいこなしてたんですが、それもちょっと物足りない。。
-それからeclipseとかaptanaとかも手を出したけど、重たいし、仰々しい。</p>
-
-<p>actionscriptはサクラエディタ→Flash Professtionalのスクリプト →FlashDevelopと、ここで落ち着き中です。
-FlashDevelop的なのがいろんな言語対応であればいいのに。。といろいろ探していたら、IDEって結構いろいろありますね。</p>
-
-<p>で、今回はその中でも<a title="http://www.geany.org/" href="http://www.geany.org/" target="_blank">Geany</a>を試すことにしました。</p>
-
-<p>Geanyは魔法のランプのgeanyみたいです。 アイコンが魔法のランプ！笑。</p>
-
-<p>Windowsだと、本家サイトからインストーラーをDownloadしてきて、インストーラーを実行するだけ。
-既に日本語化もされててそのまま取り合えず使えます。</p>
-
-<p>では、Macでのインストール。</p>
-
-<p>まず本家サイトからgzファイルをDownloadします。
-ターミナルから解凍。
-./configureを実行したらエラー。
-Macになんも入れてなかったので、Xcode、MacPortsをインストール。</p>
-
-<p>もう一度やり直し。</p>
-
-<pre><code>configure: error: The intltool scripts were not found.　Please install intltool*
-</code></pre>
-
-<p>素直にMacPortsからintltoolをインストール。</p>
-
-<pre><code>$ sudo port install intltool
-</code></pre>
-
-<p>※結構時間かかります。</p>
-
-<p>さらにもう一度。</p>
-
-<pre><code>configure: error: Package requirements (gtk+-2.0&gt;= 2.12 glib-2.0 &gt;= 2.16 gio-2.0 &gt;= 2.16)were not met: No package "gtk+-2.0"; found*
-</code></pre>
-
-<p>必要なパッケージをインストール</p>
-
-<pre><code>$ sudo port search gtk+-2.0 gtk-xfce-engine
-</code></pre>
-
-<pre><code>$ ./configure
-$ make
-$ sudo make install
-</code></pre>
-
-<p>これでとりあえずインストールされます。
-でもなぜか私のところではアプリケーションのところに追加されない。。
-なぜ？笑。</p>
-
-<p>Geanyはターミナルもついてて、コード書いて実行の流れがスムーズ。
-あと、プラグインがあるので、いろいろと拡張も可能の様子。</p>
-
-<p>使い勝手についてはまた後日にします。
-それでは。</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-07T22:04:12+09:00</updated>
+  <updated>2014-09-07T23:04:07+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,30 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mac メニューバーにカレンダーを表示させるDay-Oが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/07/mac-day-o/"/>
+    <updated>2014-09-07T22:11:08+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/07/mac-day-o</id>
+    <content type="html"><![CDATA[<p>しばらく前から<a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Day-O</a>を利用している。 メニューバーから日付が確認できてなかなか便利。</p>
+
+<!--more-->
+
+
+<p><img src="http://blog.code-life.net/images/2014/09/mac-day-o-1.png"></p>
+
+<p>日付をクリックすると以下のような表示となる。</p>
+
+<p><img src="http://blog.code-life.net/images/2014/09/mac-day-o-2.png"></p>
+
+<p><code>Preference</code>から日付のフォーマットを変更することもできる。</p>
+
+<p>デフォルトの日付&amp;時刻と別にDay-Oの表示されていたのでデフォルトはOFFに、またカレンダーを確認するだけに利用してたDashboardも<a href="http://www.bresink.com/osx/TinkerTool.html">TinkerTool</a>で無効にした。</p>
+
+<p><a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Download Day-O</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[SSH agent forwardingまとめ]]></title>
@@ -1286,139 +1310,6 @@ homebrewのバグだそう。</p>
 
 
 <p>普段書かないので普通に忘れる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない]]></title>
-    <link href="http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/"/>
-    <updated>2013-12-09T23:07:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox</id>
-    <content type="html"><![CDATA[<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
-
-<!--more-->
-
-
-<h2>環境</h2>
-
-<ul>
-<li>JQuery2.0.3</li>
-</ul>
-
-
-<h2>checkedプロパティを変更</h2>
-
-<p>見たら分かるんだけど、期待する動作はコンソールに「checkbox change!!」と出力されること。</p>
-
-<p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-</pre></td><td class='code'><pre><code class='html'><span class='line'><span class="cp">&lt;!DOCTYPE html&gt;</span>
-</span><span class='line'><span class="nt">&lt;html&gt;</span>
-</span><span class='line'><span class="nt">&lt;head&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;/head&gt;</span>
-</span><span class='line'><span class="nt">&lt;body&gt;</span>
-</span><span class='line'><span class="nt">&lt;form&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;input</span> <span class="na">id=</span><span class="s">&quot;checkbox1&quot;</span> <span class="na">type=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name=</span><span class="s">&quot;example&quot;</span> <span class="na">value=</span><span class="s">&quot;hoge&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="nt">&lt;label</span> <span class="na">for=</span><span class="s">&quot;checkbox1&quot;</span><span class="nt">&gt;</span>Sample CheckBox<span class="nt">&lt;/label&gt;</span>
-</span><span class='line'><span class="nt">&lt;/form&gt;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
-</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">})();</span>
-</span><span class='line'><span class="nt">&lt;/script&gt;</span>
-</span><span class='line'><span class="nt">&lt;/body&gt;</span>
-</span><span class='line'><span class="nt">&lt;/html&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>triggerでイベントを発行</h2>
-
-<p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">})();</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>イベントの発行元を判断する</h2>
-
-<p>trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。</p>
-
-<p>そんな時は以下のようにしておく。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="o">&lt;</span><span class="nx">script</span> <span class="nx">type</span><span class="o">=</span><span class="s2">&quot;text/javascript&quot;</span><span class="o">&gt;</span>
-</span><span class='line'>    <span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">e</span><span class="p">,</span> <span class="nx">param</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>            <span class="k">if</span> <span class="p">(</span><span class="nx">param</span> <span class="o">===</span> <span class="kc">true</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>                <span class="c1">// 何らかの処理</span>
-</span><span class='line'>            <span class="p">}</span>
-</span><span class='line'>            <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;checkbox change!!&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="p">});</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;input[name=&quot;example&quot;]&#39;</span><span class="p">).</span><span class="nx">prop</span><span class="p">(</span><span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="kc">true</span><span class="p">).</span><span class="nx">trigger</span><span class="p">(</span><span class="s2">&quot;change&quot;</span><span class="p">,</span> <span class="p">[</span><span class="kc">true</span><span class="p">]);</span>
-</span><span class='line'>    <span class="p">})();</span>
-</span><span class='line'><span class="o">&lt;</span><span class="err">/script&gt;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ちなみにラジオボタンでも同じです。
-javascript好きになってきた今日この頃。</p>
 ]]></content>
   </entry>
   
