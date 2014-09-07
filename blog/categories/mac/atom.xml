@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-07T23:04:07+09:00</updated>
+  <updated>2014-09-07T23:09:44+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -18,7 +18,7 @@
     <link href="http://blog.code-life.net/blog/2014/09/07/mac-day-o/"/>
     <updated>2014-09-07T22:11:08+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/09/07/mac-day-o</id>
-    <content type="html"><![CDATA[<p>しばらく前から<a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Day-O</a>を利用している。 メニューバーから日付が確認できてなかなか便利。</p>
+    <content type="html"><![CDATA[<p>しばらく前から<a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Day-O</a>を利用している。 メニューバーからカレンダーが確認できてなかなか便利。</p>
 
 <!--more-->
 
@@ -31,7 +31,7 @@
 
 <p><code>Preference</code>から日付のフォーマットを変更することもできる。</p>
 
-<p>デフォルトの日付&amp;時刻と別にDay-Oの表示されていたのでデフォルトはOFFに、またカレンダーを確認するだけに利用してたDashboardも<a href="http://www.bresink.com/osx/TinkerTool.html">TinkerTool</a>で無効にした。</p>
+<p>デフォルトの日付&amp;時刻と別にDay-Oの表示がされていたのでデフォルトはOFFに、またカレンダーを確認するだけに利用してたDashboardも<a href="http://www.bresink.com/osx/TinkerTool.html">TinkerTool</a>で無効にしている。</p>
 
 <p><a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Download Day-O</a></p>
 ]]></content>
