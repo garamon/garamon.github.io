@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ssh | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/ssh/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2014-09-07T22:01:03+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[SSH agent forwardingまとめ]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/07/ssh-agent-forwarding/"/>
+    <updated>2014-09-07T19:24:56+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/07/ssh-agent-forwarding</id>
+    <content type="html"><![CDATA[<p>Capistranoを触った際にagent forwardingについて調べたことをまとめておく。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>MacOS X 10.9 (ローカル)</li>
+<li>CentOS 6.5 (リモート)</li>
+</ul>
+
+
+<h2>SSH agent forwardingとは</h2>
+
+<p>ローカルからサーバA サーバAからサーバBへSSH接続したい場合、サーバAに秘密鍵を置かずローカルの鍵を参照して認証させる仕組み。</p>
+
+<p>例えば以下のようなことができる。</p>
+
+<ul>
+<li>ローカルからサーバAにログイン後、サーバBにログイン</li>
+<li>ローカルからサーバAにログイン後、サーバBとファイル同期(rsync)する</li>
+<li>ローカルからサーバAにログイン後、git cloneを行う</li>
+</ul>
+
+
+<h2>SSH agent forwardingの設定</h2>
+
+<p>agent forwardingを利用するためにはいくつか条件がある。</p>
+
+<h3>ローカルの条件</h3>
+
+<p>ssh-agentが起動していること。また秘密鍵がssh-agentに登録されていること。</p>
+
+<p>秘密鍵を登録しなければ、参照する鍵がない為SSH接続時にエラーとなる。</p>
+
+<h4>ssh-agentの起動確認</h4>
+
+<pre><code>$ echo "$SSH_AUTH_SOCK"
+/tmp/launch-5XHwDO/Listeners
+</code></pre>
+
+<h4>秘密鍵を登録</h4>
+
+<pre><code>$ ssh-add path_to_key
+</code></pre>
+
+<p>再起動後でもssh-agentに鍵を登録させていたい場合は<code>K</code>オプションを利用する</p>
+
+<pre><code>$ ssh-add -K path_to_key
+</code></pre>
+
+<h4>登録されている秘密鍵を確認</h4>
+
+<pre><code>$ ssh-add -L
+</code></pre>
+
+<h3>リモートの条件</h3>
+
+<p>AgentForwardingが許可されていること。
+<code>sshd_config</code>内の<code>AllowAgentForwarding</code>の値を確認。</p>
+
+<h2>実際にやってみる</h2>
+
+<p>ssh-agentの転送を許可するには<code>A</code>オプションを利用する</p>
+
+<pre><code>$ ssh -A exsample.com
+</code></pre>
+
+<p>毎回オプション指定するのが面倒な場合は<code>~/.ssh/config</code>に<code>ForwardAgent</code>を追加する。</p>
+
+<p><code>text ~/.ssh/config
+Host exsample.com
+  ForwardAgent yes
+</code></p>
+
+<p><code>sudo</code> または <code>su</code> 後、転送した鍵情報を利用することができない場合がある。</p>
+
+<p> suの場合、<code>m</code>, <code>p</code>, <code>preserve-environment</code>オプションを利用することで鍵情報を引き継ぐことができる。</p>
+
+<pre><code class="text">$ su -p
+</code></pre>
+
+<p>sudoの場合、<code>E</code>オプションを利用する。</p>
+
+<pre><code>$ sudo -E
+</code></pre>
+
+<p>サーバを移転したい時やデプロイする時に使えて便利。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="https://developer.github.com/guides/using-ssh-agent-forwarding/">Using SSH agent forwarding</a></li>
+<li><a href="http://www.unixuser.org/~euske/doc/openssh/jman/ssh.html">ssh</a></li>
+<li><a href="http://linuxjm.sourceforge.jp/html/gnumaniak/man1/su.1.html#index">su</a></li>
+<li><a href="http://linuxjm.sourceforge.jp/html/sudo/man8/sudo.8.html">sudo</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

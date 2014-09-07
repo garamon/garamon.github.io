@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-08-30T01:48:14+09:00</updated>
+  <updated>2014-09-07T22:01:03+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,125 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[SSH agent forwardingまとめ]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/07/ssh-agent-forwarding/"/>
+    <updated>2014-09-07T19:24:56+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/07/ssh-agent-forwarding</id>
+    <content type="html"><![CDATA[<p>Capistranoを触った際にagent forwardingについて調べたことをまとめておく。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>MacOS X 10.9 (ローカル)</li>
+<li>CentOS 6.5 (リモート)</li>
+</ul>
+
+
+<h2>SSH agent forwardingとは</h2>
+
+<p>ローカルからサーバA サーバAからサーバBへSSH接続したい場合、サーバAに秘密鍵を置かずローカルの鍵を参照して認証させる仕組み。</p>
+
+<p>例えば以下のようなことができる。</p>
+
+<ul>
+<li>ローカルからサーバAにログイン後、サーバBにログイン</li>
+<li>ローカルからサーバAにログイン後、サーバBとファイル同期(rsync)する</li>
+<li>ローカルからサーバAにログイン後、git cloneを行う</li>
+</ul>
+
+
+<h2>SSH agent forwardingの設定</h2>
+
+<p>agent forwardingを利用するためにはいくつか条件がある。</p>
+
+<h3>ローカルの条件</h3>
+
+<p>ssh-agentが起動していること。また秘密鍵がssh-agentに登録されていること。</p>
+
+<p>秘密鍵を登録しなければ、参照する鍵がない為SSH接続時にエラーとなる。</p>
+
+<h4>ssh-agentの起動確認</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "$SSH_AUTH_SOCK"
+</span><span class='line'>/tmp/launch-5XHwDO/Listeners</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>秘密鍵を登録</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh-add path_to_key</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再起動後でもssh-agentに鍵を登録させていたい場合は<code>K</code>オプションを利用する</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh-add -K path_to_key</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>登録されている秘密鍵を確認</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh-add -L</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>リモートの条件</h3>
+
+<p>AgentForwardingが許可されていること。
+<code>sshd_config</code>内の<code>AllowAgentForwarding</code>の値を確認。</p>
+
+<h2>実際にやってみる</h2>
+
+<p>ssh-agentの転送を許可するには<code>A</code>オプションを利用する</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh -A exsample.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>毎回オプション指定するのが面倒な場合は<code>~/.ssh/config</code>に<code>ForwardAgent</code>を追加する。</p>
+
+<figure class='code'><figcaption><span>~/.ssh/config</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Host exsample.com
+</span><span class='line'>  ForwardAgent yes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>sudo</code> または <code>su</code> 後、転送した鍵情報を利用することができない場合がある。</p>
+
+<p> suの場合、<code>m</code>, <code>p</code>, <code>preserve-environment</code>オプションを利用することで鍵情報を引き継ぐことができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ su -p
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>sudoの場合、<code>E</code>オプションを利用する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ sudo -E
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>サーバを移転したい時やデプロイする時に使えて便利。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="https://developer.github.com/guides/using-ssh-agent-forwarding/">Using SSH agent forwarding</a></li>
+<li><a href="http://www.unixuser.org/~euske/doc/openssh/jman/ssh.html">ssh</a></li>
+<li><a href="http://linuxjm.sourceforge.jp/html/gnumaniak/man1/su.1.html#index">su</a></li>
+<li><a href="http://linuxjm.sourceforge.jp/html/sudo/man8/sudo.8.html">sudo</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CakePHP2.x クエリーログを取得する]]></title>
@@ -1300,57 +1419,6 @@ homebrewのバグだそう。</p>
 
 <p>ちなみにラジオボタンでも同じです。
 javascript好きになってきた今日この頃。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Vagrant]パブリックネットワークの設定]]></title>
-    <link href="http://blog.code-life.net/blog/2013/12/01/vagrant-configure-public-network/"/>
-    <updated>2013-12-01T15:39:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/12/01/vagrant-configure-public-network</id>
-    <content type="html"><![CDATA[<p>Vagrantでパブリックネットワークの設定をしようとしたところ、若干ハマったのでメモ。</p>
-
-<!--more-->
-
-
-<h2>環境</h2>
-
-<ul>
-<li>Vagrant 1.3.2</li>
-</ul>
-
-
-<h2>Public Network</h2>
-
-<p><a href="http://docs.vagrantup.com/v2/networking/public_network.html">公式のドキュメント</a>通りに設定し、vagrant reload すれば設定が反映されます。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="ss">:public_network</span><span class="p">,</span>  <span class="ss">:bridge</span> <span class="o">=&gt;</span> <span class="s1">&#39;en1: Wi-Fi (AirPort)&#39;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>Xdubug</h2>
-
-<p>public networkで起動したらサイトがクソ重くなる&hellip;</p>
-
-<p>色々調べたところ <a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a> に記載されてる方法で解決することができました。</p>
-
-<h3>xdubug.ini</h3>
-
-<p>xdubug.ini もしくは php.iniに以下の一文を追加</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>xdebug.remote_connect_back <span class="o">=</span> 1
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Xdebug使ってる人は要注意です。</p>
-
-<h2>参考</h2>
-
-<p><a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a></p>
-
-<p><a href="http://stackoverflow.com/questions/18241065/auto-setting-xdebug-remote-host-ip-address-with-vagrant-puppet">Auto setting xdebug.remote_host ip address with vagrant/puppet</a></p>
 ]]></content>
   </entry>
   
