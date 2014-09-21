@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-21T15:51:24+09:00</updated>
+  <updated>2014-09-22T01:02:34+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,130 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[FTP リモート先のファイル名一覧をローカルに保存する方法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/21/ftp-ls-output-to-local-file-from-the-command-line/"/>
+    <updated>2014-09-21T16:32:47+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/21/ftp-ls-output-to-local-file-from-the-command-line</id>
+    <content type="html"><![CDATA[<p>同僚に聞かれてすぐに応えられなかったので備忘録としてメモ。</p>
+
+<!--more-->
+
+
+<h2>ファイル一覧を出力する</h2>
+
+<p>単純にファイル一覧を取得するには<code>ls</code>コマンドで出力できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ftp
+</span><span class='line'>ftp&gt; open ftp.exsample.com
+</span><span class='line'>Name <span class="o">(</span>xxxx<span class="o">)</span>: <span class="o">[</span>ユーザー名応答<span class="o">]</span>
+</span><span class='line'>Password: <span class="o">[</span>パスワード応答<span class="o">]</span>
+</span><span class='line'><span class="m">230</span> User code-life logged in
+</span><span class='line'>Remote system <span class="nb">type </span>is UNIX.
+</span><span class='line'>Using binary mode to transfer files.
+</span><span class='line'>ftp&gt; ls
+</span><span class='line'>drwxr-xr-x <span class="m">428</span> root     wheel        <span class="m">9216</span> Sep <span class="m">16</span> 18:40 ..
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> code-life users         <span class="m">773</span> Jan  <span class="m">7</span>  <span class="m">2009</span> .cshrc
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> code-life users         <span class="m">258</span> Jan  <span class="m">2</span>  <span class="m">2009</span> .login
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> code-life users         <span class="m">167</span> Jan  <span class="m">2</span>  <span class="m">2009</span> .login_conf
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> code-life users         <span class="m">762</span> Jan  <span class="m">7</span>  <span class="m">2009</span> .profile
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> code-life users         <span class="m">980</span> Jan  <span class="m">2</span>  <span class="m">2009</span> .shrc
+</span><span class='line'>drwx------   <span class="m">2</span> code-life users         <span class="m">512</span> Mar <span class="m">13</span>  <span class="m">2009</span> .spamassassin
+</span><span class='line'>drwx------   <span class="m">2</span> code-life users         <span class="m">512</span> Mar <span class="m">13</span>  <span class="m">2009</span> .ssh
+</span><span class='line'>drwxr-xr-x   <span class="m">5</span> code-life users         <span class="m">512</span> Aug <span class="m">20</span> 22:01 www
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>出力したファイル一覧をローカルに保存する</h2>
+
+<p>lsの標準出力をファイルに出力できるかと思ったができない。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ftp&gt; dir &gt; test.txt
+</span><span class='line'>output to <span class="nb">local</span>-file: test.txt <span class="o">[</span>anpqy?<span class="o">]</span>? y
+</span><span class='line'><span class="m">229</span> Entering Extended Passive Mode <span class="o">(||</span><span class="p">|</span>27752<span class="p">|</span><span class="o">)</span>
+</span><span class='line'><span class="m">150</span> Opening ASCII mode data connection <span class="k">for</span> file list
+</span><span class='line'>     <span class="m">0</span>        0.00 KiB/s
+</span><span class='line'>     <span class="m">450</span> &gt;: No such file or directory
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>help ls</code>で確認すると<code>list contents of remote path</code>と期待した応答はしてくれなかった。不親切だ。</p>
+
+<p><code>man ftp</code>で確認する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ls <span class="o">[</span>remote-path <span class="o">[</span><span class="nb">local</span>-file<span class="o">]]</span>
+</span><span class='line'>            A synonym <span class="k">for</span> dir.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ということでリモートパスとローカルファイルを指定する。ここではカレントディレクトリのファイル一覧を取得する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ftp&gt; ls . filelist.txt
+</span><span class='line'>output to <span class="nb">local</span>-file: filelist.txt <span class="o">[</span>anpqy?<span class="o">]</span>? y
+</span><span class='line'><span class="m">229</span> Entering Extended Passive Mode <span class="o">(||</span><span class="p">|</span>14481<span class="p">|</span><span class="o">)</span>
+</span><span class='line'><span class="m">150</span> Opening ASCII mode data connection <span class="k">for</span> file list
+</span><span class='line'>  <span class="m">1104</span>       38.53 KiB/s
+</span><span class='line'>  <span class="m">226</span> Transfer <span class="nb">complete</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>出力したfilelist.txtはローカルのホームディレクトリ直下にダウンロードされているのが確認できる。</p>
+
+<h2>ファイル一覧を再帰的に出力する</h2>
+
+<p>再帰的にファイル一覧を出力するには<code>R</code>オプションを指定する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ftp&gt; ls -R
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>再帰的に出力したファイル一覧をローカルに保存する</h2>
+
+<p><code>R</code>オプション指定時にはリモートパスの指定はできない。カレントディレクトリから再帰的に一覧を取得する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ftp&gt; ls -R filelist.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果は上記と同様にローカルのホームディレクトリ直下にダウンロードされている。</p>
+
+<p>こういったちょっとしたことを、さっと応えられるようにしたい。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[MacアプリCaffeineのメニューバーアイコンをRetinaディスプレイ用に変更する]]></title>
@@ -1168,186 +1292,6 @@ homebrewのバグだそう。</p>
 
 
 <p>地味に忘れる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[php]連想配列を特定のキーの同じ値でグルーピング]]></title>
-    <link href="http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value/"/>
-    <updated>2013-12-18T22:36:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value</id>
-    <content type="html"><![CDATA[<p>連想配列を特定キーの同じ値でグルーピングする方法。</p>
-
-<!--more-->
-
-
-
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$arr</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;yamada&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;20&#39;</span>
-</span><span class='line'>    <span class="p">),</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;satou&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;20&#39;</span>
-</span><span class='line'>    <span class="p">),</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;suzuki&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;30&#39;</span>
-</span><span class='line'>    <span class="p">),</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span>
-</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tanaka&#39;</span><span class="p">,</span>
-</span><span class='line'>        <span class="s1">&#39;age&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;40&#39;</span>
-</span><span class='line'>    <span class="p">)</span>
-</span><span class='line'><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>
-</span><span class='line'><span class="k">function</span> <span class="nf">groupArray</span><span class="p">(</span><span class="nv">$arr</span><span class="p">,</span> <span class="nv">$key</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$retval</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">foreach</span><span class="p">(</span><span class="nv">$arr</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>        <span class="nv">$group</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">[</span><span class="nv">$key</span><span class="p">];</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">]))</span> <span class="p">{</span>
-</span><span class='line'>            <span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">]</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
-</span><span class='line'>        <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="nv">$retval</span><span class="p">[</span><span class="nv">$group</span><span class="p">][]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">return</span> <span class="nv">$retval</span><span class="p">;</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'><span class="nb">var_dump</span><span class="p">(</span><span class="nx">groupArray</span><span class="p">(</span><span class="nv">$arr</span><span class="p">,</span> <span class="s1">&#39;age&#39;</span><span class="p">));</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">array</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>  <span class="p">[</span><span class="mi">20</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;yamada&quot;</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;20&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>    <span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="s2">&quot;satou&quot;</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;20&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="p">[</span><span class="mi">30</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;suzuki&quot;</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;30&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'>  <span class="p">[</span><span class="mi">40</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>  <span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>    <span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span> <span class="s2">&quot;tanaka&quot;</span>
-</span><span class='line'>      <span class="p">[</span><span class="s2">&quot;age&quot;</span><span class="p">]</span><span class="o">=&gt;</span>
-</span><span class='line'>      <span class="nx">string</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="s2">&quot;40&quot;</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>  <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ageキーの同じ値でグルーピングされていることが確認できます。そもそも(ry</p>
 ]]></content>
   </entry>
   
