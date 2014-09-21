@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-07T23:12:25+09:00</updated>
+  <updated>2014-09-21T15:51:24+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MacアプリCaffeineのメニューバーアイコンをRetinaディスプレイ用に変更する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon/"/>
+    <updated>2014-09-21T14:33:34+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon</id>
+    <content type="html"><![CDATA[<p><a href="http://lightheadsw.com/caffeine/">Caffeine</a>は、Macのスリープモードを一時的に無効にするMacの定番アプリです。</p>
+
+<p>起動するとメニューバーにコーヒーカップのアイコンが表示され、クリックすると無効化のON・OFFを切り替えます。</p>
+
+<p>とてもシンプルな機能で重宝していますが一つ不満があります。</p>
+
+<p>アイコンがダサい・・・。</p>
+
+<p><img src="/images/2014/09/mac-caffeine-1.png"></p>
+
+<!--more-->
+
+
+<h2>Caffeineのアイコンを変更する</h2>
+
+<p>Retinaディスプレイ対応 &amp; シャレオツなアイコンに変えました。</p>
+
+<h3>アイコンセットをダウンロード</h3>
+
+<p>3つ紹介しますが、探せばもっとあるかもしれません。ちなみに私は「1」を使用しました。</p>
+
+<ol>
+<li><a href="https://github.com/bkenny/retina-caffeine">bkenny/retina-caffeine</a></li>
+<li><a href="https://webjac.com/design/caffeine-retina-icons/">Caffeine Retina Icons</a></li>
+<li><a href="http://blog.timlockridge.com/blog/2013/04/26/retina-menu-bar-icons-for-caffeine/">Retina Menu Bar Icons for Caffeine</a></li>
+</ol>
+
+
+<h3>アイコンの置き換え</h3>
+
+<ol>
+<li>/Applications/Caffeine.appを<code>Ctrl + クリック</code>して<code>パッケージの内容を表示</code>を選択</li>
+<li>Contents/Resources内に置き換えたいアイコンをコピー</li>
+<li>(起動している場合)Caffeineを終了し、Caffeineを起動</li>
+</ol>
+
+
+<h3>結果</h3>
+
+<p>いい感じ。</p>
+
+<p><img src="/images/2014/09/mac-caffeine-2.png"></p>
+
+<h2>注意</h2>
+
+<p>Caffeine自体のアップデートがあった場合、アイコンがデフォルト状態に戻ります。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac メニューバーにカレンダーを表示させるDay-Oが便利]]></title>
@@ -175,53 +229,6 @@ OpenSSL 1.0.1e 11 Feb 2013
 </code></pre>
 
 <p>インストールできたついでに初めてコメントを書いてみたが自身の英語力がなくて泣けてくる。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Macで使ってるエディタ 【Geanyのその後】]]></title>
-    <link href="http://blog.code-life.net/blog/2012/01/11/fraise/"/>
-    <updated>2012-01-11T00:00:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2012/01/11/fraise</id>
-    <content type="html"><![CDATA[<p>iyamaです。</p>
-
-<p>以前、Macでの開発環境を整えようと、
-エディタについて書きましたが、その続編です。</p>
-
-<!--more-->
-
-
-<p>前の記事は<a href="/blog/2011/12/06/geany/">こちら</a>
-今日は、Geanyの使い勝手とその後についてです。</p>
-
-<p>GeanyはWindowsにも入れて使ってます。
-Windows版のインストールはもっと簡単で、インストーラーをダウンロードしてきて実行するだけ。
-ただ、Windows版は初期起動がなぜか遅め。
-なんででしょう？ただのエディタなのになんで最初もっさり。
-起動してからも、コード入力始めだけ遅い。
-そこだけ改善されれば今のところ問題なしです。</p>
-
-<p>次に、肝心のMac版。
-アプリケーションにアイコンがどうしても追加されなくて、
-起動するのがなんか面倒で、実はあんまり使ってません。笑。
-でも、Mac版の方はWindows版で気になった初期起動の遅さも
-入力始めのもっさりもありません。
-やっぱりMacよりなエディタなんですかね？</p>
-
-<p>で、今はGeanyに代わってMacではFraiseっていうエディタ使ってます。</p>
-
-<p><a href="http://www.macupdate.com/app/mac/33751/fraise" title="Fraise" target="_blank">Fraise</a></p>
-
-<p>ちょっとつぶれた苺？のアイコンでかわいいです。
-インストールも簡単。コンパイル不要。
-言語別のカラーリングもかなりの種類に最初から対応していて、シンプルだし軽快。
-参考にさせてもらったサイトは以下。</p>
-
-<p><a href="http://wakabamac.blog95.fc2.com/blog-entry-1057.html" title="わかばマークのMacの備忘録 | Fraise" target="_blank">わかばマークのMacの備忘録 | Fraise</a></p>
-
-<p>Fraiseもまだまだ試し中なので、使い勝手は追々。
-他にもいいエディタとかIDEを見つけたらご報告します。
-以上です。</p>
 ]]></content>
   </entry>
   

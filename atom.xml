@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-07T23:12:25+09:00</updated>
+  <updated>2014-09-21T15:51:24+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,60 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[MacアプリCaffeineのメニューバーアイコンをRetinaディスプレイ用に変更する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon/"/>
+    <updated>2014-09-21T14:33:34+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon</id>
+    <content type="html"><![CDATA[<p><a href="http://lightheadsw.com/caffeine/">Caffeine</a>は、Macのスリープモードを一時的に無効にするMacの定番アプリです。</p>
+
+<p>起動するとメニューバーにコーヒーカップのアイコンが表示され、クリックすると無効化のON・OFFを切り替えます。</p>
+
+<p>とてもシンプルな機能で重宝していますが一つ不満があります。</p>
+
+<p>アイコンがダサい・・・。</p>
+
+<p><img src="http://blog.code-life.net/images/2014/09/mac-caffeine-1.png"></p>
+
+<!--more-->
+
+
+<h2>Caffeineのアイコンを変更する</h2>
+
+<p>Retinaディスプレイ対応 &amp; シャレオツなアイコンに変えました。</p>
+
+<h3>アイコンセットをダウンロード</h3>
+
+<p>3つ紹介しますが、探せばもっとあるかもしれません。ちなみに私は「1」を使用しました。</p>
+
+<ol>
+<li><a href="https://github.com/bkenny/retina-caffeine">bkenny/retina-caffeine</a></li>
+<li><a href="https://webjac.com/design/caffeine-retina-icons/">Caffeine Retina Icons</a></li>
+<li><a href="http://blog.timlockridge.com/blog/2013/04/26/retina-menu-bar-icons-for-caffeine/">Retina Menu Bar Icons for Caffeine</a></li>
+</ol>
+
+
+<h3>アイコンの置き換え</h3>
+
+<ol>
+<li>/Applications/Caffeine.appを<code>Ctrl + クリック</code>して<code>パッケージの内容を表示</code>を選択</li>
+<li>Contents/Resources内に置き換えたいアイコンをコピー</li>
+<li>(起動している場合)Caffeineを終了し、Caffeineを起動</li>
+</ol>
+
+
+<h3>結果</h3>
+
+<p>いい感じ。</p>
+
+<p><img src="http://blog.code-life.net/images/2014/09/mac-caffeine-2.png"></p>
+
+<h2>注意</h2>
+
+<p>Caffeine自体のアップデートがあった場合、アイコンがデフォルト状態に戻ります。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Mac メニューバーにカレンダーを表示させるDay-Oが便利]]></title>
@@ -1294,22 +1348,6 @@ homebrewのバグだそう。</p>
 
 
 <p>ageキーの同じ値でグルーピングされていることが確認できます。そもそも(ry</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[bash]連番のディレクトリを作成する]]></title>
-    <link href="http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories/"/>
-    <updated>2013-12-18T22:22:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories</id>
-    <content type="html"><![CDATA[<p>dir_1, dir_2, dir_3&hellip;と連番でディレクトリを作成したい場合は以下で一発。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>mkdir dir_<span class="o">{</span>1..15<span class="o">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>普段書かないので普通に忘れる。</p>
 ]]></content>
   </entry>
   
