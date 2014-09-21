@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-22T01:02:34+09:00</updated>
+  <updated>2014-09-22T01:47:51+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -669,7 +669,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[Octopress アルファベットで始まるタイトルの最初の文字が大文字となる]]></title>
+    <title type="html"><![CDATA[Octopress アルファベットで始まるタイトルの最初の文字が大文字となる場合の対処法]]></title>
     <link href="http://blog.code-life.net/blog/2014/08/24/uncapitalize-the-post-title-octopress/"/>
     <updated>2014-08-24T23:28:21+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/08/24/uncapitalize-the-post-title-octopress</id>
@@ -760,7 +760,7 @@
   </entry>
   
   <entry>
-    <title type="html"><![CDATA[[Vagrant]複数の共有ディレクトリをマウントさせる]]></title>
+    <title type="html"><![CDATA[Vagrant 共有ディレクトリを複数追加する]]></title>
     <link href="http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders/"/>
     <updated>2014-04-14T21:06:31+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders</id>
@@ -776,7 +776,7 @@
 </ul>
 
 
-<h2>複数の共有ディレクトリをマウントさせる</h2>
+<h2>共有ディレクトリを複数追加する</h2>
 
 <p>ただ複数書けばいいだけだった&hellip;</p>
 
