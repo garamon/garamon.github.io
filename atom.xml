@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-23T22:14:12+09:00</updated>
+  <updated>2014-09-23T23:30:53+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,184 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[php オブジェクト内のメソッドをcallback関数として渡す場合の注意点]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/23/php-callbacks/"/>
+    <updated>2014-09-23T22:28:38+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/23/php-callbacks</id>
+    <content type="html"><![CDATA[<p>array_filterやarray_mapなどcallback関数を引数にとる関数がphpには多く存在します。</p>
+
+<p>callback関数の渡し方でのハマりどころが1点あったので共有しておきます。</p>
+
+<!--more-->
+
+
+<p>ほとんどのケースが<a href="http://php.net/manual/ja/language.types.callable.php#example-110">例1 コールバック関数の例</a>に記載されていますが、
+オブジェクト内から同じオブジェクト内のメソッドをコールする場合の記載がありません。(タイプ 3: オブジェクトメソッドのコールと同等なので必要ないと言えばないのですが)</p>
+
+<h2>オブジェクト内から同じオブジェクト内のメソッドをコールする</h2>
+
+<figure class='code'><figcaption><span>1.誤</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">class</span> <span class="nc">CallBack</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">private</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">my_callback</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span><span class="nv">$val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nb">print_r</span><span class="p">(</span><span class="nb">array_filter</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span><span class="p">,</span> <span class="s1">&#39;my_callback&#39;</span><span class="p">));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$callback</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CallBack</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$callback</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記のコードは一見正しく見えますが実行すると
+<code>Warning: array_filter() expects parameter 2 to be a valid callback,  function 'my_callback' not found or invalid function name</code>
+とエラーになります。</p>
+
+<p>同じオブジェクト内からコールする場合でもcallbackは配列で指定する必要があります。</p>
+
+<figure class='code'><figcaption><span>2.正</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">class</span> <span class="nc">CallBack</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">private</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">my_callback</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span><span class="nv">$val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// オブジェクト自身を指定</span>
+</span><span class='line'>        <span class="nb">print_r</span><span class="p">(</span><span class="nb">array_filter</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;my_callback&#39;</span><span class="p">)));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$callback</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CallBack</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$callback</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>注意. オブジェクトは常に指定すること</h2>
+
+<p><code>1.誤</code>のコードでもエラーなく動作させることはできます。</p>
+
+<p>以下のコードを実行するとエラーは発生せず、結果として<code>Array ( [0] =&gt; 1 [2] =&gt; 3 [4] =&gt; 5)</code>が出力されます。</p>
+
+<p>名前の一致が生じて予期しない挙動をしておりバグの元となるので、オブジェクトは常に指定するよう注意しましょう。</p>
+
+<figure class='code'><figcaption><span>2.正</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">my_callback</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="nv">$val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">CallBack</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">private</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">my_callback</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span><span class="nv">$val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// array(2, 4, 6)が出力されることを期待</span>
+</span><span class='line'>        <span class="nb">print_r</span><span class="p">(</span><span class="nb">array_filter</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span><span class="p">,</span> <span class="s1">&#39;my_callback&#39;</span><span class="p">));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$callback</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CallBack</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$callback</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考</h2>
+
+<p><a href="http://php.net/manual/ja/language.types.callable.php">PHP コールバック</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[php array_flattenを実装する]]></title>
@@ -1168,81 +1346,6 @@ homebrewのバグだそう。</p>
 <h2>参考</h2>
 
 <p><a href="http://docs.slimframework.com/#Route-Names">Slim Framework Documentation</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[FFMpegでHttp Live Streaming(HLS)向けにセグメント化する]]></title>
-    <link href="http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/"/>
-    <updated>2013-12-19T22:45:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming</id>
-    <content type="html"><![CDATA[<p><a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/">CentOSにm3u8-segmenterをインストールする</a>がほんのちょっぴり人気なので、FFMpeg単体でもセグメントできるよって話です。</p>
-
-<!--more-->
-
-
-<h2>FFMpegでSegment化</h2>
-
-<p>コンテンツは既に準備されているものとし、セグメント化のみ行います。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'>ffmpeg -i sample.mp4 -acodec copy -vcodec copy <span class="se">\</span>
-</span><span class='line'>  -vbsf h264_mp4toannexb <span class="se">\</span>
-</span><span class='line'>  -map 0 <span class="se">\</span>
-</span><span class='line'>  -f segment <span class="se">\</span>
-</span><span class='line'>  -segment_format mpegts <span class="se">\</span>
-</span><span class='line'>  -segment_time 5 <span class="se">\</span>
-</span><span class='line'>  -segment_list playlist.m3u8 <span class="se">\</span>
-</span><span class='line'>  -segment_list_flags -cache <span class="se">\</span>
-</span><span class='line'>  stream_%d.ts
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>オプションについて</h3>
-
-<ul>
-<li>-acodec copy -vcodec copy
-
-<ul>
-<li>コンテンツのコーデックをコピー。トランスコードは行われない。</li>
-</ul>
-</li>
-<li>-segment_time
-
-<ul>
-<li>分割秒数の設定。5秒を設定したとしても５秒ジャストでセグメント化されるわけではない。</li>
-</ul>
-</li>
-<li>-segment_list playlist.m3u8
-
-<ul>
-<li>プレイリストの出力先</li>
-</ul>
-</li>
-<li>-segment_list_flags -cache
-
-<ul>
-<li>キャッシュ(#EXT-X-ALLOW-CACHE)の無効化。デフォルトでは有効。</li>
-</ul>
-</li>
-</ul>
-
-
-<p>iPhoneやAndroidで再生し挙動を確認をしましたが、FFMpeg内蔵のsegmenterはm3u8-segmenterより優秀ですね。</p>
-
-<p>気が向いたらHLSの暗号化についても書こうかな。</p>
-
-<h2>参考</h2>
-
-<p><a href="http://rest-term.com/archives/3008/">NginxとFFmpegを利用したHTTP Live Streaming配信</a></p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-23T22:14:12+09:00</updated>
+  <updated>2014-09-23T23:30:53+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,115 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[php オブジェクト内のメソッドをcallback関数として渡す場合の注意点]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/23/php-callbacks/"/>
+    <updated>2014-09-23T22:28:38+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/23/php-callbacks</id>
+    <content type="html"><![CDATA[<p>array_filterやarray_mapなどcallback関数を引数にとる関数がphpには多く存在します。</p>
+
+<p>callback関数の渡し方でのハマりどころが1点あったので共有しておきます。</p>
+
+<!--more-->
+
+
+<p>ほとんどのケースが<a href="http://php.net/manual/ja/language.types.callable.php#example-110">例1 コールバック関数の例</a>に記載されていますが、
+オブジェクト内から同じオブジェクト内のメソッドをコールする場合の記載がありません。(タイプ 3: オブジェクトメソッドのコールと同等なので必要ないと言えばないのですが)</p>
+
+<h2>オブジェクト内から同じオブジェクト内のメソッドをコールする</h2>
+
+<pre><code class="php 1.誤">class CallBack {
+
+    private $arr;
+
+    public function __construct($arr) {
+        $this-&gt;arr = $arr;
+    }
+
+    public function my_callback($val) {
+        return ($val % 2 === 0);
+    }
+
+    public function run() {
+        print_r(array_filter($this-&gt;arr, 'my_callback'));
+    }
+
+}
+
+$callback = new CallBack(array(1, 2, 3, 4, 5, 6));
+$callback-&gt;run();
+</code></pre>
+
+<p>上記のコードは一見正しく見えますが実行すると
+<code>Warning: array_filter() expects parameter 2 to be a valid callback,  function 'my_callback' not found or invalid function name</code>
+とエラーになります。</p>
+
+<p>同じオブジェクト内からコールする場合でもcallbackは配列で指定する必要があります。</p>
+
+<pre><code class="php 2.正">class CallBack {
+
+    private $arr;
+
+    public function __construct($arr) {
+        $this-&gt;arr = $arr;
+    }
+
+    public function my_callback($val) {
+        return ($val % 2 === 0);
+    }
+
+    public function run() {
+        // オブジェクト自身を指定
+        print_r(array_filter($this-&gt;arr, array($this, 'my_callback')));
+    }
+
+}
+
+$callback = new CallBack(array(1, 2, 3, 4, 5, 6));
+$callback-&gt;run();
+</code></pre>
+
+<h2>注意. オブジェクトは常に指定すること</h2>
+
+<p><code>1.誤</code>のコードでもエラーなく動作させることはできます。</p>
+
+<p>以下のコードを実行するとエラーは発生せず、結果として<code>Array ( [0] =&gt; 1 [2] =&gt; 3 [4] =&gt; 5)</code>が出力されます。</p>
+
+<p>名前の一致が生じて予期しない挙動をしておりバグの元となるので、オブジェクトは常に指定するよう注意しましょう。</p>
+
+<pre><code>function my_callback($val) {
+    return ($val % 2 !== 0);
+}
+
+class CallBack {
+
+    private $arr;
+
+    public function __construct($arr) {
+        $this-&gt;arr = $arr;
+    }
+
+    public function my_callback($val) {
+        return ($val % 2 === 0);
+    }
+
+    public function run() {
+        // array(2, 4, 6)が出力されることを期待
+        print_r(array_filter($this-&gt;arr, 'my_callback'));
+    }
+
+}
+
+$callback = new CallBack(array(1, 2, 3, 4, 5, 6));
+$callback-&gt;run();
+</code></pre>
+
+<h2>参考</h2>
+
+<p><a href="http://php.net/manual/ja/language.types.callable.php">PHP コールバック</a></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[php array_flattenを実装する]]></title>
@@ -315,64 +424,6 @@ array(3) {
 </code></pre>
 
 <p>ageキーの同じ値でグルーピングされていることが確認できます。そもそも(ry</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CakePHP]モデルのコールバックを無効化にする]]></title>
-    <link href="http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback/"/>
-    <updated>2013-09-25T21:59:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback</id>
-    <content type="html"><![CDATA[<p>モデルの<a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html">コールバックメソッド</a>が様々ありますが、無効化したい場合があります。</p>
-
-<p>find, save共に第２引数にcallbacksをキーとした配列を渡すことでモデルのコールバック実行の可否を伝えることが可能です。</p>
-
-<!--more-->
-
-
-<h2>find(beforeFind, afterFind共に無効化)</h2>
-
-<pre><code class="php">$this-&gt;find('first', array(
-    'callbacks' =&gt; false
-));
-</code></pre>
-
-<h2>find(beforeFindのみ有効)</h2>
-
-<pre><code class="php">$this-&gt;find('first', array(
-    'callbacks' =&gt; 'before'
-));
-</code></pre>
-
-<h2>find(afterFindのみ有効)</h2>
-
-<pre><code class="php">$this-&gt;find('first', array(
-    'callbacks' =&gt; 'after'
-));
-</code></pre>
-
-<h2>save(beforeSave, afterSave共に無効化)</h2>
-
-<pre><code class="php">$this-&gt;save($data, array(
-    'callbacks' =&gt; false
-));
-</code></pre>
-
-<h2>save(beforeSaveのみ有効)</h2>
-
-<pre><code class="php">$this-&gt;save($data, array(
-    'callbacks' =&gt; 'before'
-));
-</code></pre>
-
-<h2>save(afterSaveのみ有効)</h2>
-
-<pre><code class="php">$this-&gt;save($data, array(
-    'callbacks' =&gt; 'after'
-));
-</code></pre>
-
-<p>という小ネタ。</p>
 ]]></content>
   </entry>
   
