@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-22T01:47:51+09:00</updated>
+  <updated>2014-09-23T22:14:12+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,99 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[php array_flattenを実装する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/23/php-array-flatten/"/>
+    <updated>2014-09-23T21:24:42+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/23/php-array-flatten</id>
+    <content type="html"><![CDATA[<p>phpは配列を操作する関数が多くあるが多次元配列をフラットにする関数がない。(ということを最近知った)</p>
+
+<p>実装方法は様々あるが、その中からいくつか紹介します。</p>
+
+<!--more-->
+
+
+<h2>再帰的に処理をする</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">array_flatten</span><span class="p">(</span><span class="k">array</span> <span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$ret</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$arr</span> <span class="k">as</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nb">is_array</span><span class="p">(</span><span class="nv">$item</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nv">$ret</span> <span class="o">=</span> <span class="nb">array_merge</span><span class="p">(</span><span class="nv">$ret</span><span class="p">,</span> <span class="nx">array_flatten</span><span class="p">(</span><span class="nv">$item</span><span class="p">));</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nv">$ret</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$item</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>SPLのイテレータクラスを利用する</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">array_flatten</span><span class="p">(</span><span class="k">array</span> <span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">iterator_to_array</span><span class="p">(</span><span class="k">new</span> <span class="nx">RecursiveIteratorIterator</span><span class="p">(</span><span class="k">new</span> <span class="nx">RecursiveArrayIterator</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)),</span> <span class="k">false</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>値に対して何らかの処理を行いたい場合はこちらのほうが良いかも。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">array_flatten</span><span class="p">(</span><span class="k">array</span> <span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$it</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RecursiveIteratorIterator</span><span class="p">(</span><span class="k">new</span> <span class="nx">RecursiveArrayIterator</span><span class="p">(</span><span class="nv">$arr</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$ret</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$it</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$ret</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>SPLのイテレータクラス初めて知ったけどシンプルに書けてよいね。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/1319903/how-to-flatten-a-multidimensional-array">How to Flatten a Multidimensional Array?</a></li>
+<li><a href="http://yuubiseiharukana.blog.shinobi.jp/Entry/1156/">PHP5.4.7 PHPでarray_flatten関数のパフォーマンス測定</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[FTP リモート先のファイル名一覧をローカルに保存する方法]]></title>
@@ -1150,148 +1243,6 @@ homebrewのバグだそう。</p>
 <h2>参考</h2>
 
 <p><a href="http://rest-term.com/archives/3008/">NginxとFFmpegを利用したHTTP Live Streaming配信</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[CentOS]システム情報(メモリ情報、バージョン、カーネルのバージョン、CPU情報)を確認する]]></title>
-    <link href="http://blog.code-life.net/blog/2013/12/18/centos-linux-system-information/"/>
-    <updated>2013-12-18T22:51:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/12/18/centos-linux-system-information</id>
-    <content type="html"><![CDATA[<h2>メモリ情報の確認</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/meminfo
-</span></code></pre></td></tr></table></div></figure>
-
-
-
-
-<!--more-->
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>MemTotal:        1020532 kB
-</span><span class='line'>MemFree:          855980 kB
-</span><span class='line'>Buffers:           36860 kB
-</span><span class='line'>Cached:            59728 kB
-</span><span class='line'>
-</span><span class='line'>... 省略 ...
-</span><span class='line'>
-</span><span class='line'>HugePages_Free:        0
-</span><span class='line'>HugePages_Rsvd:        0
-</span><span class='line'>HugePages_Surp:        0
-</span><span class='line'>Hugepagesize:       2048 kB
-</span><span class='line'>DirectMap4k:        8128 kB
-</span><span class='line'>DirectMap2M:     1040384 kB
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>バージョン確認</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /etc/redhat-release
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>CentOS release 6.4 (Final)
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>カーネルのバージョン確認</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/version
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>Linux version 2.6.32-358.2.1.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-3) (GCC) ) #1 SMP Wed Mar 13 00:26:49 UTC 2013
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>こっちでも確認できる</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>uname -a
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>Linux localhost.localdomain 2.6.32-358.2.1.el6.x86_64 #1 SMP Wed Mar 13 00:26:49 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>CPU情報の確認</h2>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>cat /proc/cpuinfo
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h3>結果</h3>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-</pre></td><td class='code'><pre><code class='text'><span class='line'>processor   : 0
-</span><span class='line'>vendor_id   : GenuineIntel
-</span><span class='line'>cpu family  : 6
-</span><span class='line'>model       : 58
-</span><span class='line'>model name  : Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
-</span><span class='line'>stepping    : 9
-</span><span class='line'>cpu MHz     : 3405.814
-</span><span class='line'>cache size  : 6144 KB
-</span><span class='line'>fpu     : yes
-</span><span class='line'>fpu_exception   : yes
-</span><span class='line'>cpuid level : 5
-</span><span class='line'>wp      : yes
-</span><span class='line'>flags       : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx rdtscp lm constant_tsc up rep_good pni monitor ssse3 lahf_lm
-</span><span class='line'>bogomips    : 6811.62
-</span><span class='line'>clflush size    : 64
-</span><span class='line'>cache_alignment : 64
-</span><span class='line'>address sizes   : 36 bits physical,  48 bits virtual
-</span><span class='line'>power management:
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>地味に忘れる。</p>
 ]]></content>
   </entry>
   

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: php | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/php/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-22T01:47:51+09:00</updated>
+  <updated>2014-09-23T22:14:12+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,69 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[php array_flattenを実装する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/23/php-array-flatten/"/>
+    <updated>2014-09-23T21:24:42+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/23/php-array-flatten</id>
+    <content type="html"><![CDATA[<p>phpは配列を操作する関数が多くあるが多次元配列をフラットにする関数がない。(ということを最近知った)</p>
+
+<p>実装方法は様々あるが、その中からいくつか紹介します。</p>
+
+<!--more-->
+
+
+<h2>再帰的に処理をする</h2>
+
+<pre><code class="php">function array_flatten(array $arr) {
+    $ret = array();
+
+    foreach ($arr as $item) {
+        if (is_array($item)) {
+            $ret = array_merge($ret, array_flatten($item));
+        } else {
+            $ret[] = $item;
+        }
+    }
+
+    return $ret;
+}
+</code></pre>
+
+<h2>SPLのイテレータクラスを利用する</h2>
+
+<pre><code class="php">function array_flatten(array $arr) {
+    return iterator_to_array(new RecursiveIteratorIterator(new RecursiveArrayIterator($arr)), false);
+}
+</code></pre>
+
+<p>値に対して何らかの処理を行いたい場合はこちらのほうが良いかも。</p>
+
+<pre><code>function array_flatten(array $arr) {
+    $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($arr));
+
+    $ret = array();
+
+    foreach ($it as $value) {
+        $ret[] = $value;
+    }
+
+    return $ret;
+}
+</code></pre>
+
+<p>SPLのイテレータクラス初めて知ったけどシンプルに書けてよいね。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/1319903/how-to-flatten-a-multidimensional-array">How to Flatten a Multidimensional Array?</a></li>
+<li><a href="http://yuubiseiharukana.blog.shinobi.jp/Entry/1156/">PHP5.4.7 PHPでarray_flatten関数のパフォーマンス測定</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[CakePHP2.x クエリーログを取得する]]></title>
@@ -310,59 +373,6 @@ array(3) {
 </code></pre>
 
 <p>という小ネタ。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[レスポンスヘッダのPHPのバージョン情報を隠す]]></title>
-    <link href="http://blog.code-life.net/blog/2013/04/24/hide-php-version/"/>
-    <updated>2013-04-24T22:33:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2013/04/24/hide-php-version</id>
-    <content type="html"><![CDATA[<p>ほんとに今更感があるが、ちょっとしたことでもブログに書いておこうと思う。</p>
-
-<p>親切心からかPHPはデフォルトでレスポンスヘッダにPHPのバージョン情報を出力しています。</p>
-
-<!--more-->
-
-
-<pre><code>HTTP/1.1 200 OK
-Date: Wed,  24 Apr 2013 13:46:59 GMT
-Server: Apache
-X-Powered-By: PHP/5.2.0
-Content-Length: 2558
-Content-Type: text/html; charset=UTF-8
-</code></pre>
-
-<h2>PHPのバージョン出力を抑制する</h2>
-
-<p>PHPのバージョン情報が出力されると、そのバージョンの脆弱性を狙った攻撃を受ける可能性がある為、PHPのバージョン情報を出力しないよう設定行います。</p>
-
-<p>php.ini に次の設定を加え、Apache or Nginx の再起動します。</p>
-
-<pre><code>expose_php=Off
-</code></pre>
-
-<h3>設定を加えた後のレスポンスヘッダ</h3>
-
-<pre><code>HTTP/1.1 200 OK
-Date: Wed,  24 Apr 2013 13:46:59 GMT
-Server: Apache
-Content-Length: 2558
-Content-Type: text/html; charset=UTF-8
-...
-</code></pre>
-
-<p>バージョン情報が出力されていないことが確認できます。
-セキュリティ上 Webサーバのバージョン情報も抑制したほうがよいでしょう。</p>
-
-<h2>ヘッダ情報の確認方法</h2>
-
-<p>以下の方法で簡単にヘッダ情報を確認できます。</p>
-
-<p>wgetコマンドでも確認できますがmacはデフォルトではwgetコマンドがインストールされていないのでcurlを利用するのがいいと思います。Winはtelnet?</p>
-
-<pre><code>curl -I http://hoge.com
-</code></pre>
 ]]></content>
   </entry>
   
