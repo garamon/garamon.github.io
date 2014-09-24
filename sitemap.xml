@@ -3,6 +3,12 @@
   
   
   <url>
+    <loc>http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network/</loc>
+    <lastmod>2014-09-25T01:34:11+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
     <loc>http://blog.code-life.net/blog/2014/09/23/php-callbacks/</loc>
     <lastmod>2014-09-23T22:28:38+09:00</lastmod>
     <priority>0.8</priority>
@@ -1313,21 +1319,21 @@
   
   <url>
     <loc>http://blog.code-life.net/blog/archives/</loc>
-    <lastmod>2014-09-25T01:31:11+09:00</lastmod>
+    <lastmod>2014-09-25T01:51:08+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>
   
   <url>
     <loc>http://blog.code-life.net/</loc>
-    <lastmod>2014-09-25T01:31:11+09:00</lastmod>
+    <lastmod>2014-09-25T01:51:08+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   
   <url>
     <loc>http://blog.code-life.net/blog/categories/</loc>
-    <lastmod>2014-09-25T01:31:11+09:00</lastmod>
+    <lastmod>2014-09-25T01:51:08+09:00</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.7</priority>
   </url>

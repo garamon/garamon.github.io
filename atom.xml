@@ -4,7 +4,7 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2014-09-25T01:31:11+09:00</updated>
+  <updated>2014-09-25T01:51:08+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -12,6 +12,73 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[VirtualBox ホストオンリーネットワークの設定]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network/"/>
+    <updated>2014-09-25T01:34:11+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network</id>
+    <content type="html"><![CDATA[<p>最近はVagrant経由でVirtualBoxを起動させるのでほとんど自分で書くことがないけどね。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>VirtualBox 4.3.16</li>
+<li>ホスト Mac OS X 10.9.1</li>
+<li>ゲスト CentOS 5.6</li>
+</ul>
+
+
+<h2>ホストオンリーネットワークインターフェースの追加</h2>
+
+<ol>
+<li><code>VirtualBox</code> | <code>環境設定</code> | <code>ネットワーク</code> を選択。</li>
+<li><code>ホストオンリーネットワーク</code> を選択し<code>ホストオンリーネットワークを追加(+マークのアイコン)</code>をクリック。</li>
+<li><code>vboxnet0</code>が作成されたことが確認できる。 アドレス等は適宜変更する。</li>
+</ol>
+
+
+<h2>ホストオンリーアダプターの追加</h2>
+
+<ol>
+<li>仮想マシンの設定から <code>ネットワーク</code> | <code>アダプター２</code> を選択する。</li>
+<li>割り当てを<code>ホストオンリーアダプター</code>名前を先に作成した<code>vboxnet0</code>とする。</li>
+</ol>
+
+
+<p>ゲストOS起動後、外部ネットワークに接続できることを確認する。</p>
+
+<h2>ネットワークインターフェースの設定</h2>
+
+<p>次のようにネットワーク設定を変更</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vi /etc/sysconfig/network-scripts/ifcfg-eth1
+</span><span class='line'>
+</span><span class='line'>DEVICE=eth1
+</span><span class='line'>BOOTPROTO=static    ← dhcpから変更
+</span><span class='line'>ONBOOT=yes
+</span><span class='line'>HWADDR="XX:XX:XX:XX:XX:XX"
+</span><span class='line'>IPADDR=192.168.56.10  ← 追加 IPアドレスは適宜変更すること
+</span><span class='line'>NETMASK=255.255.255.0 ← 追加</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ネットワークインターフェースの設定完了後、ネットワークの再起動を行いホストOSからsshで接続できることを確認する。</p>
+
+<p>最近DropBoxに溜まってたメモをブログに落としてるが、なんだかんだで時間がかかる。
+この時間をプロダクトに当てた方がよいのではないかとふと思うこの頃。</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[php オブジェクト内のメソッドをcallback関数として渡す場合の注意点]]></title>
@@ -1286,66 +1353,6 @@ homebrewのバグだそう。</p>
 <h2>参考</h2>
 
 <p><a href="https://github.com/Homebrew/homebrew/issues/24286">undefined method `to_sym&#8217; for nil:NilClass</a></p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[[Slim Framework]サブディレクトリにインストールした場合のリダイレクト方法]]></title>
-    <link href="http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory/"/>
-    <updated>2014-01-06T22:07:00+09:00</updated>
-    <id>http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory</id>
-    <content type="html"><![CDATA[<p>簡単なWebアプリを作る機会があったので、PHPのマイクロフレームワークの一つである<a href="http://docs.slimframework.com">Slim Framework</a>を触ってみた。</p>
-
-<p>そこでサブディレクトリにインストールした場合のリダイレクト方法で少しハマったので共有しておく。</p>
-
-<!--more-->
-
-
-<h2>環境</h2>
-
-<p>Slim 2.4.0</p>
-
-<h2>getRootUriを利用する</h2>
-
-<p>Slim_Http_Request::getRootUriはサブディレクトリ名を返すのでそれを利用しリダイレクトを行う。</p>
-
-<p>ex) サブディレクトリ名がslimの場合、「/slim」という文字列を返す。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/index&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">request</span><span class="o">-&gt;</span><span class="na">getRootUri</span><span class="p">()</span> <span class="o">.</span> <span class="s1">&#39;/hoge&#39;</span> <span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>urlForを利用する</h2>
-
-<p>Slimはrouteに任意の名前を割り当てることができ、urlForでURLを生成することができる。</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/index&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">render</span><span class="p">(</span><span class="s1">&#39;index.php&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">})</span><span class="o">-&gt;</span><span class="na">name</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="s1">&#39;/edit&#39;</span><span class="p">,</span>  <span class="k">function</span> <span class="p">()</span> <span class="k">use</span> <span class="p">(</span><span class="nv">$app</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nv">$app</span><span class="o">-&gt;</span><span class="na">redirect</span><span class="p">(</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">urlFor</span><span class="p">(</span><span class="s1">&#39;index&#39;</span><span class="p">));</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>これでインストール先がドキュメントルートだろうが、サブディレクトリだろうがコードを変える必要はなくなる。</p>
-
-<h2>参考</h2>
-
-<p><a href="http://docs.slimframework.com/#Route-Names">Slim Framework Documentation</a></p>
 ]]></content>
   </entry>
   
