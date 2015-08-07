@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: c++ | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/c-plus-plus/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hello DirectShow]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/02/hello-directshow/"/>
+    <updated>2011-12-02T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/02/hello-directshow</id>
+    <content type="html"><![CDATA[<p>chakemiです。</p>
+
+<p>本日はDirectShowの最初の一歩として、前回、作成したWebMファイルを再生するアプリケーションを作成してみます。</p>
+
+<!--more-->
+
+
+<h2>開発環境</h2>
+
+<ul>
+<li>WindowsXP SP3</li>
+<li>VisualC++2010Express</li>
+<li>WindowsSDK</li>
+</ul>
+
+
+<p>フィルタグラフマネージャーのインスタンスを作成し、フィルタグラフを作成し、CoInitializeを呼び出して COM ライブラリを初期化します。</p>
+
+<p>次にCoCreateInstance を呼び出してフィルタ グラフ マネージャを作成します。
+IGraphBuilderインターフェイス以外に必要となる、IMediaControlインターフェースとIMediaEventインターフェースを取得します。</p>
+
+<p>IGraphBuilderインターフェイスのRenderFileメソッドに再生ファイルを設定し、IMediaControlインターフェースのRunメソッドで再生を開始します。
+IMediaEventのWaitForCompletionメソッドを呼び出して、再生が完了するまで待機させます。</p>
+
+<p>RenderFileメソッドは、指定されたファイルを再生できるコーデックなどのフィルタグラフを自動的に作成してくれるので、たったこれだけコードでWebMファイルを再生するアプリの出来上がりです。
+当然、デコーダフィルタなどがインストールされている必要がありますが。。。</p>
+
+<p>以下、サンプルコード。</p>
+
+<pre><code class="c++">#include &lt;dshow.h&gt;
+#include &lt;iostream&gt;
+
+using namespace std;
+
+int main(void)
+{
+    cout &lt;&lt; "[Enter]キーで再生" &lt;&lt; endl;
+    getchar();
+
+    CoInitialize(NULL);
+
+    IGraphBuilder *pGraph;
+    IMediaControl *pMediaControl;
+    IMediaEvent *pEvent;
+
+    CoCreateInstance(CLSID_FilterGraph, NULL, CLSCTX_INPROC_SERVER,
+        IID_IGraphBuilder, (void **)&amp;pGraph);
+    pGraph-&gt;QueryInterface(IID_IMediaControl, (void **)&amp;pMediaControl);
+    pGraph-&gt;QueryInterface(IID_IMediaEvent, (void **)&amp;pEvent);
+
+    //グラフ作成
+    pGraph-&gt;RenderFile(L"C:\\test.webm", NULL);
+
+    //グラフ実行
+    pMediaControl-&gt;Run();
+
+    //終了待ち
+    long evCode;
+    pEvent-&gt;WaitForCompletion(INFINITE, &amp;evCode);
+
+    //開放
+    pMediaControl-&gt;Release();
+    pEvent-&gt;Release();
+    pGraph-&gt;Release();
+    CoUninitialize();
+
+    return 0;
+}
+</code></pre>
+
+<p>※このサンプルは全く例外処理をしていないのでご注意ください。</p>
+
+<p>次回は、自動的に構築されたフィルタグラフが、実際にはどのように構成されているのか、それを確認するためにROT(Running Object Table)を使用して作成されたフィルタグラフを「graphstudio.exe」でロードしてみたいと思います。</p>
+]]></content>
+  </entry>
+  
+</feed>

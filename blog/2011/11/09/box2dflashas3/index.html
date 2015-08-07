@@ -1,0 +1,596 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Box2DFlashAS3をお試し - Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="Box2DFlashAS3をお試し こんばんわ。iyamaです。 今日はwonderflを使ってActionScriptで遊んでみようと思います。
+久々にwonderflのアカウント引っ張り出してきたよ。 wonderflでサポートされている物理演算ライブラリのBox2DFlashAS3(2.0 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/blog/2011/11/09/box2dflashas3/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Box2DFlashAS3をお試し</h1>
+	<div class="entry-content" itemprop="articleBody"><p>こんばんわ。iyamaです。</p>
+
+<p>今日は<a href="http://wonderfl.net/">wonderfl</a>を使ってActionScriptで遊んでみようと思います。
+久々にwonderflのアカウント引っ張り出してきたよ。</p>
+
+<p>wonderflでサポートされている物理演算ライブラリのBox2DFlashAS3(2.0.2)を使ってみましょー。</p>
+
+<!--more-->
+
+
+<p>お手本として以下のサイトを参考にさせてもらいました。</p>
+
+<p><a href="http://d.hatena.ne.jp/nitoyon/20090428/box2dflashas3_2_0_2">Box2DFlashAS3 の単純なサンプルと使い方 (2.0.2版)</a></p>
+
+<p>そして作成したwonderflは以下からどうぞ。</p>
+
+<p><a href="http://wonderfl.net/c/mX2o">Box2DFlashAS3</a></p>
+
+<p>ソースは以下のとおり。</p>
+
+<p>参考サイトを元にちょこちょこと私好みに書き換えてあります。
+wonderflではBox2FlashAS3のライブラリが使えるので、
+import Box2D.*とするだけで使えるのです。楽チン。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+<span class='line-number'>78</span>
+<span class='line-number'>79</span>
+<span class='line-number'>80</span>
+<span class='line-number'>81</span>
+<span class='line-number'>82</span>
+<span class='line-number'>83</span>
+<span class='line-number'>84</span>
+<span class='line-number'>85</span>
+<span class='line-number'>86</span>
+<span class='line-number'>87</span>
+<span class='line-number'>88</span>
+<span class='line-number'>89</span>
+<span class='line-number'>90</span>
+<span class='line-number'>91</span>
+<span class='line-number'>92</span>
+<span class='line-number'>93</span>
+<span class='line-number'>94</span>
+<span class='line-number'>95</span>
+<span class='line-number'>96</span>
+<span class='line-number'>97</span>
+<span class='line-number'>98</span>
+<span class='line-number'>99</span>
+<span class='line-number'>100</span>
+<span class='line-number'>101</span>
+<span class='line-number'>102</span>
+<span class='line-number'>103</span>
+<span class='line-number'>104</span>
+<span class='line-number'>105</span>
+<span class='line-number'>106</span>
+<span class='line-number'>107</span>
+<span class='line-number'>108</span>
+<span class='line-number'>109</span>
+<span class='line-number'>110</span>
+<span class='line-number'>111</span>
+<span class='line-number'>112</span>
+<span class='line-number'>113</span>
+<span class='line-number'>114</span>
+<span class='line-number'>115</span>
+<span class='line-number'>116</span>
+<span class='line-number'>117</span>
+<span class='line-number'>118</span>
+<span class='line-number'>119</span>
+<span class='line-number'>120</span>
+<span class='line-number'>121</span>
+<span class='line-number'>122</span>
+<span class='line-number'>123</span>
+<span class='line-number'>124</span>
+<span class='line-number'>125</span>
+<span class='line-number'>126</span>
+<span class='line-number'>127</span>
+<span class='line-number'>128</span>
+<span class='line-number'>129</span>
+<span class='line-number'>130</span>
+<span class='line-number'>131</span>
+<span class='line-number'>132</span>
+<span class='line-number'>133</span>
+<span class='line-number'>134</span>
+<span class='line-number'>135</span>
+<span class='line-number'>136</span>
+<span class='line-number'>137</span>
+<span class='line-number'>138</span>
+<span class='line-number'>139</span>
+<span class='line-number'>140</span>
+<span class='line-number'>141</span>
+<span class='line-number'>142</span>
+<span class='line-number'>143</span>
+<span class='line-number'>144</span>
+<span class='line-number'>145</span>
+<span class='line-number'>146</span>
+<span class='line-number'>147</span>
+<span class='line-number'>148</span>
+<span class='line-number'>149</span>
+<span class='line-number'>150</span>
+<span class='line-number'>151</span>
+<span class='line-number'>152</span>
+<span class='line-number'>153</span>
+<span class='line-number'>154</span>
+<span class='line-number'>155</span>
+<span class='line-number'>156</span>
+<span class='line-number'>157</span>
+</pre></td><td class='code'><pre><code class='as3'><span class='line'><span class="cm">/**</span>
+</span><span class='line'><span class="cm"> * Copyright aiyco ( http://wonderfl.net/user/aiyco )</span>
+</span><span class='line'><span class="cm"> * MIT License ( http://www.opensource.org/licenses/mit-license.php )</span>
+</span><span class='line'><span class="cm"> * Downloaded from: http://wonderfl.net/c/mX2o</span>
+</span><span class='line'><span class="cm"> */</span>
+</span><span class='line'>
+</span><span class='line'><span class="kd">package</span> <span class="o">{</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">Box2D.Dynamics.</span><span class="o">*;</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">Box2D.Collision.</span><span class="o">*;</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">Box2D.Collision.Shapes.</span><span class="o">*;</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">Box2D.Common.Math.</span><span class="o">*;</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">flash.events.Event</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">flash.events.MouseEvent</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">flash.display.Sprite</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">flash.display.Stage</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">flash.display.StageAlign</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">flash.display.StageScaleMode</span><span class="o">;</span>
+</span><span class='line'>    <span class="k">import</span> <span class="nn">flash.text.TextField</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="o">[</span><span class="n">SWF</span><span class="o">(</span><span class="n">backgroundColor</span><span class="o">=</span><span class="s2">&quot;#ffffcc&quot;</span><span class="o">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;350&quot;</span><span class="o">,</span> <span class="n">height</span><span class="o">=</span><span class="s2">&quot;200&quot;</span><span class="o">)]</span>
+</span><span class='line'>    <span class="kd">public</span> <span class="kd">class</span> <span class="n">FlashTest</span> <span class="kd">extends</span> <span class="n">Sprite</span> <span class="o">{</span>
+</span><span class='line'>        <span class="c1">// 重力</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">const</span> <span class="n">SCALE</span><span class="p">:</span><span class="kt">Number</span> <span class="o">=</span> <span class="mi">8</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">world</span><span class="p">:</span><span class="kt">b2World</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">tf</span><span class="p">:</span><span class="kt">TextField</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">animation</span><span class="p">:</span><span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">count</span><span class="p">:</span><span class="kt">int</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// 世界</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">worldAABB</span><span class="p">:</span><span class="kt">b2AABB</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">gravity</span><span class="p">:</span><span class="kt">b2Vec2</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">wallBdDef</span><span class="p">:</span><span class="kt">b2BodyDef</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">wallBd</span><span class="p">:</span><span class="kt">b2Body</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">wallShapeDef</span><span class="p">:</span><span class="kt">b2PolygonDef</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">debugDraw</span><span class="p">:</span><span class="kt">b2DebugDraw</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Object</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">objBdDef</span><span class="p">:</span><span class="kt">b2BodyDef</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">objBd</span><span class="p">:</span><span class="kt">b2Body</span><span class="o">;</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">var</span> <span class="n">shapeDef</span><span class="p">:</span><span class="kt">b2PolygonDef</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="kd">public</span> <span class="kd">function </span><span class="nf">FlashTest</span><span class="o">()</span> <span class="o">{</span>
+</span><span class='line'>            <span class="c1">// write as3 code here..</span>
+</span><span class='line'>            <span class="n">stage</span><span class="o">.</span><span class="na">scaleMode</span> <span class="o">=</span> <span class="n">StageScaleMode</span><span class="o">.</span><span class="na">NO_SCALE</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">stage</span><span class="o">.</span><span class="na">align</span> <span class="o">=</span> <span class="n">StageAlign</span><span class="o">.</span><span class="na">TOP_LEFT</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">tf</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">TextField</span><span class="o">();</span>
+</span><span class='line'>            <span class="n">tf</span><span class="o">.</span><span class="na">textColor</span> <span class="o">=</span> <span class="mh">0x000000</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">tf</span><span class="o">.</span><span class="na">text</span> <span class="o">=</span> <span class="s2">&quot;Click to start&quot;</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">addChild</span><span class="o">(</span><span class="n">tf</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">animation</span> <span class="o">=</span> <span class="kc">false</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">stage</span><span class="o">.</span><span class="na">addEventListener</span><span class="o">(</span><span class="n">MouseEvent</span><span class="o">.</span><span class="na">CLICK</span><span class="o">,</span> <span class="n">tfClickEventHandler</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// 初期化</span>
+</span><span class='line'>            <span class="n">init</span><span class="o">();</span>
+</span><span class='line'>            <span class="n">createObject</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">stage</span><span class="o">.</span><span class="na">addEventListener</span><span class="o">(</span><span class="n">Event</span><span class="o">.</span><span class="na">ENTER_FRAME</span><span class="o">,</span> <span class="n">enterFrameHandler</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="cm">/**</span>
+</span><span class='line'><span class="cm">         * init</span>
+</span><span class='line'><span class="cm">         */</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">function </span><span class="nf">init</span><span class="o">():</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>            <span class="c1">// 世界を作る</span>
+</span><span class='line'>            <span class="n">worldAABB</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2AABB</span><span class="o">();</span>
+</span><span class='line'>            <span class="n">worldAABB</span><span class="o">.</span><span class="na">lowerBound</span><span class="o">.</span><span class="na">Set</span><span class="o">(-</span><span class="mf">100.0</span><span class="o">,</span> <span class="o">-</span><span class="mf">100.0</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">worldAABB</span><span class="o">.</span><span class="na">upperBound</span><span class="o">.</span><span class="na">Set</span><span class="o">(</span><span class="mf">100.0</span><span class="o">,</span> <span class="mf">100.0</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// 重力</span>
+</span><span class='line'>            <span class="n">gravity</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2Vec2</span><span class="o">(</span><span class="mf">0.0</span><span class="o">,</span> <span class="mf">10.0</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// 世界のインスタンス</span>
+</span><span class='line'>            <span class="n">world</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2World</span><span class="o">(</span><span class="n">worldAABB</span><span class="o">,</span> <span class="n">gravity</span><span class="o">,</span> <span class="kc">true</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// 床</span>
+</span><span class='line'>            <span class="n">wallBdDef</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2BodyDef</span><span class="o">();</span>
+</span><span class='line'>            <span class="n">wallBdDef</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">Set</span><span class="o">(</span><span class="mi">400</span> <span class="sr">/ SCALE / 2, 300 /</span> <span class="n">SCALE</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">wallBdDef</span><span class="o">.</span><span class="na">angle</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span> <span class="o">/</span> <span class="mi">20</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">wallBd</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="na">CreateBody</span><span class="o">(</span><span class="n">wallBdDef</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">wallShapeDef</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2PolygonDef</span><span class="o">();</span>
+</span><span class='line'>            <span class="n">wallShapeDef</span><span class="o">.</span><span class="na">SetAsBox</span><span class="o">(</span><span class="mi">180</span> <span class="sr">/ SCALE, 10 /</span> <span class="n">SCALE</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">wallBd</span><span class="o">.</span><span class="na">CreateShape</span><span class="o">(</span><span class="n">wallShapeDef</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// DebugDraw</span>
+</span><span class='line'>            <span class="n">debugDraw</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2DebugDraw</span><span class="o">();</span>
+</span><span class='line'>            <span class="n">debugDraw</span><span class="o">.</span><span class="na">m_sprite</span> <span class="o">=</span> <span class="k">this</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">debugDraw</span><span class="o">.</span><span class="na">m_drawScale</span> <span class="o">=</span> <span class="n">SCALE</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">debugDraw</span><span class="o">.</span><span class="na">m_fillAlpha</span> <span class="o">=</span> <span class="o">.</span><span class="mi">5</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">debugDraw</span><span class="o">.</span><span class="na">m_lineThickness</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">debugDraw</span><span class="o">.</span><span class="na">m_drawFlags</span> <span class="o">=</span> <span class="n">b2DebugDraw</span><span class="o">.</span><span class="na">e_shapeBit</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">world</span><span class="o">.</span><span class="na">SetDebugDraw</span><span class="o">(</span><span class="n">debugDraw</span><span class="o">);</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="cm">/**</span>
+</span><span class='line'><span class="cm">         * createObject</span>
+</span><span class='line'><span class="cm">         */</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">function </span><span class="nf">createObject</span><span class="o">():</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">objBdDef</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2BodyDef</span><span class="o">();</span>
+</span><span class='line'>            <span class="n">objBdDef</span><span class="o">.</span><span class="na">position</span><span class="o">.</span><span class="na">Set</span><span class="o">((</span><span class="mi">300</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">())</span> <span class="o">/</span> <span class="n">SCALE</span><span class="o">,</span> <span class="mi">0</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">objBdDef</span><span class="o">.</span><span class="na">angle</span> <span class="o">=</span> <span class="n">Math</span><span class="o">.</span><span class="na">PI</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">Math</span><span class="o">.</span><span class="na">random</span><span class="o">();</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">objBd</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="na">CreateBody</span><span class="o">(</span><span class="n">objBdDef</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">shapeDef</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">b2PolygonDef</span><span class="o">();</span>
+</span><span class='line'>            <span class="n">shapeDef</span><span class="o">.</span><span class="na">SetAsBox</span><span class="o">(</span><span class="mi">30</span> <span class="sr">/ SCALE, 30 /</span> <span class="n">SCALE</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">shapeDef</span><span class="o">.</span><span class="na">density</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">shapeDef</span><span class="o">.</span><span class="na">restitution</span> <span class="o">=</span> <span class="mf">0.4</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">shapeDef</span><span class="o">.</span><span class="na">friction</span> <span class="o">=</span> <span class="mf">0.1</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">objBd</span><span class="o">.</span><span class="na">CreateShape</span><span class="o">(</span><span class="n">shapeDef</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">shapeDef</span><span class="o">.</span><span class="na">SetAsBox</span><span class="o">(</span><span class="mi">40</span> <span class="sr">/ SCALE, 5 /</span> <span class="n">SCALE</span><span class="o">);</span>
+</span><span class='line'>            <span class="n">objBd</span><span class="o">.</span><span class="na">CreateShape</span><span class="o">(</span><span class="n">shapeDef</span><span class="o">);</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="n">objBd</span><span class="o">.</span><span class="na">SetMassFromShapes</span><span class="o">();</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="cm">/**</span>
+</span><span class='line'><span class="cm">         * tfClickEventHandler</span>
+</span><span class='line'><span class="cm">         * @event : MouseEvent</span>
+</span><span class='line'><span class="cm">         */</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">function </span><span class="nf">tfClickEventHandler</span><span class="o">(</span><span class="n">event</span><span class="o">:</span><span class="kt">MouseEvent</span><span class="o">):</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+</span><span class='line'>            <span class="n">animation</span> <span class="o">=</span> <span class="o">!</span><span class="n">animation</span><span class="o">;</span>
+</span><span class='line'>            <span class="k">if</span> <span class="o">(</span><span class="n">animation</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">tf</span><span class="o">.</span><span class="na">text</span> <span class="o">=</span> <span class="s2">&quot;Click to stop&quot;</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">tf</span><span class="o">.</span><span class="na">text</span> <span class="o">=</span> <span class="s2">&quot;Click to start&quot;</span><span class="o">;</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="cm">/**</span>
+</span><span class='line'><span class="cm">         * enterFrameHandler</span>
+</span><span class='line'><span class="cm">         * @event : Event</span>
+</span><span class='line'><span class="cm">         */</span>
+</span><span class='line'>        <span class="kd">private</span> <span class="kd">function </span><span class="nf">enterFrameHandler</span><span class="o">(</span><span class="n">event</span><span class="o">:</span><span class="kt">Event</span><span class="o">):</span><span class="kt">void</span> <span class="o">{</span>
+</span><span class='line'>            <span class="n">world</span><span class="o">.</span><span class="na">Step</span><span class="o">(</span><span class="mi">1</span> <span class="o">/</span> <span class="mi">15</span><span class="o">,</span> <span class="mi">10</span><span class="o">);</span>
+</span><span class='line'>            <span class="k">if</span> <span class="o">(</span><span class="n">count</span> <span class="o">==</span> <span class="mi">0</span> <span class="o">&amp;&amp;</span> <span class="n">animation</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                <span class="n">createObject</span><span class="o">();</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>            <span class="n">count</span> <span class="o">=</span> <span class="o">(</span><span class="n">count</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span> <span class="o">%</span> <span class="mi">30</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="c1">// 下に行ったオブジェクトを削除</span>
+</span><span class='line'>            <span class="k">for</span> <span class="o">(</span><span class="kd">var</span> <span class="n">b</span><span class="p">:</span><span class="kt">b2Body</span> <span class="o">=</span> <span class="n">world</span><span class="o">.</span><span class="na">GetBodyList</span><span class="o">();</span> <span class="n">b</span><span class="o">;</span> <span class="n">b</span> <span class="o">=</span> <span class="n">b</span><span class="o">.</span><span class="na">GetNext</span><span class="o">())</span> <span class="o">{</span>
+</span><span class='line'>                <span class="k">if</span> <span class="o">(</span><span class="n">b</span><span class="o">.</span><span class="na">GetWorldCenter</span><span class="o">().</span><span class="n">y</span> <span class="o">*</span> <span class="n">SCALE</span> <span class="o">&amp;</span><span class="n">gt</span><span class="o">;</span> <span class="mi">600</span><span class="o">)</span> <span class="o">{</span>
+</span><span class='line'>                    <span class="n">world</span><span class="o">.</span><span class="na">DestroyBody</span><span class="o">(</span><span class="n">b</span><span class="o">);</span>
+</span><span class='line'>                <span class="o">}</span>
+</span><span class='line'>            <span class="o">}</span>
+</span><span class='line'>        <span class="o">}</span>
+</span><span class='line'>    <span class="o">}</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>wonderflはいいですね。
+リアルタイムにコーディングしたものがプレビューできるので。
+前に紹介したas3corelibもサポートしているので、ちょっとしたテストにはもってこいです。</p>
+
+<p>そして、皆様ご存知かと思いますが、Javascript版の<a href="http://jsdo.it/">jsdoit</a>もあるよーん。
+以上です。</p>
+</div>
+
+</article>
+
+	<div class="ads">
+    <script type="text/javascript"><!--
+    google_ad_client = "ca-pub-1004737269453987";
+    /* big banner */
+    google_ad_slot = "2274687956";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2011/11/09/box2dflashas3/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2015 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.code-life.net/blog/2011/11/09/box2dflashas3/';
+        var disqus_url = 'http://blog.code-life.net/blog/2011/11/09/box2dflashas3/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

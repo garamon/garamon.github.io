@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bootcamp | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/bootcamp/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Mac bootcampのWindowsでのキーボードショートカット メモ]]></title>
+    <link href="http://blog.code-life.net/blog/2011/10/08/bootcamp-keyboard-mappings-windows/"/>
+    <updated>2011-10-08T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/10/08/bootcamp-keyboard-mappings-windows</id>
+    <content type="html"><![CDATA[<p>chakemiです。MacBook airを購入してもうすぐ一ヶ月になりますが、まったくMacOSを起動しておりません。。。
+本日は、bootcampのWindowsでのキーボードショートカットのメモ。</p>
+
+<!--more-->
+
+
+<h2>スクリーンキャプチャ</h2>
+
+<p><code>fn</code> + <code>左shift</code> + <code>F11</code>
+これで画面全体がキャプチャできます。</p>
+
+<p><code>fn</code> + <code>alt option</code> + <code>左shift</code> + <code>F11</code>
+でアクティブウィンドウのみキャプチャ。</p>
+
+<h2>半角/全角</h2>
+
+<p><code>caps</code>キー これ以外に <code>alt option</code> + <code>`@</code> でも切り替え可能。</p>
+
+<h2>delete</h2>
+
+<p>キーボードのdeleteキーはBSキーとして機能しますが、 <code>fn</code> + <code>delete</code> でdelete。</p>
+
+<p>他にも普段PCキーボードで使うようなものの代替があったら忘れないようにメモしよっ。</p>
+]]></content>
+  </entry>
+  
+</feed>

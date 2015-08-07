@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: rbenv | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/rbenv/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[rbenv使うならこれもいれとけプラグイン4選]]></title>
+    <link href="http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/"/>
+    <updated>2014-05-07T22:30:15+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin</id>
+    <content type="html"><![CDATA[<p>複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。</p>
+
+<!--more-->
+
+
+<h2>ruby-build</h2>
+
+<p><a href="https://github.com/sstephenson/ruby-build">ruby-build</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>rubyのコンパイル &amp; インストール</p>
+
+<h3>インストール</h3>
+
+<pre><code>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</code></pre>
+
+<h2>rbenv-default-gems</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-default-gems">rbenv-default-gems</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>新しくrubyをインストールする際、~/.rbenv/default-gemsに記載してあるgemを自動的にインストールする</p>
+
+<p><code>sh ex) ~/.rbenv/default-gems
+bundler
+pry
+</code></p>
+
+<h3>Installation</h3>
+
+<pre><code class="sh">$ git clone https://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems
+</code></pre>
+
+<h2>rbenv-gem-rehash</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-gem-rehash">rbenv-gem-rehash</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>gemをインストール or アンインストールした際に自動的にrbenv rehashを行う</p>
+
+<h3>Installation</h3>
+
+<pre><code class="sh">$ git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+</code></pre>
+
+<h2>rbenv-update</h2>
+
+<p><a href="https://github.com/rkh/rbenv-update">rbenv-update</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p><code>rbenv update</code>と打てば rbenv &amp; rbenvプラグインをまとめて最新の状態にする</p>
+
+<h3>Installation</h3>
+
+<pre><code class="sh">$ git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
+</code></pre>
+
+<p>全部<a href="https://github.com/sstephenson/rbenv/wiki/Plugins#approved-plugins">wiki</a>に載ってるんすけどね。</p>
+]]></content>
+  </entry>
+  
+</feed>

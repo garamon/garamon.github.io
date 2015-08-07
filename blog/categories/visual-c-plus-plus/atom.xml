@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: visual c++ | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/visual-c-plus-plus/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[VisualC++でWindowsMediaPlayer Plug-in Wizardを使う]]></title>
+    <link href="http://blog.code-life.net/blog/2011/10/03/visualc-plus-plus-windowsmediaplayer-plug-in-wizard/"/>
+    <updated>2011-10-03T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/10/03/visualc-plus-plus-windowsmediaplayer-plug-in-wizard</id>
+    <content type="html"><![CDATA[<p>chakemiです。先日のmindmapsですが、即効でnoto氏に
+「こういうのじゃないんだよなぁ」とバッサリ切り捨てられました。。。</p>
+
+<p>まぁ、どんなのがいいのかは判っていたのでダメージ０ですが。</p>
+
+<p>本日は、WindowsMediaPlayerのplug-inを作成するWizardをVisualC++2010Expressで使う際のメモ。</p>
+
+<!--more-->
+
+
+<h2>開発環境</h2>
+
+<ul>
+<li>Windows7 Professional 32bit</li>
+<li>VisualC++2010Express</li>
+<li>WindowsSDK</li>
+</ul>
+
+
+<p>まず、最新のWindowsSDKをダウンロードします。
+<a href="http://msdn.microsoft.com/ja-jp/windows/bb980924">http://msdn.microsoft.com/ja-jp/windows/bb980924</a></p>
+
+<p>インストールが完了したら、Plug-in Wizardをインストールします。
+インストールには、以下の3つのファイルを使用します。</p>
+
+<pre><code>wmpwiz.ico
+wmpwiz.vsdir
+wmpwiz.vsz
+</code></pre>
+
+<p>デフォルトでは以下のフォルダから選択できます。</p>
+
+<pre><code>C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\multimedia\WMP\Wizards\wmpwiz
+</code></pre>
+
+<p>選択した3つのファイルをVisualC++がインストールされているフォルダにコピーします。 デフォルトでは下記になります。</p>
+
+<pre><code>C:\Program Files\Microsoft Visual Studio 10.0\VC\Express\VCProjects
+</code></pre>
+
+<p>コピーの際、wmpwiz.vszを念のため、Wmpwiz.vszにリネームしておきます。
+Wmpwiz.vszをメモ帳などで開き、下記の行を修正します。</p>
+
+<pre><code>Wizard=VsWizard.&lt;VsWizardEngine version goes here&gt;
+↓↓↓
+&lt;font color="red"&gt;Wizard=VsWizard.VsWizardEngine.10.0&lt;/font&gt;
+
+Param="ABSOLUTE_PATH = &lt;path to wmpwiz directory goes here&gt;"
+↓↓↓
+&lt;font color="red"&gt;Param="ABSOLUTE_PATH = C:\Program Files\Microsoft SDKs\Windows\v7.1\Samples\multimedia\WMP\Wizards\wmpwiz"&lt;/font&gt;
+</code></pre>
+
+<p>これで、準備完了。
+VisualC++を起動すると、</p>
+
+<p><a href="/images/2011/10/WindowsMediaPlayerWizard.jpg"><img src="/images/2011/10/WindowsMediaPlayerWizard-300x207.jpg" width="300" height="207"></a></p>
+
+<p>Windows Media Player Plug-in Wizardが追加されました！
+Wizardテンプレートを選択し、プロジェクト作成を開始すると</p>
+
+<p><a href="/images/2011/10/WindowsMediaPlayerWizard2.jpg"><img src="/images/2011/10/WindowsMediaPlayerWizard2-300x187.jpg" width="300" height="187"></a></p>
+
+<p>作成するplug-inの形式を選択することができます。
+適当に選んで、プロジェクト作成完了です！</p>
+
+<p><a href="/images/2011/10/WindowsMediaPlayerWizard3.jpg"><img src="/images/2011/10/WindowsMediaPlayerWizard3-300x181.jpg" width="300" height="181"></a></p>
+]]></content>
+  </entry>
+  
+</feed>

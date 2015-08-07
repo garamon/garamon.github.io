@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ftp | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/ftp/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[FTP リモート先のファイル名一覧をローカルに保存する方法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/21/ftp-ls-output-to-local-file-from-the-command-line/"/>
+    <updated>2014-09-21T16:32:47+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/21/ftp-ls-output-to-local-file-from-the-command-line</id>
+    <content type="html"><![CDATA[<p>同僚に聞かれてすぐに応えられなかったので備忘録としてメモ。</p>
+
+<!--more-->
+
+
+<h2>ファイル一覧を出力する</h2>
+
+<p>単純にファイル一覧を取得するには<code>ls</code>コマンドで出力できる。</p>
+
+<pre><code class="sh">$ ftp
+ftp&gt; open ftp.exsample.com
+Name (xxxx): [ユーザー名応答]
+Password: [パスワード応答]
+230 User code-life logged in
+Remote system type is UNIX.
+Using binary mode to transfer files.
+ftp&gt; ls
+drwxr-xr-x 428 root     wheel        9216 Sep 16 18:40 ..
+-rw-r--r--   1 code-life users         773 Jan  7  2009 .cshrc
+-rw-r--r--   1 code-life users         258 Jan  2  2009 .login
+-rw-r--r--   1 code-life users         167 Jan  2  2009 .login_conf
+-rw-r--r--   1 code-life users         762 Jan  7  2009 .profile
+-rw-r--r--   1 code-life users         980 Jan  2  2009 .shrc
+drwx------   2 code-life users         512 Mar 13  2009 .spamassassin
+drwx------   2 code-life users         512 Mar 13  2009 .ssh
+drwxr-xr-x   5 code-life users         512 Aug 20 22:01 www
+</code></pre>
+
+<h2>出力したファイル一覧をローカルに保存する</h2>
+
+<p>lsの標準出力をファイルに出力できるかと思ったができない。</p>
+
+<pre><code class="sh">ftp&gt; dir &gt; test.txt
+output to local-file: test.txt [anpqy?]? y
+229 Entering Extended Passive Mode (|||27752|)
+150 Opening ASCII mode data connection for file list
+     0        0.00 KiB/s
+     450 &gt;: No such file or directory
+</code></pre>
+
+<p><code>help ls</code>で確認すると<code>list contents of remote path</code>と期待した応答はしてくれなかった。不親切だ。</p>
+
+<p><code>man ftp</code>で確認する。</p>
+
+<pre><code class="sh">ls [remote-path [local-file]]
+            A synonym for dir.
+</code></pre>
+
+<p>ということでリモートパスとローカルファイルを指定する。ここではカレントディレクトリのファイル一覧を取得する。</p>
+
+<pre><code class="sh">ftp&gt; ls . filelist.txt
+output to local-file: filelist.txt [anpqy?]? y
+229 Entering Extended Passive Mode (|||14481|)
+150 Opening ASCII mode data connection for file list
+  1104       38.53 KiB/s
+  226 Transfer complete
+</code></pre>
+
+<p>出力したfilelist.txtはローカルのホームディレクトリ直下にダウンロードされているのが確認できる。</p>
+
+<h2>ファイル一覧を再帰的に出力する</h2>
+
+<p>再帰的にファイル一覧を出力するには<code>R</code>オプションを指定する。</p>
+
+<pre><code>ftp&gt; ls -R
+</code></pre>
+
+<h2>再帰的に出力したファイル一覧をローカルに保存する</h2>
+
+<p><code>R</code>オプション指定時にはリモートパスの指定はできない。カレントディレクトリから再帰的に一覧を取得する。</p>
+
+<pre><code>ftp&gt; ls -R filelist.txt
+</code></pre>
+
+<p>結果は上記と同様にローカルのホームディレクトリ直下にダウンロードされている。</p>
+
+<p>こういったちょっとしたことを、さっと応えられるようにしたい。</p>
+]]></content>
+  </entry>
+  
+</feed>

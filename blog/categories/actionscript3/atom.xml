@@ -1,0 +1,311 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: actionscript3 | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/actionscript3/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ActionScript3.0 の論理演算子について]]></title>
+    <link href="http://blog.code-life.net/blog/2012/04/02/operators-as3/"/>
+    <updated>2012-04-02T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/04/02/operators-as3</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>今日はまた戻ってActionScript3.0。
+論理演算子についてです。</p>
+
+<!--more-->
+
+
+<p>論理演算子とは、if文とかでよく使われる、AND(&amp;&amp;)やOR(||)のこと。
+こんな風によく使いますよね。</p>
+
+<p>例）Aが真、または、Bが真のときCを真にする。（※A、B、Cは変数）</p>
+
+<pre><code class="as3">if (A == true || B == true) {
+    C = true;
+}
+</code></pre>
+
+<p>※上記はPHPとかActionScriptで想像してください。</p>
+
+<p>もちろんActionScriptでも論理演算子は使えるのですが、
+最近オープンソースのコードを読んでて以下みたいのが出てきたんです。</p>
+
+<pre><code class="as3">A ||= B;
+</code></pre>
+
+<p>！？
+まず驚いたのは、こんな演算子ActionScriptでも使えんの？</p>
+
+<p>えぇ。使えるらしいです。
+私、知らなさ過ぎました。
+省略形、好きじゃないんです。</p>
+
+<p>上記をしっかり書くと以下のような感じ。(A、Bは変数)</p>
+
+<pre><code class="as3">A = A || B;
+</code></pre>
+
+<p>Aが真の場合、AにはAが返り、それ以外の場合はAにBが返ります。
+※AとBは任意の型。Booleanじゃなくても使えるけど、片方がBooleanだとブール値になります。</p>
+
+<p>使用例としては、nullチェックとか、ステータスチェックとかに使えそうですね。</p>
+
+<p>ActionScriptはPHPとかよりも型チェックが厳しいので(それが普通ともいう)、
+「+=」とかもあんまり使ってなかったのですが、もうちょっと演算子に気を使った方がいいですね。</p>
+
+<p>今回の例はOR(||)で説明しましたが、もちろんAND(&amp;&amp;)もあります。</p>
+
+<pre><code class="as3">A &amp;&amp;= B;
+
+A = A &amp;&amp; B;
+</code></pre>
+
+<p>Aが偽の場合、AにはAを返し、それ以外の場合はAにBが返ります。
+うーん。文字で書くとややこしい。</p>
+
+<p>以上です。
+数学の論理演算は嫌いじゃなかったけど、そもそも論理演算のことを忘れてますね。。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://livedocs.adobe.com/flash/9.0_jp/ActionScriptLangRefV3/operators.html" title="演算子" target="_blank">ActionScript 3.0 コンポーネントリファレンスガイド | 演算子</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AS3で動画再生終了を検知する]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/02/listen-for-when-movie-is-finishied-as3/"/>
+    <updated>2011-12-02T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/02/listen-for-when-movie-is-finishied-as3</id>
+    <content type="html"><![CDATA[<p>どうもiyamaです。</p>
+
+<p>今日はちょっと前回予告もしました  NetStreamを利用して動画を再生した場合、
+再生終了を検知する方法です。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>ActionScript3.0</li>
+<li>Flash CS3～CS5</li>
+</ul>
+
+
+<pre><code class="as3 Main.as">import flash.events.Event;
+import flash.net.NetConnection;
+import flash.net.NetStream;
+
+// ns = NetStream、stream = (ファイル名) のとき
+ns.play(stream);
+stage.addEventListener(Event.ENTER_FRAME, onEnterFrameHandler);
+
+/**
+ * onEnterFrameHandler
+ * @param    event
+ */
+private function onEnterFrameHandler(event:Event):void {
+    // duration = 動画尺（ミリ秒）とする
+    if ((Math.ceil(ns.time * 10) / 10) &gt;= (Math.floor(duration * 10) / 10)) {
+        // 再生終了！！
+    }
+}
+</code></pre>
+
+<p>結構はしょっている部分多いです。
+NetConnectionとNetStreamがある程度分かっている前提です。
+ここで大事なのは2つ。</p>
+
+<p>「Math.ceil」と「Math.floor」</p>
+
+<ul>
+<li>Math.ceil(value) ： valueを切り上げ</li>
+<li>Math.floor(value)： valueを切り下げ</li>
+</ul>
+
+
+<p>ふむ。
+冷静になって考えると、 *10して/10する必要あるのかな？とか思ったり思わなかったり。笑。
+*10するのはわかるけど。</p>
+
+<p>以上です。
+細かいことは、また改めて考えます。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AS3のNetStatusEventについて考えてみた]]></title>
+    <link href="http://blog.code-life.net/blog/2011/11/30/as3-netstatus-event/"/>
+    <updated>2011-11-30T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/11/30/as3-netstatus-event</id>
+    <content type="html"><![CDATA[<p>こんばんわ。iyamaです。</p>
+
+<p>今日もActionScript。
+NetConnectionとNetStreamを使用したときに発生する
+NetStatusEventについて考えてみました。</p>
+
+<!--more-->
+
+
+<p>今日、以下のブログ記事を読みまして、
+ちょっと私の思ったことを書こう思います。</p>
+
+<p><a href="http://memo.393.bz/archives/1697" title="[AS]FlashPlayer11で、FMS接続でのNetStatusEvent.NET_STATUSをリスナーしてるときのNetStreamからのdispatchの挙動が変わったっぽい。" target="_blank">[AS]FlashPlayer11で、FMS接続でのNetStatusEvent.NET_STATUSをリスナーしてるときのNetStreamからのdispatchの挙動が変わったっぽい。</a></p>
+
+<p>ほほー。
+FlashPlayer11だとNetStream.Buffer.Emptyが出て、対処方法としては、bufferTimeの時間を調整するとのこと。
+bufferTimeは使いますね。大事です。
+ただ、FlashPlayer11だと再生開始時にNetStream.Buffer.Emptyが出やすいというのは、初耳です。</p>
+
+<p>FlashPlayer9とかで普段Debugすることが多いんですけど、
+再生開始時にBuffer.Emptyはあんまりでないかも。（この辺はうろ覚え）
+でも、突き詰めて考えていくと、そもそもBuffer.Emptyが出ていない方がおかしいんじゃないかと思うのです。</p>
+
+<p>再生開始時はバッファを持っていないのだから、Emptyが出ても自然な気がします。 Play.Resetとか出すよりもよっぽど理解できる気がする。
+で、さらに気になったのが、Buffer.Emptyで動画の終了のタイミングを取っているっていうところ。</p>
+
+<p>Buffer.Emptyが出たら終了というのは、危ないです。
+Buffer.Emptyはその文字のとおり、Buffer量(秒)分がEmptyなんです。</p>
+
+<p>これだけでは、動画が終了したか、本当にネットワーク環境が貧弱でBufferが確保できていないかを判別することはできません。</p>
+
+<p>動画の終了はVODの場合、ファイルのdurationと現在時間(NetStream.time)を比較して判別します。
+NetStatusEventだけで判断すると、Bufferに溜まっている分が再生されません。</p>
+
+<p>以上です。</p>
+
+<p>今回ははいつもと違って、コードなしでした。 そのうち動画の終了を判別するサンプルスクリプトでも書きます。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AS3でn秒後に1度だけ実行]]></title>
+    <link href="http://blog.code-life.net/blog/2011/11/27/settimeout-as3/"/>
+    <updated>2011-11-27T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/11/27/settimeout-as3</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>今日は、ActionScriptで私が時々使ってる便利クラスを紹介します。
+Timerを便利に使うクラスです。</p>
+
+<!--more-->
+
+
+<p>紹介するのは以下のサイトのクラスです。
+<a href="http://blog.alumican.net/2009/07/26_224801" title="http://blog.alumican.net/2009/07/26_224801" target="_blank">『 一定時間後に関数を一度だけ実行するDelayExecutorクラス 』</a></p>
+
+<p>必ず使うと便利！ってわけじゃないんですけど、
+1回だけn秒後にイベントを発生させたい場合とかはとにかく便利。
+DelayExecutorを使わない場合はこんな感じ。</p>
+
+<h2>通常</h2>
+
+<pre><code class="as3">import flash.events.TimerEvent;
+import flash.utils.Timer;
+
+// n秒後に1回実行
+var timer:Timer = new Timer(n * 1000, 1);
+timer.addEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
+timer.start();
+
+/**
+ * onTimerComplete
+ * @param event
+ */
+private function onTimerComplete(event:TimerEvent):void {
+    // n秒後に実行させたい処理
+    timer.removeEventListener(TimerEvent.TIMER_COMPLETE, onTimerComplete);
+}
+</code></pre>
+
+<h2>DelayExecutor</h2>
+
+<pre><code class="as3">import DelayExecutor;
+import flash.events.TimerEvent;
+import flash.utils.Timer;
+
+// n秒後に1回実行
+DelayExecutor.register(onTimerFunc, n * 1000).start();
+
+/**
+ * onTimerFunc
+ * @param exe
+ */
+private function onTimerFunc(exe:DelayExecutor):void {
+    // n秒後に実行させたい処理
+}
+</code></pre>
+
+<p>ちょっとスマートでしょ。
+忘れがちなremoveEventListnerをしなくてもいいってこともよいのです。</p>
+
+<p>以上です。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[AS3でパラメーター取得]]></title>
+    <link href="http://blog.code-life.net/blog/2011/11/24/how-to-get-query-string-as3/"/>
+    <updated>2011-11-24T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/11/24/how-to-get-query-string-as3</id>
+    <content type="html"><![CDATA[<p>どうも。iyamaです。
+SWFでのパラメーター取得についてです。</p>
+
+<!--more-->
+
+
+<p>値渡しをしてSWFを呼び出したい時って多々ありますよね。
+簡単だけど、よく使うので覚え書き。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>ActionScript3.0</li>
+<li>Flash CS3～5</li>
+</ul>
+
+
+<h3>ActionScript</h3>
+
+<pre><code class="as3">var param:Object = loaderInfo.parameters;
+var key:String = param["key"];
+</code></pre>
+
+<p>最初、どうしてもとっつきにくいのがloaderInfo。デフォルトで使えます。
+外部の画像ファイルのサイズをとるときもloaderInfo系のライブラリを使いますー。</p>
+
+<h3>HTML</h3>
+
+<p>&#8220;`</p>
+
+<!-- ※一部抜粋 -->
+
+
+<p>FlashVars = { key: &ldquo;test&rdquo;};</p>
+
+<!-- QueryStringでも大丈夫 -->
+
+
+<p><a href="test.swf?key=test">リンクで開く場合</a>
+&#8220;`</p>
+
+<p>一般的にはFlashVarsで値を渡します。
+またはGETでSWFに直接渡してもいけるはず。</p>
+
+<p>以上です。</p>
+]]></content>
+  </entry>
+  
+</feed>

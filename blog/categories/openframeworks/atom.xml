@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: openframeworks | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/openframeworks/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[openFrameworks のサンプルが動きました]]></title>
+    <link href="http://blog.code-life.net/blog/2012/02/07/openframeworks-sample/"/>
+    <updated>2012-02-07T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/02/07/openframeworks-sample</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>引き続き、openFrameworksデス。</p>
+
+<!--more-->
+
+
+<p><a href="/blog/2012/02/04/openframeworks-build/">前回</a>からの続きで、openFrameworksの
+graphicsExampleプロジェクトをビルドしてみます。</p>
+
+<p>エラー出てたんです。ホント。
+graphicsExampleをビルドすると以下のような
+メッセージが出て、先に進まなかったんです。</p>
+
+<pre><code>▼openFrameworks
+  ▼ofQuickTimePlayer.cpp
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;DisposeGWorld&amp;#8217;
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;GetWorldPixMap&amp;#8217;
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;SetGWorld&amp;#8217;
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;DisposeGWorld&amp;#8217;
+  ▼ofQuickTimeGrabber.cpp
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;MacSetRect&amp;#8217;
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;GetGWorldPixMap&amp;#8217;
+    Semantic Issue
+    Use of undeclared identifier &amp;#8216;SetGWorld&amp;#8217;
+</code></pre>
+
+<p>がっつりでてたんです。
+ところが、サンプルたちを別のフォルダーに移動してから開いて
+なんとかビルドを通るようにしたら、あっさり動いちゃいました。。</p>
+
+<p>ビルドしてからRunすると以下のような
+ポップアップウィンドウで表示されます。</p>
+
+<p><a href="/images/2012/02/openframeworks-sample.png"><img src="/images/2012/02/openframeworks-sample-300x216.png" width="300" height="216"></a></p>
+
+<p>ポイントは左上の選択バーから「openFrameworks」ではなく、
+プロジェクトの「graphicsExample > My Mac 32-bit」を選択することでした。</p>
+
+<p>では、次回からは実際にコーディングしていきたいと思います。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[openFrameworks サンプルのビルドで迷走中]]></title>
+    <link href="http://blog.code-life.net/blog/2012/02/04/openframeworks-build/"/>
+    <updated>2012-02-04T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/02/04/openframeworks-build</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>今日はタイトルの通りopenFrameworksで迷走中です。泣。。</p>
+
+<!--more-->
+
+
+<p><a href="/blog/2012/02/01/openframeworks">前回（openFrameworks を試してみるよ）</a> からの続きでopenFrameworksを試しております。</p>
+
+<p>前回はテンプレートみたいなのをインストールしたのに、Xcodeの新規プロジェクトでopenFrameworksのテンプレート出てこないじゃない！
+そんな感じで終了していました。</p>
+
+<p>今回はアプローチをちょっとかえて、まぁサンプルが動けばいいじゃない。
+新規プロジェクトはサンプルから派生するパターンの方が多そうだし。
+と言うことで、サンプルプロジェクトのビルドを目的とします。</p>
+
+<p>まず、サンプルっていっても、先人の方々が言ってるサンプルファイルが見つからず、迷走。
+結局サンプルは日本語サイトからはリンク切れで行けず、
+英語の本家サイトからダウンロードしなければなりませんでした。なんてこった。
+以下からダウンロードできます。</p>
+
+<p><a title="download" href="http://www.openframeworks.cc/download/" target="_blank">OF download</a>
+※ダウンロードは自分の環境にあったものを選びましょう。
+今回はosxのxcodeからダウンロードしました。</p>
+
+<p>では、サンプルプロジェクトのビルドに着手しましょう。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Mac OS X (Lion)</li>
+<li>Xcode 4.2.1</li>
+</ul>
+
+
+<p>ダウンロードしてきたサンプルのセットを解凍すると、
+apps > examples にサンプルプロジェクトがたくさんあります。
+今回は本家サイトのsetup guideでも紹介されている graphicsExample を使用します。</p>
+
+<p>openFrameworksのプロジェクトは以下のような構成になっています。</p>
+
+<pre><code>[graphicsExample] ※プロジェクトのフォルダー
+  |
+  +- [bin]
+  +- graphicsExample.xcodeproj
+  +- openFrameworkds-Info.plist
+  +- Project.xcconfig
+  +- [src]
+      |
+      +- main.cpp
+      +- testApp.cpp
+      +- testApp.h
+</code></pre>
+
+<p>大事なのはsrcフォルダー以下。
+main.cppが実行され、testApp.cppが呼び出されます。
+実際のコーディングはtestApp.cppで行うことになります。</p>
+
+<p>次に、Xcodeから操作していきます。
+graphicsExample.xcodeprojを開きます。
+Xcodeからプロジェクトのツリーを見てみると、
+実フォルダー内のファイルの他に以下のように表示されます。</p>
+
+<pre><code>▼[graphicsExample]
+  openFrameworks-Info.plist
+  Project.xcconfig
+  ▼[src]
+    main.cpp
+    testApp.cpp
+    testApp.h
+  ▼[openFrameworks]
+  ▼[addons]
+  ▼[frameworks]
+  graphicsExampleDebug.app
+</code></pre>
+
+<p>追加されているフォルダーの部分がopenFrameworksのテンプレートというか
+フレームワークの部分になります。</p>
+
+<p>それで、早速サンプルをビルド（command + B）してみたのですが、ここでうまくいかない。
+openFrameworks内の今回は関係ないであろうQuickTime関係のライブラリで引っかかってる。
+未宣言の識別子があるとかないとか。。</p>
+
+<p>ここまでにもはしょってるけど、Xcodeがわからなさすぎて迷走。
+悲しいけど、だいぶ長くなってきたので、次回に持ち越します。
+Lionだからかな？パスがあってないだけっぽい気もするけどな。。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[openFrameworks を試してみるよ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/02/01/openframeworks/"/>
+    <updated>2012-02-01T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/02/01/openframeworks</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>今日はまた新しいものに手を出そうかと。
+何もやってないけど、すっかり Corona SDK にも飽きちゃって。。汗。</p>
+
+<p>次に目を付けたのは <a href="http://openframeworks.jp/" title="openFrameworks" target="_blank">openFrameworks</a> です。</p>
+
+<!--more-->
+
+
+<p><a href="http://openframeworks.jp/" title="openFrameworks" target="_blank">openFrameworks</a> とはc++で書かれた
+メディアアート系に特化したフレームワークです。
+ProcessingやFlashよりもc++で構成されたフレームワークなので、
+よりできることが広がると考えられます。</p>
+
+<p>開発はMac、Windowsでも可能です。
+Macの場合はXcodeで。Windowsの場合はVisual Studio
+(今のところ推奨されているのは2008)になります。
+Visual Studioの方が使い慣れていますが、
+せっかくなので、Macで開発してみようと思います。</p>
+
+<p>MacではXcodeとテンプレートを使ってプロジェクトを作成していきます。
+XcodeはMacのディスク(?)またはダウンロードしてきて、
+Xcode Tools > XcodeTools.mpkgからインストール。
+インストーラーになっているから簡単ですね。
+インストーラーの指示に従いインストールしてください。</p>
+
+<p>続いてopenFrameworksをダウンロードします。
+openFrameworksはOS、開発環境にあったバッケージがあり、
+また、拡張機能(アドオン)がない通常版と拡張機能があるFAT版があります。
+拡張機能を使ってなんぼみたいな感じなので、
+FAT版をインストールするのがおすすめです。
+Lionバージョンがないんですけど、Mac OS X 10.6 (Snow Leopard)を
+インストールすればよいみたいです。</p>
+
+<p>さらに、Xcodeを使用して開発する場合はXcodeのテンプレートを
+使うと便利のようです。
+以下のリンクよりテンプレートをダウンロードしてください。</p>
+
+<p><a href="http://openframeworks.jp/download/" title="openFrameworks.jp/download" target="_blank">openFrameworks download</a></p>
+
+<p>ダウンロードしてきたファイルを解凍し、pkgファイルを起動してください。
+これでXcodeから新規のopenFrameworksのプロジェクトを作成できるようになります。</p>
+
+<p>しかし、なぜか私の環境ではテンプレートをインストールして
+Xcodeを再起動したり、Mac本体を再起動してもopenFrameworksの項目が追加されない。。</p>
+
+<p>Lionだからなのかな？この辺はまた改めて調査してみます。
+次回へ続く（たぶん。。）</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,294 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>DirectShowでWebMエンコード - Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="DirectShowでWebMエンコード chakemiです。最近、首を寝違えてばかりで首がまわりません。。。 DirectShowネタが続いたので、今日はDirectShowでWebMファイルをエンコードしてみようと思います。 まず、 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/blog/2011/11/26/encoding-in-directshow/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">DirectShowでWebMエンコード</h1>
+	<div class="entry-content" itemprop="articleBody"><p>chakemiです。最近、首を寝違えてばかりで首がまわりません。。。</p>
+
+<p>DirectShowネタが続いたので、今日はDirectShowでWebMファイルをエンコードしてみようと思います。</p>
+
+<!--more-->
+
+
+<p>まず、<a href="http://www.webmproject.org/">TheWebMProject</a>よりDirectShowフィルタをダウンロード、インストールします。</p>
+
+<p>どうやらwebmdshow-0.9.12.0-20101216.zip が最新のようです。
+パッケージの中には「makewebm.exe」って簡単なエンコーダが付属しますが、DirectShowの勉強なので使いません。</p>
+
+<p>前回も説明しましたが、DirectShowは「フィルタグラフ」を構築し動作させます。
+フィルタグラフを簡単に構築するためにWindowsSDKには「graphedt.exe」ってものがBinディレクトリに用意されています。</p>
+
+<p>今回はもっと使いやすいオープンソースの「<a href="http://blog.monogram.sk/janos/tools/monogram-graphstudio/">MONOGRAM GraphStudio</a>」ってものを使いました。</p>
+
+<p>エンコード素材にはフリー素材を<a href="http://amano.haru.gs/index.html">こちら</a>から拝借しました。</p>
+
+<p>では、GraphStudioを使って実際に構築したフィルタグラフを見てみます。</p>
+
+<p><a href="/images/2011/11/graphedit.jpg"><img src="/images/2011/11/graphedit-300x173.jpg" width="300" height="173"></a></p>
+
+<p>フィルタグラフを構築するにはメニューの[Graph]から[Insert Filter]を選択し、
+最低限必要なフィルタをグラフに並べます。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ソースフィルタに「File Source(Async)」
+</span><span class='line'>変換フィルタに「WebM VP8 Encoder Filter」
+</span><span class='line'>WebMフォーマット形式にするために「WebM Muxer Filter」
+</span><span class='line'>ファイルに保存するために「File Writer」</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>これらをストリーム順につないでいきます。
+フィルタグラフマネージャーは「インテリジェント接続」という仕組みを使ってフィルタとフィルタを繋ぐのに必要なフィルタを自動的にフィルタグラフに追加してくれます。</p>
+
+<p>これによって自分では追加しなくても、aviファイルを映像と音声に分ける
+「AVI Splitter」とDVコーデックをデコードするための「DV Video Decoder」が追加されました。</p>
+
+<p>すべての接続が完了したら、「Start」ボタンを押してエンコード開始。</p>
+
+<p>最初、エンコードにかなり時間が掛かりましたが、「WebM VP8 Encoder Filter」のプロパティのThread Countをいじったら多少速くなった気がしますが、
+この辺はもうちょっと調査しないと分かりません。</p>
+</div>
+
+</article>
+
+	<div class="ads">
+    <script type="text/javascript"><!--
+    google_ad_client = "ca-pub-1004737269453987";
+    /* big banner */
+    google_ad_slot = "2274687956";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2011/11/26/encoding-in-directshow/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2015 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.code-life.net/blog/2011/11/26/encoding-in-directshow/';
+        var disqus_url = 'http://blog.code-life.net/blog/2011/11/26/encoding-in-directshow/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

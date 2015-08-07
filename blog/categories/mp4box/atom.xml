@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mp4box | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/mp4box/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CentOS MP4Boxをインストールする]]></title>
+    <link href="http://blog.code-life.net/blog/2012/04/04/install-mp4box-on-centos/"/>
+    <updated>2012-04-04T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/04/04/install-mp4box-on-centos</id>
+    <content type="html"><![CDATA[<p>notoです。
+MP4Boxを利用する機会があったので、備忘録としてメモ。</p>
+
+<!--more-->
+
+
+<p>yumでインストールしたかったのですが、依存関係がゴニョゴニョしていたので結局ソースからコンパイルしました。</p>
+
+<h2>検証環境</h2>
+
+<ul>
+<li>CentOS 5.7</li>
+</ul>
+
+
+<h2>MP4Boxのダウンロード</h2>
+
+<h3>ダウンロード</h3>
+
+<pre><code>[root@localhost ~]# cd /usr/local/src
+[root@localhost src]# wget http://sourceforge.net/projects/gpac/files/GPAC/GPAC%200.4.5/gpac-0.4.5.tar.gz/download
+[root@localhost src]# wget http://sourceforge.net/projects/gpac/files/GPAC%20extra%20libs/GPAC%20extra%20libs%200.4.5/gpac_extra_libs-0.4.5.tar.gz/download
+</code></pre>
+
+<h3>ファイルの解凍</h3>
+
+<pre><code>[root@localhost src]# tar -xzf gpac-0.4.5.tar.gz
+[root@localhost src]# tar -xzf gpac_extra_libs-0.4.5.tar.gz
+</code></pre>
+
+<h2>ライブラリを追加する</h2>
+
+<pre><code>[root@localhost src]# cd gpac_extra_libs
+[root@localhost gpac_extra_libs]# cp -rf * ../gpac/extra_lib/
+</code></pre>
+
+<h2>インストール</h2>
+
+<pre><code>[root@localhost gpac_extra_libs]# cd ../gpac
+[root@localhost gpac]# chmod +x configure
+[root@localhost gpac]# ./configure
+</code></pre>
+
+<p>エラーではないがメーッセージが表示された。</p>
+
+<pre><code>which: no freetype-config in (/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin)
+which: no wx-config in (/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin)
+which: no sdl-config in (/usr/kerberos/sbin:/usr/kerberos/bin:/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin:/root/bin)
+</code></pre>
+
+<p><a href="http://www.mathomfactory.com/contents/gpac.htm" title="マソム自宅サーバ構築の記録" target="_blank">マソム自宅サーバ構築の記録</a>を参考にさせて頂いた結果、どれも利用しないことにしました。</p>
+
+<pre><code>[root@localhost gpac]# make lib
+[root@localhost gpac]# make apps
+[root@localhost gpac]# make install lib
+[root@localhost gpac]# make install
+[root@localhost gpac]# cp bin/gcc/libgpac.so /usr/lib/
+</code></pre>
+
+<p>エラーもなくインストール完了。</p>
+
+<h2>バージョン確認</h2>
+
+<pre><code>[root@localhost gpac]# MP4Box -version
+MP4Box - GPAC version 0.4.5 (build 33)
+GPAC Copyright: (c) Jean Le Feuvre 2000-2005
+(c) ENST 2005-200X
+</code></pre>
+
+<p>あとはゴミを削除したら終了です。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://eitwebguru.com/how-to-install-mp4box-on-linux-server/">How to Install MP4Box on Linux Server</a></li>
+<li><a href="http://www.mathomfactory.com/contents/gpac.htm">マソム自宅サーバ構築の記録</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

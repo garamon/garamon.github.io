@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: virtualbox | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/virtualbox/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[VirtualBox ホストオンリーネットワークの設定]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network/"/>
+    <updated>2014-09-25T01:34:11+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network</id>
+    <content type="html"><![CDATA[<p>最近はVagrant経由でVirtualBoxを起動させるのでほとんど自分で書くことがないけどね。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>VirtualBox 4.3.16</li>
+<li>ホスト Mac OS X 10.9.1</li>
+<li>ゲスト CentOS 5.6</li>
+</ul>
+
+
+<h2>ホストオンリーネットワークインターフェースの追加</h2>
+
+<ol>
+<li><code>VirtualBox</code> | <code>環境設定</code> | <code>ネットワーク</code> を選択。</li>
+<li><code>ホストオンリーネットワーク</code> を選択し<code>ホストオンリーネットワークを追加(+マークのアイコン)</code>をクリック。</li>
+<li><code>vboxnet0</code>が作成されたことが確認できる。 アドレス等は適宜変更する。</li>
+</ol>
+
+
+<h2>ホストオンリーアダプターの追加</h2>
+
+<ol>
+<li>仮想マシンの設定から <code>ネットワーク</code> | <code>アダプター２</code> を選択する。</li>
+<li>割り当てを<code>ホストオンリーアダプター</code>名前を先に作成した<code>vboxnet0</code>とする。</li>
+</ol>
+
+
+<p>ゲストOS起動後、外部ネットワークに接続できることを確認する。</p>
+
+<h2>ネットワークインターフェースの設定</h2>
+
+<p>次のようにネットワーク設定を変更</p>
+
+<pre><code>$ vi /etc/sysconfig/network-scripts/ifcfg-eth1
+
+DEVICE=eth1
+BOOTPROTO=static    ← dhcpから変更
+ONBOOT=yes
+HWADDR="XX:XX:XX:XX:XX:XX"
+IPADDR=192.168.56.10  ← 追加 IPアドレスは適宜変更すること
+NETMASK=255.255.255.0 ← 追加
+</code></pre>
+
+<p>ネットワークインターフェースの設定完了後、ネットワークの再起動を行いホストOSからsshで接続できることを確認する。</p>
+
+<p>最近DropBoxに溜まってたメモをブログに落としてるが、なんだかんだで時間がかかる。
+この時間をプロダクトに当てた方がよいのではないかとふと思うこの頃。</p>
+]]></content>
+  </entry>
+  
+</feed>

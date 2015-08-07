@@ -1,0 +1,565 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>CakePHP2.0でlog4phpを利用する - Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="CakePHP2.0でlog4phpを利用する notoです。 CakePHPのloggerはシンプルすぎて扱いずらいので、ボクは毎回log4phpを利用しております。
+CakePHP2.0でもlog4phpを利用したかったので試しに組み込んでみたところ、 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/blog/2011/12/21/cakephp2-log4php/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">CakePHP2.0でlog4phpを利用する</h1>
+	<div class="entry-content" itemprop="articleBody"><p>notoです。</p>
+
+<p>CakePHPのloggerはシンプルすぎて扱いずらいので、ボクは毎回log4phpを利用しております。
+CakePHP2.0でもlog4phpを利用したかったので試しに組み込んでみたところ、かなりスマートに実装できましたのでご紹介をば。</p>
+
+<!--more-->
+
+
+<h2>log4phpのダウンロード</h2>
+
+<p>こちらからlog4phpをダウンロードします。
+<a href="http://logging.apache.org/log4php/download.html" title="Apache log4php" target="_blank">Apache log4php</a></p>
+
+<h2>動作環境</h2>
+
+<ul>
+<li>CakePHP 2.0.4</li>
+<li>PHP 5.3.8</li>
+<li>CentOS 5.6</li>
+</ul>
+
+
+<h2>log streamsを作成・設定</h2>
+
+<p>CakePHP2.0では、以下のように利用したいloggerを指定することができるようになりました。
+そこで、これを利用してlog4phpを組み込んでいきます。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">CakeLog</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;myLogger&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CustomLogger&#39;</span>
+</span><span class='line'>    <span class="c1">// ...</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h2>log4phpの配置</h2>
+
+<p>ダウンロードしたlog4phpを配置します。
+ドキュメントによると「app/Lib/Log/Engine/」もしくは「app/Plugin/[プラグイン名]/Lib/Log/Engine/」に配置したらいいよ。と記載してあるので素直に従って「app/Lib/Log/Engine/」以下にlog4phpを配置します。</p>
+
+<h3>ディレクトリ構造</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">app</span>
+</span><span class='line'> <span class="o">|</span><span class="nx">__Lib</span>
+</span><span class='line'>    <span class="o">|</span><span class="nx">__Log</span>
+</span><span class='line'>       <span class="o">|</span><span class="nx">__Engine</span>
+</span><span class='line'>            <span class="o">|</span><span class="nx">__log4php</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>log4phpの指定</h3>
+
+<p>もちろん配置しただけでは、利用できないのでlog4phpを使いたいぜ！と設定してあげる必要があります。
+記載する箇所は、bootstrap.php内になります。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>app/Config/bootstrap.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeLog&#39;</span><span class="p">,</span> <span class="s1">&#39;Log&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nx">CakeLog</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;log4php&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CustomLogger&#39;</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>この設定をすることで、app/Lib/Log/Engine/以下のCustomLogger.phpを探しにいきます。
+CustomLogger.phpをまだ作成していないので、次はCustomLogger.phpを作成します。</p>
+
+<h3>CustomLoggerの作成</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+<span class='line-number'>46</span>
+<span class='line-number'>47</span>
+<span class='line-number'>48</span>
+<span class='line-number'>49</span>
+<span class='line-number'>50</span>
+<span class='line-number'>51</span>
+<span class='line-number'>52</span>
+<span class='line-number'>53</span>
+<span class='line-number'>54</span>
+<span class='line-number'>55</span>
+<span class='line-number'>56</span>
+<span class='line-number'>57</span>
+<span class='line-number'>58</span>
+<span class='line-number'>59</span>
+<span class='line-number'>60</span>
+<span class='line-number'>61</span>
+<span class='line-number'>62</span>
+<span class='line-number'>63</span>
+<span class='line-number'>64</span>
+<span class='line-number'>65</span>
+<span class='line-number'>66</span>
+<span class='line-number'>67</span>
+<span class='line-number'>68</span>
+<span class='line-number'>69</span>
+<span class='line-number'>70</span>
+<span class='line-number'>71</span>
+<span class='line-number'>72</span>
+<span class='line-number'>73</span>
+<span class='line-number'>74</span>
+<span class='line-number'>75</span>
+<span class='line-number'>76</span>
+<span class='line-number'>77</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="nx">App</span><span class="o">::</span><span class="na">uses</span><span class="p">(</span><span class="s1">&#39;CakeLogInterface&#39;</span><span class="p">,</span> <span class="s1">&#39;Log&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">require</span> <span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/log4php/Logger.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * カスタムログクラス log4phpをラップ</span>
+</span><span class='line'><span class="sd"> * @author noto</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">CustomLogger</span> <span class="k">implements</span> <span class="nx">CakeLogInterface</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * logger</span>
+</span><span class='line'><span class="sd">     * @var object</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">private</span> <span class="nv">$logger</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * コンストラクタ</span>
+</span><span class='line'><span class="sd">     * @param array $options</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$options</span> <span class="o">=</span> <span class="k">array</span><span class="p">())</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">//log4php設定ファイル読み込み</span>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;properties_path&#39;</span><span class="p">])){</span>
+</span><span class='line'>            <span class="nx">Logger</span><span class="o">::</span><span class="na">configure</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;properties_path&#39;</span><span class="p">]);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nx">Logger</span><span class="o">::</span><span class="na">configure</span><span class="p">(</span><span class="nx">APP</span><span class="o">.</span> <span class="s1">&#39;Config&#39;</span> <span class="o">.</span> <span class="s1">&#39;/log4php.properties&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">if</span><span class="p">(</span><span class="nb">isset</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">])){</span>
+</span><span class='line'>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span> <span class="o">=</span> <span class="nx">Logger</span><span class="o">::</span><span class="na">getLogger</span><span class="p">(</span><span class="nv">$options</span><span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">]);</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>        <span class="k">else</span><span class="p">{</span>
+</span><span class='line'>            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span> <span class="o">=</span> <span class="nx">Logger</span><span class="o">::</span><span class="na">getLogger</span><span class="p">(</span><span class="nb">get_class</span><span class="p">());</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>
+</span><span class='line'>    <span class="sd">/**</span>
+</span><span class='line'><span class="sd">     * (non-PHPdoc)</span>
+</span><span class='line'><span class="sd">     * @see CakeLogInterface::write()</span>
+</span><span class='line'><span class="sd">     */</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">write</span><span class="p">(</span><span class="nv">$type</span><span class="p">,</span> <span class="nv">$message</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="k">switch</span> <span class="p">(</span><span class="nv">$type</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">case</span> <span class="s1">&#39;debug&#39;</span><span class="o">:</span>
+</span><span class='line'>                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">debug</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">case</span> <span class="s1">&#39;notice&#39;</span><span class="o">:</span>
+</span><span class='line'>                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">case</span> <span class="s1">&#39;info&#39;</span><span class="o">:</span>
+</span><span class='line'>                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">info</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">case</span> <span class="s1">&#39;warning&#39;</span><span class="o">:</span>
+</span><span class='line'>                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">warn</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">case</span> <span class="s1">&#39;error&#39;</span><span class="o">:</span>
+</span><span class='line'>                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="k">default</span><span class="o">:</span>
+</span><span class='line'>                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">logger</span><span class="o">-&gt;</span><span class="na">error</span><span class="p">(</span><span class="nv">$message</span><span class="p">);</span>
+</span><span class='line'>            <span class="k">break</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>ディレクトリ構造</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">app</span>
+</span><span class='line'> <span class="o">|</span><span class="nx">__Lib</span>
+</span><span class='line'>    <span class="o">|</span><span class="nx">__Log</span>
+</span><span class='line'>       <span class="o">|</span><span class="nx">__Engine</span>
+</span><span class='line'>            <span class="o">|</span><span class="nx">__log4php</span>
+</span><span class='line'>            <span class="o">|</span>
+</span><span class='line'>            <span class="o">|</span><span class="nx">__CustomLogger</span><span class="o">.</span><span class="nx">php</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>CakeLogInterfaceは必ず継承してください。でないと$this->log();と書けないですからね。
+特に説明するようなことはないのですが、コンストラクタでlog4phpのインスタンスを取得し、writeメソッド内でlog4phpを利用しているだけです。</p>
+
+<p>log4phpでは、「notice」というログレベルがないので代わりに「info」で出力させています。</p>
+
+<p>コンストラクタに入るoptionは</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">CakeLog</span><span class="o">::</span><span class="na">config</span><span class="p">(</span><span class="s1">&#39;log4php&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>    <span class="s1">&#39;engine&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;CustomLogger&#39;</span><span class="p">,</span>
+</span><span class='line'><span class="nx">　　</span><span class="c1">//以下がオプションとなります。</span>
+</span><span class='line'>    <span class="s1">&#39;properties_path&#39;</span> <span class="o">=&gt;</span> <span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/log4php.properties&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="s1">&#39;name&#39;</span>            <span class="o">=&gt;</span> <span class="s1">&#39;noto&#39;</span>
+</span><span class='line'><span class="p">));</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>log4php.propertiesの配置と設定</h3>
+
+<p>最後に、log4phpは設定ファイルがないと動作してくれません。その設定ファイルがlog4php.propertiesになります。
+今回は、「app/Config/」以下にlog4php.propertiesを配置しています。</p>
+
+<h4>ディレクトリ構造</h4>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">app</span>
+</span><span class='line'> <span class="o">|</span><span class="nx">__Config</span>
+</span><span class='line'>    <span class="o">|</span><span class="nx">__log4php</span><span class="o">.</span><span class="nx">properties</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h4>log4php.propertiesの設定</h4>
+
+<p>「log4php.properties　設定」とgoogle先生に伺えば色々出てくると思いますが、サンプルとして設定例を記載しておきます。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">log4php</span><span class="o">.</span><span class="nx">rootLogger</span><span class="o">=</span><span class="nx">DEBUG</span><span class="p">,</span> <span class="nx">R</span>
+</span><span class='line'><span class="nx">log4php</span><span class="o">.</span><span class="nx">appender</span><span class="o">.</span><span class="nx">R</span><span class="o">=</span><span class="nx">LoggerAppenderRollingFile</span>
+</span><span class='line'><span class="nx">log4php</span><span class="o">.</span><span class="nx">appender</span><span class="o">.</span><span class="nx">R</span><span class="o">.</span><span class="nb">file</span><span class="o">=/</span><span class="k">var</span><span class="o">/</span><span class="nb">log</span><span class="o">/</span><span class="nx">hoge</span><span class="o">.</span><span class="nb">log</span> <span class="nx">←</span> <span class="nx">相対パスだと</span> <span class="nx">does</span> <span class="k">not</span> <span class="nx">exist</span><span class="o">!</span> <span class="nx">と怒られるので絶対パスに変更</span>
+</span><span class='line'><span class="nx">log4php</span><span class="o">.</span><span class="nx">appender</span><span class="o">.</span><span class="nx">R</span><span class="o">.</span><span class="nx">layout</span><span class="o">=</span><span class="nx">LoggerLayoutPattern</span>
+</span><span class='line'><span class="nx">log4php</span><span class="o">.</span><span class="nx">appender</span><span class="o">.</span><span class="nx">R</span><span class="o">.</span><span class="nx">layout</span><span class="o">.</span><span class="nx">ConversionPattern</span><span class="o">=%</span><span class="nx">d</span> <span class="o">%-</span><span class="mi">5</span><span class="nx">p</span> <span class="o">-</span> <span class="o">%</span><span class="nx">m</span><span class="o">%</span><span class="nx">n</span>
+</span><span class='line'><span class="nx">log4php</span><span class="o">.</span><span class="nx">appender</span><span class="o">.</span><span class="nx">R</span><span class="o">.</span><span class="nx">MaxFileSize</span><span class="o">=</span><span class="mi">10240</span>
+</span><span class='line'><span class="nx">log4php</span><span class="o">.</span><span class="nx">appender</span><span class="o">.</span><span class="nx">R</span><span class="o">.</span><span class="nx">MaxBackupIndex</span><span class="o">=</span><span class="mi">5</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>これで$this->log(&lsquo;error&rsquo;)とすれば、内部ではlog4phpが動作することになります。
+CakePHP1.3よりスマートに組み込めると思うのですが、どうですかね。</p>
+</div>
+
+</article>
+
+	<div class="ads">
+    <script type="text/javascript"><!--
+    google_ad_client = "ca-pub-1004737269453987";
+    /* big banner */
+    google_ad_slot = "2274687956";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2011/12/21/cakephp2-log4php/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2015 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.code-life.net/blog/2011/12/21/cakephp2-log4php/';
+        var disqus_url = 'http://blog.code-life.net/blog/2011/12/21/cakephp2-log4php/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

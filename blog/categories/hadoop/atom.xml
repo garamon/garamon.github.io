@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: hadoop | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/hadoop/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[HiveServerを使用してPHPからHiveQLを実行する]]></title>
+    <link href="http://blog.code-life.net/blog/2012/09/30/php-hiveql-hiveserver/"/>
+    <updated>2012-09-30T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/09/30/php-hiveql-hiveserver</id>
+    <content type="html"><![CDATA[<p>Hadoopを触る機会があり手探りで構築しているのですが PHP から HiveQLを実行させたいとgoogle先生に伺うと <a href="http://d.hatena.ne.jp/tagomoris/20110310/1299738606" title="HiveServerを使用してPythonやPerlからHiveQLを実行する" target="_blank">HiveServerを使用してPythonやPerlからHiveQLを実行する</a> の記事があったので、こちらを参考に試してみました。
+今回はHadoopのインストールから行います。</p>
+
+<!--more-->
+
+
+<p>まずはHadoopのインストールからです。初めはソースからインストールしていたのですが実際運用となるとやはりパッケージ管理したほうが無難です。そこでClouderaのHadoopディストリビューションパッケージCDH3をインストールします。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>CentOS 6.3 64bit</li>
+<li>Hadoop CDH3u5</li>
+<li>PHP 5.3.16</li>
+</ul>
+
+
+<h2>Javaのダウンロード &amp; インストール</h2>
+
+<p>HadoopはJavaソフトウェアの為、Javaのインストールが必要となります。以下のコマンドでJavaのバージョンが低い、またはそもそもインストールされていない場合はインストールする必要があります。
+CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上です。</p>
+
+<pre><code>$ java -version
+</code></pre>
+
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" title="Java SE Downloads" target="_blank">Java SE Downloads</a> から　Java SE 6 Update xx　の　JDK を選択します。</p>
+
+<p>自身の環境に沿ったファイルをダウンロードします。ボクの場合は、jdk-6uxx-linux-x64-rpm.binをダウンロードします。
+ダウンロードしたファイルはSCP等で転送しましょう。</p>
+
+<h3>インストール</h3>
+
+<p>実行権限を与えて、インストールを行います。</p>
+
+<pre><code>$ chmod a+x jdk-6uxx-linux-x64-rpm.bin
+$ ./jdk-6uxx-linux-x64-rpm.bin
+</code></pre>
+
+<h3>環境変数の設定</h3>
+
+<p>インストールが完了したら環境変数の設定を行います。どのユーザにおいてもその設定が反映するよう /etc/bashrc に以下を追加します。</p>
+
+<pre><code>$ vi /etc/bashrc
+
+export JAVA_HOME=/usr/java/default
+export PATH=$PATH:$JAVA_HOME/bin
+</code></pre>
+
+<p>設定を反映させ、正しく設定されているか確認します。</p>
+
+<pre><code>$ source ~/.bashrc
+$ printenv JAVA_HOME
+/usr/java/default
+</code></pre>
+
+<h2>Hadoop のインストール</h2>
+
+<p>擬似分散モードでのHadoopインストールになります。</p>
+
+<h3>リポジトリの登録</h3>
+
+<p><a href="https://ccp.cloudera.com/display/CDHDOC/CDH3+Installation" title="CDH3+Installation" target="_blank">CDH3+Installation</a> を参考に環境に沿った方法でインストールしてください。</p>
+
+<p>ボクの場合は、リポジトリを追加してyum でインストールします。</p>
+
+<pre><code>wget -O /etc/yum.repos.d/cloudera-cdh3.repo http://archive.cloudera.com/redhat/6/x86_64/cdh/cloudera-cdh3.repo
+</code></pre>
+
+<p>CDH3にもバージョンがあり、CDH3u5 から WebHDFSがサポートされたようです。
+なるべく新しいもの使いたいよねということで CDH3u5 をインストールします。その為に先ほどダウンロードしたリポジトリの修正を行います。</p>
+
+<pre><code>$ vi /etc/yum.repos.d/cloudera-cdh3.repo
+
+mirrorlist=http://archive.cloudera.com/redhat/6/x86_64/cdh/3/mirrors
+
+↓ 変更
+
+mirrorlist=http://archive.cloudera.com/redhat/6/x86_64/cdh/3u5/mirrors
+</code></pre>
+
+<h3>インストール</h3>
+
+<p>修正したら Hadoop のインストールです。時間がかかるので適当に待ちましょう。</p>
+
+<pre><code>$ yum install hadoop-0.20 hadoop-0.20-native
+$ yum install hadoop-0.20-conf-pseudo hadoop-0.20-datanode  hadoop-hive-server
+</code></pre>
+
+<h3>サービスの起動 &amp; 確認</h3>
+
+<pre><code>$ for service in /etc/init.d/hadoop-*; do sudo $service start; done
+$ jps
+</code></pre>
+
+<p>以下が表示されていることを確認します。</p>
+
+<ul>
+<li>secondarynamenode</li>
+<li>datanode</li>
+<li>namenode</li>
+<li>jobtracker</li>
+<li>tasktracker</li>
+</ul>
+
+
+<h3>MapReduceの動作確認</h3>
+
+<p>実際に円周率を計算するサンプルを動作させてみます。</p>
+
+<pre><code>$ hadoop jar /usr/lib/hadoop/hadoop-examples.jar pi 4 2000
+
+・・・　省略 ・・・
+Job Finished in 29.955 seconds
+Estimated value of Pi is 3.14100000000000000000
+</code></pre>
+
+<p>ちゃんと動作していることが確認できましたね。Hadoopには HDFS(Hadoop分散ファイルシステム)を操作するコマンドがあるのですが、長ったらしいのでエイリアスを設定しておきます。</p>
+
+<h3>エイリアスの設定</h3>
+
+<pre><code>$ vi ~/.bashrc
+
+alias dfsls='/usr/lib/hadoop/bin/hadoop dfs -ls'       # ls¬
+alias dfsrm='/usr/lib/hadoop/bin/hadoop dfs -rm'       # rm¬
+alias dfscat='/usr/lib/hadoop/bin/hadoop dfs -cat'     # cat¬
+alias dfsrmr='/usr/lib/hadoop/bin/hadoop dfs -rmr'     # rm -r¬
+alias dfsmkdir='/usr/lib/hadoop/bin/hadoop dfs -mkdir' # mkdir¬
+alias dfsput='/usr/lib/hadoop/bin/hadoop dfs -put'     # HDFS に転送¬
+alias dfsget='/usr/lib/hadoop/bin/hadoop dfs -get'     # HDFS から転送¬
+</code></pre>
+
+<h2>Hiveの設定</h2>
+
+<h3>Hive Metastoreの設定</h3>
+
+<blockquote><p>Hive の Metastoreは組み込みのApache Derbyにメタデータを格納するように構成されるている為、単一のユーザーが一度にMetastoreにアクセスすることしかできません。新規ユーザー向けのセットアップを簡単にする為には、代わりにMySQLデータベースを使用するように強く奨励しています。</p></blockquote>
+
+<p>とマニュアルに記載してあるので、その通りにします。</p>
+
+<h4>MySQL JDBC Connector のダウンロード</h4>
+
+<p>MySQL JDBC Connectorのバージョンは現在の最新のものを利用してます。</p>
+
+<pre><code>$ cd /tmp
+$ curl -L 'http://www.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.22.tar.gz/from/http://mysql.he.net/' | tar xz
+$ cp mysql-connector-java-5.1.22/mysql-connector-java-5.1.22-bin.jar /usr/lib/hive/lib/
+</code></pre>
+
+<h4>metastoreデータベースの作成</h4>
+
+<p>mysqlにログインしDBを作成します。DB名、ユーザー名、パスワードは適時置き換えて下さい。</p>
+
+<pre><code>CREATE DATABASE metastore;
+USE metastore;
+SOURCE /usr/lib/hive/scripts/metastore/upgrade/mysql/hive-schema-0.7.0.mysql.sql;
+
+CREATE USER 'hiveuser'@'localhost' IDENTIFIED BY 'password';
+GRANT SELECT,INSERT,UPDATE,DELETE ON metastore.* TO 'hiveuser'@'localhost';
+REVOKE ALTER,CREATE ON metastore.* FROM 'hiveuser'@'localhost';
+</code></pre>
+
+<h3>Hiveの設定</h3>
+
+<p>MySQLのMetaStore用のDBを作成したら、Hiveの設定ファイルの編集を行います。
+ホスト名、DB名、ユーザー名、パスワードは先程作成した情報に合わせて下さい。</p>
+
+<pre><code>$ vi /etc/hive/conf/hive-site.xml
+</code></pre>
+
+<pre><code class="text /etc/hive/conf/hive-site.xml">&lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;
+    &lt;value&gt;jdbc:mysql://localhost/metastore&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;
+    &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;
+    &lt;value&gt;hiveuser&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;
+    &lt;value&gt;password&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;datanucleus.autoCreateSchema&lt;/name&gt;
+    &lt;value&gt;false&lt;/value&gt;
+&lt;/property&gt;
+
+&lt;property&gt;
+    &lt;name&gt;datanucleus.fixedDatastore&lt;/name&gt;
+    &lt;value&gt;true&lt;/value&gt;
+&lt;/property&gt;
+</code></pre>
+
+<p>設定が完了したらHadoopを再起動します。</p>
+
+<h2>PHPから HiveQLを実行する</h2>
+
+<p>HiveServerはThriftプロトコルで接続することができます。PHPの場合は、Hiveパッケージの中に生成済みのライブラリが既に存在するのでこちらを利用します。しかしそのまま利用しようとすると色々不具合があるのでそれを修正していきます。</p>
+
+<h3>ライブラリの修正</h3>
+
+<p>まずは自身のワークスペースにライブラリをコピーします。</p>
+
+<pre><code>cp -a /usr/lib/hive/lib/php/* /my/workspace/thrift
+</code></pre>
+
+<h4>ディレクトリ構造の変更</h4>
+
+<p>packagesディレクトリの hive_metastore, hive_service, queryplan, serde が何故か入れ子になっている為、以下の構成に変更します。</p>
+
+<pre><code>▾ packages/
+    ▾ fb303/
+    |- FacebookService.php
+    |- fb303_types.php
+    ▾ hive_metastore/
+    |- ThriftHiveMetastore.php
+    |- hive_metastore_constants.php
+    |- hive_metastore_types.php
+    ▾ hive_service/
+    |- ThriftHive.php
+    |- hive_service_types.php
+    ▾ queryplan/
+    |- queryplan_types.php
+    ▾ serde/
+    |- serde_constants.php
+    |- serde_types.php
+</code></pre>
+
+<p>とりあえずはデータベース一覧を出力するだけの簡単なスクリプトを作成して実行してみます。</p>
+
+<pre><code class="text hive.php">
+&lt;?php
+$GLOBALS['THRIFT_ROOT'] = dirname(__FILE__) . '/lib/';
+require_once $GLOBALS['THRIFT_ROOT'] . 'packages/hive_service/ThriftHive.php';
+require_once $GLOBALS['THRIFT_ROOT'] . 'transport/TSocket.php';
+require_once $GLOBALS['THRIFT_ROOT'] . 'protocol/TBinaryProtocol.php';
+
+$transport = new TSocket('localhost',  10000);
+$protocol = new TBinaryProtocol($transport);
+$client = new ThriftHiveClient($protocol);
+$transport-&gt;open();
+
+$client-&gt;execute('SHOW DATABASES');
+var_dump($client-&gt;fetchAll());
+$transport-&gt;close();
+</code></pre>
+
+<p>実行すると以下のエラーが出力されます。GLOBALはPHPの予約語と重複しているのでこれをコメントアウトします。</p>
+
+<pre><code>PHP Parse error:  syntax error, unexpected 'GLOBAL' (T_GLOBAL), expecting identifier (T_STRING) in /my/workspace/lib/packages/hive_metastore/hive_metastore_types.php on line 20
+</code></pre>
+
+<pre><code class="php lib/packages/hive_metastore/hive_metastore_types.php">
+final class metastore_HiveObjectType {
+//  const GLOBAL = 1;
+  const DATABASE = 2;
+  const TABLE = 3;
+  const PARTITION = 4;
+  const COLUMN = 5;
+</code></pre>
+
+<p>再度実行するとまたエラーが発生します。</p>
+
+<pre><code>PHP Fatal error:  Uncaught exception 'TException' with message 'TSocket: timed out reading 4 bytes from localhost:10000' in /my/workspace/lib/transport/TSocket.php:228
+</code></pre>
+
+<p>エラーからソケットタイムアウトをしていることがわかります。
+TSocketクラスの関数でタイムアウトが設定できる &amp; デフォルトの設定だと短すぎる為、これを先程作成したスクリプトに追加します。</p>
+
+<pre><code class="php hive.php">&lt;?php
+$GLOBALS['THRIFT_ROOT'] = dirname(__FILE__) . '/lib/';
+require_once $GLOBALS['THRIFT_ROOT'] . 'packages/hive_service/ThriftHive.php';
+require_once $GLOBALS['THRIFT_ROOT'] . 'transport/TSocket.php';
+require_once $GLOBALS['THRIFT_ROOT'] . 'protocol/TBinaryProtocol.php';
+
+$transport = new TSocket('localhost',  10000);
+//timeout設定 millisecond
+$transport-&gt;setSendTimeout(600 * 1000); //追加
+$transport-&gt;setRecvTimeout(600 * 1000); //追加
+$protocol = new TBinaryProtocol($transport);
+$client = new ThriftHiveClient($protocol);
+$transport-&gt;open();
+
+$client-&gt;execute('SHOW DATABASES');
+var_dump($client-&gt;fetchAll());
+$transport-&gt;close();
+</code></pre>
+
+<p>タイムアウトの設定を１０分に設定しました。そこまで複雑なHQLを実行することもないのでとりあえず良しとします。
+実際に運用する場合は、タイムアウト設定もconfig等で変更できるようにします。</p>
+
+<h4>実行結果</h4>
+
+<pre><code>array(2) {
+  [0] =&gt;
+  string(7) "default"
+  [1] =&gt;
+  string(4) "hoge"
+}
+</code></pre>
+
+<p>案外さっくりいけますね。実際に集計スクリプトを実装する場合は、ThriftHiveClientインスタンスを返却するようなクラスをひとつかましてあげればうまくいくかな。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/tagomoris/20110310/1299738606" title="HiveServerを使用してPythonやPerlからHiveQLを実行する" target="_blank">HiveServerを使用してPythonやPerlからHiveQLを実行する</a></li>
+<li><a href="https://ccp.cloudera.com/display/CDHDOC/Java+Development+Kit+Installation" title="Java Development Kit Installation" target="_blank">Java Development Kit Installation</a></li>
+<li><a href="https://ccp.cloudera.com/display/CDHDOC/CDH3+Installation" title="CDH3 Installation" target="_blank">CDH3 Installation</a></li>
+<li><a href="https://ccp.cloudera.com/display/CDHDOC/Hive+Installation#HiveInstallation-InstallingHive" title="Configuring the Hive Metastore" target="_blank">Configuring the Hive Metastore</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

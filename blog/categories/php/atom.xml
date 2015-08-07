@@ -1,0 +1,430 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: php | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/php/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[php オブジェクト内のメソッドをcallback関数として渡す場合の注意点]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/23/php-callbacks/"/>
+    <updated>2014-09-23T22:28:38+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/23/php-callbacks</id>
+    <content type="html"><![CDATA[<p>array_filterやarray_mapなどcallback関数を引数にとる関数がphpには多く存在します。</p>
+
+<p>callback関数の渡し方でのハマりどころが1点あったので共有しておきます。</p>
+
+<!--more-->
+
+
+<p>ほとんどのケースが<a href="http://php.net/manual/ja/language.types.callable.php#example-110">例1 コールバック関数の例</a>に記載されていますが、
+オブジェクト内から同じオブジェクト内のメソッドをコールする場合の記載がありません。(タイプ 3: オブジェクトメソッドのコールと同等なので必要ないと言えばないのですが)</p>
+
+<h2>オブジェクト内から同じオブジェクト内のメソッドをコールする</h2>
+
+<pre><code class="php 1.誤">class CallBack {
+
+    private $arr;
+
+    public function __construct($arr) {
+        $this-&gt;arr = $arr;
+    }
+
+    public function my_callback($val) {
+        return ($val % 2 === 0);
+    }
+
+    public function run() {
+        print_r(array_filter($this-&gt;arr, 'my_callback'));
+    }
+
+}
+
+$callback = new CallBack(array(1, 2, 3, 4, 5, 6));
+$callback-&gt;run();
+</code></pre>
+
+<p>上記のコードは一見正しく見えますが実行すると
+<code>Warning: array_filter() expects parameter 2 to be a valid callback,  function 'my_callback' not found or invalid function name</code>
+とエラーになります。</p>
+
+<p>同じオブジェクト内からコールする場合でもcallbackは配列で指定する必要があります。</p>
+
+<pre><code class="php 2.正">class CallBack {
+
+    private $arr;
+
+    public function __construct($arr) {
+        $this-&gt;arr = $arr;
+    }
+
+    public function my_callback($val) {
+        return ($val % 2 === 0);
+    }
+
+    public function run() {
+        // オブジェクト自身を指定
+        print_r(array_filter($this-&gt;arr, array($this, 'my_callback')));
+    }
+
+}
+
+$callback = new CallBack(array(1, 2, 3, 4, 5, 6));
+$callback-&gt;run();
+</code></pre>
+
+<h2>注意. オブジェクトは常に指定すること</h2>
+
+<p><code>1.誤</code>のコードでもエラーなく動作させることはできます。</p>
+
+<p>以下のコードを実行するとエラーは発生せず、結果として<code>Array ( [0] =&gt; 1 [2] =&gt; 3 [4] =&gt; 5)</code>が出力されます。</p>
+
+<p>名前の一致が生じて予期しない挙動をしておりバグの元となるので、オブジェクトは常に指定するよう注意しましょう。</p>
+
+<pre><code>function my_callback($val) {
+    return ($val % 2 !== 0);
+}
+
+class CallBack {
+
+    private $arr;
+
+    public function __construct($arr) {
+        $this-&gt;arr = $arr;
+    }
+
+    public function my_callback($val) {
+        return ($val % 2 === 0);
+    }
+
+    public function run() {
+        // array(2, 4, 6)が出力されることを期待
+        print_r(array_filter($this-&gt;arr, 'my_callback'));
+    }
+
+}
+
+$callback = new CallBack(array(1, 2, 3, 4, 5, 6));
+$callback-&gt;run();
+</code></pre>
+
+<h2>参考</h2>
+
+<p><a href="http://php.net/manual/ja/language.types.callable.php">PHP コールバック</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[php array_flattenを実装する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/23/php-array-flatten/"/>
+    <updated>2014-09-23T21:24:42+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/23/php-array-flatten</id>
+    <content type="html"><![CDATA[<p>phpは配列を操作する関数が多くあるが多次元配列をフラットにする関数がない。(ということを最近知った)</p>
+
+<p>実装方法は様々あるが、その中からいくつか紹介します。</p>
+
+<!--more-->
+
+
+<h2>再帰的に処理をする</h2>
+
+<pre><code class="php">function array_flatten(array $arr) {
+    $ret = array();
+
+    foreach ($arr as $item) {
+        if (is_array($item)) {
+            $ret = array_merge($ret, array_flatten($item));
+        } else {
+            $ret[] = $item;
+        }
+    }
+
+    return $ret;
+}
+</code></pre>
+
+<h2>SPLのイテレータクラスを利用する</h2>
+
+<pre><code class="php">function array_flatten(array $arr) {
+    return iterator_to_array(new RecursiveIteratorIterator(new RecursiveArrayIterator($arr)), false);
+}
+</code></pre>
+
+<p>値に対して何らかの処理を行いたい場合はこちらのほうが良いかも。</p>
+
+<pre><code>function array_flatten(array $arr) {
+    $it = new RecursiveIteratorIterator(new RecursiveArrayIterator($arr));
+
+    $ret = array();
+
+    foreach ($it as $value) {
+        $ret[] = $value;
+    }
+
+    return $ret;
+}
+</code></pre>
+
+<p>SPLのイテレータクラス初めて知ったけどシンプルに書けてよいね。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/1319903/how-to-flatten-a-multidimensional-array">How to Flatten a Multidimensional Array?</a></li>
+<li><a href="http://yuubiseiharukana.blog.shinobi.jp/Entry/1156/">PHP5.4.7 PHPでarray_flatten関数のパフォーマンス測定</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHP2.x クエリーログを取得する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2/"/>
+    <updated>2014-08-29T10:58:40+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2</id>
+    <content type="html"><![CDATA[<p>どんなクエリが発行されているか確認したい場合があった際のメモ</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>CakePHP 2.5.2</li>
+<li>MySQL 5.5.30</li>
+</ul>
+
+
+<h2>注意</h2>
+
+<p>この方法でクエリーログが取得できるのはデバッグレベル2の場合のみ</p>
+
+<h2>クエリーログを取得する</h2>
+
+<pre><code class="php">$log = $this-&gt;{$Model}-&gt;getDataSource()-&gt;getLog(false, false);
+</code></pre>
+
+<ul>
+<li>第１引数は、ソートの有無。trueの場合はtook(ms)で降順ソート</li>
+<li>第2引数では、クエリーを格納している変数の初期化を行うか否か</li>
+</ul>
+
+
+<h3>返却値</h3>
+
+<p>以下のデータ構造で返却される。</p>
+
+<pre><code class="php sample value">Array
+(
+    [log] =&gt; Array
+        (
+            [0] =&gt; Array
+                (
+                    [query] =&gt; SELECT `username` FROM `users`  AS `User`
+                    [params] =&gt; Array
+                        (
+                        )
+
+                    [affected] =&gt; 1
+                    [numRows] =&gt; 1
+                    [took] =&gt; 1
+                )
+
+            [1] =&gt; Array
+                (
+                    [query] =&gt; SELECT `name` FROM `groups`  AS `Group`
+                    [params] =&gt; Array
+                        (
+                        )
+
+                    [affected] =&gt; 1
+                    [numRows] =&gt; 1
+                    [took] =&gt; 0
+                )
+        )
+
+    [count] =&gt; 2
+    [time] =&gt; 1
+)
+</code></pre>
+
+<p><code>getLog</code>が行っている処理内容</p>
+
+<pre><code class="php lib/Cake/Model/Datasource/DboSource.php">/**
+ * Get the query log as an array.
+ *
+ * @param boolean $sorted Get the queries sorted by time taken, defaults to false.
+ * @param boolean $clear If True the existing log will cleared.
+ * @return array Array of queries run as an array
+ */
+public function getLog($sorted = false, $clear = true) {
+    if ($sorted) {
+        $log = sortByKey($this-&gt;_queriesLog, 'took', 'desc', SORT_NUMERIC);
+    } else {
+        $log = $this-&gt;_queriesLog;
+    }
+    if ($clear) {
+        $this-&gt;_queriesLog = array();
+    }
+    return array('log' =&gt; $log, 'count' =&gt; $this-&gt;_queriesCnt, 'time' =&gt; $this-&gt;_queriesTime);
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Slim Framework]サブディレクトリにインストールした場合のリダイレクト方法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory/"/>
+    <updated>2014-01-06T22:07:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory</id>
+    <content type="html"><![CDATA[<p>簡単なWebアプリを作る機会があったので、PHPのマイクロフレームワークの一つである<a href="http://docs.slimframework.com">Slim Framework</a>を触ってみた。</p>
+
+<p>そこでサブディレクトリにインストールした場合のリダイレクト方法で少しハマったので共有しておく。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<p>Slim 2.4.0</p>
+
+<h2>getRootUriを利用する</h2>
+
+<p>Slim_Http_Request::getRootUriはサブディレクトリ名を返すのでそれを利用しリダイレクトを行う。</p>
+
+<p>ex) サブディレクトリ名がslimの場合、「/slim」という文字列を返す。</p>
+
+<pre><code class="php">$app-&gt;get('/index',  function () use ($app) {
+    $app-&gt;redirect($app-&gt;request-&gt;getRootUri() . '/hoge' );
+}
+</code></pre>
+
+<h2>urlForを利用する</h2>
+
+<p>Slimはrouteに任意の名前を割り当てることができ、urlForでURLを生成することができる。</p>
+
+<pre><code class="php">$app-&gt;get('/index',  function () use ($app) {
+    $app-&gt;render('index.php');
+})-&gt;name('index');
+
+$app-&gt;get('/edit',  function () use ($app) {
+    $app-&gt;redirect($app-&gt;urlFor('index'));
+}
+</code></pre>
+
+<p>これでインストール先がドキュメントルートだろうが、サブディレクトリだろうがコードを変える必要はなくなる。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://docs.slimframework.com/#Route-Names">Slim Framework Documentation</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[php]連想配列を特定のキーの同じ値でグルーピング]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value/"/>
+    <updated>2013-12-18T22:36:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value</id>
+    <content type="html"><![CDATA[<p>連想配列を特定キーの同じ値でグルーピングする方法。</p>
+
+<!--more-->
+
+
+<pre><code class="php">&lt;?php
+
+$arr = array(
+    array(
+        'name' =&gt; 'yamada',
+        'age'  =&gt; '20'
+    ),
+    array(
+        'name' =&gt; 'satou',
+        'age'  =&gt; '20'
+    ),
+    array(
+        'name' =&gt; 'suzuki',
+        'age'  =&gt; '30'
+    ),
+    array(
+        'name' =&gt; 'tanaka',
+        'age'  =&gt; '40'
+    )
+);
+
+
+function groupArray($arr, $key) {
+    $retval = array();
+
+    foreach($arr as $value) {
+        $group = $value[$key];
+
+        if (!isset($retval[$group])) {
+            $retval[$group] = array();
+        }
+
+        $retval[$group][] = $value;
+    }
+
+    return $retval;
+}
+
+var_dump(groupArray($arr, 'age'));
+</code></pre>
+
+<h3>結果</h3>
+
+<pre><code class="php">
+array(3) {
+  [20]=&gt;
+  array(2) {
+    [0]=&gt;
+    array(2) {
+      ["name"]=&gt;
+      string(6) "yamada"
+      ["age"]=&gt;
+      string(2) "20"
+    }
+    [1]=&gt;
+    array(2) {
+      ["name"]=&gt;
+      string(5) "satou"
+      ["age"]=&gt;
+      string(2) "20"
+    }
+  }
+  [30]=&gt;
+  array(1) {
+    [0]=&gt;
+    array(2) {
+      ["name"]=&gt;
+      string(6) "suzuki"
+      ["age"]=&gt;
+      string(2) "30"
+    }
+  }
+  [40]=&gt;
+  array(1) {
+    [0]=&gt;
+    array(2) {
+      ["name"]=&gt;
+      string(6) "tanaka"
+      ["age"]=&gt;
+      string(2) "40"
+    }
+  }
+}
+</code></pre>
+
+<p>ageキーの同じ値でグルーピングされていることが確認できます。そもそも(ry</p>
+]]></content>
+  </entry>
+  
+</feed>

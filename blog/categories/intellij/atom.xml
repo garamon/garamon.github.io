@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: intellij | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/intellij/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[IntelliJ] vim-easymotionぽいことができるAceJumpプラグインが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2014/01/06/using-vim-easymotion-in-intellij/"/>
+    <updated>2014-01-06T23:21:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/01/06/using-vim-easymotion-in-intellij</id>
+    <content type="html"><![CDATA[<p>IntelliJ IDEA 13がリリースされ先日UpgradeついでにPluginを整理していたところ、Acejumpなるプラグインを発見し便利だったって話。</p>
+
+<p>なにができるかっていうとVimのプラグイン<a href="https://github.com/Lokaltog/vim-easymotion">easymotion</a>的なことができる。</p>
+
+<p>ということでデモ。</p>
+
+<!--more-->
+
+
+<h2>Demo</h2>
+
+<p>&ldquo;ctrl + ;&#8221;を入力、続けて任意の1文字を入力すると該当箇所にラベルが振られる。ハイライトされたアルファベットを入力するとその箇所に移動する。</p>
+
+<p><img src="/images/2014/02/acejump.gif" width="600" height="400"></p>
+
+<h2>Install</h2>
+
+<p><code>Preferences</code> | <code>Plugins</code> | <code>Browse Repositories</code> | <code>AceJump</code> を選択しインストール</p>
+
+<h2>Keymap</h2>
+
+<p>キーマップが気に入らない場合は、</p>
+
+<p><code>Preferences</code> | <code>Keymap</code> | <code>Plug-ins</code> | <code>AceJump</code> | <code>Ace Jump</code> から好きなキーマップを割り当てることができる。</p>
+
+<p>AceJumpは WebStorm/PhpStorm, RubyMine, Pycharm等からも利用できるみたい。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://johnlindquist.com/2012/08/14/ace_jump.html">ACE JUMP</a></p>
+]]></content>
+  </entry>
+  
+</feed>

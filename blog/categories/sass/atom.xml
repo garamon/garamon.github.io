@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: sass | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/sass/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Sassの使い始めメモ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/05/02/start-using-sass-css/"/>
+    <updated>2012-05-02T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/05/02/start-using-sass-css</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>前回、LESSについて書き方だけメモったんですが、Sassについても触れてみようかと。</p>
+
+<!--more-->
+
+
+<h2>Sassを使うための環境構築</h2>
+
+<h3>windowsにRubyをインストール</h3>
+
+<p>とりあえず、Windows環境で構築します。</p>
+
+<p><a href="http://rubyinstaller.org/" target="_blank"><a href="http://rubyinstaller.org/">http://rubyinstaller.org/</a></a></p>
+
+<p>インストールするときに、チェック項目があったので、とりあえず全てチェック。
+特に、Pathの項目をチェックしておかないと、あとでシステムの環境変数を自分で変更しなければならなくなるので注意。</p>
+
+<h3>Rubyがインストールされたか確認。</h3>
+
+<pre><code>ruby -v
+ruby 1.9.3p194 (2012-04-20) [i386-mingw32]
+</code></pre>
+
+<p>バージョン情報が表示されれば、無事インストールされてます。</p>
+
+<h3>gemのアップデート</h3>
+
+<p>次にgemをアップデートします。</p>
+
+<pre><code>gem update --system
+</code></pre>
+
+<h3>gemでSassをインストール</h3>
+
+<pre><code>gem install sass
+</code></pre>
+
+<p>インストールが終われば、Sassを使う環境が構築できました。</p>
+
+<h2>Sassを使ってみる</h2>
+
+<h3>変数を使う</h3>
+
+<p>LESSでは、@マークでしたが、Sassは$です。
+記述したファイルを「C:\Documents and Settings\hogehoge」以下に「test.scss」という名前を付けて保存します。
+hogehogeはお使いのパソコンのユーザー名になります。</p>
+
+<pre><code class="css test.scss">$mgn: 10px;
+h1{
+     margin:$mgn;
+}
+h2{
+     margin:$mgn;
+}
+</code></pre>
+
+<h3>コンパイルする</h3>
+
+<pre><code>sass test.scss test.css
+</code></pre>
+
+<p>コマンドプロンプトで上記コマンドを打ちます。
+特に問題なく実行されれば、「test.scss」と同じところに「test.css」というファイルが出力されます。</p>
+
+<pre><code class="css test.css">h1 {
+  margin: 10px; }
+
+h2 {
+  margin: 10px; }
+</code></pre>
+
+<p>無事生成されていれば、Sassが使えるようになりました。</p>
+
+<h3>GUIでコンパイル</h3>
+
+<p>黒い画面が嫌いで、GUI操作のコンパイルでSassを使いたい！って人もいると思います。
+そんなときは、SCOUTが便利。</p>
+
+<p>SCOUT <a href="http://mhs.github.com/scout-app/" target="_blank"><a href="http://mhs.github.com/scout-app/">http://mhs.github.com/scout-app/</a></a></p>
+
+<p>Adobe AIRがインストールされていれば、使用できます。
+詳しいインストール方法はこちらの記事が参考になります。
+<a href="http://www.webcyou.com/?p=2280" target="_blank"><a href="http://www.webcyou.com/?p=2280">http://www.webcyou.com/?p=2280</a></a></p>
+
+<p>もうちょっと使いこなしてみないとも何とも言えないので、しばらくはLESSとSASSで色々遊んでみます。</p>
+]]></content>
+  </entry>
+  
+</feed>

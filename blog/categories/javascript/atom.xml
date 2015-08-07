@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/"/>
+    <updated>2013-12-09T23:07:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox</id>
+    <content type="html"><![CDATA[<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>JQuery2.0.3</li>
+</ul>
+
+
+<h2>checkedプロパティを変更</h2>
+
+<p>見たら分かるんだけど、期待する動作はコンソールに「checkbox change!!」と出力されること。</p>
+
+<p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
+
+<p>&#8220;` html
+&lt;!DOCTYPE html>
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+<body>
+<form>
+    <input id="checkbox1" type="checkbox" name="example" value="hoge">
+    <label for="checkbox1">Sample CheckBox</label>
+</form></p>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e) {
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true);
+    })();
+</script>
+
+
+<p></body>
+</html>
+&#8220;`</p>
+
+<h2>triggerでイベントを発行</h2>
+
+<p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
+
+<p>&#8220;` javascript</p>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e) {
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true).trigger('change');
+    })();
+</script>
+
+
+<pre><code>
+## イベントの発行元を判断する
+
+trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。
+
+そんな時は以下のようにしておく。
+</code></pre>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e, param) {
+            if (param === true) {
+                // 何らかの処理
+            }
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true).trigger("change", [true]);
+    })();
+</script>
+
+
+<p>&#8220;`</p>
+
+<p>ちなみにラジオボタンでも同じです。
+javascript好きになってきた今日この頃。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[javascript オブジェクトのマージあれこれ]]></title>
+    <link href="http://blog.code-life.net/blog/2013/05/29/javascript-object-merge/"/>
+    <updated>2013-05-29T22:45:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/05/29/javascript-object-merge</id>
+    <content type="html"><![CDATA[<p>最近 javascriptを書く機会が少し増えてきたのでオブジェクトのマージ方法を備忘録的にメモ。</p>
+
+<!--more-->
+
+
+<h2>pure JS</h2>
+
+<h3>通常のマージ</h3>
+
+<pre><code class="javascript">var merge = function (obj1, obj2) {
+    if (!obj2) {
+        obj2 = {};
+    }
+    for (var attrname in obj2) {
+        if (obj2.hasOwnProperty(attrname)) {
+            obj1[attrname] = obj2[attrname];
+        }
+    }
+};
+
+var obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: '00-0000-0000'
+};
+
+var obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+merge(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", city: "osaka", tel: "00-0000-0000", sex: "man"}
+</code></pre>
+
+<h3>存在しないプロパティのみマージ</h3>
+
+<pre><code class="javascript">
+var merge = function (obj1, obj2) {
+    if (!obj2) {
+        obj2 = {};
+    }
+    for (var attrname in obj2) {
+        if (obj2.hasOwnProperty(attrname) &amp;&amp; !obj1.hasOwnProperty(attrname)) {
+            obj1[attrname] = obj2[attrname];
+        }
+    }
+};
+
+var obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: '00-0000-0000'
+};
+
+var obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+merge(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "pigmon", city: "tokyo", tel: "00-0000-0000", sex: "man"}
+</code></pre>
+
+<h2>JQuery(1.9.1)</h2>
+
+<h3>通常のマージ</h3>
+
+<pre><code class="javascript">var obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: '00-0000-0000'
+};
+
+var obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+$.extend(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", city: "osaka", tel: "00-0000-0000", sex: "man"}
+</code></pre>
+
+<h3>再帰的にマージ</h3>
+
+<p>extendの第一引数にtrueを与えると再帰的にマージしてくれる</p>
+
+<pre><code class="javascript">
+var obj1 = {
+    name: 'pigmon',
+    address: {
+        city: 'tokyo',
+        tel: '00-0000-0000'
+    }
+};
+
+var obj2 = {
+    name: 'garamon',
+    address: {
+        city: 'osaka'
+    }
+};
+
+$.extend(true, obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", address: {city: "osaka", tel: "00-0000-0000"}}
+</code></pre>
+
+<h2>underscore.js(1.4.3)</h2>
+
+<h3>通常のマージ</h3>
+
+<pre><code class="javascript">obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: "00-0000-0000"
+};
+
+obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+_.extend(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", city: "osaka", tel: "00-0000-0000", sex: "man"}
+</code></pre>
+
+<p>ちなみにunderscore.jsでは再帰的にマージはしてくれないよう。</p>
+
+<p><a href="https://github.com/BenHall/underscore/commit/83133be8055dbecf23a27b866adbbae95b2140b7">これ</a>を見てるとできてるっぽいんだけど&hellip;</p>
+
+<h2>参考</h2>
+
+<p><a href="http://api.jquery.com/jQuery.extend/">jQuery.extend()</a></p>
+
+<p><a href="http://underscorejs.org/#extend">underscorejs extend</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mousemoveイベントにbindした処理の実行間隔を制御する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval/"/>
+    <updated>2013-05-29T21:31:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval</id>
+    <content type="html"><![CDATA[<p>制御するってのは言い過ぎですが、mousemoveイベントにbindした処理の実行間隔を空けたい場合、setIntervalで実行フラグのオン・オフを行い実行間隔を調整します。</p>
+
+<!--more-->
+
+
+<pre><code class="javascript">    (function() {
+        var enableHandler = true;
+
+        $("body").mousemove(function(e) {
+            if (enableHandler) {
+                // 何らかの処理
+                enableHandler = false;
+            }
+        });
+
+        var timer = window.setInterval(function() {
+            enableHandler = true;
+        }, 100);
+    })();
+</code></pre>
+
+<p>偉大なるは先人達の知恵。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://stackoverflow.com/questions/4648444/jquery-fire-mousemove-events-less-often">jQuery: Fire mousemove events less often</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CentOSにnode.jsをインストールする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/29/install-node-on-centos/"/>
+    <updated>2013-04-29T00:13:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/29/install-node-on-centos</id>
+    <content type="html"><![CDATA[<p>JavaScript力向上の為、node.jsで何か作ってみようと思いインストールしてみた。</p>
+
+<!--more-->
+
+
+
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<p>CentOS 6.3</p>
+
+<h2>依存パッケージのインストール</h2>
+
+<pre><code class="sh">$ yum install git openssh-devel
+</code></pre>
+
+<h2>nvm(node.jsバージョン管理)のインストール</h2>
+
+<p>node.jsのバージョン管理は<a href="https://github.com/creationix/nvm">nvm</a>の他に<a href="https://github.com/hokaccha/nodebrew">nodebrew</a>や<a href="https://github.com/ekalinin/nodeenv">nodeenv</a>があるらしいが、初めてなので安直にStarが多かったnvmを利用してみる。</p>
+
+<pre><code class="sh">$ curl https://raw.github.com/creationix/nvm/master/install.sh | sh
+</code></pre>
+
+<p>~/.bash_profileを確認すると次の設定が追加されていた。</p>
+
+<pre><code>[[ -s /root/.nvm/nvm.sh ]] &amp;&amp; . /root/.nvm/nvm.sh # This loads NVM
+</code></pre>
+
+<h3>反映</h3>
+
+<p>ということで反映</p>
+
+<pre><code>$ source ~/.bash_profile
+</code></pre>
+
+<h2>サブコマンドの補完</h2>
+
+<p>nvmコマンドは使えるようになったが、サブコマンドの補完が効かないので以下の設定を ~/.bash_profile または ~/.bashrc に追加</p>
+
+<pre><code>[[ -r $NVM_DIR/bash_completion ]] &amp;&amp; . $NVM_DIR/bash_completion
+</code></pre>
+
+<p>設定を反映させたら nvm [tab][tab] でサブコマンドの補完が効くようになる。</p>
+
+<pre><code>$ nvm
+alias          copy-packages  help           list           ls             run            uninstall      version
+clear-cache    deactivate     install        list-remote    ls-remote      unalias        use
+</code></pre>
+
+<h2>node.jsのインストール</h2>
+
+<p>サブコマンド「ls-remote」で利用可能なnode.jsのバージョンが確認できるので表示させてみる。</p>
+
+<h3>利用可能なバージョンの確認</h3>
+
+<pre><code class="sh">$ nvm ls-remote
+   v0.1.14     v0.1.29    v0.1.100      v0.3.3      v0.4.9      v0.6.0     v0.6.15      v0.7.8     v0.8.10      v0.9.1     v0.10.3
+   v0.1.15     v0.1.30    v0.1.101      v0.3.4     v0.4.10      v0.6.1     v0.6.16      v0.7.9     v0.8.11      v0.9.2     v0.10.4
+   v0.1.16     v0.1.31    v0.1.102      v0.3.5     v0.4.11      v0.6.2     v0.6.17     v0.7.10     v0.8.12      v0.9.3     v0.10.5
+   v0.1.17     v0.1.32    v0.1.103      v0.3.6     v0.4.12      v0.6.3     v0.6.18     v0.7.11     v0.8.13      v0.9.4     v0.11.0
+   v0.1.18     v0.1.33    v0.1.104      v0.3.7      v0.5.0      v0.6.4     v0.6.19     v0.7.12     v0.8.14      v0.9.5     v0.11.1
+   v0.1.19     v0.1.90      v0.2.0      v0.3.8      v0.5.1      v0.6.5     v0.6.20      v0.8.0     v0.8.15      v0.9.6
+   v0.1.20     v0.1.91      v0.2.1      v0.4.0      v0.5.2      v0.6.6     v0.6.21      v0.8.1     v0.8.16      v0.9.7
+   v0.1.21     v0.1.92      v0.2.2      v0.4.1      v0.5.3      v0.6.7      v0.7.0      v0.8.2     v0.8.17      v0.9.8
+   v0.1.22     v0.1.93      v0.2.3      v0.4.2      v0.5.4      v0.6.8      v0.7.1      v0.8.3     v0.8.18      v0.9.9
+   v0.1.23     v0.1.94      v0.2.4      v0.4.3      v0.5.5      v0.6.9      v0.7.2      v0.8.4     v0.8.19     v0.9.10
+   v0.1.24     v0.1.95      v0.2.5      v0.4.4      v0.5.6     v0.6.10      v0.7.3      v0.8.5     v0.8.20     v0.9.11
+   v0.1.25     v0.1.96      v0.2.6      v0.4.5      v0.5.7     v0.6.11      v0.7.4      v0.8.6     v0.8.21     v0.9.12
+   v0.1.26     v0.1.97      v0.3.0      v0.4.6      v0.5.8     v0.6.12      v0.7.5      v0.8.7     v0.8.22     v0.10.0
+   v0.1.27     v0.1.98      v0.3.1      v0.4.7      v0.5.9     v0.6.13      v0.7.6      v0.8.8     v0.8.23     v0.10.1
+   v0.1.28     v0.1.99      v0.3.2      v0.4.8     v0.5.10     v0.6.14      v0.7.7      v0.8.9      v0.9.0     v0.10.2
+</code></pre>
+
+<p><a href="http://blog.nodejs.org/">release notes</a>を確認すると現時点ではv0.10.5がstableなのでこいつをインストールする。</p>
+
+<h3>v0.10.5のインストール</h3>
+
+<pre><code>nvm install 0.10.5
+</code></pre>
+
+<h3>Aliasの設定</h3>
+
+<p>新しくshellを立ち上げたり再起動をかけるとnvmの設定がリセットされるようなのでデフォルトのバージョンを設定する。</p>
+
+<pre><code>$ nvm alias default 0.10.5
+</code></pre>
+
+<p>とりあえずこんな感じで大丈夫なのかな。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/creationix/nvm">Node Version Manager</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQueryでページトップへ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/05/10/scroll-top-jquery/"/>
+    <updated>2012-05-10T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/05/10/scroll-top-jquery</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p><a href="/blog/2012/05/06/tab-menu-jquery" title="jQueryでタブメニュー">前回</a>に続き、jQueryネタです。
+ページトップへっていうリンククリックしたときに滑らかに移動させます。
+上に戻すだけの機能なら、jQueryのみで実現できます。</p>
+
+<!--more-->
+
+
+<h2>jQueryの読み込み</h2>
+
+<p>&#8220;`html</p>
+
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+
+<pre><code>
+例にならい、jQueryを読み込みます。
+
+### html
+</code></pre>
+
+<p><body class="top"></p>
+
+<p id="pageTop"><a href="#top">ページトップへ</a></p>
+
+
+<p></body>
+&#8220;`</p>
+
+<p>bodyにclassでtopを付けておきます。
+Javascriptが無効のときもページ内リンクが有効になります。</p>
+
+<h3>Javascript</h3>
+
+<pre><code class="javascript">$(function(){
+  $("#pageTop a").click(function(){
+    $('html,body').animate({ scrollTop: $($(this).attr("href")).offset().top }, 'slow','swing');
+    return false;
+  })
+});
+</code></pre>
+
+<p>idで指定した「pageTop」内のアンカーリンクがクリックされた場合、スクロールでトップへ移動します。
+スクロールのアニメーション部分は下記の指定。</p>
+
+<pre><code>animate(params, [duration], [easing], [callback])
+</code></pre>
+
+<h4>duration</h4>
+
+<p>「slow」、「normal」、「fast」、「ミリ秒単位」、初期値は「normal」</p>
+
+<h4>easing</h4>
+
+<p>値の変化量を調節するカスタム関数の名前。
+初期で設定できるのは「linear」と「swing」。初期値は「swing」</p>
+
+<p>こちらを参考にさせて頂きました。
+<a href="http://semooh.jp/jquery/api/effects/animate/params,+options/" target="_blank"><a href="http://semooh.jp/jquery/api/effects/animate/params,+options/">http://semooh.jp/jquery/api/effects/animate/params,+options/</a></a></p>
+
+<h3>プラグインを使う</h3>
+
+<p>jQueryではないけど、よく使うプラグイン。</p>
+
+<ul>
+<li><a href="http://blog.webcreativepark.net/2007/07/12-143406.html" target="_blank">ページ内リンクをスマートにするsmoothScroll.js</a></li>
+<li><a href="http://coliss.com/articles/build-websites/operation/javascript/296.html" target="_blank">[JS]簡単に設置できるページ内をスムーズにスクロールできるスクリプト -Page Scroller ver.3</a></li>
+</ul>
+
+
+<p>Page Scrollerは高機能で、いろいろな動作設定が可能です。
+ちなみに、スマートフォンでも動くはずです。</p>
+]]></content>
+  </entry>
+  
+</feed>

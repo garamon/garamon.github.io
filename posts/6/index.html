@@ -1,0 +1,583 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="cakephp, php CakePHP2 モデルからログインしているユーザー情報を取得する Modelからログインしているユーザー情報を取得したい場合があります。
+もちろん $this-&gt;Auth-&gt;user() では取得できないので一手間かけてあげます。 Read on & &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/posts/6/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-09T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/cakephp/'>cakephp</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/03/09/how-to-get-logged-in-user-in-model-cakephp/" itemprop="url">CakePHP2 モデルからログインしているユーザー情報を取得する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Modelからログインしているユーザー情報を取得したい場合があります。
+もちろん <code>$this-&gt;Auth-&gt;user()</code> では取得できないので一手間かけてあげます。</p>
+
+
+		
+		<a href="/blog/2013/03/09/how-to-get-logged-in-user-in-model-cakephp/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-03-09T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/cakephp/'>cakephp</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/03/09/changing-the-tags-output-cakephp2/" itemprop="url">[CakePHP2] Htmlヘルパーで出力されるタグを変更する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Htmlヘルパー便利ですよね。けど期待したタグが出力されない場合があります。
+出力されるタグを独自にカスタマイズする仕組みがあるのでそれを利用しましょう。</p>
+
+
+		
+		<a href="/blog/2013/03/09/changing-the-tags-output-cakephp2/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-12-12T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hive/'>hive</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/12/12/php-thrifthiveclient/" itemprop="url">ThriftHiveClient を少し便利にしてみた</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>以前、<a href="/blog/2012/09/30/php-hiveql-hiveserver">HiveServerを使用してPHPからHiveQLを実行する</a>で、PHPから HiveQLを実行してみました。
+その際に、ThriftHiveClientの使い勝手が少し悪かったので改良を施してみました。</p>
+
+
+		
+		<a href="/blog/2012/12/12/php-thrifthiveclient/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-10-01T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/vim/'>vim</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/10/01/vim-vdebug-xdebug/" itemprop="url">Vim + Vdebug + Xdebug でPHPのリモートデバッグ</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近はようやく本格的に vim を使ってコーディングするようになりましたが、まだまだ慣れない &amp; 微妙な不満があったりします。
+移動系がキーボードで全てできるのは、確かにかなり楽なように思えます。</p>
+
+<p>話が変わりますが新しく違う言語を勉強しようと思う時、何を一番初めに調べますか？
+構文はもちろん、インストール方法とか色々ありますよね。ボクが一番重要視してるのはデバッグ方法です。</p>
+
+<p>どうやってデバッグするか。まずその方法などを調べます。
+LL系言語の方は 変数を printしたりする方が多いらしいのですがボクはあまり好きではないので PHPの場合は Xdebugを利用してステップ実行させたりしてます。</p>
+
+<p>print させるのが嫌いな理由は一つです。</p>
+
+<p> 「コードを書かなくちゃいけない」</p>
+
+<p>これに尽きます。なんでデバッグするのにコード書くんだよ！って思ってます。</p>
+
+<p>前置きが長くなりましたが、素晴らしいプラグイン <a href="https://github.com/joonty/vdebug" title="vdebug" target="_blank">Vdebug</a> を見つけたので紹介します。</p>
+
+
+		
+		<a href="/blog/2012/10/01/vim-vdebug-xdebug/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-30T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/hadoop/'>hadoop</a>, <a class='category' href='/blog/categories/hive/'>hive</a>, <a class='category' href='/blog/categories/php/'>php</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/09/30/php-hiveql-hiveserver/" itemprop="url">HiveServerを使用してPHPからHiveQLを実行する</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Hadoopを触る機会があり手探りで構築しているのですが PHP から HiveQLを実行させたいとgoogle先生に伺うと <a href="http://d.hatena.ne.jp/tagomoris/20110310/1299738606" title="HiveServerを使用してPythonやPerlからHiveQLを実行する" target="_blank">HiveServerを使用してPythonやPerlからHiveQLを実行する</a> の記事があったので、こちらを参考に試してみました。
+今回はHadoopのインストールから行います。</p>
+
+
+		
+		<a href="/blog/2012/09/30/php-hiveql-hiveserver/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-30T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/fluentd/'>fluentd</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/08/30/install-fluentd/" itemprop="url">fluentdをインストールしてみた</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>notoです。
+久しぶりのブログ更新。かなり乗り遅れてる感がありますがfluentdをインストールして、微妙にハマったので備忘録的なメモです。</p>
+
+
+		
+		<a href="/blog/2012/08/30/install-fluentd/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-30T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/08/30/how-to-install-vmwaretools-on-centos6/" itemprop="url">CentOS 6.2 に VMwareTools をインストール</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>最近ボクの開発環境は、ローカルにはほとんど何もいれないで仮想マシン上に全て用意させるのがマイブームです。
+しかしソースコードはローカルにおいておきたいので、ゲストOSとファイルの共有を行います。</p>
+
+<p>VMWareFusionでファイル共有を行うには VMwareToolsをインストールする必要がある為その手順です。ちなみにGUIからのインストールではなくCUIからのインストールになります。</p>
+
+<p>意外と手順書いてるブログないんですよね。google力が足りないのかな。</p>
+
+
+		
+		<a href="/blog/2012/08/30/how-to-install-vmwaretools-on-centos6/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-03T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/vim/'>vim</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/07/03/comment-out-multiple-lines-vim/" itemprop="url">Vimで複数行コメントアウトする方法</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>久しぶりに更新なのでリハビリがてら、軽いネタです。
+最近は Eclipseを封印し、なるべく Vimを使用するようにしています。そこで 最近知った複数行コメントアウトする方法です。</p>
+
+
+		
+		<a href="/blog/2012/07/03/comment-out-multiple-lines-vim/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-15T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/06/15/stop-daily-updates/" itemprop="url">ブログの毎日更新をやめる理由</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>notoです。</p>
+
+<p>このブログは、去年の９月頃から始めて9ヶ月程、恐らく毎日更新してきましたが、ボクの独断で、毎日更新することをやめることにしました。</p>
+
+
+		
+		<a href="/blog/2012/06/15/stop-daily-updates/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-06-12T00:00:00+09:00" data-updated="true" itemprop="datePublished"></time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/mysql/'>mysql</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2012/06/12/install-mymemcheck-on-centos/" itemprop="url">MySQLチューニングツール 「mymemcheck」をCentOSにインストールする</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>notoです。</p>
+
+<p>MySQLのメモリ関係のチューニングをする際に、メモリの計算をするのが面倒くさいと思っていたら便利なツールがあるんですね。
+その名も「mymemcheck」KLab製の自家製ツールですが、<a href="http://dsas.blog.klab.org/archives/50860867.html" title="5分でできる、MySQLのメモリ関係のチューニング！" target="_blank">こちら</a> からダウンロードして利用することができます。</p>
+
+<p>mymemcheckは以下のチェックを行なってくれます。</p>
+
+<blockquote><p>my.cnfもしくはSHOW VARIABLESの結果を元に、以下の3つのチェックを行います。</p>
+
+<ul>
+<li>最低限必要な物理メモリの大きさ</li>
+<li>IA-32のLinuxでのヒープサイズの制限</li>
+<li>innodb_log_file_sizeの最大サイズ</li>
+</ul>
+</blockquote>
+
+<p>今回は、CentOS 5.7にインストールしてみます。</p>
+
+
+		
+		<a href="/blog/2012/06/12/install-mymemcheck-on-centos/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+</div>
+<nav id="pagenavi">
+    
+        <a href="/posts/5" class="prev">Prev</a>
+    
+    
+        <a href="/posts/7" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2015 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: fluentd | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/fluentd/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[fluentdをインストールしてみた]]></title>
+    <link href="http://blog.code-life.net/blog/2012/08/30/install-fluentd/"/>
+    <updated>2012-08-30T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/08/30/install-fluentd</id>
+    <content type="html"><![CDATA[<p>notoです。
+久しぶりのブログ更新。かなり乗り遅れてる感がありますがfluentdをインストールして、微妙にハマったので備忘録的なメモです。</p>
+
+<!--more-->
+
+
+<p>fluentd は ruby 上で動作するので ruby のインストールも合わせて記載します。
+インストール方法は色々あるのですが、今回は RubyGems からインストールを行います。</p>
+
+<h2>構築環境</h2>
+
+<ul>
+<li>CentOS 6.2</li>
+<li>Ruby 1.9.2+</li>
+</ul>
+
+
+<h2>rubyのインストール</h2>
+
+<p>fluentd のドキュメントでは ruby のインストールは <a href="https://github.com/wayneeseguin/rvm">rvm (Ruby Version Manager)</a> 使うことが推奨されてますが、単純にインストール や バージョンの切り替えをしたいだけなので <a href="https://github.com/sstephenson/rbenv">rbenv</a> を利用します。</p>
+
+<h3>rbenvのインストール</h3>
+
+<pre><code>$ cd
+$ git clone git://github.com/sstephenson/rbenv.git .rbenv
+</code></pre>
+
+<p>ダウンロードが完了したら、bash_profileを編集します。
+PATHを通し、eval &lsquo;$(rbenv init -)&rsquo; を追加します。</p>
+
+<pre><code>$ vi ~/.bash_profile
+
+PATH="$HOME/.rbenv/bin:$PATH:$HOME/bin"
+eval "$(rbenv init -)"
+</code></pre>
+
+<p>サクッと反映
+反映させたら、rbenvコマンドが利用できるようになっていると思います。利用できない場合は、PATHがちゃんと通っているか確認してみてください。</p>
+
+<pre><code>$ source ~/.bash_profile
+</code></pre>
+
+<h3>rb-buildのインストール</h3>
+
+<pre><code>$ mkdir -p ~/.rbenv/plugins
+$ cd ~/.rbenv/plugins
+$ git clone git://github.com/sstephenson/ruby-build.git
+</code></pre>
+
+<h3>rubyのインストール</h3>
+
+<p>最新版をインストール</p>
+
+<pre><code>$ rbenv install 1.9.3-p194
+$ rbenv global 1.9.3-p194
+$ rbenv rehash
+</code></pre>
+
+<pre><code>$ ruby -v
+ruby 1.9.3p194 (2012-04-20 revision 35410) [x86_64-linux]
+</code></pre>
+
+<h2>fluentdのインストール</h2>
+
+<p>ruby のインストールもできたことなので、fluentd のインストールを行います。ここで若干つまずきました。</p>
+
+<pre><code>$ gem install fluentd
+ERROR:  Loading command: install (LoadError)
+    cannot load such file -- zlib
+ERROR:  While executing gem ... (NameError)
+    uninitialized constant Gem::Commands::InstallCommand
+</code></pre>
+
+<p>zlib がインストールされてないだと。。。と思い確認するとインストールされてたので、はいはい、zlib-devel zlib-devel ということでインストールします。</p>
+
+<pre><code>$ yum install zlib-devel
+</code></pre>
+
+<p>先ほどインストールした ruby も一度アンインストールします。</p>
+
+<pre><code>$rbenv uninstall 1.9.3-p194
+rbenv: remove /root/.rbenv/versions/1.9.3-p194? y
+</code></pre>
+
+<p>再度 rubyをインストールし、fluentd のインストールを行います。</p>
+
+<pre><code>$ rbenv install 1.9.3-p194
+$ rbenv global 1.9.3-p194
+$ rbenv rehash
+$ gem install fluentd
+$ rbenv rehash
+</code></pre>
+
+<p>エラーもなく fluentd のインストールが行われたようです。</p>
+
+<h3>インストールの確認</h3>
+
+<p>問題なく fluentd が動作しているか確認を行います。</p>
+
+<pre><code>$ fluentd --setup ./fluent
+$ fluentd -c ./fluent/fluent.conf -vv &amp;
+$ echo '{"json":"message"}' | fluent-cat debug.test
+</code></pre>
+
+<p>最後のコマンドを打って以下の文言が出力されていたら正常にインストールされています。</p>
+
+<p><code>20xx-xx-xx 11:40:31 +0900 debug.test: {"json":"message"}</code></p>
+
+<p>問題なく動作していることが確認できたので一応確認で作成したディレクトリを消去。</p>
+
+<pre><code>rm -rf ./fluent
+</code></pre>
+
+<p>ruby 勉強しようと思って、まだ何もしていないという。。。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://documents.mazgi.com/fluentd/doc/" title="fluentd v0.10 documentation" target="_blank">fluentd v0.10 documentation</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

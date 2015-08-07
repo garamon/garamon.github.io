@@ -1,0 +1,730 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: c# | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/c-number/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[C#で簡易的なWindowsサービスを作ってみる]]></title>
+    <link href="http://blog.code-life.net/blog/2012/05/27/windows-service-c-sharp-2/"/>
+    <updated>2012-05-27T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/05/27/windows-service-c-sharp-2</id>
+    <content type="html"><![CDATA[<p><a href="http://twitter.com/j_sakemi">chakemi</a>です。
+本日は、<a href="/blog/2012/05/24/windows-service-c-sharp-1">前回</a>の続きで簡易的なWindowsサービスを作成してみたいと思います。</p>
+
+<!--more-->
+
+
+<h2>開発環境</h2>
+
+<ul>
+<li>VisualStudio2010</li>
+<li>WindowsXP SP3 .Net Framework4</li>
+</ul>
+
+
+<p>前回までで、何も起動しないサービスを登録するとこまでは出来ました。</p>
+
+<p>今回は、実際に処理を実装し、サービスとして開始、停止をしてみます。
+まずは、簡単なとこから、サービスの開始、停止時にアプリケーションのイベントログを記録するようにしてみます。</p>
+
+<p>開始と停止の際に処理される、Onstartメソッド、Onstopメソッドで、EventLogクラスのWriteEntryメソッドを実行します。</p>
+
+<pre><code class="c#">protected override void OnStart(string[] args)
+{
+    EventLog.WriteEntry(String.Format("OnStart: {0}", DateTime.Now));
+}
+
+protected override void OnStop()
+{
+    EventLog.WriteEntry(String.Format("OnStop: {0}", DateTime.Now));
+}
+</code></pre>
+
+<p>実際にインストールし、サービスを開始、停止してみます。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-2-1.jpg"><img src="/images/2012/05/windows-service-c-sharp-2-1-300x266.jpg" width="300" height="266"></a></p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-2-2.jpg"><img src="/images/2012/05/windows-service-c-sharp-2-2-300x266.jpg" width="300" height="266"></a></p>
+
+<p>とりあえず、独自のフォーマットのイベントログが記録出来ました。
+では、本題に入って、実際に自作のサービスを登録してみます。</p>
+
+<p>今回は、簡単なwebサーバを実装してみたいと思います。</p>
+
+<p>サービスを実行するのに、OnStartメソッドで開始時に実行したい処理を書けば言い訳ですが、
+OnStartメソッドはサービスが指定時間内に、正常起動したことをWindows側へ返す必要があるため
+ここでは、メインループを別スレッドで実行するように記述します。</p>
+
+<p>HTTPリクエストを処理する簡単なメインループを作成します。</p>
+
+<pre><code class="c#">//メインループ 簡易webサーバ
+private Thread serviceThread;
+private volatile bool serviceStop = false;
+
+private void Run()
+{
+    string root = @"c:\www";
+    string prefix = "http://*:8080/";
+
+    HttpListener listener = new HttpListener();
+    listener.Prefixes.Add(prefix);
+    listener.Start();
+
+    while (!serviceStop)
+    {
+        HttpListenerContext context = listener.GetContext();
+        HttpListenerRequest request = context.Request;
+        HttpListenerResponse response = context.Response;
+
+        string path = root + request.RawUrl.Replace("/", "\\");
+
+        if (File.Exists(path))
+        {
+            byte[] content = File.ReadAllBytes(path);
+            response.OutputStream.Write(content, 0, content.Length);
+        }
+        response.Close();
+    }
+    listener.Close();
+}
+</code></pre>
+
+<p>別スレッドでループを開始します。</p>
+
+<pre><code class="c#">private Thread serviceThread;
+protected override void OnStart(string[] args)
+{
+    serviceThread = new Thread(Run);
+    serviceThread.Start();
+    EventLog.WriteEntry(String.Format("OnStart: {0}", DateTime.Now));
+}
+</code></pre>
+
+<p>ここでは、処理を簡単にするため、OnStopメソッドでスレッドを強制的に終了してます。</p>
+
+<pre><code class="c#">protected override void OnStop()
+{
+    serviceStop = true;
+    serviceThread.Abort();
+    EventLog.WriteEntry(String.Format("OnStop: {0}", DateTime.Now));
+}
+</code></pre>
+
+<p>ルートに指定したディレクトリに適当にhtmlファイルを用意し、実際にサービスを開始してアクセスしてみます。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-2-3.jpg"><img src="/images/2012/05/windows-service-c-sharp-2-3-300x153.jpg" width="300" height="153"></a></p>
+
+<p>とりあえず、出来上がり♪</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[C# Windowsサービスを作る]]></title>
+    <link href="http://blog.code-life.net/blog/2012/05/24/windows-service-c-sharp-1/"/>
+    <updated>2012-05-24T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/05/24/windows-service-c-sharp-1</id>
+    <content type="html"><![CDATA[<p><a href="http://twitter.com/j_sakemi">chakemi</a>です。ここ最近、バックグラウンドで実行されるサービスについて調べていたので、
+ついでに、C#でWindowsサービスを作ってみました。</p>
+
+<!--more-->
+
+
+<h2>開発環境</h2>
+
+<ul>
+<li>VisualStudio2010</li>
+<li>WindowsXP SP3 Net Framework4</li>
+</ul>
+
+
+<p>VisualStudioのウィザードからテンプレートを選択します。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-1-1.jpg"><img src="/images/2012/05/windows-service-c-sharp-1-1-300x207.jpg" width="300" height="207"></a></p>
+
+<p>Service1.csのデザイナ上で右クリックをし、「インストーラーの追加」を選択します。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-1-2.jpg"><img src="/images/2012/05/windows-service-c-sharp-1-2-300x156.jpg" width="300" height="156"></a></p>
+
+<p>すると、ProjectInstaller.csのデザイナが表示され、
+serviceProcessInstaller1とserviceInstaller1のコンポーネントが追加されます。</p>
+
+<p>次に、プロパティウィンドウでこれらのコンポーネントの設定をします。</p>
+
+<p><a href="http://msdn.microsoft.com/ja-jp/library/system.serviceprocess.serviceinstaller_properties">serviceInstaller1</a></p>
+
+<table border="1">
+  <tr>
+    <td>
+      Name
+    </td>
+    <td>
+      そのまんまですね。
+    </td>
+  </tr>
+  <tr>
+    <td>
+      DelayedAutoStart
+    </td>
+
+    <td>
+      他の自動的に開始されるサービスが実行されるまでサービスの開始を遅延するかどうかを示す値 サービスが自動開始でない限り無視される
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Description
+    </td>
+    <td>
+      サービスの説明
+    </td>
+  </tr>
+  <tr>
+    <td>
+      DisplayName
+    </td>
+    <td>
+      一覧での表示名
+    </td>
+  </tr>
+  <tr>
+    <td>
+      Parent
+    </td>
+    <td>
+      インストーラーが属しているコレクションを格納しているインストーラー。
+    </td>
+  </tr>
+  <tr>
+    <td>
+      ServiceName
+    </td>
+    <td>
+      システムが使用する名前 Service1.csのプロパティServiceNameとあわせます。
+    </td>
+  </tr>
+  <tr>
+    <td>
+      StartType
+    </td>
+    <td>
+      サービスを開始する方法
+    </td>
+  </tr>
+</table>
+
+
+<p>リファレンスのまんまですね。。。</p>
+
+<p><a href="http://msdn.microsoft.com/ja-jp/library/by8cdy7y">serviceProcessInstaller1</a></p>
+
+<table border="1">
+  <tr>
+    <td>
+      Account
+    </td>
+
+    <td>
+      サービス アプリケーションを実行するときに使用するアカウントの種類
+    </td>
+  </tr>
+</table>
+
+
+<p>とりあえず、適当にサービスの説明と一覧での表示名を記述して、あとは、デフォルトのままで、AccountはUserにしときます。</p>
+
+<p>あとは、Service1.csの中に、OnStartメソッドとOnStopメソッドがあるので、起動と停止の際のイベントに対応した処理を書きますが
+ここまでしといて、これといったサービスを考えていなかったので、とりあえず何もしないサービスをビルドしてみます。</p>
+
+<p>すると、プロジェクトのbinフォルダにexeファイルが生成されるのでとりあえず、インストールしてみます。
+インストールには、.NET FrameworkのユーティリティのInstallUtilを使います。</p>
+
+<p>スタートメニューからVisualStudioコマンドプロンプトを起動して、</p>
+
+<pre><code>installutil "C:\～\bin\Debug\TestService.exe"
+</code></pre>
+
+<p>と実行します。
+すると、「サービス ログインの設定」というポップアップダイアログが表示されます。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-1-3.jpg"><img src="/images/2012/05/windows-service-c-sharp-1-3-300x120.jpg" width="300" height="120"></a></p>
+
+<p>AccountはUserを指定しておいたので、ログインユーザーとパスワードを指定したいとこですが、
+ここで一点注意で、ユーザー名は「コンピュータ名￥ユーザー名」の形で入力します。</p>
+
+<p>無事、インストールが完了すれば、以下のように出力されます。</p>
+
+<pre><code>Microsoft(R) .NET Framework Installation utility Version 4.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+トランザクションのインストールを実行中です。
+
+インストール段階を開始しています。
+
+
+～省略～
+
+
+サービス 'Service1' をインストールしています...
+サービス 'Service1' は正常にインストールされました。
+EventLog ソース Service1 をログ Application に作成しています...
+
+インストール段階が正常に完了しました。コミット段階を開始しています。
+
+
+～省略～
+
+
+コミット段階が正常に終了しました。
+</code></pre>
+
+<p>コンピュータの管理から見てみると、ちゃんと登録出来てます。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-1-4.jpg"><img src="/images/2012/05/windows-service-c-sharp-1-4-300x85.jpg" width="300" height="85"></a></p>
+
+<p>実際に、起動してみます。</p>
+
+<p><a href="/images/2012/05/windows-service-c-sharp-1-5.jpg"><img src="/images/2012/05/windows-service-c-sharp-1-5-300x269.jpg" width="300" height="269"></a></p>
+
+<p>ちゃんと起動出来ます。何も実行されませんが。。。
+最後に、アンインストールしときます。</p>
+
+<pre><code>installutil "C:\～\bin\Debug\TestService.exe" /u
+
+
+Microsoft(R) .NET Framework Installation utility Version 4.0.30319.1
+Copyright (c) Microsoft Corporation.  All rights reserved.
+
+
+
+アンインストールを開始します。
+
+
+～省略～
+
+
+EventLog ソース Service1 を削除しています。
+サービス Service1 をシステムから削除しています...
+サービス 'Service1' は正常にシステムから削除されました。
+
+アンインストールか完了しました。
+</code></pre>
+
+<p>最後の日本語がおかしいですが、無事アンインストール完了です。
+次回までに、実際に動かすサービスを考えておこうと思います。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[C#でTCPサーバを作ってみる]]></title>
+    <link href="http://blog.code-life.net/blog/2012/03/12/tcp-server-c-sharp/"/>
+    <updated>2012-03-12T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/03/12/tcp-server-c-sharp</id>
+    <content type="html"><![CDATA[<p>chakemiです。
+本日は、C#でTCPサーバを作ってみようと思います。</p>
+
+<!--more-->
+
+
+<h2>開発環境</h2>
+
+<ul>
+<li>WindowsXP Pro SP3</li>
+<li>VisualStudio2008</li>
+</ul>
+
+
+<p>今回は手始めなのでコンソールアプリケーションで、TCPソケット生成には便利なTCPListenerとTCPClient クラスを使ってServer-Clientの1対1のサーバを作ってみます。</p>
+
+<p>では最初に、名前空間のusingディレクティブを追加します。</p>
+
+<pre><code class="c#">using System.Net;     //IPEndPointクラス
+using System.Net.Sockets; //TCPListener、TCPClientクラス
+using System.IO;
+</code></pre>
+
+<p>TCPListenerコンストラクタの引数に必要なIPEndPointを生成し、TCPListenerのインスタンスを生成します。
+IPEndPointにはサーバのIPアドレスと待ち受けポートを渡します。</p>
+
+<pre><code class="c#">IPEndPoint ipAdd = new IPEndPoint(IPAddress.Parse("192.168.1.113"), 8888);
+TcpListener listener = new TcpListener(ipAdd);
+</code></pre>
+
+<p>Startメソッドを実行し、待ち受けを開始します。
+引数には接続待ちのバックログを指定しますが、省略した場合、デフォルト値が使用されます。</p>
+
+<pre><code class="c#">listener.Start();
+</code></pre>
+
+<p>接続要求が来たら、接続を許可し、TcpClientオブジェクトを生成します。</p>
+
+<pre><code class="c#">TcpClient client = listener.AcceptTcpClient();
+</code></pre>
+
+<p>TcpClientの接続状態が確認出来たら、以降これを使用してデータ送受信をするのでListenerを閉じちゃってNetworkStreamクラスとStreamReaderクラスのインスタンスを生成。</p>
+
+<pre><code class="c#">if (client.Connected)
+{
+    listener.Stop();
+    NetworkStream netStream = client.GetStream();
+    StreamReader sReader = new StreamReader(netStream, Encoding.UTF8);
+}
+</code></pre>
+
+<p>あとは、永遠とデータ受信処理のループを回します。</p>
+
+<pre><code class="c#">string str = String.Empty;
+
+do
+{
+    str = sReader.ReadLine();
+    if (null == str)
+    {
+        break;
+    }
+    Console.WriteLine(str);
+} while (!str.Equals("quit"));
+</code></pre>
+
+<p>こんな感じです。</p>
+
+<pre><code class="c#">using System;
+using System.Text;
+using System.Net;
+using System.Net.Sockets;
+using System.IO;
+
+namespace testTCPServer
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            IPEndPoint ipAdd = new IPEndPoint(IPAddress.Parse("192.168.1.2"), 8888);
+            TcpListener listener = new TcpListener(ipAdd);
+            listener.Start(0);
+            Console.WriteLine("Port:8888のListenを開始しました。");
+
+            TcpClient client = listener.AcceptTcpClient();
+            Console.WriteLine("クライアントが接続しました。");
+
+            if (client.Connected)
+            {
+                listener.Stop();
+                NetworkStream netStream = client.GetStream();
+                StreamReader sReader = new StreamReader(netStream, Encoding.UTF8);
+
+                string str = String.Empty;
+
+                do
+                {
+                    str = sReader.ReadLine();
+                    if (null == str)
+                    {
+                        break;
+                    }
+                    Console.WriteLine(str);
+                } while (!str.Equals("quit"));
+                sReader.Close();
+                client.Close();
+            }
+            Console.WriteLine("終了するには、Enterキーを押してください");
+            Console.ReadLine();
+        }
+    }
+}
+</code></pre>
+
+<p>サーバを起動して、コマンドプロンプトからtelnetで接続できたら完成。</p>
+
+<pre><code class="c#">telnet 192.168.1.2 8888
+</code></pre>
+
+<p>次回ももう少し通信系の勉強をしようかと思います。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[C#でパフォーマンスカウンタを使ってみた]]></title>
+    <link href="http://blog.code-life.net/blog/2012/03/08/performance-counter-c-sharp/"/>
+    <updated>2012-03-08T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/03/08/performance-counter-c-sharp</id>
+    <content type="html"><![CDATA[<p>chakemiです。</p>
+
+<p>本日は、パフォーマンスカウンタからCPU使用率やメモリ空き容量などを取得してみました。</p>
+
+<!--more-->
+
+
+<h2>開発環境</h2>
+
+<ul>
+<li>WindowsXP SP3</li>
+<li>VisualC#2010Express</li>
+</ul>
+
+
+<p>PerformanceCounterとは、「コントロールパネル」の「管理ツール」にある「パフォーマンス」というシステムの状態を折れ線グラフで表示してくれるアプリケーションの値を.NETから参照できるクラスです。
+では、さっそく。</p>
+
+<p>PerformanceCounterクラスを使用するために、System.Diagnostics名前空間を追加します。</p>
+
+<pre><code class="c#">using System.Diagnostics;
+</code></pre>
+
+<p>パフォーマンスカウンタは、多くの情報を管理していて、情報ごとに「Category」「Counter」「Instance」と階層構造に情報が分類されています。</p>
+
+<p>「パフォーマンス」アプリケーションのカウンタの追加から選択出来るパフォーマンス オブジェクトを参考に必要なカテゴリなど調べてください。
+今回は、CPU使用率、空きメモリ容量、ネットワーク送受信量を1秒間隔で表示してみたいと思います。</p>
+
+<p>まず、必要なカテゴリ名を指定します。</p>
+
+<pre><code class="c#">string catCpu = "Processor";
+string catMem = "Memory";
+string catNW = "Network Interface";
+</code></pre>
+
+<p>次に、インスタンス名を指定します。</p>
+
+<pre><code class="c#">string countCpu = "% Processor Time";
+string countMem = "Available MBytes";
+string countNW = "Bytes Total/sec";
+</code></pre>
+
+<p>インスタンス名が必要なカウンタは指定します。
+ネットワークデバイスはipconfigなどで調べて環境にあわせてください。</p>
+
+<pre><code class="c#">string instanceCpu = "_Total";
+string instanceNW = "Marvell Yukon 88E8055 PCI-E Gigabit Ethernet Controller";
+</code></pre>
+
+<p>PerformanceCounterオブジェクトを生成します。</p>
+
+<pre><code class="c#">pcCpu = new PerformanceCounter(catCpu, countCpu, instanceCpu);
+pcMem = new PerformanceCounter(catMem, countMem);
+pcNW = new PerformanceCounter(catNW, countNW, instanceNW);
+</code></pre>
+
+<p>あとは、NextValueメソッドを使用して、現在の計算値を一秒間隔で表示します。</p>
+
+<p>こんな感じ。</p>
+
+<pre><code class="c#">using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+using System.Diagnostics;
+
+namespace testPerformanceCounter
+{
+    public partial class Form1 : Form
+    {
+        private PerformanceCounter pcCpu;
+        private PerformanceCounter pcMem;
+        private PerformanceCounter pcNW;
+
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            //カテゴリ名
+            string catCpu = "Processor";
+            string catMem = "Memory";
+            string catNW = "Network Interface";
+
+            //カウンタ名
+            string countCpu = "% Processor Time";
+            string countMem = "Available MBytes";
+            string countNW = "Bytes Total/sec";
+
+            //インスタンス名
+            string instanceCpu = "_Total";
+
+            string instanceNW = "Marvell Yukon 88E8055 PCI-E Gigabit Ethernet Controller";
+
+            //PerformanceCounterオブジェクト生成
+            pcCpu = new PerformanceCounter(catCpu, countCpu, instanceCpu);
+            pcMem = new PerformanceCounter(catMem, countMem);
+            pcNW = new PerformanceCounter(catNW, countNW, instanceNW);
+
+            timer1.Tick += new EventHandler(timer1_Tick);
+            timer1.Interval = 1000;
+            timer1.Enabled = true;
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            label1.Text = pcCpu.NextValue().ToString() + "%";
+            label2.Text = pcMem.NextValue().ToString() + "MBytes";
+            label3.Text = pcNW.NextValue().ToString() + "Byte Total/sec";
+        }
+
+    }
+}
+</code></pre>
+
+<p>カスタムカウンタの作り方や、カテゴリの一覧取得などは時間があったら書きたいと思います。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[C#でSNTPから現在日時を取得]]></title>
+    <link href="http://blog.code-life.net/blog/2012/02/20/sntp-c-sharp/"/>
+    <updated>2012-02-20T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/02/20/sntp-c-sharp</id>
+    <content type="html"><![CDATA[<p>chakemiです。今回はC#でSNTPサーバから現在日時を取得してみたいと思います。
+SNTP(Simple Network Time Protocol)は、名前の通り簡易ネットワーク時刻プロトコルでNTPの仕様から複雑な部分を省略した形となっています。</p>
+
+<!--more-->
+
+
+<p>SNTPプロトコルについては、<a href="http://www.geocities.co.jp/SiliconValley/6876/rfc2030j.htm">こちら</a>や、<a href="http://www.venus.dti.ne.jp/~yoshi-o/NTP/NTP-SNTP_Format.html">こちら</a>を参考にしてください。ってか、自分も参考にさせて頂きました。</p>
+
+<h2>開発環境</h2>
+
+<ul>
+<li>WindowsXP Pro SP3</li>
+<li>VisualStudio2008</li>
+</ul>
+
+
+<p>では、さっそく。</p>
+
+<p>UDPクライアントを生成します。</p>
+
+<pre><code class="c#">System.Net.Sockets.UdpClient sock;
+System.Net.IPEndPoint ipAny = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 0);
+sock = new System.Net.Sockets.UdpClient(ipAny);
+</code></pre>
+
+<p>送信用パケットを生成し、送信します。
+SNTPサーバは、送られてきた要求パケットの中身を書き換えて、送り返してきます。</p>
+
+<pre><code class="c#">Byte[] s_data = new Byte[48];
+//LI, Version, Mode
+s_data[0] = 0xE3;
+//Stratum
+s_data[1] = 0;
+//Polling Interval
+s_data[2] = 6;
+//Precision
+s_data[3] = 0xEC;
+
+sock.Send(s_data, s_data.GetLength(0), "time.windows.com", 123);
+</code></pre>
+
+<p>タイムサーバにはWindowsXPのデフォルトで指定されたタイムサーバを利用させて頂きました。</p>
+
+<p>SNTPから返ってきたパケットを受信します。</p>
+
+<pre><code class="c#">Byte[] r_data = sock.Receive(ref ipAny);
+</code></pre>
+
+<p>タイムサーバは１９００年１月１日０時を基準に相対的な差を秒単位で、６４ビット符号無し固定小数点で返してきます。
+整数部の上位３２ビットを取得して、経過秒数を取得します。</p>
+
+<pre><code class="c#">long passSec;
+
+long b0 = (long)r_data[40];
+long b1 = (long)r_data[41];
+long b2 = (long)r_data[42];
+long b3 = (long)r_data[43];
+passSec = (b0 &lt;&lt; 24 | b1 &lt;&lt; 16) | (b2 &lt;&lt; 8 | b3);
+</code></pre>
+
+<p>基準時間に経過秒数を加えて、さらに日本標準時間にあわせます。</p>
+
+<pre><code class="c#">DateTime dateTime = new DateTime(1900, 1, 1);
+dateTime = dateTime.AddSeconds(passSec);
+
+dateTime = dateTime.AddHours(9);
+</code></pre>
+
+<p>以下、全文です。</p>
+
+<pre><code class="c#">using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Windows.Forms;
+
+namespace testSNTPClient
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            //UDP生成
+            System.Net.Sockets.UdpClient sock;
+            System.Net.IPEndPoint ipAny = new System.Net.IPEndPoint(System.Net.IPAddress.Any, 0);
+            sock = new System.Net.Sockets.UdpClient(ipAny);
+
+            //Send UDP
+            Byte[] s_data = new Byte[48];
+            //LI, Version, Mode
+            s_data[0] = 0xE3;
+            //Stratum
+            s_data[1] = 0;
+            //Polling Interval
+            s_data[2] = 6;
+            //Precision
+            s_data[3] = 0xEC;
+
+            sock.Send(s_data, s_data.GetLength(0), "time.windows.com", 123);
+
+            //Recieve UDP
+            Byte[] r_data = sock.Receive(ref ipAny);
+
+            //1900/01/01から経過秒数
+            long passSec;    //全秒数
+
+            //Transmit Timestampの40バイト目からはじまる4バイトのデータ
+            long b0 = (long)r_data[40];
+            long b1 = (long)r_data[41];
+            long b2 = (long)r_data[42];
+            long b3 = (long)r_data[43];
+            passSec = (b0 &lt;&lt; 24 | b1 &lt;&lt; 16) | (b2 &lt;&lt; 8 | b3);
+
+            //基準時間に経過乗数を加える
+            DateTime dateTime = new DateTime(1900, 1, 1);
+            dateTime = dateTime.AddSeconds(passSec);
+            //日本標準時間にあわせる
+            dateTime = dateTime.AddHours(9);
+
+            label1.Text = dateTime.ToString();
+
+        }
+    }
+}
+</code></pre>
+
+<p>ネットワークの遅延だとか考慮してません。。。
+外部のサーバへアクセスする際は、ご注意ください。</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: apache | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/apache/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Apache ServerTokensについて少しだけ理解を深めてみる]]></title>
+    <link href="http://blog.code-life.net/blog/2012/03/24/apache-servertokens/"/>
+    <updated>2012-03-24T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/03/24/apache-servertokens</id>
+    <content type="html"><![CDATA[<p>notoです。</p>
+
+<p>Apacheのセキュリティについてのエントリーが、定期的にはてブにあがったりします。
+ボクもApacheを触り始めて間もないので、正直コピペしてました。</p>
+
+<p>ServerTokens Prod にして、ServerSignature Offにしてってな感じで。
+けどその設定をすることで、どういう挙動になるの？？って理解を全然していなかったので、調べてみました。</p>
+
+<!--more-->
+
+
+<h2>検証環境</h2>
+
+<ul>
+<li>CentOS 5.7</li>
+<li>Apache/2.2.3</li>
+</ul>
+
+
+<h2>ServerTokens</h2>
+
+<p>Apacheのマニュアルからの引用です。</p>
+
+<blockquote><p>HTTP 応答ヘッダを設定する</p>
+
+<p>クライアントに送り返す Server 応答ヘッダ内に、サーバの一般的な OS 種別や、 コンパイルされて組み込まれているモジュールの情報を 含めるかどうかを指定します。</p></blockquote>
+
+<p>ふむ。レスポンスヘッダの情報を制御するディレクティブなんですね。わかります。</p>
+
+<h3>ServerTokens OSの場合</h3>
+
+<p>デフォルトでは ServerTokens OSと設定されています。
+wgetコマンドでレスポンスヘッダの情報を確認してみます。</p>
+
+<pre><code>wget -S http://localhost
+</code></pre>
+
+<h4>レスポンスヘッダ</h4>
+
+<pre><code>・・・中略・・・
+  HTTP/1.1 200 OK
+  Date: Tue, 24 Jan 2012 14:36:08 GMT
+  Server: Apache/2.2.3 (CentOS)
+  Content-Length: 1050
+  Connection: close
+  Content-Type: text/html;charset=ISO-8859-1
+・・・中略・・・
+</code></pre>
+
+<pre><code>Server: Apache/2.2.3 (CentOS)
+</code></pre>
+
+<p>ApacheのバージョンとOS情報が取得できます。</p>
+
+<h3>ServerTokens Full(もしくは未指定)の場合</h3>
+
+<h4>レスポンスヘッダ</h4>
+
+<pre><code>・・・中略・・・
+  HTTP/1.1 200 OK
+  Date: Tue, 24 Jan 2012 14:42:50 GMT
+  Server: Apache/2.2.3 (CentOS) DAV/2 PHP/5.3.9
+  Content-Length: 1066
+  Connection: close
+  Content-Type: text/html;charset=ISO-8859-1
+・・・中略・・・
+</code></pre>
+
+<pre><code>Server: Apache/2.2.3 (CentOS) DAV/2 PHP/5.3.9
+</code></pre>
+
+<p>Apacheのバージョン、OS情報、モジュール情報、PHPのバージョン丸見えである。</p>
+
+<h3>ServerTokens Prod(uctOnly)の場合</h3>
+
+<h4>レスポンスヘッダ</h4>
+
+<pre><code>・・・中略・・・
+  HTTP/1.1 200 OK
+  Date: Tue, 24 Jan 2012 14:50:27 GMT
+  Server: Apache
+  Content-Length: 1035
+  Connection: close
+  Content-Type: text/html;charset=ISO-8859-1
+・・・中略・・・
+</code></pre>
+
+<pre><code>Server: Apache
+</code></pre>
+
+<p>Apacheを利用してることしか確認できません。</p>
+
+<h3>ServerTokensをOSにしてると何がダメなの？</h3>
+
+<p>Apacheの脆弱性をつかれる可能性があります。 例えば、少し前に話題になったApache Killerです。</p>
+
+<p><a href="http://blog.tokumaru.org/2011/08/apache-killerapache-killer.html" title="Apache killerは危険～Apache killerを評価する上での注意～" target="_blank">Apache killerは危険～Apache killerを評価する上での注意～</a></p>
+
+<p><a href="http://www.apache.jp/news/apache-http-server-2.2.20-released" target="_blank">Apache HTTP Server 2.2.20</a>以前のバージョンを使用しており、対策が施されていない場合、悪意のあるおじさんが、レスポンスヘッダを読み取って、Apacheバージョン古いな。おじさん Apache killerしちゃうぞ。なんてことも起きる可能があると思います。</p>
+
+<p>必要のない情報は隠しましょうってことですね。
+長くなってしまったので、この辺りで、次はTraceEnableについて調べてみたり調べなかったり。</p>
+]]></content>
+  </entry>
+  
+</feed>

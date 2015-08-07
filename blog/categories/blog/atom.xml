@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: blog | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/blog/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2015-08-07T23:59:34+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[はてなブログはじめました]]></title>
+    <link href="http://blog.code-life.net/blog/2015/08/07/hatena-blog/"/>
+    <updated>2015-08-07T23:12:04+09:00</updated>
+    <id>http://blog.code-life.net/blog/2015/08/07/hatena-blog</id>
+    <content type="html"><![CDATA[<p>Octopressが億劫になってきたので、はてなブログに移りました。</p>
+
+<p><a href="http://grmn.hatenablog.com/">http://grmn.hatenablog.com/</a></p>
+]]></content>
+  </entry>
+  
+</feed>
