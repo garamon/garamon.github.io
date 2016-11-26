@@ -4,7 +4,7 @@
   <title><![CDATA[Category: streaming | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/streaming/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -85,7 +85,7 @@ $ ffmpeg -i big_buck_bunny.mp4 -f mpegts - | \
   <dd>何秒毎に分割するか。上記のコマンドの場合、10秒</dd>
 
   <dt>オプション -p</dt>
-  <dd>分割されたtsファイルの出力先 & 出力ファイル名。出力先にbig_buck_bunny-1.ts ... big_buck_bunny-50.ts ... と連番でファイルが作成される</dd>
+  <dd>分割されたtsファイルの出力先 & 出力ファイル名。出力先にbig_buck_bunny-1.ts &#8230; big_buck_bunny-50.ts &#8230; と連番でファイルが作成される</dd>
 
   <dt>オプション -m</dt>
   <dd>m3u8の出力先</dd>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: expressionencoder | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/expressionencoder/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -69,11 +69,11 @@ Presetsクラスには、ExpressionEncoderのプリセットに定義されて�
 <p>せっかくなので、自分で作成したプロファイルをプリセットとして保存して使用してみたいと思います。
 ExpressionEncoderアプリケーションのエンコードタブから独自の設定を行い、歯車マークのボタンをクリックし「パネルをプリセットとして保存」を選択、xmlファイルを保存します。</p>
 
-<p><a href="/images/2011/12/expression-encoder-sdk2.jpg">{% img /images/2011/12/expression-encoder-sdk2-300x252.jpg 300 253 %}</a></p>
+<p><a href="/images/2011/12/expression-encoder-sdk2.jpg"><img src="/images/2011/12/expression-encoder-sdk2-300x252.jpg" width="300" height="253"></a></p>
 
 <p>試しに作成したものがこんな感じ</p>
 
-<p>```xml
+<p>&#8220;`xml
 &lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;utf-16&rdquo;?></p>
 
 <!--Created with Expression Encoder version 4.0.1651.0-->
@@ -143,7 +143,7 @@ ExpressionEncoderアプリケーションのエンコードタブから独自の
     </OutputFormat>
   </MediaFile>
 </Preset>
-```
+&#8220;`
 ※ここでは、プリセットの細かい点に関しては触れません。</p>
 
 <p>では、試しに作成したプリセットを指定してエンコードを行なってみたいと思います。
@@ -196,7 +196,7 @@ namespace ConsoleApplication1
 
 <p>プリセットに設定した通りにエンコード出来ました。</p>
 
-<p><a href="/images/2011/12/expression-encoder-sdk2-2.jpg">{% img /images/2011/12/expression-encoder-sdk2-2-300x271.jpg 300 271 %}</a></p>
+<p><a href="/images/2011/12/expression-encoder-sdk2-2.jpg"><img src="/images/2011/12/expression-encoder-sdk2-2-300x271.jpg" width="300" height="271"></a></p>
 
 <p>今回は、EncodeProgressイベントハンドラを登録してエンコード進捗を表示するようにしました。(サンプルのまんまですが。。。)</p>
 ]]></content>

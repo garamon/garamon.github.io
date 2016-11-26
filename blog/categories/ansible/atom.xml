@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ansible | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/ansible/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -41,10 +41,10 @@
 
 <pre><code>- name: Source nvm in ~/.profile
   sudo: yes
-  sudo_user: "{{ install_user }}"
+  sudo_user: ""
   blockinfile: |
     dest=~/.bash_profile
-    content='export NVM_DIR="/home/{{ install_user }}/.nvm"
+    content='export NVM_DIR="/home//.nvm"
       [ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; . "$NVM_DIR/nvm.sh"'
   tags: nvm
 </code></pre>

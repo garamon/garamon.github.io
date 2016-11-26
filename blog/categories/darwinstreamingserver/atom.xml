@@ -4,7 +4,7 @@
   <title><![CDATA[Category: darwinstreamingserver | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/darwinstreamingserver/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -84,11 +84,11 @@ qtss     20299  0.0  1.7  13520  4360 ?        Ss   04:16   0:00 /usr/bin/perl /
 <p>webインターフェース http://localhost:1220/ にアクセスして先ほど作成したadminユーザーでログインします。</p>
 
 
-<p><a href="/images/2011/12/darwin-streaming-server.jpg">{% img /images/2011/12/darwin-streaming-server-300x205.jpg 300 205 %}</a></p>
+<p><a href="/images/2011/12/darwin-streaming-server.jpg"><img src="/images/2011/12/darwin-streaming-server-300x205.jpg" width="300" height="205"></a></p>
 
 <p>ダイアログに沿って設定を行えば完了です。</p>
 
-<p><a href="/images/2011/12/darwin-streaming-server.jpg">{% img /images/2011/12/darwin-streaming-server2-300x197.jpg 300 197 %}</a></p>
+<p><a href="/images/2011/12/darwin-streaming-server.jpg"><img src="/images/2011/12/darwin-streaming-server2-300x197.jpg" width="300" height="197"></a></p>
 
 <p>QuickTimePlayerなどで、rtsp://localhost:554/sample_100kbit.mp4とかでアクセスして再生出来ればOKです。</p>
 

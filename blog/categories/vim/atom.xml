@@ -4,7 +4,7 @@
   <title><![CDATA[Category: vim | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/vim/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -95,23 +95,23 @@ xdebug.remote_port=9000
 <p>ボクはchromeを主に利用しているので、<a href="https://chrome.google.com/webstore/search/Xdebug%20helper" target="_blank">Xdebug helper</a> をインストールして使用しています。
 インストールするとアドレス入力部分に虫のアイコンが追加されます。</p>
 
-<p><a href="/images/2012/10/vim-vdebug-xdebug-1.png">{% img /images/2012/10/vim-vdebug-xdebug-1-300x53.png 300 53 %}</a></p>
+<p><a href="/images/2012/10/vim-vdebug-xdebug-1.png"><img src="/images/2012/10/vim-vdebug-xdebug-1-300x53.png" width="300" height="53"></a></p>
 
 <p>デバッグしたい場合、この虫のアイコンをクリックします。クリックすると虫が緑色に変わります。</p>
 
-<p><a href="/images/2012/10/vim-vdebug-xdebug-2.png">{% img /images/2012/10/vim-vdebug-xdebug-2-300x45.png 300 45 %}</a></p>
+<p><a href="/images/2012/10/vim-vdebug-xdebug-2.png"><img src="/images/2012/10/vim-vdebug-xdebug-2-300x45.png" width="300" height="45"></a></p>
 
 <p>これでブラウザ側の準備は整いました。次にvim側です。
 止めたい箇所に、ブレイクポイントを打ちます。デフォルトでは F10 でブレイクポイントを設定することができます。</p>
 
 <p>ブレイクポイントを打つと対象行がハイライト表示されます。</p>
 
-<p><a href="/images/2012/10/vim-vdebug-xdebug-3.png">{% img /images/2012/10/vim-vdebug-xdebug-3-300x216.png 300 216 %}</a></p>
+<p><a href="/images/2012/10/vim-vdebug-xdebug-3.png"><img src="/images/2012/10/vim-vdebug-xdebug-3-300x216.png" width="300" height="216"></a></p>
 
 <p>デバッガを起動させます。デフォルトでは F5 で起動します。起動後２０秒待機し、待機中にブラウザからアクセスします。
 正しく設定がされていると、下の画像のような画面に切り替わります。</p>
 
-<p><a href="/images/2012/10/vim-vdebug-xdebug-4.png">{% img /images/2012/10/vim-vdebug-xdebug-4-300x225.png 300 225 %}</a></p>
+<p><a href="/images/2012/10/vim-vdebug-xdebug-4.png"><img src="/images/2012/10/vim-vdebug-xdebug-4-300x225.png" width="300" height="225"></a></p>
 
 <p>左の画面がソースコード。
 右の画面が４つに分割されます。上から</p>
@@ -227,16 +227,16 @@ $ mv php-xdebug /usr/local/bin/
 
 <p>まずは[C-v]で、矩形ビジュアルモードになり、コメントアウトしたい範囲を指定します。</p>
 
-<p><a href="/images/2012/07/comment-out-multiple-lines-vim-1.png">{% img /images/2012/07/comment-out-multiple-lines-vim-1-300x222.png 300 222 %}</a></p>
+<p><a href="/images/2012/07/comment-out-multiple-lines-vim-1.png"><img src="/images/2012/07/comment-out-multiple-lines-vim-1-300x222.png" width="300" height="222"></a></p>
 
 <p>コメントアウトしたい範囲を指定したら、<code>I</code>でインサートモードに変更します。通常は小文字の<code>i</code>ですが、大文字の<code>I</code>でインサートモードに移ります。
 インサートモードに移行後、コメントアウトを行います。</p>
 
-<p><a href="/images/2012/07/comment-out-multiple-lines-vim-2.png">{% img /images/2012/07/comment-out-multiple-lines-vim-2-300x222.png 300 222 %}</a></p>
+<p><a href="/images/2012/07/comment-out-multiple-lines-vim-2.png"><img src="/images/2012/07/comment-out-multiple-lines-vim-2-300x222.png" width="300" height="222"></a></p>
 
 <p>一行だけじゃん！と思わず、ここで <code>Esc</code> を入力しインサートモードを抜けると・・・</p>
 
-<p><a href="/images/2012/07/comment-out-multiple-lines-vim-3.png">{% img /images/2012/07/comment-out-multiple-lines-vim-3-300x221.png 300 221 %}</a></p>
+<p><a href="/images/2012/07/comment-out-multiple-lines-vim-3.png"><img src="/images/2012/07/comment-out-multiple-lines-vim-3-300x221.png" width="300" height="221"></a></p>
 
 <p>すこしラグがありますが、矩形ビジュアルモードで指定した範囲がコメントアウトされます。
 たぶんもっと簡単にコメントアウトするプラグインとかあるよね。きっと。訓練されたVimmer教えてください！</p>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: openframeworks | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/openframeworks/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -58,7 +58,7 @@ graphicsExampleをビルドすると以下のような
 <p>ビルドしてからRunすると以下のような
 ポップアップウィンドウで表示されます。</p>
 
-<p><a href="/images/2012/02/openframeworks-sample.png">{% img /images/2012/02/openframeworks-sample-300x216.png 300 216 %}</a></p>
+<p><a href="/images/2012/02/openframeworks-sample.png"><img src="/images/2012/02/openframeworks-sample-300x216.png" width="300" height="216"></a></p>
 
 <p>ポイントは左上の選択バーから「openFrameworks」ではなく、
 プロジェクトの「graphicsExample > My Mac 32-bit」を選択することでした。</p>

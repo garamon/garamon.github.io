@@ -4,7 +4,7 @@
   <title><![CDATA[Category: stream.m | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/stream-dot-m/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -44,7 +44,7 @@ vlc部分が不安定だし不便だったので、WindowsMediaエンコーダ�
 <p>せっかくなので、HTML5のvideoタグとcanvasタグを使って
 frameキャプチャをしてみました。</p>
 
-<p>``` html
+<p>&#8220;` html
 <html>
 <head></p>
 
@@ -74,11 +74,11 @@ function copyFrame(){
     <input type="button" value="copy frame" onclick="copyFrame()" />
 </body>
 </html>
-```</p>
+&#8220;`</p>
 
 <p>適当ですみません。。。</p>
 
-<p><a href="/images/2011/10/capture_webm.jpg">{% img /images/2011/10/capture_webm-300x203.jpg 203 293 %}</a></p>
+<p><a href="/images/2011/10/capture_webm.jpg"><img src="/images/2011/10/capture_webm-300x203.jpg" width="203" height="293"></a></p>
 
 <p>も少し面白いこと出来るようになれるよう頑張ります。</p>
 ]]></content>
@@ -168,7 +168,7 @@ Stating server on port: 8080
 <p>ブラウザから「http://localhost:8080/consume/first」へアクセスすると、下のように確認ができます。</p>
 
 
-<p><a href="/images/2011/10/streamm_consume.jpg">{% img /images/2011/10/streamm_consume-300x204.jpg 300 204 %}</a></p>
+<p><a href="/images/2011/10/streamm_consume.jpg"><img src="/images/2011/10/streamm_consume-300x204.jpg" width="300" height="204"></a></p>
 
 <p>実際にHTML5で記述する際は、下記のように書きます。</p>
 
@@ -183,7 +183,7 @@ Stating server on port: 8080
 
 <p>設定したストリーム名とパスワードを入力し、ログインすると下のようにBandwidthや接続数が確認出来ます。</p>
 
-<p><a href="/images/2011/10/streamm_console.jpg">{% img /images/2011/10/streamm_console-300x200.jpg 300 200 %}</a></p>
+<p><a href="/images/2011/10/streamm_console.jpg"><img src="/images/2011/10/streamm_console-300x200.jpg" width="300" height="200"></a></p>
 
 <p>実際に配信してみましたが、バッファリング毎にノイズだけ発生しているような感じで、vlcのバージョンが古いのが原因かと思いましたが、突き詰められてません。</p>
 

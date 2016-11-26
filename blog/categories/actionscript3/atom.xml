@@ -4,7 +4,7 @@
   <title><![CDATA[Category: actionscript3 | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/actionscript3/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -288,7 +288,7 @@ var key:String = param["key"];
 
 <h3>HTML</h3>
 
-<p>```</p>
+<p>&#8220;`</p>
 
 <!-- ※一部抜粋 -->
 
@@ -299,7 +299,7 @@ var key:String = param["key"];
 
 
 <p><a href="test.swf?key=test">リンクで開く場合</a>
-```</p>
+&#8220;`</p>
 
 <p>一般的にはFlashVarsで値を渡します。
 またはGETでSWFに直接渡してもいけるはず。</p>

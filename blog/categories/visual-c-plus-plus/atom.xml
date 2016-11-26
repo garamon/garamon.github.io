@@ -4,7 +4,7 @@
   <title><![CDATA[Category: visual c++ | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/visual-c-plus-plus/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -73,17 +73,17 @@ Param="ABSOLUTE_PATH = &lt;path to wmpwiz directory goes here&gt;"
 <p>これで、準備完了。
 VisualC++を起動すると、</p>
 
-<p><a href="/images/2011/10/WindowsMediaPlayerWizard.jpg">{% img /images/2011/10/WindowsMediaPlayerWizard-300x207.jpg 300 207 %}</a></p>
+<p><a href="/images/2011/10/WindowsMediaPlayerWizard.jpg"><img src="/images/2011/10/WindowsMediaPlayerWizard-300x207.jpg" width="300" height="207"></a></p>
 
 <p>Windows Media Player Plug-in Wizardが追加されました！
 Wizardテンプレートを選択し、プロジェクト作成を開始すると</p>
 
-<p><a href="/images/2011/10/WindowsMediaPlayerWizard2.jpg">{% img /images/2011/10/WindowsMediaPlayerWizard2-300x187.jpg 300 187 %}</a></p>
+<p><a href="/images/2011/10/WindowsMediaPlayerWizard2.jpg"><img src="/images/2011/10/WindowsMediaPlayerWizard2-300x187.jpg" width="300" height="187"></a></p>
 
 <p>作成するplug-inの形式を選択することができます。
 適当に選んで、プロジェクト作成完了です！</p>
 
-<p><a href="/images/2011/10/WindowsMediaPlayerWizard3.jpg">{% img /images/2011/10/WindowsMediaPlayerWizard3-300x181.jpg 300 181 %}</a></p>
+<p><a href="/images/2011/10/WindowsMediaPlayerWizard3.jpg"><img src="/images/2011/10/WindowsMediaPlayerWizard3-300x181.jpg" width="300" height="181"></a></p>
 ]]></content>
   </entry>
   

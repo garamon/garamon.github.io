@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mysqlworkbench | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/mysqlworkbench/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -35,11 +35,11 @@
 
 <p>テーブルの詳細を表示し</p>
 
-<p><a href="/images/2014/08/mysql-work-bench-1.png">{% img /images/2014/08/mysql-work-bench-1-500x121.png 500 121 %}</a></p>
+<p><a href="/images/2014/08/mysql-work-bench-1.png"><img src="/images/2014/08/mysql-work-bench-1-500x121.png" width="500" height="121"></a></p>
 
 <p>すると</p>
 
-<p><a href="/images/2014/08/mysql-work-bench-2.png">{% img /images/2014/08/mysql-work-bench-2-500x121.png 500 121 %}</a></p>
+<p><a href="/images/2014/08/mysql-work-bench-2.png"><img src="/images/2014/08/mysql-work-bench-2-500x121.png" width="500" height="121"></a></p>
 
 <p>ストレージエンジンのセレクトボックスが表示される。分りにくい。</p>
 

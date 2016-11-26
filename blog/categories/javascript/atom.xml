@@ -4,7 +4,7 @@
   <title><![CDATA[Category: javascript | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/javascript/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -23,7 +23,7 @@
 
 <h2>イベントハンドラの登録は重い処理</h2>
 
-<p>``` html</p>
+<p>&#8220;` html</p>
 
 <ul>
     <li>1</li>
@@ -58,7 +58,7 @@ jQueryのonメソッドは、第2引数にイベントを発生させる要素�
 <p>$(&lsquo;ul&rsquo;).on(&lsquo;click&rsquo;, &lsquo;li&rsquo;, function(e) {
     console.log(&lsquo;delegate&rsquo;);
 });
-```</p>
+&#8220;`</p>
 
 <h2>jsPerfでの性能テスト結果</h2>
 
@@ -145,7 +145,7 @@ jQueryのonメソッドは、第2引数にイベントを発生させる要素�
 
 <p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
 
-<p>``` html
+<p>&#8220;` html
 &lt;!DOCTYPE html>
 <html>
 <head>
@@ -170,13 +170,13 @@ jQueryのonメソッドは、第2引数にイベントを発生させる要素�
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <h2>triggerでイベントを発行</h2>
 
 <p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
 
-<p>``` javascript</p>
+<p>&#8220;` javascript</p>
 
 <script type="text/javascript">
     (function() {
@@ -211,7 +211,7 @@ trigger経由で発行されたイベントの場合のみなんらかの処理�
 </script>
 
 
-<p>```</p>
+<p>&#8220;`</p>
 
 <p>ちなみにラジオボタンでも同じです。
 javascript好きになってきた今日この頃。</p>

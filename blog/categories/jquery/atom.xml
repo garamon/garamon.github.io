@@ -4,7 +4,7 @@
   <title><![CDATA[Category: jquery | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -23,7 +23,7 @@
 
 <h2>イベントハンドラの登録は重い処理</h2>
 
-<p>``` html</p>
+<p>&#8220;` html</p>
 
 <ul>
     <li>1</li>
@@ -58,7 +58,7 @@ jQueryのonメソッドは、第2引数にイベントを発生させる要素�
 <p>$(&lsquo;ul&rsquo;).on(&lsquo;click&rsquo;, &lsquo;li&rsquo;, function(e) {
     console.log(&lsquo;delegate&rsquo;);
 });
-```</p>
+&#8220;`</p>
 
 <h2>jsPerfでの性能テスト結果</h2>
 
@@ -121,7 +121,7 @@ jQueryのonメソッドは、第2引数にイベントを発生させる要素�
 
 <p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
 
-<p>``` html
+<p>&#8220;` html
 &lt;!DOCTYPE html>
 <html>
 <head>
@@ -146,13 +146,13 @@ jQueryのonメソッドは、第2引数にイベントを発生させる要素�
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <h2>triggerでイベントを発行</h2>
 
 <p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
 
-<p>``` javascript</p>
+<p>&#8220;` javascript</p>
 
 <script type="text/javascript">
     (function() {
@@ -187,7 +187,7 @@ trigger経由で発行されたイベントの場合のみなんらかの処理�
 </script>
 
 
-<p>```</p>
+<p>&#8220;`</p>
 
 <p>ちなみにラジオボタンでも同じです。
 javascript好きになってきた今日この頃。</p>
@@ -210,7 +210,7 @@ javascript好きになってきた今日この頃。</p>
 
 <h2>jQueryの読み込み</h2>
 
-<p>```html</p>
+<p>&#8220;`html</p>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
@@ -227,7 +227,7 @@ javascript好きになってきた今日この頃。</p>
 
 
 <p></body>
-```</p>
+&#8220;`</p>
 
 <p>bodyにclassでtopを付けておきます。
 Javascriptが無効のときもページ内リンクが有効になります。</p>
@@ -290,7 +290,7 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
 
 <h2>jQueryの読み込み</h2>
 
-<p>```html</p>
+<p>&#8220;`html</p>
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
@@ -336,7 +336,7 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
     return false;
   });
 });
-```</p>
+&#8220;`</p>
 
 <p>初めに、コンテンツ内容を非表示にします。
 次に、メニューの最初の項目にclassでactiveを追加します。
@@ -413,7 +413,7 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
 
 <h3>jQuery Mobile</h3>
 
-<p>```html
+<p>&#8220;`html
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -468,13 +468,13 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <p><a href="http://jsdo.it/regret2721/gbHB" target="_blank">デモページ</a></p>
 
 <h3>地図の大きさを100%指定にしてみる</h3>
 
-<p>```html
+<p>&#8220;`html
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -532,11 +532,11 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <p><a href="http://jsdo.it/regret2721/unrq" target="_blank">デモページ</a></p>
 
-<p>```javascript</p>
+<p>&#8220;`javascript</p>
 
 
 
@@ -546,13 +546,13 @@ CSSを100%に変更
 
 <p>var pageHeight= $(document).height();
 $(&ldquo;#gmap&rdquo;).css(&ldquo;height&rdquo;,pageHeight);
-```</p>
+&#8220;`</p>
 
 <p>CSSでgmap要素を100%指定すると消えてしまったので、Javascriptでドキュメントの高さをgmapに設定</p>
 
 <h3>地図の大きさを100%でページ分割する</h3>
 
-<p>```html
+<p>&#8220;`html
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -629,7 +629,7 @@ $(&ldquo;#gmap&rdquo;).css(&ldquo;height&rdquo;,pageHeight);
 
 <p></body>
 </html>
-```</p>
+&#8220;`</p>
 
 <p><a href="http://jsdo.it/regret2721/gBxa" target="_blank">デモページ</a></p>
 
@@ -640,7 +640,7 @@ $(&ldquo;#gmap&rdquo;).css(&ldquo;height&rdquo;,pageHeight);
 
 <p>スクリプトが全ページで実行されてしまうので、onloadの指定をやめました。</p>
 
-<p>```javascript</p>
+<p>&#8220;`javascript</p>
 
 <script type="text/javascript">
   function initialize() {
@@ -678,7 +678,7 @@ pageshowイベントを使用して、accessページのみ実行するように
 <p>$(&lsquo;#access&rsquo;).bind(&lsquo;pageshow&rsquo;,initialize);
 ↓
 $(&lsquo;#access&rsquo;).live(&lsquo;pageshow&rsquo;,initialize);
-```</p>
+&#8220;`</p>
 
 <p>動的要素なので、bindをliveにすればHead内でも実行できました。</p>
 ]]></content>

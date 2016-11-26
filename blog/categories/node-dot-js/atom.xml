@@ -4,7 +4,7 @@
   <title><![CDATA[Category: node.js | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/node-dot-js/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -265,7 +265,7 @@ Express server listening on port 3000 in development mode
 ブラウザで、http://localhost:3000にアクセスします。</p>
 
 
-<p>{% img /images/2011/10/express.jpg 242 214 %}</p>
+<p><img src="/images/2011/10/express.jpg" width="242" height="214"></p>
 
 <p>上のように表示され無事、作成出来ました。</p>
 

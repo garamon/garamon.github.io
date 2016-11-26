@@ -4,7 +4,7 @@
   <title><![CDATA[Category: mac | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
-  <updated>2016-11-26T21:13:31+09:00</updated>
+  <updated>2016-11-27T00:15:30+09:00</updated>
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -92,7 +92,7 @@
 
 <p>アイコンがダサい・・・。</p>
 
-<p>{% img /images/2014/09/mac-caffeine-1.png %}</p>
+<p><img src="/images/2014/09/mac-caffeine-1.png"></p>
 
 <!--more-->
 
@@ -125,7 +125,7 @@
 
 <p>いい感じ。</p>
 
-<p>{% img /images/2014/09/mac-caffeine-2.png %}</p>
+<p><img src="/images/2014/09/mac-caffeine-2.png"></p>
 
 <h2>注意</h2>
 
@@ -143,11 +143,11 @@
 <!--more-->
 
 
-<p>{% img /images/2014/09/mac-day-o-1.png %}</p>
+<p><img src="/images/2014/09/mac-day-o-1.png"></p>
 
 <p>日付をクリックすると以下のような表示となる。</p>
 
-<p>{% img /images/2014/09/mac-day-o-2.png %}</p>
+<p><img src="/images/2014/09/mac-day-o-2.png"></p>
 
 <p><code>Preference</code>から日付のフォーマットを変更することもできる。</p>
 
@@ -175,13 +175,13 @@
 
 <p>ログインオプションを選択する。</p>
 
-<p><a href="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png">{% img /images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png 500 379 %}</a></p>
+<p><a href="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png"><img src="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png" width="500" height="379"></a></p>
 
 <h3>ファストユーザスイッチメニューの表示</h3>
 
 <p>「ファストユーザスイッチメニューを表示」にチェックがはいっているので外す。</p>
 
-<p><a href="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png">{% img /images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png 500 379 %}</a></p>
+<p><a href="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png"><img src="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png" width="500" height="379"></a></p>
 
 <p>これでメニューバーのユーザー名は非表示となる。
 <a href="http://evernote.com/intl/jp/skitch/">skitch</a>を使ってみたが便利だ。</p>
