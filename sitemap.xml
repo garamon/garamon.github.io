@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<<<<<<< HEAD
   <url>
     <loc>http://blog.code-life.net/blog/2016/02/09/ansible-blockinfile/</loc>
     <lastmod>2016-02-09T20:00:37+09:00</lastmod>
@@ -1103,4 +1104,1351 @@
   <url>
     <loc>http://blog.code-life.net/blog/categories/ansible/</loc>
   </url>
+=======
+  
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2015/08/07/hatena-blog/</loc>
+    <lastmod>2015-08-07T23:12:04+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network/</loc>
+    <lastmod>2014-09-25T01:34:11+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/09/23/php-callbacks/</loc>
+    <lastmod>2014-09-23T22:28:38+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/09/23/php-array-flatten/</loc>
+    <lastmod>2014-09-23T21:24:42+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/09/21/ftp-ls-output-to-local-file-from-the-command-line/</loc>
+    <lastmod>2014-09-21T16:32:47+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon/</loc>
+    <lastmod>2014-09-21T14:33:34+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/09/07/mac-day-o/</loc>
+    <lastmod>2014-09-07T22:11:08+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/09/07/ssh-agent-forwarding/</loc>
+    <lastmod>2014-09-07T19:24:56+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2/</loc>
+    <lastmod>2014-08-29T10:58:40+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/08/28/how-to-change-storage-engine-mysql-work-bench/</loc>
+    <lastmod>2014-08-28T18:24:52+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/08/28/change-ssh-port-when-using-rsync/</loc>
+    <lastmod>2014-08-28T16:52:28+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/08/27/linux-skelton-directory/</loc>
+    <lastmod>2014-08-27T17:54:17+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/08/25/hide-user-name-from-menu-bar-in-mac-marvericks/</loc>
+    <lastmod>2014-08-25T14:57:41+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/08/25/escape-backtick-in-markdown/</loc>
+    <lastmod>2014-08-25T00:38:47+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/08/24/uncapitalize-the-post-title-octopress/</loc>
+    <lastmod>2014-08-24T23:28:21+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/</loc>
+    <lastmod>2014-05-07T22:30:15+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders/</loc>
+    <lastmod>2014-04-14T21:06:31+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow/</loc>
+    <lastmod>2014-04-14T20:41:27+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/02/07/install-vagrant-bash-completion-on-mac/</loc>
+    <lastmod>2014-02-07T11:19:47+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/01/06/using-vim-easymotion-in-intellij/</loc>
+    <lastmod>2014-01-06T23:21:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/01/06/homebrew-undefined-method-to-sym-for-nil-nilclass/</loc>
+    <lastmod>2014-01-06T22:40:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory/</loc>
+    <lastmod>2014-01-06T22:07:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/</loc>
+    <lastmod>2013-12-19T22:45:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/12/18/centos-linux-system-information/</loc>
+    <lastmod>2013-12-18T22:51:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/12/18/php-group-array-by-value/</loc>
+    <lastmod>2013-12-18T22:36:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/12/18/bash-creating-sequentially-numbered-directories/</loc>
+    <lastmod>2013-12-18T22:22:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/</loc>
+    <lastmod>2013-12-09T23:07:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/12/01/vagrant-configure-public-network/</loc>
+    <lastmod>2013-12-01T15:39:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/09/26/vagrant-mounting-failed/</loc>
+    <lastmod>2013-09-26T22:58:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback/</loc>
+    <lastmod>2013-09-25T21:59:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/09/18/vagrant-vbguest-update/</loc>
+    <lastmod>2013-09-18T21:57:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/06/12/vagrant-vbox-snapshot/</loc>
+    <lastmod>2013-06-12T21:25:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/06/10/the-guest-additions-on-this-vm-do-not-match-the-installed-version-of-virtualbox-on-vagrant/</loc>
+    <lastmod>2013-06-10T23:33:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/05/29/javascript-object-merge/</loc>
+    <lastmod>2013-05-29T22:45:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval/</loc>
+    <lastmod>2013-05-29T21:31:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/05/01/temporarily-ignore-alias/</loc>
+    <lastmod>2013-05-01T23:11:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/29/install-node-on-centos/</loc>
+    <lastmod>2013-04-29T00:13:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/25/parallel-merging/</loc>
+    <lastmod>2013-04-25T22:52:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/24/hide-php-version/</loc>
+    <lastmod>2013-04-24T22:33:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/22/ld-library-not-found-for-lltdl/</loc>
+    <lastmod>2013-04-22T20:04:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/22/how-to-syntax-check-mysql-config-file/</loc>
+    <lastmod>2013-04-22T16:39:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/22/php-compilation-failed-on-mac-osx/</loc>
+    <lastmod>2013-04-22T15:43:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/17/how-to-get-auto-increment-value-in-mysql/</loc>
+    <lastmod>2013-04-17T20:15:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/16/bash-hack-tips/</loc>
+    <lastmod>2013-04-16T23:40:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/15/how-to-copy-list-of-filename-in-windows/</loc>
+    <lastmod>2013-04-15T22:31:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/</loc>
+    <lastmod>2013-04-14T22:48:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/14/scp-command-not-found-on-centos/</loc>
+    <lastmod>2013-04-14T22:32:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/04/14/how-to-install-ffmpeg-on-centos6-x86-64/</loc>
+    <lastmod>2013-04-14T14:53:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/03/30/start-blogging-with-octopress/</loc>
+    <lastmod>2013-03-30T12:52:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/03/21/cakephp2-css-controller-could-not-be-found/</loc>
+    <lastmod>2013-03-21T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/03/09/how-to-get-logged-in-user-in-model-cakephp/</loc>
+    <lastmod>2013-03-09T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2013/03/09/changing-the-tags-output-cakephp2/</loc>
+    <lastmod>2013-03-09T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/12/12/php-thrifthiveclient/</loc>
+    <lastmod>2012-12-12T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/10/01/vim-vdebug-xdebug/</loc>
+    <lastmod>2012-10-01T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/09/30/php-hiveql-hiveserver/</loc>
+    <lastmod>2012-09-30T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/08/30/install-fluentd/</loc>
+    <lastmod>2012-08-30T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/08/30/how-to-install-vmwaretools-on-centos6/</loc>
+    <lastmod>2012-08-30T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/07/03/comment-out-multiple-lines-vim/</loc>
+    <lastmod>2012-07-03T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/06/15/stop-daily-updates/</loc>
+    <lastmod>2012-06-15T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/06/12/install-mymemcheck-on-centos/</loc>
+    <lastmod>2012-06-12T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/06/11/movable-type-mtkeitaipaginate/</loc>
+    <lastmod>2012-06-11T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/06/04/nginx-ngx-cache-purge-module/</loc>
+    <lastmod>2012-06-04T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/05/31/how-to-check-squid-status/</loc>
+    <lastmod>2012-05-31T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/05/30/compass-css/</loc>
+    <lastmod>2012-05-30T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/05/27/windows-service-c-sharp-2/</loc>
+    <lastmod>2012-05-27T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/05/24/windows-service-c-sharp-1/</loc>
+    <lastmod>2012-05-24T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/05/20/psexec/</loc>
+    <lastmod>2012-05-20T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/05/19/how-to-install-small-light-imagemagick/</loc>
+    <lastmod>2012-05-19T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/05/10/scroll-top-jquery/</loc>
+    <lastmod>2012-05-10T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/05/06/tab-menu-jquery/</loc>
+    <lastmod>2012-05-06T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/05/03/how-to-install-httpsegmenter-on-centos/</loc>
+    <lastmod>2012-05-03T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/05/02/start-using-sass-css/</loc>
+    <lastmod>2012-05-02T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/04/28/start-using-less-css/</loc>
+    <lastmod>2012-04-28T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/04/24/wordpress-image-link/</loc>
+    <lastmod>2012-04-24T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/04/20/htaccess-redirect/</loc>
+    <lastmod>2012-04-20T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/04/16/mtappjqueryplus-movable-type/</loc>
+    <lastmod>2012-04-16T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/04/12/movable-type-plugins/</loc>
+    <lastmod>2012-04-12T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/04/08/movable-type-custom-field/</loc>
+    <lastmod>2012-04-08T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/04/04/install-mp4box-on-centos/</loc>
+    <lastmod>2012-04-04T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/04/03/movable-type-mtinclude-variable/</loc>
+    <lastmod>2012-04-03T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/04/02/operators-as3/</loc>
+    <lastmod>2012-04-02T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/31/movable-type-tags/</loc>
+    <lastmod>2012-03-31T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/27/jquery-mobile-googlemap/</loc>
+    <lastmod>2012-03-27T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/24/apache-servertokens/</loc>
+    <lastmod>2012-03-24T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/23/start-jquery-mobile/</loc>
+    <lastmod>2012-03-23T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/19/css-top-page-corporate-site-html5/</loc>
+    <lastmod>2012-03-19T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/16/six-things-that-begginer-should-know-about-cakephp/</loc>
+    <lastmod>2012-03-16T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/15/html5-id-class/</loc>
+    <lastmod>2012-03-15T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/12/tcp-server-c-sharp/</loc>
+    <lastmod>2012-03-12T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/12/cakephp-containable-behavior/</loc>
+    <lastmod>2012-03-12T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/10/sub-page-corporate-site-html5/</loc>
+    <lastmod>2012-03-10T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/08/performance-counter-c-sharp/</loc>
+    <lastmod>2012-03-08T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/08/how-to-convert-url-to-image-cakephp/</loc>
+    <lastmod>2012-03-08T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/07/top-page-corporate-site-html5/</loc>
+    <lastmod>2012-03-07T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/04/how-to-check-email-from-command-line-using-gmail-pop3/</loc>
+    <lastmod>2012-03-04T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/03/03/corporate-site-html5/</loc>
+    <lastmod>2012-03-03T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/28/create-thumbnail-ffmpeg/</loc>
+    <lastmod>2012-02-28T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/23/how-to-send-email-from-command-line-using-gmail-smtp/</loc>
+    <lastmod>2012-02-23T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/20/sntp-c-sharp/</loc>
+    <lastmod>2012-02-20T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/14/how-to-convert-ppt-file-to-image-file-c-sharp/</loc>
+    <lastmod>2012-02-14T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/08/directshow-usbcamera-c-sharp-2/</loc>
+    <lastmod>2012-02-08T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/07/openframeworks-sample/</loc>
+    <lastmod>2012-02-07T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/05/directshow-usbcamera-c-sharp-1/</loc>
+    <lastmod>2012-02-05T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/04/openframeworks-build/</loc>
+    <lastmod>2012-02-04T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/04/cakephp-configure/</loc>
+    <lastmod>2012-02-04T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/02/yaml-configuration-cakephp/</loc>
+    <lastmod>2012-02-02T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/02/directshow-c-sharp/</loc>
+    <lastmod>2012-02-02T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/02/01/openframeworks/</loc>
+    <lastmod>2012-02-01T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/30/convert-bmp-to-avi-c-sharp/</loc>
+    <lastmod>2012-01-30T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/28/screen-capture-with-mouse-pointer-c-sharp/</loc>
+    <lastmod>2012-01-28T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/24/desktop-capture-c-sharp/</loc>
+    <lastmod>2012-01-24T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/22/managed-directsound-3/</loc>
+    <lastmod>2012-01-22T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/21/63-best-practice-optimize-php-code-performance-ja/</loc>
+    <lastmod>2012-01-21T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/19/managed-directsound-2/</loc>
+    <lastmod>2012-01-19T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/16/managed-directsound/</loc>
+    <lastmod>2012-01-16T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/12/type-hinting-php/</loc>
+    <lastmod>2012-01-12T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/11/fraise/</loc>
+    <lastmod>2012-01-11T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/09/install-phpunit-3-6/</loc>
+    <lastmod>2012-01-09T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/09/expression-encoder-sdk-6/</loc>
+    <lastmod>2012-01-09T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/07/php-calendar/</loc>
+    <lastmod>2012-01-07T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/06/how-to-get-mime-type-in-php/</loc>
+    <lastmod>2012-01-06T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/06/expression-encoder-sdk-5/</loc>
+    <lastmod>2012-01-06T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/03/expression-encoder-sdk-4/</loc>
+    <lastmod>2012-01-03T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2012/01/03/cakephp-compact/</loc>
+    <lastmod>2012-01-03T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/31/expression-encoder-sdk-3/</loc>
+    <lastmod>2011-12-31T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/31/cakephp2-custom-exception/</loc>
+    <lastmod>2011-12-31T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/29/expression-encoder-sdk-2/</loc>
+    <lastmod>2011-12-29T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/28/spl_autoload_register-php/</loc>
+    <lastmod>2011-12-28T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/26/vc1/</loc>
+    <lastmod>2011-12-26T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/25/convert-array-to-xml-cakephp2/</loc>
+    <lastmod>2011-12-25T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/23/expression-encoder-sdk/</loc>
+    <lastmod>2011-12-23T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/21/ruby-rmagick/</loc>
+    <lastmod>2011-12-21T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/21/cakephp2-log4php/</loc>
+    <lastmod>2011-12-21T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/19/olecom-object-viewer/</loc>
+    <lastmod>2011-12-19T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/19/do-not-use-database-cakephp2/</loc>
+    <lastmod>2011-12-19T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/18/ruby-xml/</loc>
+    <lastmod>2011-12-18T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/15/convert-xml-to-associative-array-in-php/</loc>
+    <lastmod>2011-12-15T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/14/md5-ruby/</loc>
+    <lastmod>2011-12-14T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/12/to-s-ruby/</loc>
+    <lastmod>2011-12-12T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/12/php-cache-lite/</loc>
+    <lastmod>2011-12-12T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/10/f4v/</loc>
+    <lastmod>2011-12-10T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/08/install-darwin-streaming-server/</loc>
+    <lastmod>2011-12-08T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/07/how-to-load-yaml-php/</loc>
+    <lastmod>2011-12-07T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/06/geany/</loc>
+    <lastmod>2011-12-06T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/02/listen-for-when-movie-is-finishied-as3/</loc>
+    <lastmod>2011-12-02T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/02/hello-directshow/</loc>
+    <lastmod>2011-12-02T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/12/01/dot-install/</loc>
+    <lastmod>2011-12-01T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/30/as3-netstatus-event/</loc>
+    <lastmod>2011-11-30T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/29/encoding-in-directshow-2/</loc>
+    <lastmod>2011-11-29T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/28/wordcamp-tokyo-2011/</loc>
+    <lastmod>2011-11-28T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/27/settimeout-as3/</loc>
+    <lastmod>2011-11-27T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/26/encoding-in-directshow/</loc>
+    <lastmod>2011-11-26T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/25/associative-array-array-push-php/</loc>
+    <lastmod>2011-11-25T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/24/how-to-get-query-string-as3/</loc>
+    <lastmod>2011-11-24T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/23/directshow-sample-grabber/</loc>
+    <lastmod>2011-11-23T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/21/fullscreen-as3/</loc>
+    <lastmod>2011-11-21T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/18/fscommand-as3/</loc>
+    <lastmod>2011-11-18T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/17/redirect-referer/</loc>
+    <lastmod>2011-11-17T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/16/document-write-script/</loc>
+    <lastmod>2011-11-16T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/15/flash-cross-domain/</loc>
+    <lastmod>2011-11-15T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/14/webm/</loc>
+    <lastmod>2011-11-14T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/12/external-interface-as3/</loc>
+    <lastmod>2011-11-12T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/11/developer-program-for-playstation-suite-closed-beta-test/</loc>
+    <lastmod>2011-11-11T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/10/how-to-create-multiple-checkboxes-in-cakephp/</loc>
+    <lastmod>2011-11-10T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/09/box2dflashas3/</loc>
+    <lastmod>2011-11-09T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/08/media-encoding-cluster/</loc>
+    <lastmod>2011-11-08T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/07/javascript-var/</loc>
+    <lastmod>2011-11-07T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/05/ppm3/</loc>
+    <lastmod>2011-11-05T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/05/connect-to-fms/</loc>
+    <lastmod>2011-11-05T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/03/md5-in-actionscript2/</loc>
+    <lastmod>2011-11-03T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/02/ppm-2/</loc>
+    <lastmod>2011-11-02T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/11/01/php-iterator-interface/</loc>
+    <lastmod>2011-11-01T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/30/ppm-1/</loc>
+    <lastmod>2011-10-30T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/30/md5-in-actionscript3/</loc>
+    <lastmod>2011-10-30T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/29/session-high-jacking-3/</loc>
+    <lastmod>2011-10-29T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/28/combine-date-and-time-mysql/</loc>
+    <lastmod>2011-10-28T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/26/session-high-jacking-2/</loc>
+    <lastmod>2011-10-26T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/26/duratioin-mp4-video/</loc>
+    <lastmod>2011-10-26T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/24/stream-m-live-streaming-2/</loc>
+    <lastmod>2011-10-24T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/24/as3-format-time/</loc>
+    <lastmod>2011-10-24T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/23/session-high-jacking-1/</loc>
+    <lastmod>2011-10-23T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/22/random-password-cakephp/</loc>
+    <lastmod>2011-10-22T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/21/create-windowsmediaplayer-skins/</loc>
+    <lastmod>2011-10-21T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/19/send-mail-gmail-cakephp/</loc>
+    <lastmod>2011-10-19T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/19/basic-authentication-cakephp/</loc>
+    <lastmod>2011-10-19T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/18/stream-m-live-streaming-1/</loc>
+    <lastmod>2011-10-18T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/16/away3d/</loc>
+    <lastmod>2011-10-16T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/15/cakephp-group-by-problem-paginate/</loc>
+    <lastmod>2011-10-15T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/13/flartoolkit-2/</loc>
+    <lastmod>2011-10-13T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/13/download-csv-cakephp/</loc>
+    <lastmod>2011-10-13T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/11/install-node-js-express/</loc>
+    <lastmod>2011-10-11T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/11/cakephp-acl-plugin/</loc>
+    <lastmod>2011-10-11T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/10/flartoolkit-1/</loc>
+    <lastmod>2011-10-10T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/09/upgrade-php/</loc>
+    <lastmod>2011-10-09T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/08/bootcamp-keyboard-mappings-windows/</loc>
+    <lastmod>2011-10-08T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/07/cakephp-flash-message-template/</loc>
+    <lastmod>2011-10-07T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/06/c-sharp-windows-media-player-activex-tips/</loc>
+    <lastmod>2011-10-06T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/05/cakephp-remove-validation-rule/</loc>
+    <lastmod>2011-10-05T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/03/visualc-plus-plus-windowsmediaplayer-plug-in-wizard/</loc>
+    <lastmod>2011-10-03T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/10/01/mindmaps/</loc>
+    <lastmod>2011-10-01T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/30/c-sharp-skype-api-3/</loc>
+    <lastmod>2011-09-30T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/28/c-sharp-skype-api-2/</loc>
+    <lastmod>2011-09-28T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/26/c-sharp-skype-api-1/</loc>
+    <lastmod>2011-09-26T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/25/how-to-avoid-web-page-has-expired-ie/</loc>
+    <lastmod>2011-09-25T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/24/how-to-use-windows-media-player-activex-controll-5/</loc>
+    <lastmod>2011-09-24T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/22/c-sharp-linux/</loc>
+    <lastmod>2011-09-22T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/21/be-careful-is-file-in-php/</loc>
+    <lastmod>2011-09-21T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/19/check-mime-type-in-php/</loc>
+    <lastmod>2011-09-19T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/18/c-sharp-as3-externalInterface-2/</loc>
+    <lastmod>2011-09-18T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/16/c-sharp-as3-externalInterface-1/</loc>
+    <lastmod>2011-09-16T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/13/c-sharp-flash-swf/</loc>
+    <lastmod>2011-09-13T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/11/webcam-with-as3/</loc>
+    <lastmod>2011-09-11T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/11/change-rdp-port/</loc>
+    <lastmod>2011-09-11T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/10/start-a-websocket/</loc>
+    <lastmod>2011-09-10T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/10/phpcon2011-lightning-talk/</loc>
+    <lastmod>2011-09-10T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/08/how-to-use-windows-media-player-activex-controll-4/</loc>
+    <lastmod>2011-09-08T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/05/how-to-use-windows-media-player-activex-controll-3/</loc>
+    <lastmod>2011-09-05T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/03/how-to-use-windows-media-player-activex-controll-2/</loc>
+    <lastmod>2011-09-03T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/09/02/how-to-use-windows-media-player-activex-controll-1/</loc>
+    <lastmod>2011-09-02T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/2011/08/31/setting-php-character-encoding/</loc>
+    <lastmod>2011-08-31T00:00:00+09:00</lastmod>
+    <priority>0.8</priority>
+  </url>
+  
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/archives/</loc>
+    <lastmod>2015-08-08T00:04:40+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/</loc>
+    <lastmod>2015-08-08T00:04:40+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+  
+  <url>
+    <loc>http://blog.code-life.net/blog/categories/</loc>
+    <lastmod>2015-08-08T00:04:40+09:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  
+  
+>>>>>>> origin/master
 </urlset>

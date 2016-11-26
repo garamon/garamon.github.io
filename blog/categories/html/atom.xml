@@ -4,7 +4,11 @@
   <title><![CDATA[Category: html | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/html/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
+<<<<<<< HEAD
   <updated>2016-11-26T21:13:31+09:00</updated>
+=======
+  <updated>2015-08-08T00:04:40+09:00</updated>
+>>>>>>> origin/master
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -84,7 +88,11 @@
 
 <p>モジュール名：ページタイトル</p>
 
+<<<<<<< HEAD
 <p><a href="/images/2012/03/movable-type-tags-1.jpg">{% img /images/2012/03/movable-type-tags-1.jpg 300 187 %}</a></p>
+=======
+<p><a href="/images/2012/03/movable-type-tags-1.jpg"><img src="/images/2012/03/movable-type-tags-1.jpg" width="300" height="187"></a></p>
+>>>>>>> origin/master
 
 <pre><code class="html">&lt;mt:If name="main_index"&gt;&lt;!-- ▼テンプレート設定のテンプレート種類がメインインデックスの場合 --&gt;
 
@@ -171,7 +179,11 @@
 
 <h4>main_indexの処理</h4>
 
+<<<<<<< HEAD
 <p><a href="/images/2012/03/movable-type-tags-2.jpg">{% img /images/2012/03/movable-type-tags-2-300x273.jpg 300 273 %}</a></p>
+=======
+<p><a href="/images/2012/03/movable-type-tags-2.jpg"><img src="/images/2012/03/movable-type-tags-2-300x273.jpg" width="300" height="273"></a></p>
+>>>>>>> origin/master
 
 <p>インデックステンプレートのテンプレート設定のところにあるテンプレートの種類をMain Index（main_index）に設定したテンプレートに対して表示を行います。</p>
 
@@ -208,7 +220,11 @@
 ブログ記事の設定で指定した概要の文字数だけ先頭から表示します。
 </code></pre>
 
+<<<<<<< HEAD
 <p>remove_html=&ldquo;1"を指定することで、htmlタグが使用されていたらそれを削除します。</p>
+=======
+<p>remove_html=&ldquo;1&#8221;を指定することで、htmlタグが使用されていたらそれを削除します。</p>
+>>>>>>> origin/master
 
 <h4>entry_archiveの処理</h4>
 
@@ -243,9 +259,15 @@
 
 <p>ただ、インデックステンプレートには、タイトル入力欄や説明文入力欄がないので、新たにカスタムフィールドで設定してあげる必要があります。</p>
 
+<<<<<<< HEAD
 <p><a href="/images/2012/03/movable-type-tags-3.jpg">{% img /images/2012/03/movable-type-tags-3-300x209.jpg 300 209 %}</a></p>
 
 <p><a href="/images/2012/03/movable-type-tags-4.jpg">{% img /images/2012/03/movable-type-tags-4-300x262.jpg 300 262 %}</a></p>
+=======
+<p><a href="/images/2012/03/movable-type-tags-3.jpg"><img src="/images/2012/03/movable-type-tags-3-300x209.jpg" width="300" height="209"></a></p>
+
+<p><a href="/images/2012/03/movable-type-tags-4.jpg"><img src="/images/2012/03/movable-type-tags-4-300x262.jpg" width="300" height="262"></a></p>
+>>>>>>> origin/master
 
 <p>システムのカスタムフィールドの作成から、それぞれフィールドを作成することで、インデックステンプレートの入力欄に表示されます。
 あとはそのカスタムフィールドを表示します。</p>
@@ -338,7 +360,11 @@
 
 <h3>jQuery Mobile</h3>
 
+<<<<<<< HEAD
 <p>```html
+=======
+<p>&#8220;`html
+>>>>>>> origin/master
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -393,13 +419,21 @@
 
 <p></body>
 </html>
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p><a href="http://jsdo.it/regret2721/gbHB" target="_blank">デモページ</a></p>
 
 <h3>地図の大きさを100%指定にしてみる</h3>
 
+<<<<<<< HEAD
 <p>```html
+=======
+<p>&#8220;`html
+>>>>>>> origin/master
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -457,11 +491,19 @@
 
 <p></body>
 </html>
+<<<<<<< HEAD
 ```</p>
 
 <p><a href="http://jsdo.it/regret2721/unrq" target="_blank">デモページ</a></p>
 
 <p>```javascript</p>
+=======
+&#8220;`</p>
+
+<p><a href="http://jsdo.it/regret2721/unrq" target="_blank">デモページ</a></p>
+
+<p>&#8220;`javascript</p>
+>>>>>>> origin/master
 
 
 
@@ -471,13 +513,21 @@ CSSを100%に変更
 
 <p>var pageHeight= $(document).height();
 $(&ldquo;#gmap&rdquo;).css(&ldquo;height&rdquo;,pageHeight);
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>CSSでgmap要素を100%指定すると消えてしまったので、Javascriptでドキュメントの高さをgmapに設定</p>
 
 <h3>地図の大きさを100%でページ分割する</h3>
 
+<<<<<<< HEAD
 <p>```html
+=======
+<p>&#8220;`html
+>>>>>>> origin/master
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -554,7 +604,11 @@ $(&ldquo;#gmap&rdquo;).css(&ldquo;height&rdquo;,pageHeight);
 
 <p></body>
 </html>
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p><a href="http://jsdo.it/regret2721/gBxa" target="_blank">デモページ</a></p>
 
@@ -565,7 +619,11 @@ $(&ldquo;#gmap&rdquo;).css(&ldquo;height&rdquo;,pageHeight);
 
 <p>スクリプトが全ページで実行されてしまうので、onloadの指定をやめました。</p>
 
+<<<<<<< HEAD
 <p>```javascript</p>
+=======
+<p>&#8220;`javascript</p>
+>>>>>>> origin/master
 
 <script type="text/javascript">
   function initialize() {
@@ -603,7 +661,11 @@ pageshowイベントを使用して、accessページのみ実行するように
 <p>$(&lsquo;#access&rsquo;).bind(&lsquo;pageshow&rsquo;,initialize);
 ↓
 $(&lsquo;#access&rsquo;).live(&lsquo;pageshow&rsquo;,initialize);
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>動的要素なので、bindをliveにすればHead内でも実行できました。</p>
 ]]></content>
@@ -647,7 +709,11 @@ $(&lsquo;#access&rsquo;).live(&lsquo;pageshow&rsquo;,initialize);
 
 <h2>初期テンプレート</h2>
 
+<<<<<<< HEAD
 <p>```html
+=======
+<p>&#8220;`html
+>>>>>>> origin/master
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -681,9 +747,15 @@ $(&lsquo;#access&rsquo;).live(&lsquo;pageshow&rsquo;,initialize);
 
 <p></body>
 </html>
+<<<<<<< HEAD
 ```</p>
 
 <p><a href="/images/2012/03/start-jquery-mobile-1.jpg">{% img /images/2012/03/start-jquery-mobile-1.jpg 300 264 %}</a></p>
+=======
+&#8220;`</p>
+
+<p><a href="/images/2012/03/start-jquery-mobile-1.jpg"><img src="/images/2012/03/start-jquery-mobile-1.jpg" width="300" height="264"></a></p>
+>>>>>>> origin/master
 
 <p>公式を参考にすると上記のような感じになります。</p>
 
@@ -691,7 +763,11 @@ $(&lsquo;#access&rsquo;).live(&lsquo;pageshow&rsquo;,initialize);
 
 <p>エラーメッセージなどが英語だったりするので設定を変更するために下記のJSを読み込みます。</p>
 
+<<<<<<< HEAD
 <p>```javascript</p>
+=======
+<p>&#8220;`javascript</p>
+>>>>>>> origin/master
 
 <script src="jquery.mobile.init.js"></script>
 
@@ -706,7 +782,11 @@ $(&lsquo;#access&rsquo;).live(&lsquo;pageshow&rsquo;,initialize);
     $.mobile.listview.prototype.options.filterPlaceholder = &lsquo;検索文字列&rsquo;;
     $.mobile.page.prototype.options.backBtnText = &lsquo;戻る&rsquo;;
   });
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>ポイントは、上記スクリプトをjQuery MobileのJS読み込み前に読み込むこと。</p>
 
@@ -731,7 +811,11 @@ $(&lsquo;#access&rsquo;).live(&lsquo;pageshow&rsquo;,initialize);
 
 <p>デフォルトのデザインをそのまま使う場合はあまりないので、それぞれのデザインをオリジナルなものに変更します。</p>
 
+<<<<<<< HEAD
 <p>```html</p>
+=======
+<p>&#8220;`html</p>
+>>>>>>> origin/master
 
 <div data-role="page" data-theme="f">
   <header data-role="header" data-theme="f">
@@ -751,14 +835,24 @@ $(&lsquo;#access&rsquo;).live(&lsquo;pageshow&rsquo;,initialize);
 </div>
 
 
+<<<<<<< HEAD
 <p>```</p>
 
 <p>data-theme=&ldquo;f"をそれぞれの要素に追加しました。</p>
+=======
+<p>&#8220;`</p>
+
+<p>data-theme=&ldquo;f&#8221;をそれぞれの要素に追加しました。</p>
+>>>>>>> origin/master
 
 <p>data-themeによって、スタイルの切り替えが可能。
 jQuery Mobileでは、aからeまでのスタイルがセットされているので、何もスタイルがセットされていないf～zなど任意のスタイルを指定してあげれば、当然スタイルがセットされてないのでデザインが解除されます。</p>
 
+<<<<<<< HEAD
 <p><a href="/images/2012/03/start-jquery-mobile-2.jpg">{% img /images/2012/03/start-jquery-mobile-2.jpg 300 241 %}</a></p>
+=======
+<p><a href="/images/2012/03/start-jquery-mobile-2.jpg"><img src="/images/2012/03/start-jquery-mobile-2.jpg" width="300" height="241"></a></p>
+>>>>>>> origin/master
 
 <p>あとはそれぞれいつも通りにCSSでデザイン作るだけです。</p>
 
@@ -772,7 +866,11 @@ jQuery Mobileでは、aからeまでのスタイルがセットされている�
 <p>そんなときは、jQuery Mobileの<a href="http://jquerymobile.com/themeroller/" target="_blank">Theme Roller</a>を使います。
 このウェブツールを使うと、jQuery Mobileのテーマをちょちょいと作ることができます。</p>
 
+<<<<<<< HEAD
 <p><a href="/images/2012/03/start-jquery-mobile-3.png">{% img /images/2012/03/start-jquery-mobile-3.png 300 171 %}</a></p>
+=======
+<p><a href="/images/2012/03/start-jquery-mobile-3.png"><img src="/images/2012/03/start-jquery-mobile-3.png" width="300" height="171"></a></p>
+>>>>>>> origin/master
 
 <p>カラーコード指定で迷った場合は、Adobe Kulerからも選択できます。
 ちなみにKulerをどう反映すればいいか最初はわからなかったんですが、カラーアイコン（？）をドラック＆ドロップで反映できます。
@@ -814,7 +912,11 @@ jQuery Mobileでは、aからeまでのスタイルがセットされている�
 
 <h3>HTML</h3>
 
+<<<<<<< HEAD
 <p>```html</p>
+=======
+<p>&#8220;`html</p>
+>>>>>>> origin/master
 
 <div id="container">
 
@@ -838,7 +940,11 @@ jQuery Mobileでは、aからeまでのスタイルがセットされている�
   line-height:150%;
   letter-spacing:0.05em;
 }
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>各要素を入れるコンテナボックスを作ります。
 人によっては、wrapperとかでしょうか。</p>
@@ -903,7 +1009,11 @@ jQuery Mobileでは、aからeまでのスタイルがセットされている�
 
 <h3>HTML</h3>
 
+<<<<<<< HEAD
 <p>```html</p>
+=======
+<p>&#8220;`html</p>
+>>>>>>> origin/master
 
 <div id="main">
   <div id="slideShow">
@@ -968,7 +1078,11 @@ jQuery Mobileでは、aからeまでのスタイルがセットされている�
 <p>  width:210px;
   float:right;
 }
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>カラム部分となるcontentsとsidebarに対してfloatを。
 それにあわせて、information部分のdlにスタイルを設定しています。</p>
@@ -1062,7 +1176,11 @@ jQuery Mobileでは、aからeまでのスタイルがセットされている�
 
 <h3>HTML</h3>
 
+<<<<<<< HEAD
 <p>```html
+=======
+<p>&#8220;`html
+>>>>>>> origin/master
 <body id="top"></p>
 
 <!--=====================================================================
@@ -1096,7 +1214,11 @@ jQuery Mobileでは、aからeまでのスタイルがセットされている�
 <p><footer id="footer">
 </footer>
 </body>
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <h3>CSS</h3>
 

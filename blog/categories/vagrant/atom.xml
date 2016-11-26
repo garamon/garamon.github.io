@@ -4,7 +4,11 @@
   <title><![CDATA[Category: vagrant | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/vagrant/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
+<<<<<<< HEAD
   <updated>2016-11-26T21:13:31+09:00</updated>
+=======
+  <updated>2015-08-08T00:04:40+09:00</updated>
+>>>>>>> origin/master
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,6 +18,7 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[Vagrantで作成した仮想マシン一覧の状態を確認する]]></title>
     <link href="http://blog.code-life.net/blog/2015/08/19/vagrant-global-status/"/>
     <updated>2015-08-19T19:41:46+09:00</updated>
@@ -55,6 +60,8 @@ a5b5835  default virtualbox aborted  /Users/noto/vagrant/project03
   </entry>
   
   <entry>
+=======
+>>>>>>> origin/master
     <title type="html"><![CDATA[Vagrant 共有ディレクトリを複数追加する]]></title>
     <link href="http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders/"/>
     <updated>2014-04-14T21:06:31+09:00</updated>
@@ -258,4 +265,83 @@ fi
 ]]></content>
   </entry>
   
+<<<<<<< HEAD
+=======
+  <entry>
+    <title type="html"><![CDATA[[Vagrant]共有ディレクトリのマウントが失敗する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/09/26/vagrant-mounting-failed/"/>
+    <updated>2013-09-26T22:58:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/09/26/vagrant-mounting-failed</id>
+    <content type="html"><![CDATA[<h2>環境</h2>
+
+<ul>
+<li><p>HOST</p>
+
+<ul>
+<li>Mac OS X 10.8</li>
+<li>Vagrant 1.3.2</li>
+<li>Virtual Box 4.2.18</li>
+<li>ruby 1.9.3p392</li>
+</ul>
+</li>
+<li><p>GUEST</p>
+
+<ul>
+<li>CentOS 6.3 minimal</li>
+</ul>
+</li>
+</ul>
+
+
+<h2>エラー内容</h2>
+
+<p>vagrantから新規仮想マシンを作成し、ホストOSとゲストOSの共有ディレクトリの設定後、起動させたところ
+下記のエラーが出力された。</p>
+
+<!--more-->
+
+
+<pre><code class="sh">The following SSH command responded with a non-zero exit status.
+Vagrant assumes that this means the command failed!
+
+mount -t vboxsf -o uid=`id -u vagrant`,gid=`getent group vagrant | cut -d: -f3` /share /share
+
+Stdout from the command:
+
+
+
+Stderr from the command:
+
+/sbin/mount.vboxsf: mounting failed with the error: No such device
+</code></pre>
+
+<p>Guest additionsが正常にインストールされていないようなので /var/log/vboxadd-install.log を確認する。</p>
+
+<pre><code>test -e include/linux/autoconf.h -a -e include/config/auto.conf || (            \
+        echo;                                                           \
+        echo "  ERROR: Kernel configuration is invalid.";               \
+        echo "         include/linux/autoconf.h or include/config/auto.conf are missing.";      \
+        echo "         Run 'make oldconfig &amp;&amp; make prepare' on kernel src to fix it.";  \
+        echo;                                                           \
+        /bin/false)
+</code></pre>
+
+<p>automake, autoconf がインストールされてない&hellip;</p>
+
+<pre><code class="sh">$ sudo yum install automake autoconf
+</code></pre>
+
+<h2>Guest additionsの再インストール</h2>
+
+<p>ログアウト後</p>
+
+<pre><code class="sh">$ vagrant vbguest --do install # requier vagrant-vbguest
+$ vagrant reload
+</code></pre>
+
+<p>これで共有設定が反映される。</p>
+]]></content>
+  </entry>
+  
+>>>>>>> origin/master
 </feed>

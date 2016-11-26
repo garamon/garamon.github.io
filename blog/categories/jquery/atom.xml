@@ -4,7 +4,11 @@
   <title><![CDATA[Category: jquery | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/jquery/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
+<<<<<<< HEAD
   <updated>2016-11-26T21:13:31+09:00</updated>
+=======
+  <updated>2015-08-08T00:04:40+09:00</updated>
+>>>>>>> origin/master
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,6 +18,7 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[jQueryイベントハンドラを登録したい要素数が多い場合はdelegateでパフォーマンスを向上させる]]></title>
     <link href="http://blog.code-life.net/blog/2015/08/25/jquery-delegate-performance/"/>
     <updated>2015-08-25T19:47:14+09:00</updated>
@@ -99,6 +104,8 @@ jQueryのonメソッドは、第2引数にイベントを発生させる要素�
   </entry>
   
   <entry>
+=======
+>>>>>>> origin/master
     <title type="html"><![CDATA[[JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない]]></title>
     <link href="http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/"/>
     <updated>2013-12-09T23:07:00+09:00</updated>
@@ -121,7 +128,11 @@ jQueryのonメソッドは、第2引数にイベントを発生させる要素�
 
 <p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
 
+<<<<<<< HEAD
 <p>``` html
+=======
+<p>&#8220;` html
+>>>>>>> origin/master
 &lt;!DOCTYPE html>
 <html>
 <head>
@@ -146,13 +157,21 @@ jQueryのonメソッドは、第2引数にイベントを発生させる要素�
 
 <p></body>
 </html>
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <h2>triggerでイベントを発行</h2>
 
 <p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
 
+<<<<<<< HEAD
 <p>``` javascript</p>
+=======
+<p>&#8220;` javascript</p>
+>>>>>>> origin/master
 
 <script type="text/javascript">
     (function() {
@@ -187,7 +206,11 @@ trigger経由で発行されたイベントの場合のみなんらかの処理�
 </script>
 
 
+<<<<<<< HEAD
 <p>```</p>
+=======
+<p>&#8220;`</p>
+>>>>>>> origin/master
 
 <p>ちなみにラジオボタンでも同じです。
 javascript好きになってきた今日この頃。</p>
@@ -210,7 +233,11 @@ javascript好きになってきた今日この頃。</p>
 
 <h2>jQueryの読み込み</h2>
 
+<<<<<<< HEAD
 <p>```html</p>
+=======
+<p>&#8220;`html</p>
+>>>>>>> origin/master
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
@@ -227,7 +254,11 @@ javascript好きになってきた今日この頃。</p>
 
 
 <p></body>
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>bodyにclassでtopを付けておきます。
 Javascriptが無効のときもページ内リンクが有効になります。</p>
@@ -290,7 +321,11 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
 
 <h2>jQueryの読み込み</h2>
 
+<<<<<<< HEAD
 <p>```html</p>
+=======
+<p>&#8220;`html</p>
+>>>>>>> origin/master
 
 <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 
@@ -336,7 +371,11 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
     return false;
   });
 });
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>初めに、コンテンツ内容を非表示にします。
 次に、メニューの最初の項目にclassでactiveを追加します。
@@ -413,7 +452,11 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
 
 <h3>jQuery Mobile</h3>
 
+<<<<<<< HEAD
 <p>```html
+=======
+<p>&#8220;`html
+>>>>>>> origin/master
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -468,13 +511,21 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
 
 <p></body>
 </html>
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p><a href="http://jsdo.it/regret2721/gbHB" target="_blank">デモページ</a></p>
 
 <h3>地図の大きさを100%指定にしてみる</h3>
 
+<<<<<<< HEAD
 <p>```html
+=======
+<p>&#8220;`html
+>>>>>>> origin/master
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -532,11 +583,19 @@ jQueryのみで実装できるので、簡単な切り替えのみならお手�
 
 <p></body>
 </html>
+<<<<<<< HEAD
 ```</p>
 
 <p><a href="http://jsdo.it/regret2721/unrq" target="_blank">デモページ</a></p>
 
 <p>```javascript</p>
+=======
+&#8220;`</p>
+
+<p><a href="http://jsdo.it/regret2721/unrq" target="_blank">デモページ</a></p>
+
+<p>&#8220;`javascript</p>
+>>>>>>> origin/master
 
 
 
@@ -546,13 +605,21 @@ CSSを100%に変更
 
 <p>var pageHeight= $(document).height();
 $(&ldquo;#gmap&rdquo;).css(&ldquo;height&rdquo;,pageHeight);
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>CSSでgmap要素を100%指定すると消えてしまったので、Javascriptでドキュメントの高さをgmapに設定</p>
 
 <h3>地図の大きさを100%でページ分割する</h3>
 
+<<<<<<< HEAD
 <p>```html
+=======
+<p>&#8220;`html
+>>>>>>> origin/master
 &lt;!DOCTYPE html>
 <html lang="ja" dir="ltr">
 <head>
@@ -629,7 +696,11 @@ $(&ldquo;#gmap&rdquo;).css(&ldquo;height&rdquo;,pageHeight);
 
 <p></body>
 </html>
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p><a href="http://jsdo.it/regret2721/gBxa" target="_blank">デモページ</a></p>
 
@@ -640,7 +711,11 @@ $(&ldquo;#gmap&rdquo;).css(&ldquo;height&rdquo;,pageHeight);
 
 <p>スクリプトが全ページで実行されてしまうので、onloadの指定をやめました。</p>
 
+<<<<<<< HEAD
 <p>```javascript</p>
+=======
+<p>&#8220;`javascript</p>
+>>>>>>> origin/master
 
 <script type="text/javascript">
   function initialize() {
@@ -678,10 +753,190 @@ pageshowイベントを使用して、accessページのみ実行するように
 <p>$(&lsquo;#access&rsquo;).bind(&lsquo;pageshow&rsquo;,initialize);
 ↓
 $(&lsquo;#access&rsquo;).live(&lsquo;pageshow&rsquo;,initialize);
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>動的要素なので、bindをliveにすればHead内でも実行できました。</p>
 ]]></content>
   </entry>
   
+<<<<<<< HEAD
+=======
+  <entry>
+    <title type="html"><![CDATA[jQuery Mobileのコトハジメ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/03/23/start-jquery-mobile/"/>
+    <updated>2012-03-23T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/03/23/start-jquery-mobile</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>VPSであーだこーだしていて、PHPから書きだされたファイルがApache権限ではてさて、SuPHP？パフォーマンス？fastcgi？って感じの初心者っぷりでgoogle先生をを頼り中な今日この頃。</p>
+
+<p>さて、本題。
+スマートフォンサイト作るとき、jQuery Mobileにお世話になってます。</p>
+
+<ul>
+<li>スマートフォンサイトのUIをカッコ良くさせたい。</li>
+<li>さっくり実装させたい。</li>
+</ul>
+
+
+<p>こんなときに便利でお手軽なjQuery Mobile。
+とりあえず、コトハジメ的に備忘録です。</p>
+
+<!--more-->
+
+
+<h2>はじめに</h2>
+
+<ul>
+<li>使用Ver：1.0.1</li>
+</ul>
+
+
+<p>わからないことは、jQuery Mobileの<a href="http://jquerymobile.com/demos/1.0.1/" target="_blank">DEMO</a>を見る。
+英語がわからない時は、<a href="http://dev.screw-axis.com/doc/jquery_mobile/" target="_blank">日本語リファレンス</a>見る。</p>
+
+<p>デモサイト見ればレイアウト実装のサンプルが豊富なので、たいていのことはカバーできます。</p>
+
+<h2>初期テンプレート</h2>
+
+<p>&#8220;`html
+&lt;!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>code life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+  <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+  <script src="jquery.mobile.init.js"></script>
+  <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+</head>
+<body></p>
+
+<div data-role="page">
+  <header data-role="header">
+    <h1>タイトル</h1>
+  </header>
+  <div data-role="content">
+    <h1>見出し1</h1>
+    <p>コンテンツ内容</p>
+    <h2>見出し2</h2>
+    <p>コンテンツ内容</p>
+    <h3>見出し3</h3>
+    <p>コンテンツ内容</p>
+  </div>
+  <footer data-role="footer">
+    <h4>CopyRight &copy; Code-life.net. All rights reserved.</h4>
+  </footer>
+</div>
+
+
+<p></body>
+</html>
+&#8220;`</p>
+
+<p><a href="/images/2012/03/start-jquery-mobile-1.jpg"><img src="/images/2012/03/start-jquery-mobile-1.jpg" width="300" height="264"></a></p>
+
+<p>公式を参考にすると上記のような感じになります。</p>
+
+<h3>jQuery Mobile 初期設定</h3>
+
+<p>エラーメッセージなどが英語だったりするので設定を変更するために下記のJSを読み込みます。</p>
+
+<p>&#8220;`javascript</p>
+
+<script src="jquery.mobile.init.js"></script>
+
+
+<pre><code></code></pre>
+
+<p>$(document).bind(&lsquo;mobileinit&rsquo;, function(){
+    $.mobile.loadingMessage = &lsquo;読み込み中&rsquo;;
+    $.mobile.pageLoadErrorMessage = &lsquo;読み込みに失敗しました&rsquo;;
+    $.mobile.dialog.prototype.options.closeBtnText = &lsquo;閉じる&rsquo;;
+    $.mobile.selectmenu.prototype.options.closeText= &lsquo;閉じる&rsquo;;
+    $.mobile.listview.prototype.options.filterPlaceholder = &lsquo;検索文字列&rsquo;;
+    $.mobile.page.prototype.options.backBtnText = &lsquo;戻る&rsquo;;
+  });
+&#8220;`</p>
+
+<p>ポイントは、上記スクリプトをjQuery MobileのJS読み込み前に読み込むこと。</p>
+
+<p>参考: <a href="http://dev.screw-axis.com/doc/jquery_mobile/api/configuring_defaults/" target="_blank">グローバル設定</a></p>
+
+<h3>jQuery Mobile CSS初期設定</h3>
+
+<p>文字数が要素内で一定値をオーバーすると、文字が省略されてしまうので、それをCSSで解除してあげる。</p>
+
+<pre><code class="css">.ui-header .ui-title,
+.ui-footer .ui-title,
+.ui-btn-inner,
+.ui-li-heading,
+.ui-li .ui-btn-text a.ui-link-inherit,
+.ui-li-desc {
+  overflow: visible;
+  white-space: normal;
+}
+</code></pre>
+
+<h3>デザインを変更する</h3>
+
+<p>デフォルトのデザインをそのまま使う場合はあまりないので、それぞれのデザインをオリジナルなものに変更します。</p>
+
+<p>&#8220;`html</p>
+
+<div data-role="page" data-theme="f">
+  <header data-role="header" data-theme="f">
+    <h1>タイトル</h1>
+  </header>
+  <div data-role="content" data-theme="f">
+    <h1>見出し1</h1>
+    <p>コンテンツ内容</p>
+    <h2>見出し2</h2>
+    <p>コンテンツ内容</p>
+    <h3>見出し3</h3>
+    <p>コンテンツ内容</p>
+  </div>
+  <footer data-role="footer" data-theme="f">
+    <h4>CopyRight &copy; Code-life.net. All rights reserved.</h4>
+  </footer>
+</div>
+
+
+<p>&#8220;`</p>
+
+<p>data-theme=&ldquo;f&#8221;をそれぞれの要素に追加しました。</p>
+
+<p>data-themeによって、スタイルの切り替えが可能。
+jQuery Mobileでは、aからeまでのスタイルがセットされているので、何もスタイルがセットされていないf～zなど任意のスタイルを指定してあげれば、当然スタイルがセットされてないのでデザインが解除されます。</p>
+
+<p><a href="/images/2012/03/start-jquery-mobile-2.jpg"><img src="/images/2012/03/start-jquery-mobile-2.jpg" width="300" height="241"></a></p>
+
+<p>あとはそれぞれいつも通りにCSSでデザイン作るだけです。</p>
+
+<h3>jQuery Mobileのデフォルトスタイルをカスタマイズ</h3>
+
+<p>テーマが折角あるようなのでテーマcssを作りたい。</p>
+
+<p>JavaScriptで適用されているCSSスタイルが何なのかを見るときは、ブラウザの要素検証だったり、firebugだったりで適用CSSを確認しますよね。
+それをすべて追って、上書きするのは大変です。</p>
+
+<p>そんなときは、jQuery Mobileの<a href="http://jquerymobile.com/themeroller/" target="_blank">Theme Roller</a>を使います。
+このウェブツールを使うと、jQuery Mobileのテーマをちょちょいと作ることができます。</p>
+
+<p><a href="/images/2012/03/start-jquery-mobile-3.png"><img src="/images/2012/03/start-jquery-mobile-3.png" width="300" height="171"></a></p>
+
+<p>カラーコード指定で迷った場合は、Adobe Kulerからも選択できます。
+ちなみにKulerをどう反映すればいいか最初はわからなかったんですが、カラーアイコン（？）をドラック＆ドロップで反映できます。
+そのデザイン反映したやつを左上のDownload Themeでダウンロードする。</p>
+
+<p>あとはそれを組み込んで随時改修していきましょう。</p>
+]]></content>
+  </entry>
+  
+>>>>>>> origin/master
 </feed>

@@ -4,7 +4,11 @@
   <title><![CDATA[Category: movable type | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/movable-type/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
+<<<<<<< HEAD
   <updated>2016-11-26T21:13:31+09:00</updated>
+=======
+  <updated>2015-08-08T00:04:40+09:00</updated>
+>>>>>>> origin/master
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -28,15 +32,24 @@
 
 <h2>通常の最新記事10件呼び出し</h2>
 
+<<<<<<< HEAD
 <p>```html
+=======
+<p>&#8220;`html
+>>>>>>> origin/master
 <MTEntries lastn="10">
 <MTEntriesHeader></p>
 
 <div class="hfeed">
     <h1>ブログ記事</h1>
 </MTEntriesHeader>
+<<<<<<< HEAD
     <div class="hentry entry" id="entry-<mt:EntryID>">
         <h2 class="entry-title"><a rel="bookmark" href="<mt:Var name="permalink">"><$MTEntryTitle$></a></h2>
+=======
+    <div class="hentry entry" id="entry-<mt:EntryID>&#8221;>
+        <h2 class="entry-title"><a rel="bookmark" href="<mt:Var name="permalink">&#8221;><$MTEntryTitle$></a></h2>
+>>>>>>> origin/master
         <div class="entry-content">
             <$MTEntryBody$>
         </div>
@@ -47,11 +60,19 @@
 
 <p></MTEntriesFooter>
 </MTEntries>
+<<<<<<< HEAD
 ```</p>
 
 <h2>最新記事10件呼び出しつつ、表示は5件でページ分割</h2>
 
 <p>```html</p>
+=======
+&#8220;`</p>
+
+<h2>最新記事10件呼び出しつつ、表示は5件でページ分割</h2>
+
+<p>&#8220;`html</p>
+>>>>>>> origin/master
 
 <!-- ▼MTKeitaiPaginateBreakが5回実行されたらページ分割 -->
 
@@ -75,7 +96,11 @@
     </MTEntriesFooter>
 </MTEntries>
 </MTKeitaiPaginate>
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>MTKeitaiPaginateでEntriesを囲んでいます。
 で、分割したいところでを使用しています。</p>
@@ -226,7 +251,11 @@ MTAppjQueryPlusの<code>$.fn.MTAppTableConverter</code>を使ってみようと�
 </ol>
 
 
+<<<<<<< HEAD
 <p>```html</p>
+=======
+<p>&#8220;`html</p>
+>>>>>>> origin/master
 
 <script src="http://blog.code-life.net/mt/mt-static/plugins/MTAppjQueryPlus/MTAppjQueryPlus.js" type="text/javascript"></script>
 
@@ -239,11 +268,19 @@ MTAppjQueryPlusの<code>$.fn.MTAppTableConverter</code>を使ってみようと�
 $.fn.MTAppTableConverterは 複数行のテキストエリアに対してのみ使用可能ということなので、
 ブログ記事に対してカスタムフィールドを追加します。
 
+<<<<<<< HEAD
 [{% img /images/2012/04/mtappjqueryplus-movable-type-1-300x204.png 300 204 %}][2]
 
 ブログ記事画面で設定したカスタムフィールドを表示させます。
 
 [{% img /images/2012/04/mtappjqueryplus-movable-type-2-300x270.jpg 300 270 %}][3]
+=======
+[<img src="/images/2012/04/mtappjqueryplus-movable-type-1-300x204.png" width="300" height="204">][2]
+
+ブログ記事画面で設定したカスタムフィールドを表示させます。
+
+[<img src="/images/2012/04/mtappjqueryplus-movable-type-2-300x270.jpg" width="300" height="270">][3]
+>>>>>>> origin/master
 
 ### user.jsに処理を記述する
 
@@ -255,13 +292,21 @@ colcnt:2, //列数
 type:&lsquo;text/textarea&rsquo;,
 thead:&lsquo; 項目 内容 &rsquo;
 });
+<<<<<<< HEAD
 ```</p>
+=======
+&#8220;`</p>
+>>>>>>> origin/master
 
 <p>※<code>#customfield_xxx</code>の、xxxはカスタムフィールドのベースネーム</p>
 
 <p>上記をアップロードして反映すると、投稿記事画面のフィールドが下記のようになります。</p>
 
+<<<<<<< HEAD
 <p><a href="/images/2012/04/mtappjqueryplus-movable-type-3.jpg">{% img /images/2012/04/mtappjqueryplus-movable-type-3-300x60.jpg 300 60 %}</a></p>
+=======
+<p><a href="/images/2012/04/mtappjqueryplus-movable-type-3.jpg"><img src="/images/2012/04/mtappjqueryplus-movable-type-3-300x60.jpg" width="300" height="60"></a></p>
+>>>>>>> origin/master
 
 <p>これで項目を追加するボタンを押せば、フィールドが任意に追加できます。</p>
 
@@ -269,7 +314,11 @@ thead:&lsquo; 項目 内容 &rsquo;
 
 <p>こちらは、READMEのサンプルを使用させてもらいました。</p>
 
+<<<<<<< HEAD
 <p>```html</p>
+=======
+<p>&#8220;`html</p>
+>>>>>>> origin/master
 
 <table>
 <mt:ignore>/* 対象とするフィールド名の指定 */</mt:ignore>
@@ -293,7 +342,11 @@ thead:&lsquo; 項目 内容 &rsquo;
 </table>
 
 
+<<<<<<< HEAD
 <p>```</p>
+=======
+<p>&#8220;`</p>
+>>>>>>> origin/master
 
 <p><code>split="##"</code>で入力された値を分割しています。</p>
 

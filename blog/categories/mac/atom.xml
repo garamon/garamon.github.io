@@ -4,7 +4,11 @@
   <title><![CDATA[Category: mac | Code Life]]></title>
   <link href="http://blog.code-life.net/blog/categories/mac/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
+<<<<<<< HEAD
   <updated>2016-11-26T21:13:31+09:00</updated>
+=======
+  <updated>2015-08-08T00:04:40+09:00</updated>
+>>>>>>> origin/master
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,6 +18,7 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[]]></title>
     <link href="http://blog.code-life.net/blog/2015/08/24/grc-generic-colouriser/"/>
     <updated>2015-08-24T19:44:44+09:00</updated>
@@ -80,6 +85,8 @@
   </entry>
   
   <entry>
+=======
+>>>>>>> origin/master
     <title type="html"><![CDATA[MacアプリCaffeineのメニューバーアイコンをRetinaディスプレイ用に変更する]]></title>
     <link href="http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon/"/>
     <updated>2014-09-21T14:33:34+09:00</updated>
@@ -92,7 +99,11 @@
 
 <p>アイコンがダサい・・・。</p>
 
+<<<<<<< HEAD
 <p>{% img /images/2014/09/mac-caffeine-1.png %}</p>
+=======
+<p><img src="/images/2014/09/mac-caffeine-1.png"></p>
+>>>>>>> origin/master
 
 <!--more-->
 
@@ -125,7 +136,11 @@
 
 <p>いい感じ。</p>
 
+<<<<<<< HEAD
 <p>{% img /images/2014/09/mac-caffeine-2.png %}</p>
+=======
+<p><img src="/images/2014/09/mac-caffeine-2.png"></p>
+>>>>>>> origin/master
 
 <h2>注意</h2>
 
@@ -143,11 +158,19 @@
 <!--more-->
 
 
+<<<<<<< HEAD
 <p>{% img /images/2014/09/mac-day-o-1.png %}</p>
 
 <p>日付をクリックすると以下のような表示となる。</p>
 
 <p>{% img /images/2014/09/mac-day-o-2.png %}</p>
+=======
+<p><img src="/images/2014/09/mac-day-o-1.png"></p>
+
+<p>日付をクリックすると以下のような表示となる。</p>
+
+<p><img src="/images/2014/09/mac-day-o-2.png"></p>
+>>>>>>> origin/master
 
 <p><code>Preference</code>から日付のフォーマットを変更することもできる。</p>
 
@@ -175,13 +198,21 @@
 
 <p>ログインオプションを選択する。</p>
 
+<<<<<<< HEAD
 <p><a href="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png">{% img /images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png 500 379 %}</a></p>
+=======
+<p><a href="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png"><img src="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png" width="500" height="379"></a></p>
+>>>>>>> origin/master
 
 <h3>ファストユーザスイッチメニューの表示</h3>
 
 <p>「ファストユーザスイッチメニューを表示」にチェックがはいっているので外す。</p>
 
+<<<<<<< HEAD
 <p><a href="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png">{% img /images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png 500 379 %}</a></p>
+=======
+<p><a href="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png"><img src="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png" width="500" height="379"></a></p>
+>>>>>>> origin/master
 
 <p>これでメニューバーのユーザー名は非表示となる。
 <a href="http://evernote.com/intl/jp/skitch/">skitch</a>を使ってみたが便利だ。</p>
@@ -251,4 +282,54 @@ CCC,333
 ]]></content>
   </entry>
   
+<<<<<<< HEAD
+=======
+  <entry>
+    <title type="html"><![CDATA[PHPのインストールでコンパイルエラーが発生する on Mac OSX]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/22/php-compilation-failed-on-mac-osx/"/>
+    <updated>2013-04-22T15:43:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/22/php-compilation-failed-on-mac-osx</id>
+    <content type="html"><![CDATA[<p>普段、開発環境は仮想マシン上にしか作らないのだが検証の必要があってローカルにPHPをインストールしようとしたところ
+コンパイル時に以下のエラーが発生した。</p>
+
+<!--more-->
+
+
+<pre><code class="sh">-----------------
+|  BUILD ERROR  |
+-----------------
+
+Here are the last 10 lines from the log:
+
+-----------------------------------------
+  "_sk_shift", referenced from:
+      _load_all_certs_from_file in openssl.o
+  "_sk_value", referenced from:
+      _zif_openssl_csr_new in openssl.o
+      _zif_openssl_pkcs7_verify in openssl.o
+      _php_openssl_parse_config in openssl.o
+      _php_openssl_sockop_set_option in xp_ssl.o
+ld: symbol(s) not found for architecture x86_64
+clang: error: linker command failed with exit code 1 (use -v to see invocation)
+make: *** [sapi/cli/php] Error 1
+-----------------------------------------
+</code></pre>
+
+<p><a href="https://github.com/CHH/phpenv/issues/22#issuecomment-1672712://github.com/CHH/phpenv/issues/22#issuecomment-16727120">同様の現象</a>に悩んでる方がいてそのコメントにOpenSSLのバージョンあげろと書いてあったので
+その通りにしてみたらインストールできた。</p>
+
+<h2>OpenSSLのアップデート方法</h2>
+
+<pre><code class="sh">$ brew install openssl
+$ brew link openssl --force
+$ exec $SHELL -l
+$ openssl version
+OpenSSL 1.0.1e 11 Feb 2013
+</code></pre>
+
+<p>インストールできたついでに初めてコメントを書いてみたが自身の英語力がなくて泣けてくる。</p>
+]]></content>
+  </entry>
+  
+>>>>>>> origin/master
 </feed>

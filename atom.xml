@@ -4,7 +4,11 @@
   <title><![CDATA[Code Life]]></title>
   <link href="http://blog.code-life.net/atom.xml" rel="self"/>
   <link href="http://blog.code-life.net/"/>
+<<<<<<< HEAD
   <updated>2016-11-26T21:06:42+09:00</updated>
+=======
+  <updated>2015-08-08T00:04:40+09:00</updated>
+>>>>>>> origin/master
   <id>http://blog.code-life.net/</id>
   <author>
     <name><![CDATA[noto]]></name>
@@ -14,6 +18,7 @@
 
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[Ansibleで複数行の編集を行う]]></title>
     <link href="http://blog.code-life.net/blog/2016/02/09/ansible-blockinfile/"/>
     <updated>2016-02-09T20:00:37+09:00</updated>
@@ -78,19 +83,37 @@
 <li><a href="http://blog.keshi.org/hogememo/2014/08/24/ansible-blockinfile-module">Ansible blockinfile モジュール</a></li>
 </ul>
 
+=======
+    <title type="html"><![CDATA[はてなブログはじめました]]></title>
+    <link href="http://blog.code-life.net/blog/2015/08/07/hatena-blog/"/>
+    <updated>2015-08-07T23:12:04+09:00</updated>
+    <id>http://blog.code-life.net/blog/2015/08/07/hatena-blog</id>
+    <content type="html"><![CDATA[<p>Octopressが億劫になってきたので、はてなブログに移りました。</p>
+
+<p><a href="http://grmn.hatenablog.com/">http://grmn.hatenablog.com/</a></p>
+>>>>>>> origin/master
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[リモートブランチをチェックアウトしpushするまでの流れ]]></title>
     <link href="http://blog.code-life.net/blog/2016/02/08/git-push-remote-branch/"/>
     <updated>2016-02-08T19:56:55+09:00</updated>
     <id>http://blog.code-life.net/blog/2016/02/08/git-push-remote-branch</id>
     <content type="html"><![CDATA[<p>Pull Requestをレビューまたはリモートブランチをローカル上で動作させたい場合、ローカルにチェックアウトしたい場合が往々にしてある。</p>
+=======
+    <title type="html"><![CDATA[VirtualBox ホストオンリーネットワークの設定]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network/"/>
+    <updated>2014-09-25T01:34:11+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network</id>
+    <content type="html"><![CDATA[<p>最近はVagrant経由でVirtualBoxを起動させるのでほとんど自分で書くことがないけどね。</p>
+>>>>>>> origin/master
 
 <!--more-->
 
 
+<<<<<<< HEAD
 <p>チェックアウトしローカルブランチを作成するには</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
@@ -134,11 +157,45 @@
 
 
 <p>パスが通っていることを確認後、~/.gitconfigに以下を追記</p>
+=======
+<h2>環境</h2>
+
+<ul>
+<li>VirtualBox 4.3.16</li>
+<li>ホスト Mac OS X 10.9.1</li>
+<li>ゲスト CentOS 5.6</li>
+</ul>
+
+
+<h2>ホストオンリーネットワークインターフェースの追加</h2>
+
+<ol>
+<li><code>VirtualBox</code> | <code>環境設定</code> | <code>ネットワーク</code> を選択。</li>
+<li><code>ホストオンリーネットワーク</code> を選択し<code>ホストオンリーネットワークを追加(+マークのアイコン)</code>をクリック。</li>
+<li><code>vboxnet0</code>が作成されたことが確認できる。 アドレス等は適宜変更する。</li>
+</ol>
+
+
+<h2>ホストオンリーアダプターの追加</h2>
+
+<ol>
+<li>仮想マシンの設定から <code>ネットワーク</code> | <code>アダプター２</code> を選択する。</li>
+<li>割り当てを<code>ホストオンリーアダプター</code>名前を先に作成した<code>vboxnet0</code>とする。</li>
+</ol>
+
+
+<p>ゲストOS起動後、外部ネットワークに接続できることを確認する。</p>
+
+<h2>ネットワークインターフェースの設定</h2>
+
+<p>次のようにネットワーク設定を変更</p>
+>>>>>>> origin/master
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
+<<<<<<< HEAD
 </pre></td><td class='code'><pre><code class=''><span class='line'>[pager]
 </span><span class='line'>    log = diff-highlight | less
 </span><span class='line'>    show = diff-highlight | less
@@ -175,10 +232,31 @@
 <p>IPアドレスだけを抽出する方法は色々あると思うが、まぁこれでいいかと思ってる。デバイス名は適宜変更すること。</p>
 
 <p>CentOS6では確認してるが、それ以外の環境では確認していない。</p>
+=======
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vi /etc/sysconfig/network-scripts/ifcfg-eth1
+</span><span class='line'>
+</span><span class='line'>DEVICE=eth1
+</span><span class='line'>BOOTPROTO=static    ← dhcpから変更
+</span><span class='line'>ONBOOT=yes
+</span><span class='line'>HWADDR="XX:XX:XX:XX:XX:XX"
+</span><span class='line'>IPADDR=192.168.56.10  ← 追加 IPアドレスは適宜変更すること
+</span><span class='line'>NETMASK=255.255.255.0 ← 追加</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ネットワークインターフェースの設定完了後、ネットワークの再起動を行いホストOSからsshで接続できることを確認する。</p>
+
+<p>最近DropBoxに溜まってたメモをブログに落としてるが、なんだかんだで時間がかかる。
+この時間をプロダクトに当てた方がよいのではないかとふと思うこの頃。</p>
+>>>>>>> origin/master
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[bash: scp: command not found]]></title>
     <link href="http://blog.code-life.net/blog/2015/08/28/scp-command-not-found/"/>
     <updated>2015-08-28T19:49:25+09:00</updated>
@@ -205,6 +283,25 @@
 <h2>イベントハンドラの登録は重い処理</h2>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+=======
+    <title type="html"><![CDATA[php オブジェクト内のメソッドをcallback関数として渡す場合の注意点]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/23/php-callbacks/"/>
+    <updated>2014-09-23T22:28:38+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/23/php-callbacks</id>
+    <content type="html"><![CDATA[<p>array_filterやarray_mapなどcallback関数を引数にとる関数がphpには多く存在します。</p>
+
+<p>callback関数の渡し方でのハマりどころが1点あったので共有しておきます。</p>
+
+<!--more-->
+
+
+<p>ほとんどのケースが<a href="http://php.net/manual/ja/language.types.callable.php#example-110">例1 コールバック関数の例</a>に記載されていますが、
+オブジェクト内から同じオブジェクト内のメソッドをコールする場合の記載がありません。(タイプ 3: オブジェクトメソッドのコールと同等なので必要ないと言えばないのですが)</p>
+
+<h2>オブジェクト内から同じオブジェクト内のメソッドをコールする</h2>
+
+<figure class='code'><figcaption><span>1.誤</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+>>>>>>> origin/master
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -217,6 +314,7 @@
 <span class='line-number'>11</span>
 <span class='line-number'>12</span>
 <span class='line-number'>13</span>
+<<<<<<< HEAD
 </pre></td><td class='code'><pre><code class='html'><span class='line'><span class="nt">&lt;ul&gt;</span>
 </span><span class='line'>    <span class="nt">&lt;li&gt;</span>1<span class="nt">&lt;/li&gt;</span>
 </span><span class='line'>    <span class="nt">&lt;li&gt;</span>2<span class="nt">&lt;/li&gt;</span>
@@ -488,227 +586,7 @@
 
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-<span class='line-number'>35</span>
-<span class='line-number'>36</span>
-<span class='line-number'>37</span>
-<span class='line-number'>38</span>
-<span class='line-number'>39</span>
-<span class='line-number'>40</span>
-<span class='line-number'>41</span>
-<span class='line-number'>42</span>
-<span class='line-number'>43</span>
-<span class='line-number'>44</span>
-<span class='line-number'>45</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>[root@vagrant-centos65 ~]# phpbrew ext install xdebug                                  [112/3083]
-</span><span class='line'>===&gt; Downloading from http://pecl.php.net/get/xdebug-2.3.2.tgz
-</span><span class='line'>WARNING: timestamping does nothing in combination with -O. See the manual
-</span><span class='line'>for details.
-</span><span class='line'>
-</span><span class='line'>    --2015-08-02 14:01:18--  http://pecl.php.net/get/xdebug-2.3.2.tgz
-</span><span class='line'>    Resolving pecl.php.net... 104.236.228.160
-</span><span class='line'>    Connecting to pecl.php.net|104.236.228.160|:80... connected.
-</span><span class='line'>    HTTP request sent,  awaiting response... 200 OK
-</span><span class='line'>    Length: 266287 (260K) [application/octet-stream]
-</span><span class='line'>    Saving to: “/root/.phpbrew/distfiles/xdebug-2.3.2.tgz”
-</span><span class='line'>
-</span><span class='line'>    100%[=======================================================&gt;] 266, 287      166K/s   in 1.6s
-</span><span class='line'>
-</span><span class='line'>    2015-08-02 14:01:20 (166 KB/s) - “/root/.phpbrew/distfiles/xdebug-2.3.2.tgz” saved [266287/26628$
-</span><span class='line'>    ]
-</span><span class='line'>
-</span><span class='line'>    ===&gt; /root/.phpbrew/distfiles/xdebug-2.3.2.tgz downloaded.
-</span><span class='line'>    ===&gt; Extracting to /root/.phpbrew/build/php-5.3.29/ext...
-</span><span class='line'>    ===&gt; Installing xdebug extension...
-</span><span class='line'>    Log stored at: /root/.phpbrew/build/php-5.3.29/ext/xdebug/build.log
-</span><span class='line'>    Changing directory to /root/.phpbrew/build/php-5.3.29/ext/xdebug
-</span><span class='line'>    ===&gt; Phpize...
-</span><span class='line'>    ===&gt; Configuring...
-</span><span class='line'>    ===&gt; Building...
-</span><span class='line'>    ===&gt; Running make all: make -C /root/.phpbrew/build/php-5.3.29/ext/xdebug  all  &gt;&gt; /root/.phpbrew
-</span><span class='line'>    /build/php-5.3.29/ext/xdebug/build.log 2&gt;&1
-</span><span class='line'>
-</span><span class='line'>    Exception: Command failed: make -C /root/.phpbrew/build/php-5.3.29/ext/xdebug  all  &gt;&gt; /root/.php
-</span><span class='line'>    brew/build/php-5.3.29/ext/xdebug/build.log 2&gt;&1 returns
-</span><span class='line'>    Trace:
-</span><span class='line'>
-</span><span class='line'>        0) PhpBrew\Utils::system(['make',  '-C',  '/root/.phpbrew/build/php-5.3.29/ext/xdebug',  '',  'al
-</span><span class='line'>        l',  ' &gt;&gt; /root/.phpbrew/build/php-5.3.29/ext/xdebug/build.log 2&gt;&1'],  CLIFramework\Logger)
-</span><span class='line'>        1) PhpBrew\Tasks\MakeTask-&gt;make('/root/.phpbrew/build/php-5.3.29/ext/xdebug',  'all')
-</span><span class='line'>        2) PhpBrew\Tasks\MakeTask-&gt;run(PhpBrew\Extension\PeclExtension)
-</span><span class='line'>        3) PhpBrew\Extension\ExtensionInstaller-&gt;install(PhpBrew\Extension\PeclExtension,  [])
-</span><span class='line'>        4) PhpBrew\Extension\ExtensionManager-&gt;installExtension(PhpBrew\Extension\PeclExtension,  [])
-</span><span class='line'>        5) PhpBrew\Command\ExtensionCommand\InstallCommand-&gt;execute('xdebug')
-</span><span class='line'>        6) call_user_func_array([PhpBrew\Command\ExtensionCommand\InstallCommand,  'execute'],  ['xdebu
-</span><span class='line'>        g'])
-</span><span class='line'>        7) CLIFramework\CommandBase-&gt;executeWrapper(['xdebug'])
-</span><span class='line'>        8) CLIFramework\Application-&gt;run(['/usr/bin/phpbrew',  'ext',  'install',  'xdebug'])
-</span><span class='line'>        9) CLIFramework\Application-&gt;runWithTry(['/usr/bin/phpbrew',  'ext',  'install',  'xdebug'])
-</span><span class='line'>        10) require('phar:///usr/bin/phpbrew/scripts/phpbrew-emb.php')</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>環境</h2>
-
-<ul>
-<li>PHP 5.3.29</li>
-</ul>
-
-
-<h2>原因</h2>
-
-<p>ログを見ても分からなかったのでgoogle先生に聞くと速攻教えてくれる。優しい。</p>
-
-<p><a href="https://github.com/phpbrew/phpbrew/issues/518">Can&rsquo;t install xdebug extension for PHP 5.3.x</a></p>
-
-<p>そういえばPHP5.3系はサポート終了のアナウンスがされていた。 <a href="http://xdebug.org/download.php">DEBUG EXTENSION FOR PHP | DOWNLOADS</a>を確認するとxdebug-2.3.xはPHP5.3に対応していない。</p>
-
-<h2>対処法</h2>
-
-<p>PHP5.3に対応しているxdebug-2.2.7を指定してインストールする。</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ phpbrew ext install xdebug 2.2.7</span></code></pre></td></tr></table></div></figure>
-
-
-<h2>参考</h2>
-
-<ul>
-<li><a href="https://github.com/phpbrew/phpbrew/issues/518">Can&rsquo;t install xdebug extension for PHP 5.3.x</a></li>
-<li><a href="http://xdebug.org/download.php">DEBUG EXTENSION FOR PHP | DOWNLOADS</a></li>
-</ul>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[VirtualBox ホストオンリーネットワークの設定]]></title>
-    <link href="http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network/"/>
-    <updated>2014-09-25T01:34:11+09:00</updated>
-    <id>http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network</id>
-    <content type="html"><![CDATA[<p>最近はVagrant経由でVirtualBoxを起動させるのでほとんど自分で書くことがないけどね。</p>
-
-<!--more-->
-
-
-<h2>環境</h2>
-
-<ul>
-<li>VirtualBox 4.3.16</li>
-<li>ホスト Mac OS X 10.9.1</li>
-<li>ゲスト CentOS 5.6</li>
-</ul>
-
-
-<h2>ホストオンリーネットワークインターフェースの追加</h2>
-
-<ol>
-<li><code>VirtualBox</code> | <code>環境設定</code> | <code>ネットワーク</code> を選択。</li>
-<li><code>ホストオンリーネットワーク</code> を選択し<code>ホストオンリーネットワークを追加(+マークのアイコン)</code>をクリック。</li>
-<li><code>vboxnet0</code>が作成されたことが確認できる。 アドレス等は適宜変更する。</li>
-</ol>
-
-
-<h2>ホストオンリーアダプターの追加</h2>
-
-<ol>
-<li>仮想マシンの設定から <code>ネットワーク</code> | <code>アダプター２</code> を選択する。</li>
-<li>割り当てを<code>ホストオンリーアダプター</code>名前を先に作成した<code>vboxnet0</code>とする。</li>
-</ol>
-
-
-<p>ゲストOS起動後、外部ネットワークに接続できることを確認する。</p>
-
-<h2>ネットワークインターフェースの設定</h2>
-
-<p>次のようにネットワーク設定を変更</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>$ vi /etc/sysconfig/network-scripts/ifcfg-eth1
-</span><span class='line'>
-</span><span class='line'>DEVICE=eth1
-</span><span class='line'>BOOTPROTO=static    ← dhcpから変更
-</span><span class='line'>ONBOOT=yes
-</span><span class='line'>HWADDR="XX:XX:XX:XX:XX:XX"
-</span><span class='line'>IPADDR=192.168.56.10  ← 追加 IPアドレスは適宜変更すること
-</span><span class='line'>NETMASK=255.255.255.0 ← 追加</span></code></pre></td></tr></table></div></figure>
-
-
-<p>ネットワークインターフェースの設定完了後、ネットワークの再起動を行いホストOSからsshで接続できることを確認する。</p>
-
-<p>最近DropBoxに溜まってたメモをブログに落としてるが、なんだかんだで時間がかかる。
-この時間をプロダクトに当てた方がよいのではないかとふと思うこの頃。</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[php オブジェクト内のメソッドをcallback関数として渡す場合の注意点]]></title>
-    <link href="http://blog.code-life.net/blog/2014/09/23/php-callbacks/"/>
-    <updated>2014-09-23T22:28:38+09:00</updated>
-    <id>http://blog.code-life.net/blog/2014/09/23/php-callbacks</id>
-    <content type="html"><![CDATA[<p>array_filterやarray_mapなどcallback関数を引数にとる関数がphpには多く存在します。</p>
-
-<p>callback関数の渡し方でのハマりどころが1点あったので共有しておきます。</p>
-
-<!--more-->
-
-
-<p>ほとんどのケースが<a href="http://php.net/manual/ja/language.types.callable.php#example-110">例1 コールバック関数の例</a>に記載されていますが、
-オブジェクト内から同じオブジェクト内のメソッドをコールする場合の記載がありません。(タイプ 3: オブジェクトメソッドのコールと同等なので必要ないと言えばないのですが)</p>
-
-<h2>オブジェクト内から同じオブジェクト内のメソッドをコールする</h2>
-
-<figure class='code'><figcaption><span>1.誤</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
+=======
 <span class='line-number'>14</span>
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
@@ -799,6 +677,7 @@
 <p>名前の一致が生じて予期しない挙動をしておりバグの元となるので、オブジェクトは常に指定するよう注意しましょう。</p>
 
 <figure class='code'><figcaption><span>2.正</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+>>>>>>> origin/master
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -823,6 +702,96 @@
 <span class='line-number'>23</span>
 <span class='line-number'>24</span>
 <span class='line-number'>25</span>
+<<<<<<< HEAD
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+<span class='line-number'>39</span>
+<span class='line-number'>40</span>
+<span class='line-number'>41</span>
+<span class='line-number'>42</span>
+<span class='line-number'>43</span>
+<span class='line-number'>44</span>
+<span class='line-number'>45</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>[root@vagrant-centos65 ~]# phpbrew ext install xdebug                                  [112/3083]
+</span><span class='line'>===&gt; Downloading from http://pecl.php.net/get/xdebug-2.3.2.tgz
+</span><span class='line'>WARNING: timestamping does nothing in combination with -O. See the manual
+</span><span class='line'>for details.
+</span><span class='line'>
+</span><span class='line'>    --2015-08-02 14:01:18--  http://pecl.php.net/get/xdebug-2.3.2.tgz
+</span><span class='line'>    Resolving pecl.php.net... 104.236.228.160
+</span><span class='line'>    Connecting to pecl.php.net|104.236.228.160|:80... connected.
+</span><span class='line'>    HTTP request sent,  awaiting response... 200 OK
+</span><span class='line'>    Length: 266287 (260K) [application/octet-stream]
+</span><span class='line'>    Saving to: “/root/.phpbrew/distfiles/xdebug-2.3.2.tgz”
+</span><span class='line'>
+</span><span class='line'>    100%[=======================================================&gt;] 266, 287      166K/s   in 1.6s
+</span><span class='line'>
+</span><span class='line'>    2015-08-02 14:01:20 (166 KB/s) - “/root/.phpbrew/distfiles/xdebug-2.3.2.tgz” saved [266287/26628$
+</span><span class='line'>    ]
+</span><span class='line'>
+</span><span class='line'>    ===&gt; /root/.phpbrew/distfiles/xdebug-2.3.2.tgz downloaded.
+</span><span class='line'>    ===&gt; Extracting to /root/.phpbrew/build/php-5.3.29/ext...
+</span><span class='line'>    ===&gt; Installing xdebug extension...
+</span><span class='line'>    Log stored at: /root/.phpbrew/build/php-5.3.29/ext/xdebug/build.log
+</span><span class='line'>    Changing directory to /root/.phpbrew/build/php-5.3.29/ext/xdebug
+</span><span class='line'>    ===&gt; Phpize...
+</span><span class='line'>    ===&gt; Configuring...
+</span><span class='line'>    ===&gt; Building...
+</span><span class='line'>    ===&gt; Running make all: make -C /root/.phpbrew/build/php-5.3.29/ext/xdebug  all  &gt;&gt; /root/.phpbrew
+</span><span class='line'>    /build/php-5.3.29/ext/xdebug/build.log 2&gt;&1
+</span><span class='line'>
+</span><span class='line'>    Exception: Command failed: make -C /root/.phpbrew/build/php-5.3.29/ext/xdebug  all  &gt;&gt; /root/.php
+</span><span class='line'>    brew/build/php-5.3.29/ext/xdebug/build.log 2&gt;&1 returns
+</span><span class='line'>    Trace:
+</span><span class='line'>
+</span><span class='line'>        0) PhpBrew\Utils::system(['make',  '-C',  '/root/.phpbrew/build/php-5.3.29/ext/xdebug',  '',  'al
+</span><span class='line'>        l',  ' &gt;&gt; /root/.phpbrew/build/php-5.3.29/ext/xdebug/build.log 2&gt;&1'],  CLIFramework\Logger)
+</span><span class='line'>        1) PhpBrew\Tasks\MakeTask-&gt;make('/root/.phpbrew/build/php-5.3.29/ext/xdebug',  'all')
+</span><span class='line'>        2) PhpBrew\Tasks\MakeTask-&gt;run(PhpBrew\Extension\PeclExtension)
+</span><span class='line'>        3) PhpBrew\Extension\ExtensionInstaller-&gt;install(PhpBrew\Extension\PeclExtension,  [])
+</span><span class='line'>        4) PhpBrew\Extension\ExtensionManager-&gt;installExtension(PhpBrew\Extension\PeclExtension,  [])
+</span><span class='line'>        5) PhpBrew\Command\ExtensionCommand\InstallCommand-&gt;execute('xdebug')
+</span><span class='line'>        6) call_user_func_array([PhpBrew\Command\ExtensionCommand\InstallCommand,  'execute'],  ['xdebu
+</span><span class='line'>        g'])
+</span><span class='line'>        7) CLIFramework\CommandBase-&gt;executeWrapper(['xdebug'])
+</span><span class='line'>        8) CLIFramework\Application-&gt;run(['/usr/bin/phpbrew',  'ext',  'install',  'xdebug'])
+</span><span class='line'>        9) CLIFramework\Application-&gt;runWithTry(['/usr/bin/phpbrew',  'ext',  'install',  'xdebug'])
+</span><span class='line'>        10) require('phar:///usr/bin/phpbrew/scripts/phpbrew-emb.php')</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>環境</h2>
+
+<ul>
+<li>PHP 5.3.29</li>
+</ul>
+
+
+<h2>原因</h2>
+
+<p>ログを見ても分からなかったのでgoogle先生に聞くと速攻教えてくれる。優しい。</p>
+
+<p><a href="https://github.com/phpbrew/phpbrew/issues/518">Can&rsquo;t install xdebug extension for PHP 5.3.x</a></p>
+
+<p>そういえばPHP5.3系はサポート終了のアナウンスがされていた。 <a href="http://xdebug.org/download.php">DEBUG EXTENSION FOR PHP | DOWNLOADS</a>を確認するとxdebug-2.3.xはPHP5.3に対応していない。</p>
+
+<h2>対処法</h2>
+
+<p>PHP5.3に対応しているxdebug-2.2.7を指定してインストールする。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ phpbrew ext install xdebug 2.2.7</span></code></pre></td></tr></table></div></figure>
+=======
 </pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">my_callback</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
 </span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="nv">$val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">);</span>
 </span><span class='line'><span class="p">}</span>
@@ -849,15 +818,68 @@
 </span><span class='line'><span class="nv">$callback</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CallBack</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">));</span>
 </span><span class='line'><span class="nv">$callback</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
 </span></code></pre></td></tr></table></div></figure>
+>>>>>>> origin/master
 
 
 <h2>参考</h2>
 
+<<<<<<< HEAD
+<ul>
+<li><a href="https://github.com/phpbrew/phpbrew/issues/518">Can&rsquo;t install xdebug extension for PHP 5.3.x</a></li>
+<li><a href="http://xdebug.org/download.php">DEBUG EXTENSION FOR PHP | DOWNLOADS</a></li>
+</ul>
+
+=======
 <p><a href="http://php.net/manual/ja/language.types.callable.php">PHP コールバック</a></p>
+>>>>>>> origin/master
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
+    <title type="html"><![CDATA[VirtualBox ホストオンリーネットワークの設定]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network/"/>
+    <updated>2014-09-25T01:34:11+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/25/configure-the-virtualbox-host-only-network</id>
+    <content type="html"><![CDATA[<p>最近はVagrant経由でVirtualBoxを起動させるのでほとんど自分で書くことがないけどね。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>VirtualBox 4.3.16</li>
+<li>ホスト Mac OS X 10.9.1</li>
+<li>ゲスト CentOS 5.6</li>
+</ul>
+
+
+<h2>ホストオンリーネットワークインターフェースの追加</h2>
+
+<ol>
+<li><code>VirtualBox</code> | <code>環境設定</code> | <code>ネットワーク</code> を選択。</li>
+<li><code>ホストオンリーネットワーク</code> を選択し<code>ホストオンリーネットワークを追加(+マークのアイコン)</code>をクリック。</li>
+<li><code>vboxnet0</code>が作成されたことが確認できる。 アドレス等は適宜変更する。</li>
+</ol>
+
+
+<h2>ホストオンリーアダプターの追加</h2>
+
+<ol>
+<li>仮想マシンの設定から <code>ネットワーク</code> | <code>アダプター２</code> を選択する。</li>
+<li>割り当てを<code>ホストオンリーアダプター</code>名前を先に作成した<code>vboxnet0</code>とする。</li>
+</ol>
+
+
+<p>ゲストOS起動後、外部ネットワークに接続できることを確認する。</p>
+
+<h2>ネットワークインターフェースの設定</h2>
+
+<p>次のようにネットワーク設定を変更</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+=======
     <title type="html"><![CDATA[php array_flattenを実装する]]></title>
     <link href="http://blog.code-life.net/blog/2014/09/23/php-array-flatten/"/>
     <updated>2014-09-23T21:24:42+09:00</updated>
@@ -914,6 +936,7 @@
 <p>値に対して何らかの処理を行いたい場合はこちらのほうが良いかも。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+>>>>>>> origin/master
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -921,6 +944,22 @@
 <span class='line-number'>6</span>
 <span class='line-number'>7</span>
 <span class='line-number'>8</span>
+<<<<<<< HEAD
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vi /etc/sysconfig/network-scripts/ifcfg-eth1
+</span><span class='line'>
+</span><span class='line'>DEVICE=eth1
+</span><span class='line'>BOOTPROTO=static    ← dhcpから変更
+</span><span class='line'>ONBOOT=yes
+</span><span class='line'>HWADDR="XX:XX:XX:XX:XX:XX"
+</span><span class='line'>IPADDR=192.168.56.10  ← 追加 IPアドレスは適宜変更すること
+</span><span class='line'>NETMASK=255.255.255.0 ← 追加</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ネットワークインターフェースの設定完了後、ネットワークの再起動を行いホストOSからsshで接続できることを確認する。</p>
+
+<p>最近DropBoxに溜まってたメモをブログに落としてるが、なんだかんだで時間がかかる。
+この時間をプロダクトに当てた方がよいのではないかとふと思うこの頃。</p>
+=======
 <span class='line-number'>9</span>
 <span class='line-number'>10</span>
 <span class='line-number'>11</span>
@@ -947,24 +986,44 @@
 <li><a href="http://yuubiseiharukana.blog.shinobi.jp/Entry/1156/">PHP5.4.7 PHPでarray_flatten関数のパフォーマンス測定</a></li>
 </ul>
 
+>>>>>>> origin/master
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
+    <title type="html"><![CDATA[php オブジェクト内のメソッドをcallback関数として渡す場合の注意点]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/23/php-callbacks/"/>
+    <updated>2014-09-23T22:28:38+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/23/php-callbacks</id>
+    <content type="html"><![CDATA[<p>array_filterやarray_mapなどcallback関数を引数にとる関数がphpには多く存在します。</p>
+
+<p>callback関数の渡し方でのハマりどころが1点あったので共有しておきます。</p>
+=======
     <title type="html"><![CDATA[FTP リモート先のファイル名一覧をローカルに保存する方法]]></title>
     <link href="http://blog.code-life.net/blog/2014/09/21/ftp-ls-output-to-local-file-from-the-command-line/"/>
     <updated>2014-09-21T16:32:47+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/09/21/ftp-ls-output-to-local-file-from-the-command-line</id>
     <content type="html"><![CDATA[<p>同僚に聞かれてすぐに応えられなかったので備忘録としてメモ。</p>
+>>>>>>> origin/master
 
 <!--more-->
 
 
+<<<<<<< HEAD
+<p>ほとんどのケースが<a href="http://php.net/manual/ja/language.types.callable.php#example-110">例1 コールバック関数の例</a>に記載されていますが、
+オブジェクト内から同じオブジェクト内のメソッドをコールする場合の記載がありません。(タイプ 3: オブジェクトメソッドのコールと同等なので必要ないと言えばないのですが)</p>
+
+<h2>オブジェクト内から同じオブジェクト内のメソッドをコールする</h2>
+
+<figure class='code'><figcaption><span>1.誤</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+=======
 <h2>ファイル一覧を出力する</h2>
 
 <p>単純にファイル一覧を取得するには<code>ls</code>コマンドで出力できる。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+>>>>>>> origin/master
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -981,6 +1040,41 @@
 <span class='line-number'>15</span>
 <span class='line-number'>16</span>
 <span class='line-number'>17</span>
+<<<<<<< HEAD
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">class</span> <span class="nc">CallBack</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">private</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">my_callback</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span><span class="nv">$val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nb">print_r</span><span class="p">(</span><span class="nb">array_filter</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span><span class="p">,</span> <span class="s1">&#39;my_callback&#39;</span><span class="p">));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$callback</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CallBack</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$callback</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>上記のコードは一見正しく見えますが実行すると
+<code>Warning: array_filter() expects parameter 2 to be a valid callback,  function 'my_callback' not found or invalid function name</code>
+とエラーになります。</p>
+
+<p>同じオブジェクト内からコールする場合でもcallbackは配列で指定する必要があります。</p>
+
+<figure class='code'><figcaption><span>2.正</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+=======
 </pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ftp
 </span><span class='line'>ftp&gt; open ftp.exsample.com
 </span><span class='line'>Name <span class="o">(</span>xxxx<span class="o">)</span>: <span class="o">[</span>ユーザー名応答<span class="o">]</span>
@@ -1006,11 +1100,62 @@
 <p>lsの標準出力をファイルに出力できるかと思ったができない。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+>>>>>>> origin/master
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
+<<<<<<< HEAD
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">class</span> <span class="nc">CallBack</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">private</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">my_callback</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span><span class="nv">$val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// オブジェクト自身を指定</span>
+</span><span class='line'>        <span class="nb">print_r</span><span class="p">(</span><span class="nb">array_filter</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="nv">$this</span><span class="p">,</span> <span class="s1">&#39;my_callback&#39;</span><span class="p">)));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$callback</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CallBack</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$callback</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>注意. オブジェクトは常に指定すること</h2>
+
+<p><code>1.誤</code>のコードでもエラーなく動作させることはできます。</p>
+
+<p>以下のコードを実行するとエラーは発生せず、結果として<code>Array ( [0] =&gt; 1 [2] =&gt; 3 [4] =&gt; 5)</code>が出力されます。</p>
+
+<p>名前の一致が生じて予期しない挙動をしておりバグの元となるので、オブジェクトは常に指定するよう注意しましょう。</p>
+
+<figure class='code'><figcaption><span>2.正</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+=======
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>ftp&gt; dir &gt; test.txt
 </span><span class='line'>output to <span class="nb">local</span>-file: test.txt <span class="o">[</span>anpqy?<span class="o">]</span>? y
 </span><span class='line'><span class="m">229</span> Entering Extended Passive Mode <span class="o">(||</span><span class="p">|</span>27752<span class="p">|</span><span class="o">)</span>
@@ -1034,11 +1179,64 @@
 <p>ということでリモートパスとローカルファイルを指定する。ここではカレントディレクトリのファイル一覧を取得する。</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+>>>>>>> origin/master
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
+<<<<<<< HEAD
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">my_callback</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="p">(</span><span class="nv">$val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">!==</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">class</span> <span class="nc">CallBack</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">private</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span> <span class="o">=</span> <span class="nv">$arr</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">my_callback</span><span class="p">(</span><span class="nv">$val</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">return</span> <span class="p">(</span><span class="nv">$val</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">===</span> <span class="mi">0</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">run</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// array(2, 4, 6)が出力されることを期待</span>
+</span><span class='line'>        <span class="nb">print_r</span><span class="p">(</span><span class="nb">array_filter</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">arr</span><span class="p">,</span> <span class="s1">&#39;my_callback&#39;</span><span class="p">));</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$callback</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">CallBack</span><span class="p">(</span><span class="k">array</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">));</span>
+</span><span class='line'><span class="nv">$callback</span><span class="o">-&gt;</span><span class="na">run</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考</h2>
+
+<p><a href="http://php.net/manual/ja/language.types.callable.php">PHP コールバック</a></p>
+=======
 </pre></td><td class='code'><pre><code class='sh'><span class='line'>ftp&gt; ls . filelist.txt
 </span><span class='line'>output to <span class="nb">local</span>-file: filelist.txt <span class="o">[</span>anpqy?<span class="o">]</span>? y
 </span><span class='line'><span class="m">229</span> Entering Extended Passive Mode <span class="o">(||</span><span class="p">|</span>14481<span class="p">|</span><span class="o">)</span>
@@ -1071,10 +1269,20 @@
 <p>結果は上記と同様にローカルのホームディレクトリ直下にダウンロードされている。</p>
 
 <p>こういったちょっとしたことを、さっと応えられるようにしたい。</p>
+>>>>>>> origin/master
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
+    <title type="html"><![CDATA[php array_flattenを実装する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/23/php-array-flatten/"/>
+    <updated>2014-09-23T21:24:42+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/23/php-array-flatten</id>
+    <content type="html"><![CDATA[<p>phpは配列を操作する関数が多くあるが多次元配列をフラットにする関数がない。(ということを最近知った)</p>
+
+<p>実装方法は様々あるが、その中からいくつか紹介します。</p>
+=======
     <title type="html"><![CDATA[MacアプリCaffeineのメニューバーアイコンをRetinaディスプレイ用に変更する]]></title>
     <link href="http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon/"/>
     <updated>2014-09-21T14:33:34+09:00</updated>
@@ -1088,10 +1296,16 @@
 <p>アイコンがダサい・・・。</p>
 
 <p><img src="http://blog.code-life.net/images/2014/09/mac-caffeine-1.png"></p>
+>>>>>>> origin/master
 
 <!--more-->
 
 
+<<<<<<< HEAD
+<h2>再帰的に処理をする</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+=======
 <h2>Caffeineのアイコンを変更する</h2>
 
 <p>Retinaディスプレイ対応 &amp; シャレオツなアイコンに変えました。</p>
@@ -1311,6 +1525,948 @@
 <p>以下のデータ構造で返却される。</p>
 
 <figure class='code'><figcaption><span>sample value</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+>>>>>>> origin/master
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<<<<<<< HEAD
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">array_flatten</span><span class="p">(</span><span class="k">array</span> <span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$ret</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$arr</span> <span class="k">as</span> <span class="nv">$item</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">if</span> <span class="p">(</span><span class="nb">is_array</span><span class="p">(</span><span class="nv">$item</span><span class="p">))</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nv">$ret</span> <span class="o">=</span> <span class="nb">array_merge</span><span class="p">(</span><span class="nv">$ret</span><span class="p">,</span> <span class="nx">array_flatten</span><span class="p">(</span><span class="nv">$item</span><span class="p">));</span>
+</span><span class='line'>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>            <span class="nv">$ret</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$item</span><span class="p">;</span>
+</span><span class='line'>        <span class="p">}</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>SPLのイテレータクラスを利用する</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">array_flatten</span><span class="p">(</span><span class="k">array</span> <span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">return</span> <span class="nb">iterator_to_array</span><span class="p">(</span><span class="k">new</span> <span class="nx">RecursiveIteratorIterator</span><span class="p">(</span><span class="k">new</span> <span class="nx">RecursiveArrayIterator</span><span class="p">(</span><span class="nv">$arr</span><span class="p">)),</span> <span class="k">false</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>値に対して何らかの処理を行いたい場合はこちらのほうが良いかも。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+=======
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">Array</span>
+</span><span class='line'><span class="p">(</span>
+</span><span class='line'>    <span class="p">[</span><span class="nb">log</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>        <span class="p">(</span>
+</span><span class='line'>            <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>                <span class="p">(</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">query</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">SELECT</span> <span class="sb">`username`</span> <span class="nx">FROM</span> <span class="sb">`users`</span>  <span class="k">AS</span> <span class="sb">`User`</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">params</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>                        <span class="p">(</span>
+</span><span class='line'>                        <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">affected</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">numRows</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">took</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>            <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>                <span class="p">(</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">query</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="nx">SELECT</span> <span class="sb">`name`</span> <span class="nx">FROM</span> <span class="sb">`groups`</span>  <span class="k">AS</span> <span class="sb">`Group`</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">params</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="k">Array</span>
+</span><span class='line'>                        <span class="p">(</span>
+</span><span class='line'>                        <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">affected</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">numRows</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'>                    <span class="p">[</span><span class="nx">took</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+</span><span class='line'>                <span class="p">)</span>
+</span><span class='line'>        <span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="p">[</span><span class="nb">count</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+</span><span class='line'>    <span class="p">[</span><span class="nb">time</span><span class="p">]</span> <span class="o">=&gt;</span> <span class="mi">1</span>
+</span><span class='line'><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>getLog</code>が行っている処理内容</p>
+
+<figure class='code'><figcaption><span>lib/Cake/Model/Datasource/DboSource.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+>>>>>>> origin/master
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<<<<<<< HEAD
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">array_flatten</span><span class="p">(</span><span class="k">array</span> <span class="nv">$arr</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$it</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">RecursiveIteratorIterator</span><span class="p">(</span><span class="k">new</span> <span class="nx">RecursiveArrayIterator</span><span class="p">(</span><span class="nv">$arr</span><span class="p">));</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$ret</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">foreach</span> <span class="p">(</span><span class="nv">$it</span> <span class="k">as</span> <span class="nv">$value</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$ret</span><span class="p">[]</span> <span class="o">=</span> <span class="nv">$value</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">return</span> <span class="nv">$ret</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>SPLのイテレータクラス初めて知ったけどシンプルに書けてよいね。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/1319903/how-to-flatten-a-multidimensional-array">How to Flatten a Multidimensional Array?</a></li>
+<li><a href="http://yuubiseiharukana.blog.shinobi.jp/Entry/1156/">PHP5.4.7 PHPでarray_flatten関数のパフォーマンス測定</a></li>
+</ul>
+
+=======
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="sd">/**</span>
+</span><span class='line'><span class="sd"> * Get the query log as an array.</span>
+</span><span class='line'><span class="sd"> *</span>
+</span><span class='line'><span class="sd"> * @param boolean $sorted Get the queries sorted by time taken, defaults to false.</span>
+</span><span class='line'><span class="sd"> * @param boolean $clear If True the existing log will cleared.</span>
+</span><span class='line'><span class="sd"> * @return array Array of queries run as an array</span>
+</span><span class='line'><span class="sd"> */</span>
+</span><span class='line'><span class="k">public</span> <span class="k">function</span> <span class="nf">getLog</span><span class="p">(</span><span class="nv">$sorted</span> <span class="o">=</span> <span class="k">false</span><span class="p">,</span> <span class="nv">$clear</span> <span class="o">=</span> <span class="k">true</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$sorted</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$log</span> <span class="o">=</span> <span class="nx">sortByKey</span><span class="p">(</span><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_queriesLog</span><span class="p">,</span> <span class="s1">&#39;took&#39;</span><span class="p">,</span> <span class="s1">&#39;desc&#39;</span><span class="p">,</span> <span class="nx">SORT_NUMERIC</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$log</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_queriesLog</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span><span class="nv">$clear</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_queriesLog</span> <span class="o">=</span> <span class="k">array</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>    <span class="k">return</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;log&#39;</span> <span class="o">=&gt;</span> <span class="nv">$log</span><span class="p">,</span> <span class="s1">&#39;count&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_queriesCnt</span><span class="p">,</span> <span class="s1">&#39;time&#39;</span> <span class="o">=&gt;</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">_queriesTime</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MySQLWorkbench テーブル毎にストレージエンジンを変更する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/28/how-to-change-storage-engine-mysql-work-bench/"/>
+    <updated>2014-08-28T18:24:52+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/28/how-to-change-storage-engine-mysql-work-bench</id>
+    <content type="html"><![CDATA[<p>いつからかテーブルのストレージエンジンの項目がどこにあるのか、とても分かりにくくなった。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>MacOS X 10.9</li>
+<li>MySQLWorkbench 6.1</li>
+</ul>
+
+
+<h2>テーブルのストレージエンジンを変更する</h2>
+
+<p>テーブルの詳細を表示し</p>
+
+<p><a href="http://blog.code-life.net/images/2014/08/mysql-work-bench-1.png"><img src="http://blog.code-life.net/images/2014/08/mysql-work-bench-1-500x121.png" width="500" height="121"></a></p>
+
+<p>すると</p>
+
+<p><a href="http://blog.code-life.net/images/2014/08/mysql-work-bench-2.png"><img src="http://blog.code-life.net/images/2014/08/mysql-work-bench-2-500x121.png" width="500" height="121"></a></p>
+
+<p>ストレージエンジンのセレクトボックスが表示される。分りにくい。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://stackoverflow.com/questions/10085203/mysql-workbench-eer-diagramm-how-to-change-storage-engine">MySQL Workbench EER Diagramm - how to change storage engine?</a></p>
+>>>>>>> origin/master
+]]></content>
+  </entry>
+  
+  <entry>
+<<<<<<< HEAD
+    <title type="html"><![CDATA[FTP リモート先のファイル名一覧をローカルに保存する方法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/21/ftp-ls-output-to-local-file-from-the-command-line/"/>
+    <updated>2014-09-21T16:32:47+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/21/ftp-ls-output-to-local-file-from-the-command-line</id>
+    <content type="html"><![CDATA[<p>同僚に聞かれてすぐに応えられなかったので備忘録としてメモ。</p>
+=======
+    <title type="html"><![CDATA[rsync sshポートを指定する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/28/change-ssh-port-when-using-rsync/"/>
+    <updated>2014-08-28T16:52:28+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/28/change-ssh-port-when-using-rsync</id>
+    <content type="html"><![CDATA[<p>rsyncは一般的にはデフォルトでsshを利用するよう設定されているがeオプションで変更することができる。</p>
+>>>>>>> origin/master
+
+<!--more-->
+
+
+<<<<<<< HEAD
+<h2>ファイル一覧を出力する</h2>
+
+<p>単純にファイル一覧を取得するには<code>ls</code>コマンドで出力できる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>ftp
+</span><span class='line'>ftp&gt; open ftp.exsample.com
+</span><span class='line'>Name <span class="o">(</span>xxxx<span class="o">)</span>: <span class="o">[</span>ユーザー名応答<span class="o">]</span>
+</span><span class='line'>Password: <span class="o">[</span>パスワード応答<span class="o">]</span>
+</span><span class='line'><span class="m">230</span> User code-life logged in
+</span><span class='line'>Remote system <span class="nb">type </span>is UNIX.
+</span><span class='line'>Using binary mode to transfer files.
+</span><span class='line'>ftp&gt; ls
+</span><span class='line'>drwxr-xr-x <span class="m">428</span> root     wheel        <span class="m">9216</span> Sep <span class="m">16</span> 18:40 ..
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> code-life users         <span class="m">773</span> Jan  <span class="m">7</span>  <span class="m">2009</span> .cshrc
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> code-life users         <span class="m">258</span> Jan  <span class="m">2</span>  <span class="m">2009</span> .login
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> code-life users         <span class="m">167</span> Jan  <span class="m">2</span>  <span class="m">2009</span> .login_conf
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> code-life users         <span class="m">762</span> Jan  <span class="m">7</span>  <span class="m">2009</span> .profile
+</span><span class='line'>-rw-r--r--   <span class="m">1</span> code-life users         <span class="m">980</span> Jan  <span class="m">2</span>  <span class="m">2009</span> .shrc
+</span><span class='line'>drwx------   <span class="m">2</span> code-life users         <span class="m">512</span> Mar <span class="m">13</span>  <span class="m">2009</span> .spamassassin
+</span><span class='line'>drwx------   <span class="m">2</span> code-life users         <span class="m">512</span> Mar <span class="m">13</span>  <span class="m">2009</span> .ssh
+</span><span class='line'>drwxr-xr-x   <span class="m">5</span> code-life users         <span class="m">512</span> Aug <span class="m">20</span> 22:01 www
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>出力したファイル一覧をローカルに保存する</h2>
+
+<p>lsの標準出力をファイルに出力できるかと思ったができない。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+=======
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ rsync -av -e 'ssh -p 10022' ~/path_to_local/files/ user@hostname:~/path_to_remote/files/</span></code></pre></td></tr></table></div></figure>
+
+
+<p>eオプションでなく環境変数 <code>RSYNC_RSH</code> に設定しても同じことができる。</p>
+
+<blockquote><p>You can also choose the remote shell program using the RSYNC_RSH environment variable,  which accepts the same range of values as -e.</p>
+
+<p>引用元: <cite><a href="http://rsync.samba.org/ftp/rsync/rsync.html">rsync</a><cite></p></blockquote>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ export RSYNC_RSH="ssh -p 10022"
+</span><span class='line'>$ rsync -av ~/path_to_local/files/ user@hostname:~/path_to_remote/files/</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考</h2>
+
+<p><a href="http://rsync.samba.org/ftp/rsync/rsync.html">rsync</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Linux 新規ユーザーのホームディレクトリの雛形設定]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/27/linux-skelton-directory/"/>
+    <updated>2014-08-27T17:54:17+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/27/linux-skelton-directory</id>
+    <content type="html"><![CDATA[<p>useraddコマンドで新規ユーザーを作成するとホームディレクトリ内に下記のようないくつかの設定ファイルが既に存在している。</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>.
+</span><span class='line'>├── .bash_logout
+</span><span class='line'>├── .bash_profile
+</span><span class='line'>└── .bashrc</span></code></pre></td></tr></table></div></figure>
+
+
+<p>これらのファイルは、<code>/etc/skel</code>内のファイルがコピーされたもので、<code>/etc/skel</code>内にファイルを追加、変更を行うと
+新規ユーザーのホームディレクトリの雛形を作成することができる。</p>
+
+<h2>雛形ディレクトリを変更する</h2>
+
+<p>デフォルトでは<code>/etc/skel</code>だが、useraddの設定ファイル<code>/etc/default/useradd</code>に指定することで変更することができる。</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+>>>>>>> origin/master
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<<<<<<< HEAD
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ftp&gt; dir &gt; test.txt
+</span><span class='line'>output to <span class="nb">local</span>-file: test.txt <span class="o">[</span>anpqy?<span class="o">]</span>? y
+</span><span class='line'><span class="m">229</span> Entering Extended Passive Mode <span class="o">(||</span><span class="p">|</span>27752<span class="p">|</span><span class="o">)</span>
+</span><span class='line'><span class="m">150</span> Opening ASCII mode data connection <span class="k">for</span> file list
+</span><span class='line'>     <span class="m">0</span>        0.00 KiB/s
+</span><span class='line'>     <span class="m">450</span> &gt;: No such file or directory
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>help ls</code>で確認すると<code>list contents of remote path</code>と期待した応答はしてくれなかった。不親切だ。</p>
+
+<p><code>man ftp</code>で確認する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ls <span class="o">[</span>remote-path <span class="o">[</span><span class="nb">local</span>-file<span class="o">]]</span>
+</span><span class='line'>            A synonym <span class="k">for</span> dir.
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>ということでリモートパスとローカルファイルを指定する。ここではカレントディレクトリのファイル一覧を取得する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ftp&gt; ls . filelist.txt
+</span><span class='line'>output to <span class="nb">local</span>-file: filelist.txt <span class="o">[</span>anpqy?<span class="o">]</span>? y
+</span><span class='line'><span class="m">229</span> Entering Extended Passive Mode <span class="o">(||</span><span class="p">|</span>14481<span class="p">|</span><span class="o">)</span>
+</span><span class='line'><span class="m">150</span> Opening ASCII mode data connection <span class="k">for</span> file list
+</span><span class='line'>  <span class="m">1104</span>       38.53 KiB/s
+</span><span class='line'>  <span class="m">226</span> Transfer <span class="nb">complete</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>出力したfilelist.txtはローカルのホームディレクトリ直下にダウンロードされているのが確認できる。</p>
+
+<h2>ファイル一覧を再帰的に出力する</h2>
+
+<p>再帰的にファイル一覧を出力するには<code>R</code>オプションを指定する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ftp&gt; ls -R
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>再帰的に出力したファイル一覧をローカルに保存する</h2>
+
+<p><code>R</code>オプション指定時にはリモートパスの指定はできない。カレントディレクトリから再帰的に一覧を取得する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>ftp&gt; ls -R filelist.txt
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>結果は上記と同様にローカルのホームディレクトリ直下にダウンロードされている。</p>
+
+<p>こういったちょっとしたことを、さっと応えられるようにしたい。</p>
+=======
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ sudo vi /etc/default/useradd
+</span><span class='line'>
+</span><span class='line'># useradd defaults file
+</span><span class='line'>GROUP=100
+</span><span class='line'>HOME=/home
+</span><span class='line'>INACTIVE=-1
+</span><span class='line'>EXPIRE=
+</span><span class='line'>SHELL=/bin/bash
+</span><span class='line'>SKEL=/etc/skel ← ここを変える
+</span><span class='line'>CREATE_MAIL_SPOOL=yes</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考</h2>
+
+<p><a href="http://linuxg.net/the-unix-and-linux-skeleton-directory-etcskel/">The Unix and Linux skeleton directory: /etc/skel</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac OS X Mavericks メニューバーに表示されているユーザー名を隠す]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/25/hide-user-name-from-menu-bar-in-mac-marvericks/"/>
+    <updated>2014-08-25T14:57:41+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/25/hide-user-name-from-menu-bar-in-mac-marvericks</id>
+    <content type="html"><![CDATA[<p>メニューバーに表示されるユーザー名は正直必要ないので非表示にしたい。</p>
+
+<!--more-->
+
+
+<h2>ユーザーとグループ</h2>
+
+<p>システム環境設定からユーザーとグループを選択</p>
+
+<h3>ログインオプションの選択</h3>
+
+<p>ログインオプションを選択する。</p>
+
+<p><a href="http://blog.code-life.net/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png"><img src="http://blog.code-life.net/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png" width="500" height="379"></a></p>
+
+<h3>ファストユーザスイッチメニューの表示</h3>
+
+<p>「ファストユーザスイッチメニューを表示」にチェックがはいっているので外す。</p>
+
+<p><a href="http://blog.code-life.net/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png"><img src="http://blog.code-life.net/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png" width="500" height="379"></a></p>
+
+<p>これでメニューバーのユーザー名は非表示となる。
+<a href="http://evernote.com/intl/jp/skitch/">skitch</a>を使ってみたが便利だ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Markdown code記法内でバッククォートを表示する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/25/escape-backtick-in-markdown/"/>
+    <updated>2014-08-25T00:38:47+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/25/escape-backtick-in-markdown</id>
+    <content type="html"><![CDATA[<p>バッククォート文字を含めるには、複数のバッククォートで囲むことで表示することができる。</p>
+
+<!--more-->
+
+
+
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>`` `バッククォート`を表示する ``
+</span><span class='line'>↓
+</span><span class='line'>`バッククォート`を表示する
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>参考</h2>
+
+<p><a href="http://daringfireball.net/projects/markdown/syntax#code">Markdown: Syntax</a></p>
+>>>>>>> origin/master
+]]></content>
+  </entry>
+  
+  <entry>
+<<<<<<< HEAD
+    <title type="html"><![CDATA[MacアプリCaffeineのメニューバーアイコンをRetinaディスプレイ用に変更する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon/"/>
+    <updated>2014-09-21T14:33:34+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon</id>
+    <content type="html"><![CDATA[<p><a href="http://lightheadsw.com/caffeine/">Caffeine</a>は、Macのスリープモードを一時的に無効にするMacの定番アプリです。</p>
+
+<p>起動するとメニューバーにコーヒーカップのアイコンが表示され、クリックすると無効化のON・OFFを切り替えます。</p>
+
+<p>とてもシンプルな機能で重宝していますが一つ不満があります。</p>
+
+<p>アイコンがダサい・・・。</p>
+
+<p><img src="http://blog.code-life.net/images/2014/09/mac-caffeine-1.png"></p>
+
+<!--more-->
+
+
+<h2>Caffeineのアイコンを変更する</h2>
+
+<p>Retinaディスプレイ対応 &amp; シャレオツなアイコンに変えました。</p>
+
+<h3>アイコンセットをダウンロード</h3>
+
+<p>3つ紹介しますが、探せばもっとあるかもしれません。ちなみに私は「1」を使用しました。</p>
+
+<ol>
+<li><a href="https://github.com/bkenny/retina-caffeine">bkenny/retina-caffeine</a></li>
+<li><a href="https://webjac.com/design/caffeine-retina-icons/">Caffeine Retina Icons</a></li>
+<li><a href="http://blog.timlockridge.com/blog/2013/04/26/retina-menu-bar-icons-for-caffeine/">Retina Menu Bar Icons for Caffeine</a></li>
+</ol>
+
+
+<h3>アイコンの置き換え</h3>
+
+<ol>
+<li>/Applications/Caffeine.appを<code>Ctrl + クリック</code>して<code>パッケージの内容を表示</code>を選択</li>
+<li>Contents/Resources内に置き換えたいアイコンをコピー</li>
+<li>(起動している場合)Caffeineを終了し、Caffeineを起動</li>
+</ol>
+
+
+<h3>結果</h3>
+
+<p>いい感じ。</p>
+
+<p><img src="http://blog.code-life.net/images/2014/09/mac-caffeine-2.png"></p>
+
+<h2>注意</h2>
+
+<p>Caffeine自体のアップデートがあった場合、アイコンがデフォルト状態に戻ります。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac メニューバーにカレンダーを表示させるDay-Oが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/07/mac-day-o/"/>
+    <updated>2014-09-07T22:11:08+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/07/mac-day-o</id>
+    <content type="html"><![CDATA[<p>しばらく前から<a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Day-O</a>を利用している。 メニューバーからカレンダーが確認できてなかなか便利。</p>
+
+<!--more-->
+
+
+<p><img src="http://blog.code-life.net/images/2014/09/mac-day-o-1.png"></p>
+
+<p>日付をクリックすると以下のような表示となる。</p>
+
+<p><img src="http://blog.code-life.net/images/2014/09/mac-day-o-2.png"></p>
+
+<p><code>Preference</code>から日付のフォーマットを変更することもできる。</p>
+
+<p>デフォルトの日付&amp;時刻と別にDay-Oの表示がされていたのでデフォルトはOFFに、またカレンダーを確認するだけに利用してたDashboardも<a href="http://www.bresink.com/osx/TinkerTool.html">TinkerTool</a>で無効にしている。</p>
+
+<p><a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Download Day-O</a></p>
+=======
+    <title type="html"><![CDATA[Octopress アルファベットで始まるタイトルの最初の文字が大文字となる場合の対処法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/24/uncapitalize-the-post-title-octopress/"/>
+    <updated>2014-08-24T23:28:21+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/24/uncapitalize-the-post-title-octopress</id>
+    <content type="html"><![CDATA[<p>ブログのタイトルを「octopress title」とした場合、実際表示されるタイトルは「Octopress title」となる。</p>
+
+<p><code>_config.yml</code>の<code>titlecase</code>を<code>false</code>にすると記載したタイトルをそのまま表示させることができる。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[rbenv使うならこれもいれとけプラグイン4選]]></title>
+    <link href="http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/"/>
+    <updated>2014-05-07T22:30:15+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin</id>
+    <content type="html"><![CDATA[<p>複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。</p>
+
+<!--more-->
+
+
+<h2>ruby-build</h2>
+
+<p><a href="https://github.com/sstephenson/ruby-build">ruby-build</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>rubyのコンパイル &amp; インストール</p>
+
+<h3>インストール</h3>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-default-gems</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-default-gems">rbenv-default-gems</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>新しくrubyをインストールする際、~/.rbenv/default-gemsに記載してあるgemを自動的にインストールする</p>
+
+<figure class='code'><figcaption><span>ex) ~/.rbenv/default-gems</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'>bundler
+</span><span class='line'>pry
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-gem-rehash</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-gem-rehash">rbenv-gem-rehash</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>gemをインストール or アンインストールした際に自動的にrbenv rehashを行う</p>
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>rbenv-update</h2>
+
+<p><a href="https://github.com/rkh/rbenv-update">rbenv-update</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p><code>rbenv update</code>と打てば rbenv &amp; rbenvプラグインをまとめて最新の状態にする</p>
+
+<h3>Installation</h3>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>全部<a href="https://github.com/sstephenson/rbenv/wiki/Plugins#approved-plugins">wiki</a>に載ってるんすけどね。</p>
+>>>>>>> origin/master
+]]></content>
+  </entry>
+  
+  <entry>
+<<<<<<< HEAD
+    <title type="html"><![CDATA[SSH agent forwardingまとめ]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/07/ssh-agent-forwarding/"/>
+    <updated>2014-09-07T19:24:56+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/07/ssh-agent-forwarding</id>
+    <content type="html"><![CDATA[<p>Capistranoを触った際にagent forwardingについて調べたことをまとめておく。</p>
+=======
+    <title type="html"><![CDATA[Vagrant 共有ディレクトリを複数追加する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders/"/>
+    <updated>2014-04-14T21:06:31+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders</id>
+    <content type="html"><![CDATA[<p>ドキュメントみてもgoogle先生に伺っても意外と情報がない。</p>
+>>>>>>> origin/master
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<<<<<<< HEAD
+<li>MacOS X 10.9 (ローカル)</li>
+<li>CentOS 6.5 (リモート)</li>
+</ul>
+
+
+<h2>SSH agent forwardingとは</h2>
+
+<p>ローカルからサーバA サーバAからサーバBへSSH接続したい場合、サーバAに秘密鍵を置かずローカルの鍵を参照して認証させる仕組み。</p>
+
+<p>例えば以下のようなことができる。</p>
+
+<ul>
+<li>ローカルからサーバAにログイン後、サーバBにログイン</li>
+<li>ローカルからサーバAにログイン後、サーバBとファイル同期(rsync)する</li>
+<li>ローカルからサーバAにログイン後、git cloneを行う</li>
+</ul>
+
+
+<h2>SSH agent forwardingの設定</h2>
+
+<p>agent forwardingを利用するためにはいくつか条件がある。</p>
+
+<h3>ローカルの条件</h3>
+
+<p>ssh-agentが起動していること。また秘密鍵がssh-agentに登録されていること。</p>
+
+<p>秘密鍵を登録しなければ、参照する鍵がない為SSH接続時にエラーとなる。</p>
+
+<h4>ssh-agentの起動確認</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ echo "$SSH_AUTH_SOCK"
+</span><span class='line'>/tmp/launch-5XHwDO/Listeners</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>秘密鍵を登録</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh-add path_to_key</span></code></pre></td></tr></table></div></figure>
+
+
+<p>再起動後でもssh-agentに鍵を登録させていたい場合は<code>K</code>オプションを利用する</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh-add -K path_to_key</span></code></pre></td></tr></table></div></figure>
+
+
+<h4>登録されている秘密鍵を確認</h4>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh-add -L</span></code></pre></td></tr></table></div></figure>
+
+
+<h3>リモートの条件</h3>
+
+<p>AgentForwardingが許可されていること。
+<code>sshd_config</code>内の<code>AllowAgentForwarding</code>の値を確認。</p>
+
+<h2>実際にやってみる</h2>
+
+<p>ssh-agentの転送を許可するには<code>A</code>オプションを利用する</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ ssh -A exsample.com</span></code></pre></td></tr></table></div></figure>
+
+
+<p>毎回オプション指定するのが面倒な場合は<code>~/.ssh/config</code>に<code>ForwardAgent</code>を追加する。</p>
+
+<figure class='code'><figcaption><span>~/.ssh/config</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>Host exsample.com
+</span><span class='line'>  ForwardAgent yes
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p><code>sudo</code> または <code>su</code> 後、転送した鍵情報を利用することができない場合がある。</p>
+
+<p> suの場合、<code>m</code>, <code>p</code>, <code>preserve-environment</code>オプションを利用することで鍵情報を引き継ぐことができる。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ su -p
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>sudoの場合、<code>E</code>オプションを利用する。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>$ sudo -E
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>データを転送したい時やデプロイする時に使えて便利。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="https://developer.github.com/guides/using-ssh-agent-forwarding/">Using SSH agent forwarding</a></li>
+<li><a href="http://www.unixuser.org/~euske/doc/openssh/jman/ssh.html">ssh</a></li>
+<li><a href="http://linuxjm.sourceforge.jp/html/gnumaniak/man1/su.1.html#index">su</a></li>
+<li><a href="http://linuxjm.sourceforge.jp/html/sudo/man8/sudo.8.html">sudo</a></li>
+</ul>
+
+=======
+<li>Vagrant 1.5.2</li>
+</ul>
+
+
+<h2>共有ディレクトリを複数追加する</h2>
+
+<p>ただ複数書けばいいだけだった&hellip;</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span> <span class="s2">&quot;../path_to_share1&quot;</span><span class="p">,</span> <span class="s2">&quot;/share1&quot;</span>
+</span><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span> <span class="s2">&quot;../path_to_share2&quot;</span><span class="p">,</span> <span class="s2">&quot;/share2&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>常識なんですかね。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://docs.vagrantup.com/v2/synced-folders/basic_usage.html">Synced Folders</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Server WEBrickの起動やレスポンス速度が遅い場合の対処法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow/"/>
+    <updated>2014-04-14T20:41:27+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow</id>
+    <content type="html"><![CDATA[<p>最近Railsを触っているのだが、いかんせんWebrickの起動やレスポンスが遅い。</p>
+
+<p>世のRubyistはこんな環境で開発しているのか(いやない)ということで調べた。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>Ruby on Rails4</li>
+<li>ruby 2.1.1p76</li>
+<li>Vagrant 1.5.2</li>
+</ul>
+
+
+<h2>Webrickの設定を見直す</h2>
+
+<p>google先生に伺うと下記の解決方法が多かったがボクの環境では効果が見られなかった。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>gem which webrick
+</span><span class='line'>/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb
+</span><span class='line'>
+</span><span class='line'><span class="nv">$ </span>vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb
+</span><span class='line'>
+</span><span class='line'>:DoNotReverseLookup <span class="o">=</span>&gt; nil
+</span><span class='line'>↓
+</span><span class='line'>:DoNotReverseLookup <span class="o">=</span>&gt; <span class="nb">true</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>Vagrant Synced Foldersの設定</h2>
+
+<p>synced_folderを<code>nfs</code> にするとパフォーマンスの向上が期待できると何処かで見た記憶があったので</p>
+
+<p>ドキュメントを覗いてみると <code>rsync</code> がバージョン1.5から利用できるとのこと。
+使わない手はないと早速1.5に上げて試してみた。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span> <span class="s2">&quot;../target&quot;</span><span class="p">,</span> <span class="s2">&quot;/share&quot;</span><span class="p">,</span> <span class="ss">type</span><span class="p">:</span> <span class="s2">&quot;rsync&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>初回起動時は立ち上がるまで若干時間がかかったが、それ以降は遅いとは感じない。</p>
+
+<p>肝心のWebrickのレスポンス速度は劇的に上がった。今までと比べると爆速。</p>
+
+<h3>注意点</h3>
+
+<p>ホストOS側で変更した点がゲストOSに反映されない。
+rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</code> を実行する必要がある。</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="err">$</span> <span class="n">vagrant</span> <span class="n">up</span>
+</span><span class='line'><span class="err">$</span> <span class="n">vagrant</span> <span class="n">rsync</span> <span class="c1">#１度きりの同期</span>
+</span><span class='line'><span class="ow">or</span>
+</span><span class='line'><span class="err">$</span> <span class="n">vagrant</span> <span class="n">rsync</span><span class="o">-</span><span class="n">auto</span> <span class="c1">#監視して変更があれば同期 若干タイムラグがある。</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<h2>結局は&hellip;</h2>
+
+<p>rsyncで少し利用してみたが、同期のラグが気になった。
+変更してすぐに確認できないことがあるのでこの辺はストレスに感じる。</p>
+
+<p>また同期は一方方向 ホスト→ ゲストの為、仮想マシン上でコマンドを打ってファイルを作成しても
+ホストには反映されない。</p>
+
+<p>自分はゲストからコマンドを打つことが多いので困った点だった。
+こういった点はこれから改善されるのだと思う。</p>
+
+<p>ということでパフォーマンス的に問題がなかったので <code>nfs</code> に変更して開発している。</p>
+
+<hr />
+
+<p>追記 2014/04/15</p>
+
+<h2>参考</h2>
+
+<p><a href="https://www.vagrantup.com/blog/feature-preview-vagrant-1-5-rsync.html">Feature Preview: Rsync Synced Folders</a></p>
+
+<p><a href="http://docs.vagrantup.com/v2/getting-started/synced_folders.html">Synced Folders</a></p>
+>>>>>>> origin/master
+]]></content>
+  </entry>
+  
+  <entry>
+<<<<<<< HEAD
+    <title type="html"><![CDATA[CakePHP2.x クエリーログを取得する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2/"/>
+    <updated>2014-08-29T10:58:40+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2</id>
+    <content type="html"><![CDATA[<p>どんなクエリが発行されているか確認したい場合があった際のメモ</p>
+=======
+    <title type="html"><![CDATA[Vagrantのコマンドを補完する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/02/07/install-vagrant-bash-completion-on-mac/"/>
+    <updated>2014-02-07T11:19:47+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/02/07/install-vagrant-bash-completion-on-mac</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/kura/vagrant-bash-completion">vagrant-bash-completion</a>なるものを発見したのでインストールした。</p>
+>>>>>>> origin/master
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<<<<<<< HEAD
+<li>CakePHP 2.5.2</li>
+<li>MySQL 5.5.30</li>
+</ul>
+
+
+<h2>注意</h2>
+
+<p>この方法でクエリーログが取得できるのはデバッグレベル2の場合のみ</p>
+
+<h2>クエリーログを取得する</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$log</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="p">{</span><span class="nv">$Model</span><span class="p">}</span><span class="o">-&gt;</span><span class="na">getDataSource</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">getLog</span><span class="p">(</span><span class="k">false</span><span class="p">,</span> <span class="k">false</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<ul>
+<li>第１引数は、ソートの有無。trueの場合はtook(ms)で降順ソート</li>
+<li>第2引数では、クエリーを格納している変数の初期化を行うか否か</li>
+</ul>
+
+
+<h3>返却値</h3>
+
+<p>以下のデータ構造で返却される。</p>
+
+<figure class='code'><figcaption><span>sample value</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
 <span class='line-number'>3</span>
 <span class='line-number'>4</span>
@@ -1417,19 +2573,64 @@
 </span><span class='line'><span class="p">}</span>
 </span></code></pre></td></tr></table></div></figure>
 
+=======
+<li>Mac OS X 10.9.1</li>
+<li>Vagrant 1.4.3</li>
+</ul>
+
+
+<h2>Installation</h2>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="nv">$ </span>brew tap homebrew/completions
+</span><span class='line'><span class="nv">$ </span>brew install vagrant-completion
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>~/.bashrcに以下を追加して反映</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='sh'><span class='line'><span class="k">if</span> <span class="o">[</span> -f <span class="sb">`</span>brew --prefix<span class="sb">`</span>/etc/bash_completion.d/vagrant <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+</span><span class='line'>  <span class="nb">source</span> <span class="sb">`</span>brew --prefix<span class="sb">`</span>/etc/bash_completion.d/vagrant
+</span><span class='line'><span class="k">fi</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Vagrantコマンド・サブコマンドの補完が行われて幸福度が少し上がる。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/kura/vagrant-bash-completion">vagrant-bash-completion</a></p>
+>>>>>>> origin/master
 ]]></content>
   </entry>
   
   <entry>
+<<<<<<< HEAD
     <title type="html"><![CDATA[MySQLWorkbench テーブル毎にストレージエンジンを変更する]]></title>
     <link href="http://blog.code-life.net/blog/2014/08/28/how-to-change-storage-engine-mysql-work-bench/"/>
     <updated>2014-08-28T18:24:52+09:00</updated>
     <id>http://blog.code-life.net/blog/2014/08/28/how-to-change-storage-engine-mysql-work-bench</id>
     <content type="html"><![CDATA[<p>いつからかテーブルのストレージエンジンの項目がどこにあるのか、とても分かりにくくなった。</p>
+=======
+    <title type="html"><![CDATA[[IntelliJ] vim-easymotionぽいことができるAceJumpプラグインが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2014/01/06/using-vim-easymotion-in-intellij/"/>
+    <updated>2014-01-06T23:21:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/01/06/using-vim-easymotion-in-intellij</id>
+    <content type="html"><![CDATA[<p>IntelliJ IDEA 13がリリースされ先日UpgradeついでにPluginを整理していたところ、Acejumpなるプラグインを発見し便利だったって話。</p>
+
+<p>なにができるかっていうとVimのプラグイン<a href="https://github.com/Lokaltog/vim-easymotion">easymotion</a>的なことができる。</p>
+
+<p>ということでデモ。</p>
+>>>>>>> origin/master
 
 <!--more-->
 
 
+<<<<<<< HEAD
 <h2>環境</h2>
 
 <ul>
@@ -1453,6 +2654,29 @@
 <h2>参考</h2>
 
 <p><a href="http://stackoverflow.com/questions/10085203/mysql-workbench-eer-diagramm-how-to-change-storage-engine">MySQL Workbench EER Diagramm - how to change storage engine?</a></p>
+=======
+<h2>Demo</h2>
+
+<p>&ldquo;ctrl + ;&#8221;を入力、続けて任意の1文字を入力すると該当箇所にラベルが振られる。ハイライトされたアルファベットを入力するとその箇所に移動する。</p>
+
+<p><img src="http://blog.code-life.net/images/2014/02/acejump.gif" width="600" height="400"></p>
+
+<h2>Install</h2>
+
+<p><code>Preferences</code> | <code>Plugins</code> | <code>Browse Repositories</code> | <code>AceJump</code> を選択しインストール</p>
+
+<h2>Keymap</h2>
+
+<p>キーマップが気に入らない場合は、</p>
+
+<p><code>Preferences</code> | <code>Keymap</code> | <code>Plug-ins</code> | <code>AceJump</code> | <code>Ace Jump</code> から好きなキーマップを割り当てることができる。</p>
+
+<p>AceJumpは WebStorm/PhpStorm, RubyMine, Pycharm等からも利用できるみたい。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://johnlindquist.com/2012/08/14/ace_jump.html">ACE JUMP</a></p>
+>>>>>>> origin/master
 ]]></content>
   </entry>
   
