@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mysqlworkbench | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/mysqlworkbench/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[MySQLWorkbench テーブル毎にストレージエンジンを変更する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/28/how-to-change-storage-engine-mysql-work-bench/"/>
+    <updated>2014-08-28T18:24:52+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/28/how-to-change-storage-engine-mysql-work-bench</id>
+    <content type="html"><![CDATA[<p>いつからかテーブルのストレージエンジンの項目がどこにあるのか、とても分かりにくくなった。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>MacOS X 10.9</li>
+<li>MySQLWorkbench 6.1</li>
+</ul>
+
+
+<h2>テーブルのストレージエンジンを変更する</h2>
+
+<p>テーブルの詳細を表示し</p>
+
+<p><a href="/images/2014/08/mysql-work-bench-1.png">{% img /images/2014/08/mysql-work-bench-1-500x121.png 500 121 %}</a></p>
+
+<p>すると</p>
+
+<p><a href="/images/2014/08/mysql-work-bench-2.png">{% img /images/2014/08/mysql-work-bench-2-500x121.png 500 121 %}</a></p>
+
+<p>ストレージエンジンのセレクトボックスが表示される。分りにくい。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://stackoverflow.com/questions/10085203/mysql-workbench-eer-diagramm-how-to-change-storage-engine">MySQL Workbench EER Diagramm - how to change storage engine?</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: shell | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/shell/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CentOS IPアドレスだけを取得する]]></title>
+    <link href="http://blog.code-life.net/blog/2015/09/21/get-ip-on-centos/"/>
+    <updated>2015-09-21T19:51:45+09:00</updated>
+    <id>http://blog.code-life.net/blog/2015/09/21/get-ip-on-centos</id>
+    <content type="html"><![CDATA[<p>IPアドレス自体は<code>ifconfig</code>コマンドや <code>ip -f inet addr</code>で確認することができるがIPアドレスのみ出力するオプションはない模様。</p>
+
+<pre><code>$ ip -f inet -o addr show eth1 | cut -d\ -f 7 | cut -d/ -f 1
+</code></pre>
+
+<p>IPアドレスだけを抽出する方法は色々あると思うが、まぁこれでいいかと思ってる。デバイス名は適宜変更すること。</p>
+
+<p>CentOS6では確認してるが、それ以外の環境では確認していない。</p>
+]]></content>
+  </entry>
+  
+</feed>

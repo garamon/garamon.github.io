@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: octopress | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Octopress アルファベットで始まるタイトルの最初の文字が大文字となる場合の対処法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/24/uncapitalize-the-post-title-octopress/"/>
+    <updated>2014-08-24T23:28:21+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/24/uncapitalize-the-post-title-octopress</id>
+    <content type="html"><![CDATA[<p>ブログのタイトルを「octopress title」とした場合、実際表示されるタイトルは「Octopress title」となる。</p>
+
+<p><code>_config.yml</code>の<code>titlecase</code>を<code>false</code>にすると記載したタイトルをそのまま表示させることができる。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Octopressはじめました]]></title>
+    <link href="http://blog.code-life.net/blog/2013/03/30/start-blogging-with-octopress/"/>
+    <updated>2013-03-30T12:52:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/03/30/start-blogging-with-octopress</id>
+    <content type="html"><![CDATA[<h2>移転done</h2>
+
+<p>以前書いてた <a href="http://code-life.net">code-life.net</a> から移転しました。今後ともよろしくお願いします。</p>
+
+<p>デザイン等もろもろの設定はこれから少しずつやってこうと思います。</p>
+]]></content>
+  </entry>
+  
+</feed>

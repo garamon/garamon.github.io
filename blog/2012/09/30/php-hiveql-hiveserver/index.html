@@ -1,0 +1,707 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>HiveServerを使用してPHPからHiveQLを実行する - Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="HiveServerを使用してPHPからHiveQLを実行する Hadoopを触る機会があり手探りで構築しているのですが PHP から HiveQLを実行させたいとgoogle先生に伺うと HiveServerを使用してPythonやPerlからHiveQLを実行する の記事があったので、 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/blog/2012/09/30/php-hiveql-hiveserver/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">HiveServerを使用してPHPからHiveQLを実行する</h1>
+	<div class="entry-content" itemprop="articleBody"><p>Hadoopを触る機会があり手探りで構築しているのですが PHP から HiveQLを実行させたいとgoogle先生に伺うと <a href="http://d.hatena.ne.jp/tagomoris/20110310/1299738606" title="HiveServerを使用してPythonやPerlからHiveQLを実行する" target="_blank">HiveServerを使用してPythonやPerlからHiveQLを実行する</a> の記事があったので、こちらを参考に試してみました。
+今回はHadoopのインストールから行います。</p>
+
+<!--more-->
+
+
+<p>まずはHadoopのインストールからです。初めはソースからインストールしていたのですが実際運用となるとやはりパッケージ管理したほうが無難です。そこでClouderaのHadoopディストリビューションパッケージCDH3をインストールします。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>CentOS 6.3 64bit</li>
+<li>Hadoop CDH3u5</li>
+<li>PHP 5.3.16</li>
+</ul>
+
+
+<h2>Javaのダウンロード &amp; インストール</h2>
+
+<p>HadoopはJavaソフトウェアの為、Javaのインストールが必要となります。以下のコマンドでJavaのバージョンが低い、またはそもそもインストールされていない場合はインストールする必要があります。
+CDH3が推奨しているバージョンは Oracle JDK 1.6, update 8 以上です。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ java -version</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/index.html" title="Java SE Downloads" target="_blank">Java SE Downloads</a> から　Java SE 6 Update xx　の　JDK を選択します。</p>
+
+<p>自身の環境に沿ったファイルをダウンロードします。ボクの場合は、jdk-6uxx-linux-x64-rpm.binをダウンロードします。
+ダウンロードしたファイルはSCP等で転送しましょう。</p>
+
+<h3>インストール</h3>
+
+<p>実行権限を与えて、インストールを行います。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ chmod a+x jdk-6uxx-linux-x64-rpm.bin
+</span><span class='line'>$ ./jdk-6uxx-linux-x64-rpm.bin</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>環境変数の設定</h3>
+
+<p>インストールが完了したら環境変数の設定を行います。どのユーザにおいてもその設定が反映するよう /etc/bashrc に以下を追加します。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vi /etc/bashrc
+</span><span class='line'>
+</span><span class='line'>export JAVA_HOME=/usr/java/default
+</span><span class='line'>export PATH=$PATH:$JAVA_HOME/bin</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>設定を反映させ、正しく設定されているか確認します。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ source ~/.bashrc
+</span><span class='line'>$ printenv JAVA_HOME
+</span><span class='line'>/usr/java/default</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h2>Hadoop のインストール</h2>
+
+<p>擬似分散モードでのHadoopインストールになります。</p>
+
+<h3>リポジトリの登録</h3>
+
+<p><a href="https://ccp.cloudera.com/display/CDHDOC/CDH3+Installation" title="CDH3+Installation" target="_blank">CDH3+Installation</a> を参考に環境に沿った方法でインストールしてください。</p>
+
+<p>ボクの場合は、リポジトリを追加してyum でインストールします。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget -O /etc/yum.repos.d/cloudera-cdh3.repo http://archive.cloudera.com/redhat/6/x86_64/cdh/cloudera-cdh3.repo</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>CDH3にもバージョンがあり、CDH3u5 から WebHDFSがサポートされたようです。
+なるべく新しいもの使いたいよねということで CDH3u5 をインストールします。その為に先ほどダウンロードしたリポジトリの修正を行います。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vi /etc/yum.repos.d/cloudera-cdh3.repo
+</span><span class='line'>
+</span><span class='line'>mirrorlist=http://archive.cloudera.com/redhat/6/x86_64/cdh/3/mirrors
+</span><span class='line'>
+</span><span class='line'>↓ 変更
+</span><span class='line'>
+</span><span class='line'>mirrorlist=http://archive.cloudera.com/redhat/6/x86_64/cdh/3u5/mirrors</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>インストール</h3>
+
+<p>修正したら Hadoop のインストールです。時間がかかるので適当に待ちましょう。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ yum install hadoop-0.20 hadoop-0.20-native
+</span><span class='line'>$ yum install hadoop-0.20-conf-pseudo hadoop-0.20-datanode  hadoop-hive-server</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>サービスの起動 &amp; 確認</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ for service in /etc/init.d/hadoop-*; do sudo $service start; done
+</span><span class='line'>$ jps</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>以下が表示されていることを確認します。</p>
+
+<ul>
+<li>secondarynamenode</li>
+<li>datanode</li>
+<li>namenode</li>
+<li>jobtracker</li>
+<li>tasktracker</li>
+</ul>
+
+
+<h3>MapReduceの動作確認</h3>
+
+<p>実際に円周率を計算するサンプルを動作させてみます。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ hadoop jar /usr/lib/hadoop/hadoop-examples.jar pi 4 2000
+</span><span class='line'>
+</span><span class='line'>・・・　省略 ・・・
+</span><span class='line'>Job Finished in 29.955 seconds
+</span><span class='line'>Estimated value of Pi is 3.14100000000000000000</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>ちゃんと動作していることが確認できましたね。Hadoopには HDFS(Hadoop分散ファイルシステム)を操作するコマンドがあるのですが、長ったらしいのでエイリアスを設定しておきます。</p>
+
+<h3>エイリアスの設定</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vi ~/.bashrc
+</span><span class='line'>
+</span><span class='line'>alias dfsls='/usr/lib/hadoop/bin/hadoop dfs -ls'       # ls¬
+</span><span class='line'>alias dfsrm='/usr/lib/hadoop/bin/hadoop dfs -rm'       # rm¬
+</span><span class='line'>alias dfscat='/usr/lib/hadoop/bin/hadoop dfs -cat'     # cat¬
+</span><span class='line'>alias dfsrmr='/usr/lib/hadoop/bin/hadoop dfs -rmr'     # rm -r¬
+</span><span class='line'>alias dfsmkdir='/usr/lib/hadoop/bin/hadoop dfs -mkdir' # mkdir¬
+</span><span class='line'>alias dfsput='/usr/lib/hadoop/bin/hadoop dfs -put'     # HDFS に転送¬
+</span><span class='line'>alias dfsget='/usr/lib/hadoop/bin/hadoop dfs -get'     # HDFS から転送¬</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h2>Hiveの設定</h2>
+
+<h3>Hive Metastoreの設定</h3>
+
+<blockquote><p>Hive の Metastoreは組み込みのApache Derbyにメタデータを格納するように構成されるている為、単一のユーザーが一度にMetastoreにアクセスすることしかできません。新規ユーザー向けのセットアップを簡単にする為には、代わりにMySQLデータベースを使用するように強く奨励しています。</p></blockquote>
+
+<p>とマニュアルに記載してあるので、その通りにします。</p>
+
+<h4>MySQL JDBC Connector のダウンロード</h4>
+
+<p>MySQL JDBC Connectorのバージョンは現在の最新のものを利用してます。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ cd /tmp
+</span><span class='line'>$ curl -L 'http://www.mysql.com/get/Downloads/Connector-J/mysql-connector-java-5.1.22.tar.gz/from/http://mysql.he.net/' | tar xz
+</span><span class='line'>$ cp mysql-connector-java-5.1.22/mysql-connector-java-5.1.22-bin.jar /usr/lib/hive/lib/</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h4>metastoreデータベースの作成</h4>
+
+<p>mysqlにログインしDBを作成します。DB名、ユーザー名、パスワードは適時置き換えて下さい。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>CREATE DATABASE metastore;
+</span><span class='line'>USE metastore;
+</span><span class='line'>SOURCE /usr/lib/hive/scripts/metastore/upgrade/mysql/hive-schema-0.7.0.mysql.sql;
+</span><span class='line'>
+</span><span class='line'>CREATE USER 'hiveuser'@'localhost' IDENTIFIED BY 'password';
+</span><span class='line'>GRANT SELECT,INSERT,UPDATE,DELETE ON metastore.* TO 'hiveuser'@'localhost';
+</span><span class='line'>REVOKE ALTER,CREATE ON metastore.* FROM 'hiveuser'@'localhost';</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>Hiveの設定</h3>
+
+<p>MySQLのMetaStore用のDBを作成したら、Hiveの設定ファイルの編集を行います。
+ホスト名、DB名、ユーザー名、パスワードは先程作成した情報に合わせて下さい。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>$ vi /etc/hive/conf/hive-site.xml</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/hive/conf/hive-site.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;javax.jdo.option.ConnectionURL&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;jdbc:mysql://localhost/metastore&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;javax.jdo.option.ConnectionDriverName&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;com.mysql.jdbc.Driver&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;javax.jdo.option.ConnectionUserName&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;hiveuser&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;javax.jdo.option.ConnectionPassword&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;password&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;datanucleus.autoCreateSchema&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;false&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span><span class='line'>
+</span><span class='line'>&lt;property&gt;
+</span><span class='line'>  &lt;name&gt;datanucleus.fixedDatastore&lt;/name&gt;
+</span><span class='line'>  &lt;value&gt;true&lt;/value&gt;
+</span><span class='line'>&lt;/property&gt;
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>設定が完了したらHadoopを再起動します。</p>
+
+<h2>PHPから HiveQLを実行する</h2>
+
+<p>HiveServerはThriftプロトコルで接続することができます。PHPの場合は、Hiveパッケージの中に生成済みのライブラリが既に存在するのでこちらを利用します。しかしそのまま利用しようとすると色々不具合があるのでそれを修正していきます。</p>
+
+<h3>ライブラリの修正</h3>
+
+<p>まずは自身のワークスペースにライブラリをコピーします。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/hive/conf/hive-site.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>cp -a /usr/lib/hive/lib/php/* /my/workspace/thrift
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h4>ディレクトリ構造の変更</h4>
+
+<p>packagesディレクトリの hive_metastore, hive_service, queryplan, serde が何故か入れ子になっている為、以下の構成に変更します。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>/etc/hive/conf/hive-site.xml</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>▾ packages/
+</span><span class='line'>  ▾ fb303/
+</span><span class='line'>  |- FacebookService.php
+</span><span class='line'>  |- fb303_types.php
+</span><span class='line'>  ▾ hive_metastore/
+</span><span class='line'>  |- ThriftHiveMetastore.php
+</span><span class='line'>  |- hive_metastore_constants.php
+</span><span class='line'>  |- hive_metastore_types.php
+</span><span class='line'>  ▾ hive_service/
+</span><span class='line'>  |- ThriftHive.php
+</span><span class='line'>      |- hive_service_types.php
+</span><span class='line'>  ▾ queryplan/
+</span><span class='line'>      |- queryplan_types.php
+</span><span class='line'>  ▾ serde/
+</span><span class='line'>  |- serde_constants.php
+</span><span class='line'>  |- serde_types.php
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>とりあえずはデータベース一覧を出力するだけの簡単なスクリプトを作成して実行してみます。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>&lt;?php
+</span><span class='line'>$GLOBALS[&#39;THRIFT_ROOT&#39;] = dirname(__FILE__) . &#39;/lib/&#39;;
+</span><span class='line'>require_once $GLOBALS[&#39;THRIFT_ROOT&#39;] . &#39;packages/hive_service/ThriftHive.php&#39;;
+</span><span class='line'>require_once $GLOBALS[&#39;THRIFT_ROOT&#39;] . &#39;transport/TSocket.php&#39;;
+</span><span class='line'>require_once $GLOBALS[&#39;THRIFT_ROOT&#39;] . &#39;protocol/TBinaryProtocol.php&#39;;
+</span><span class='line'>
+</span><span class='line'>$transport = new TSocket(&#39;localhost&#39;,  10000);
+</span><span class='line'>$protocol = new TBinaryProtocol($transport);
+</span><span class='line'>$client = new ThriftHiveClient($protocol);
+</span><span class='line'>$transport-&gt;open();
+</span><span class='line'>
+</span><span class='line'>$client-&gt;execute(&#39;SHOW DATABASES&#39;);
+</span><span class='line'>var_dump($client-&gt;fetchAll());
+</span><span class='line'>$transport-&gt;close();
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>実行すると以下のエラーが出力されます。GLOBALはPHPの予約語と重複しているのでこれをコメントアウトします。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='text'><span class='line'>PHP Parse error:  syntax error, unexpected &#39;GLOBAL&#39; (T_GLOBAL), expecting identifier (T_STRING) in /my/workspace/lib/packages/hive_metastore/hive_metastore_types.php on line 20
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>lib/packages/hive_metastore/hive_metastore_types.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">final</span> <span class="k">class</span> <span class="nc">metastore_HiveObjectType</span> <span class="p">{</span>
+</span><span class='line'><span class="c1">//  const GLOBAL = 1;</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">DATABASE</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">TABLE</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">PARTITION</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span><span class='line'>  <span class="k">const</span> <span class="no">COLUMN</span> <span class="o">=</span> <span class="mi">5</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>再度実行するとまたエラーが発生します。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>lib/packages/hive_metastore/hive_metastore_types.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">PHP</span> <span class="nx">Fatal</span> <span class="nx">error</span><span class="o">:</span>  <span class="nx">Uncaught</span> <span class="nx">exception</span> <span class="s1">&#39;TException&#39;</span> <span class="nx">with</span> <span class="nx">message</span> <span class="s1">&#39;TSocket: timed out reading 4 bytes from localhost:10000&#39;</span> <span class="nx">in</span> <span class="o">/</span><span class="nx">my</span><span class="o">/</span><span class="nx">workspace</span><span class="o">/</span><span class="nx">lib</span><span class="o">/</span><span class="nx">transport</span><span class="o">/</span><span class="nx">TSocket</span><span class="o">.</span><span class="nx">php</span><span class="o">:</span><span class="mi">228</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>エラーからソケットタイムアウトをしていることがわかります。
+TSocketクラスの関数でタイムアウトが設定できる &amp; デフォルトの設定だと短すぎる為、これを先程作成したスクリプトに追加します。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">&#39;THRIFT_ROOT&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dirname</span><span class="p">(</span><span class="k">__FILE__</span><span class="p">)</span> <span class="o">.</span> <span class="s1">&#39;/lib/&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">require_once</span> <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">&#39;THRIFT_ROOT&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;packages/hive_service/ThriftHive.php&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">require_once</span> <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">&#39;THRIFT_ROOT&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;transport/TSocket.php&#39;</span><span class="p">;</span>
+</span><span class='line'><span class="k">require_once</span> <span class="nv">$GLOBALS</span><span class="p">[</span><span class="s1">&#39;THRIFT_ROOT&#39;</span><span class="p">]</span> <span class="o">.</span> <span class="s1">&#39;protocol/TBinaryProtocol.php&#39;</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$transport</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TSocket</span><span class="p">(</span><span class="s1">&#39;localhost&#39;</span><span class="p">,</span>  <span class="mi">10000</span><span class="p">);</span>
+</span><span class='line'><span class="c1">//timeout設定 millisecond</span>
+</span><span class='line'><span class="nv">$transport</span><span class="o">-&gt;</span><span class="na">setSendTimeout</span><span class="p">(</span><span class="mi">600</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span> <span class="c1">//追加</span>
+</span><span class='line'><span class="nv">$transport</span><span class="o">-&gt;</span><span class="na">setRecvTimeout</span><span class="p">(</span><span class="mi">600</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span> <span class="c1">//追加</span>
+</span><span class='line'><span class="nv">$protocol</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">TBinaryProtocol</span><span class="p">(</span><span class="nv">$transport</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$client</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">ThriftHiveClient</span><span class="p">(</span><span class="nv">$protocol</span><span class="p">);</span>
+</span><span class='line'><span class="nv">$transport</span><span class="o">-&gt;</span><span class="na">open</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">execute</span><span class="p">(</span><span class="s1">&#39;SHOW DATABASES&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="nb">var_dump</span><span class="p">(</span><span class="nv">$client</span><span class="o">-&gt;</span><span class="na">fetchAll</span><span class="p">());</span>
+</span><span class='line'><span class="nv">$transport</span><span class="o">-&gt;</span><span class="na">close</span><span class="p">();</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>タイムアウトの設定を１０分に設定しました。そこまで複雑なHQLを実行することもないのでとりあえず良しとします。
+実際に運用する場合は、タイムアウト設定もconfig等で変更できるようにします。</p>
+
+<h4>実行結果</h4>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span>hive.php</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">array</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>  <span class="nx">string</span><span class="p">(</span><span class="mi">7</span><span class="p">)</span> <span class="s2">&quot;default&quot;</span>
+</span><span class='line'>  <span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=&gt;</span>
+</span><span class='line'>  <span class="nx">string</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span> <span class="s2">&quot;hoge&quot;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>案外さっくりいけますね。実際に集計スクリプトを実装する場合は、ThriftHiveClientインスタンスを返却するようなクラスをひとつかましてあげればうまくいくかな。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://d.hatena.ne.jp/tagomoris/20110310/1299738606" title="HiveServerを使用してPythonやPerlからHiveQLを実行する" target="_blank">HiveServerを使用してPythonやPerlからHiveQLを実行する</a></li>
+<li><a href="https://ccp.cloudera.com/display/CDHDOC/Java+Development+Kit+Installation" title="Java Development Kit Installation" target="_blank">Java Development Kit Installation</a></li>
+<li><a href="https://ccp.cloudera.com/display/CDHDOC/CDH3+Installation" title="CDH3 Installation" target="_blank">CDH3 Installation</a></li>
+<li><a href="https://ccp.cloudera.com/display/CDHDOC/Hive+Installation#HiveInstallation-InstallingHive" title="Configuring the Hive Metastore" target="_blank">Configuring the Hive Metastore</a></li>
+</ul>
+
+</div>
+
+</article>
+
+	<div class="ads">
+    <script type="text/javascript"><!--
+    google_ad_client = "ca-pub-1004737269453987";
+    /* big banner */
+    google_ad_slot = "2274687956";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/09/30/php-hiveql-hiveserver/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2016 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        var disqus_script = 'count.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,322 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>ActionScript3.0でMD5してみた - Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="ActionScript3.0でMD5してみた どうもiyamaです。 さて今日はActionScript3.0でMD5してみようと思います。 ActionScript3.0自体にはmd5("xxxx");みたいな感じで
+MD5のハッシュを作成することはできません。 &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/blog/2011/10/30/md5-in-actionscript3/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">ActionScript3.0でMD5してみた</h1>
+	<div class="entry-content" itemprop="articleBody"><p>どうもiyamaです。</p>
+
+<p>さて今日はActionScript3.0でMD5してみようと思います。</p>
+
+<!--more-->
+
+
+<p>ActionScript3.0自体には<code>md5("xxxx");</code>みたいな感じで
+MD5のハッシュを作成することはできません。
+そこでいろいろ調べた結果as3cryptoのライブラリ？を使ってハッシュ化します。
+as3cryptoではMD5以外にもHexやBase64とかいろいろ暗号・複合化できるみたいです。</p>
+
+<p><a href="http://code.google.com/p/as3crypto/" title="as3crypto" target="_blank">as3crypto</a></p>
+
+<h2>環境</h2>
+
+<p>CS3 or CS4 or CS5 のAcriptScript3.0プロジェクト</p>
+
+<h2>ダウンロード</h2>
+
+<p>googleさんのところ(上のas3cryptoへ行ってDownloads)から必要ファイルをダウンロード。
+今回はCrypto.zipを落としてきて自分の環境に合うように設置。
+zipを解凍したものをpackageに配置すればOK。</p>
+
+<h2>宣言</h2>
+
+<p>以下のようにしておけばMD5も大体大丈夫だと思います。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='as3'><span class='line'><span class="kd">package</span>
+</span><span class='line'><span class="o">{</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">com.hurlant.crypto.Crypto</span><span class="o">;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">com.hurlant.crypto.hash.</span><span class="o">*;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">com.hurlant.crypto.symmetric.</span><span class="o">*;</span>
+</span><span class='line'>  <span class="k">import</span> <span class="nn">com.hurlant.util.Hex</span><span class="o">;</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h2>使い方</h2>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='as3'><span class='line'><span class="kd">var</span> <span class="n">value</span><span class="p">:</span><span class="kt">String</span><span class="o">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="n">hash</span><span class="p">:</span><span class="kt">IHash</span><span class="o">;</span>
+</span><span class='line'><span class="kd">var</span> <span class="n">result</span><span class="p">:</span><span class="kt">ByteArray</span><span class="o">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">value</span> <span class="o">=</span> <span class="s2">&quot;test&quot;</span><span class="o">;</span>
+</span><span class='line'><span class="n">hash</span> <span class="o">=</span> <span class="n">Crypto</span><span class="o">.</span><span class="na">getHash</span><span class="o">(</span><span class="s2">&quot;md5&quot;</span><span class="o">);</span>
+</span><span class='line'><span class="n">result</span> <span class="o">=</span> <span class="n">hash</span><span class="o">.</span><span class="na">hash</span><span class="o">(</span><span class="n">Hex</span><span class="o">.</span><span class="na">toArray</span><span class="o">(</span><span class="n">Hex</span><span class="o">.</span><span class="na">fromString</span><span class="o">(</span><span class="n">value</span><span class="o">)));</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>ここでのvalueは暗号化させたい文字列。
+hashは暗号化のタイプを指定。
+resultに暗号化後の文字列が入ってきます。</p>
+
+<p>以上です。 では次回は、ActionScript2.0でMD5はどうやるの？にしたいと思います。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://studynet.blog54.fc2.com/blog-entry-9.html">ActionScript】as3cryptoを使用してハッシュ値を取得</a></p>
+
+<p><a href="http://d.hatena.ne.jp/monta31/20080904/p1">ActionScript 3.0で暗号化・復号化のメモ(1) データフォーマットについての予備知識（バイナリ、Hex、Base64&hellip;）</a></p>
+</div>
+
+</article>
+
+	<div class="ads">
+    <script type="text/javascript"><!--
+    google_ad_client = "ca-pub-1004737269453987";
+    /* big banner */
+    google_ad_slot = "2274687956";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2011/10/30/md5-in-actionscript3/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2016 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.code-life.net/blog/2011/10/30/md5-in-actionscript3/';
+        var disqus_url = 'http://blog.code-life.net/blog/2011/10/30/md5-in-actionscript3/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

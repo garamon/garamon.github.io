@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: vagrant | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/vagrant/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrantで作成した仮想マシン一覧の状態を確認する]]></title>
+    <link href="http://blog.code-life.net/blog/2015/08/19/vagrant-global-status/"/>
+    <updated>2015-08-19T19:41:46+09:00</updated>
+    <id>http://blog.code-life.net/blog/2015/08/19/vagrant-global-status</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h2>Required</h2>
+
+<p>Vagrant 1.6.0+</p>
+
+<h2>仮想マシン一覧の状態を確認</h2>
+
+<p>vagrantの<code>global-status</code>サブコマンドで確認できる。</p>
+
+<pre><code>$ vagrant global-status
+
+id       name    provider   state    directory
+-------------------------------------------------------------------------
+76e95f6  default virtualbox poweroff /Users/noto/vagrant/project01
+add5d3f  default virtualbox running  /Users/noto/vagrant/project02
+a5b5835  default virtualbox aborted  /Users/noto/vagrant/project03
+812f37e  default virtualbox poweroff /Users/noto/vagrant/project04
+0b9a1f9  default virtualbox running  /Users/noto/vagrant/project05
+</code></pre>
+
+<p>上記で出力されたIDは仮想マシンの操作に使用することができる。(例. <code>vagrant up 76e95f6</code>、 <code>vagrant ssh 76e95f6</code>)</p>
+
+<p>また、IDを指定する場合はどこからでも(Vagrantfileが存在するディレクトリでなくても)操作することができる。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="https://github.com/mitchellh/vagrant/blob/master/CHANGELOG.md#160-may-6-2014">Vagrant CHANGELOG</a></li>
+<li><a href="http://docs.vagrantup.com/v2/cli/global-status.html">VAGRANT GLOBAL STATUS</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrant 共有ディレクトリを複数追加する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders/"/>
+    <updated>2014-04-14T21:06:31+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/04/14/vagrant-multiple-synced-folders</id>
+    <content type="html"><![CDATA[<p>ドキュメントみてもgoogle先生に伺っても意外と情報がない。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>Vagrant 1.5.2</li>
+</ul>
+
+
+<h2>共有ディレクトリを複数追加する</h2>
+
+<p>ただ複数書けばいいだけだった&hellip;</p>
+
+<pre><code class="ruby">config.vm.synced_folder "../path_to_share1", "/share1"
+config.vm.synced_folder "../path_to_share2", "/share2"
+</code></pre>
+
+<p>常識なんですかね。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://docs.vagrantup.com/v2/synced-folders/basic_usage.html">Synced Folders</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Server WEBrickの起動やレスポンス速度が遅い場合の対処法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow/"/>
+    <updated>2014-04-14T20:41:27+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow</id>
+    <content type="html"><![CDATA[<p>最近Railsを触っているのだが、いかんせんWebrickの起動やレスポンスが遅い。</p>
+
+<p>世のRubyistはこんな環境で開発しているのか(いやない)ということで調べた。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>Ruby on Rails4</li>
+<li>ruby 2.1.1p76</li>
+<li>Vagrant 1.5.2</li>
+</ul>
+
+
+<h2>Webrickの設定を見直す</h2>
+
+<p>google先生に伺うと下記の解決方法が多かったがボクの環境では効果が見られなかった。</p>
+
+<pre><code class="sh">$ gem which webrick
+/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb
+
+$ vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb
+
+:DoNotReverseLookup =&gt; nil
+↓
+:DoNotReverseLookup =&gt; true
+</code></pre>
+
+<h2>Vagrant Synced Foldersの設定</h2>
+
+<p>synced_folderを<code>nfs</code> にするとパフォーマンスの向上が期待できると何処かで見た記憶があったので</p>
+
+<p>ドキュメントを覗いてみると <code>rsync</code> がバージョン1.5から利用できるとのこと。
+使わない手はないと早速1.5に上げて試してみた。</p>
+
+<pre><code class="ruby">config.vm.synced_folder "../target", "/share", type: "rsync"
+</code></pre>
+
+<p>初回起動時は立ち上がるまで若干時間がかかったが、それ以降は遅いとは感じない。</p>
+
+<p>肝心のWebrickのレスポンス速度は劇的に上がった。今までと比べると爆速。</p>
+
+<h3>注意点</h3>
+
+<p>ホストOS側で変更した点がゲストOSに反映されない。
+rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</code> を実行する必要がある。</p>
+
+<pre><code>$ vagrant up
+$ vagrant rsync #１度きりの同期
+or
+$ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグがある。
+</code></pre>
+
+<h2>結局は&hellip;</h2>
+
+<p>rsyncで少し利用してみたが、同期のラグが気になった。
+変更してすぐに確認できないことがあるのでこの辺はストレスに感じる。</p>
+
+<p>また同期は一方方向 ホスト→ ゲストの為、仮想マシン上でコマンドを打ってファイルを作成しても
+ホストには反映されない。</p>
+
+<p>自分はゲストからコマンドを打つことが多いので困った点だった。
+こういった点はこれから改善されるのだと思う。</p>
+
+<p>ということでパフォーマンス的に問題がなかったので <code>nfs</code> に変更して開発している。</p>
+
+<hr />
+
+<p>追記 2014/04/15</p>
+
+<h2>参考</h2>
+
+<p><a href="https://www.vagrantup.com/blog/feature-preview-vagrant-1-5-rsync.html">Feature Preview: Rsync Synced Folders</a></p>
+
+<p><a href="http://docs.vagrantup.com/v2/getting-started/synced_folders.html">Synced Folders</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Vagrantのコマンドを補完する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/02/07/install-vagrant-bash-completion-on-mac/"/>
+    <updated>2014-02-07T11:19:47+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/02/07/install-vagrant-bash-completion-on-mac</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/kura/vagrant-bash-completion">vagrant-bash-completion</a>なるものを発見したのでインストールした。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>Mac OS X 10.9.1</li>
+<li>Vagrant 1.4.3</li>
+</ul>
+
+
+<h2>Installation</h2>
+
+<pre><code class="sh">$ brew tap homebrew/completions
+$ brew install vagrant-completion
+</code></pre>
+
+<p>~/.bashrcに以下を追加して反映</p>
+
+<pre><code class="sh">if [ -f `brew --prefix`/etc/bash_completion.d/vagrant ]; then
+  source `brew --prefix`/etc/bash_completion.d/vagrant
+fi
+</code></pre>
+
+<p>Vagrantコマンド・サブコマンドの補完が行われて幸福度が少し上がる。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/kura/vagrant-bash-completion">vagrant-bash-completion</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[Vagrant]パブリックネットワークの設定]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/01/vagrant-configure-public-network/"/>
+    <updated>2013-12-01T15:39:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/01/vagrant-configure-public-network</id>
+    <content type="html"><![CDATA[<p>Vagrantでパブリックネットワークの設定をしようとしたところ、若干ハマったのでメモ。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>Vagrant 1.3.2</li>
+</ul>
+
+
+<h2>Public Network</h2>
+
+<p><a href="http://docs.vagrantup.com/v2/networking/public_network.html">公式のドキュメント</a>通りに設定し、vagrant reload すれば設定が反映されます。</p>
+
+<pre><code class="ruby">config.vm.network :public_network,  :bridge =&gt; 'en1: Wi-Fi (AirPort)'
+</code></pre>
+
+<h2>Xdubug</h2>
+
+<p>public networkで起動したらサイトがクソ重くなる&hellip;</p>
+
+<p>色々調べたところ <a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a> に記載されてる方法で解決することができました。</p>
+
+<h3>xdubug.ini</h3>
+
+<p>xdubug.ini もしくは php.iniに以下の一文を追加</p>
+
+<pre><code class="sh">xdebug.remote_connect_back = 1
+</code></pre>
+
+<p>Xdebug使ってる人は要注意です。</p>
+
+<h2>参考</h2>
+
+<p><a href="https://github.com/10up/varying-vagrant-vagrants/wiki/Configure-for-a-Public-Network">Configure for a Public-Network</a></p>
+
+<p><a href="http://stackoverflow.com/questions/18241065/auto-setting-xdebug-remote-host-ip-address-with-vagrant-puppet">Auto setting xdebug.remote_host ip address with vagrant/puppet</a></p>
+]]></content>
+  </entry>
+  
+</feed>

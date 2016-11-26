@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: expressionencoder | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/expressionencoder/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Expression Encoder SDKを触ってみる その２]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/29/expression-encoder-sdk-2/"/>
+    <updated>2011-12-29T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/29/expression-encoder-sdk-2</id>
+    <content type="html"><![CDATA[<p>chakemiです。本日で、年内の仕事納めだったため、軽く納会を行ないました。
+本日は、引き続きExpressionEncoderSDKを触ってみようと思います。</p>
+
+<!--more-->
+
+
+<p>まずはExpressionEncoderの基本的な部分についてですが、
+ExpressionEncoderでは、ジョブと呼ばれるエンコードセッションを作成しソースビデオのインポートをします。</p>
+
+<p>一つのジョブには任意の数のビデオをインポートする事が可能です。</p>
+
+<p>インポートが完了したらこれらのビデオに対してトリミングやカット、オーディオのボリューム変更などの処理を行ないます。</p>
+
+<p>必要な変更を行ったらジョブ内の各クリップに対し、プロファイルと呼ばれるエンコードオプションを設定します。</p>
+
+<p>プロファイルは、ビットレート、ビデオサイズ、コーデックなどの様々な設定で構成されています。</p>
+
+<p>最後に出力方法を選択してエンコードとなりますが、この出力方法はsliverlightテンプレートを使用する方法と使用しない方法があります。また、テンプレートを使用しないで.wmvファイル、.wmaファイルを作成することも出来ます。
+ここでは主に、WindowsMediaEncoderの代替としてExpressionEncoderを利用しようと考えているので、主に.wmvへ出力を基本として触れていこうと思ってます。ExpressionEncoder4Proを買う予算も無いですし。。。</p>
+
+<p>ExpressionEncoderの基本的な使い方も理解できたとこで、<a href="/blog/2011/12/23/expression-encoder-sdk/">前回</a>(前々回か)のソースを見てみます。
+まず、MediaItemインスタンスを生成してビデオソースを登録します。</p>
+
+<pre><code class="c#">MediaItem mediaItem = new MediaItem(@"C:\ruby.avi");
+</code></pre>
+
+<p>Jobインスタンスを生成し、作成したMediaItemオブジェクトをjob.MediaItemsプロパティへ追加します。</p>
+
+<pre><code class="c#">Job job = new Job();
+job.MediaItems.Add(mediaItem);
+</code></pre>
+
+<p>出力先を指定して、エンコードを実行。</p>
+
+<pre><code class="c#">job.OutputDirectory = @"C:\videoOutput";
+
+Console.WriteLine("Encoding…c");
+job.Encode();
+Console.WriteLine("Finished encoding.");
+job.Dispose();
+</code></pre>
+
+<p>今回は、エンコードの際にプロファイルを指定してエンコードを実行してみようと思います。</p>
+
+<p>プロファイルを設定するには、簡単な方法としてjob.ApplyPresetメソッドを使用してプリセットを利用する方法があります。
+引数に、Presetsクラスのメンバー、もしくはプリセットとして保存したファイル名を指定することが出来ます。
+Presetsクラスには、ExpressionEncoderのプリセットに定義されている様々なプロファイルが用意されています。</p>
+
+<p>せっかくなので、自分で作成したプロファイルをプリセットとして保存して使用してみたいと思います。
+ExpressionEncoderアプリケーションのエンコードタブから独自の設定を行い、歯車マークのボタンをクリックし「パネルをプリセットとして保存」を選択、xmlファイルを保存します。</p>
+
+<p><a href="/images/2011/12/expression-encoder-sdk2.jpg">{% img /images/2011/12/expression-encoder-sdk2-300x252.jpg 300 253 %}</a></p>
+
+<p>試しに作成したものがこんな感じ</p>
+
+<p>```xml
+&lt;?xml version=&ldquo;1.0&rdquo; encoding=&ldquo;utf-16&rdquo;?></p>
+
+<!--Created with Expression Encoder version 4.0.1651.0-->
+
+
+<p><Preset
+  Version="4.0">
+  <Job />
+  <MediaFile
+    WindowsMediaProfileLanguage="ja-JP"
+    VideoResizeMode="Letterbox">
+    <OutputFormat>
+      <WindowsMediaOutputFormat>
+        <AudioProfile>
+          <WmaAudioProfile
+            Codec="Wma"
+            Channels="2"
+            BitsPerSample="16"
+            SamplesPerSecond="44100">
+            <Bitrate>
+              <ConstantBitrate
+                Bitrate="64"
+                IsTwoPass="False"
+                BufferWindow="00:00:00" />
+            </Bitrate>
+          </WmaAudioProfile>
+        </AudioProfile>
+        <VideoProfile>
+          <MainVC1VideoProfile
+            DifferentialQuantization="Off"
+            InLoopFilter="True"
+            MotionSearchRange="MacroblockAdaptive"
+            BFrameCount="1"
+            SmoothStreaming="False"
+            AdaptiveDeadZone="Conservative"
+            AdaptiveGop="True"
+            ClosedGop="True"
+            DenoiseFilter="False"
+            KeyFrameDistance="00:00:05"
+            MotionChromaSearch="LumaOnly"
+            MotionMatchMethod="SAD"
+            NoiseEdgeRemovalFilter="False"
+            OverlapSmoothingFilter="True"
+            MotionVectorCost="Static"
+            Complexity="Normal"
+            AutoFit="True"
+            Force16Pixels="False"
+            FrameRate="0"
+            SeparateFilesPerStream="False"
+            NumberOfEncoderThreads="0">
+            <Streams
+              AutoSize="False"
+              FreezeSort="False">
+              <StreamInfo
+                Size="512, 384">
+                <Bitrate>
+                  <ConstantBitrate
+                    Bitrate="505"
+                    IsTwoPass="False"
+                    BufferWindow="00:00:05" />
+                </Bitrate>
+              </StreamInfo>
+            </Streams>
+          </MainVC1VideoProfile>
+        </VideoProfile>
+      </WindowsMediaOutputFormat>
+    </OutputFormat>
+  </MediaFile>
+</Preset>
+```
+※ここでは、プリセットの細かい点に関しては触れません。</p>
+
+<p>では、試しに作成したプリセットを指定してエンコードを行なってみたいと思います。
+作成した.xmlファイルは実行ファイルと同一フォルダに保存してください。</p>
+
+<pre><code class="c#">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Expression.Encoder;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+
+
+        static void Main(string[] args)
+        {
+            MediaItem mediaItem = new MediaItem(@"C:\ruby.avi");
+
+            //jobの生成
+            Job job = new Job();
+            job.MediaItems.Add(mediaItem);
+
+            //プリセット適用
+            job.ApplyPreset("codelife.xml");
+
+            //出力先
+            job.OutputDirectory = @"C:\videoOutput";
+
+            job.EncodeProgress += new EventHandler&lt;EncodeProgressEventArgs&gt;(OnProgress);
+
+            //エンコード
+            Console.WriteLine("Encoding…c");
+            job.Encode();
+            Console.WriteLine("Finished encoding.");
+            job.Dispose();
+        }
+
+        static void OnProgress(object sender, EncodeProgressEventArgs e)
+        {
+            Console.Write("\b\b\b\b\b\b\b");
+            Console.Write("{0:F2}%", e.Progress);
+        }
+
+    }
+}
+</code></pre>
+
+<p>プリセットに設定した通りにエンコード出来ました。</p>
+
+<p><a href="/images/2011/12/expression-encoder-sdk2-2.jpg">{% img /images/2011/12/expression-encoder-sdk2-2-300x271.jpg 300 271 %}</a></p>
+
+<p>今回は、EncodeProgressイベントハンドラを登録してエンコード進捗を表示するようにしました。(サンプルのまんまですが。。。)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Expression Encoder SDKを触ってみる]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/23/expression-encoder-sdk/"/>
+    <updated>2011-12-23T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/23/expression-encoder-sdk</id>
+    <content type="html"><![CDATA[<p>chakemiです。忘年会的な飲み会のあと、朝までカラオケボックスにいたので投稿が遅くなってしまいました。</p>
+
+<p>本日から数回に渡って、ExpressionEncoderSDKを使ってカスタムUIなEncoderを作ってみたいと思います。</p>
+
+<!--more-->
+
+
+<p>ここにきてExpressionEncoderSDKを触ろうと思ったのは、WindowsMediaEnocederがまだ必要な中、Windows7ではWMEがサポートされないので、代わりにExpressionEncoderを使うしかないのに、あまりに使い勝手が違うためSDKを利用して使いやすく出来ないかと思ったからです。</p>
+
+<p>ではまずはじめに、ExpressionEncoderSDKのインストールですが、SDKはエンコーダと一緒にインストールされるようです。</p>
+
+<p><a href="http://www.microsoft.com/downloads/ja-jp/details.aspx?FamilyID=75402BE0-C603-4998-A79C-BECDD197AA79">http://www.microsoft.com/downloads/ja-jp/details.aspx?FamilyID=75402BE0-C603-4998-A79C-BECDD197AA79</a></p>
+
+<p>ExpressionEncoder4SDKはVisualStudio2010以前では使えないような注意書きをどこかで読んだので、とりあえずVSC#Expressをインストールするとこからはじめます。</p>
+
+<p>EMobileでVSC#Expressをインストールなんて無謀ですね。全然進みません。。。</p>
+
+<h2>開発環境</h2>
+
+<ul>
+<li>WindowsXP SP3(7じゃないのかい！)</li>
+<li>VisualC#2010Express</li>
+</ul>
+
+
+<p>とりあえず今日は、サンプルソースを適当にいじってビルドしてみたいと思います。</p>
+
+<p>コンソールアプリケーションプロジェクトを作成して以下のdllファイルを「参照の追加」から追加します。</p>
+
+<ul>
+<li>Microsoft.Expression.Encoder.dll</li>
+<li>Microsoft.Expression.Encoder.Api2.dll</li>
+<li>Microsoft.Expression.Encoder.Types.dll</li>
+<li>Microsoft.Expression.Encoder.Utilities.dll</li>
+</ul>
+
+
+<pre><code class="c#">using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using Microsoft.Expression.Encoder;
+
+namespace ConsoleApplication1
+{
+    class Program
+    {
+
+
+        static void Main(string[] args)
+        {
+            MediaItem mediaItem = new MediaItem(@"C:\ruby.avi");
+
+            //jobの生成
+            Job job = new Job();
+            job.MediaItems.Add(mediaItem);
+
+            //出力先
+            job.OutputDirectory = @"C:\videoOutput";
+
+            //エンコード
+            Console.WriteLine("Encoding…c");
+            job.Encode();
+            Console.WriteLine("Finished encoding.");
+            job.Dispose();
+        }
+    }
+}
+</code></pre>
+
+<p>VC-1コーデック(WVC1)でエンコードすることが出来ました。</p>
+]]></content>
+  </entry>
+  
+</feed>

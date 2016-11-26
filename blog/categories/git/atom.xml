@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[リモートブランチをチェックアウトしpushするまでの流れ]]></title>
+    <link href="http://blog.code-life.net/blog/2016/02/08/git-push-remote-branch/"/>
+    <updated>2016-02-08T19:56:55+09:00</updated>
+    <id>http://blog.code-life.net/blog/2016/02/08/git-push-remote-branch</id>
+    <content type="html"><![CDATA[<p>Pull Requestをレビューまたはリモートブランチをローカル上で動作させたい場合、ローカルにチェックアウトしたい場合が往々にしてある。</p>
+
+<!--more-->
+
+
+<p>チェックアウトしローカルブランチを作成するには</p>
+
+<pre><code>$ git fetch
+$ git checkout feature_branch_name
+</code></pre>
+
+<p>で作成する。尚、この書き方はGit  ≥ 1.6.6 から可能なよう。</p>
+
+<p>修正後pushしたい場合は下記のようにする。</p>
+
+<pre><code>$ git push -u origin feature_branch_name
+</code></pre>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://stackoverflow.com/questions/1783405/checkout-remote-git-branch">Checkout remote Git branch</a></li>
+<li><a href="http://stackoverflow.com/questions/2765421/push-a-new-local-branch-to-a-remote-git-repository-and-track-it-too">Push a new local branch to a remote Git repository and track it too</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[diff-highlightでgit diff をより見やすくする]]></title>
+    <link href="http://blog.code-life.net/blog/2015/11/24/git-diff-highlight/"/>
+    <updated>2015-11-24T19:53:43+09:00</updated>
+    <id>http://blog.code-life.net/blog/2015/11/24/git-diff-highlight</id>
+    <content type="html"><![CDATA[<p><a href="http://motemen.hatenablog.com/entry/2013/11/26/Git_%E3%81%AE_diff_%E3%82%92%E7%BE%8E%E3%81%97%E3%81%8F%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%9F%E3%81%A3%E3%81%9F_1_%E3%81%A4%E3%81%AE%E8%A8%AD">Git の diff を美しく表示するために必要なたった 1 つの設定 #git</a> を見ていい感じだったので設定した。</p>
+
+<!--more-->
+
+
+<p>brewでインストールしたgitを利用しているので、シンボリックリンクを張る。</p>
+
+<pre><code>ln -s "$(brew --prefix git)/share/git-core/contrib/diff-highlight/diff-highlight" /usr/local/bin/
+</code></pre>
+
+<p>パスが通っていることを確認後、~/.gitconfigに以下を追記</p>
+
+<pre><code>[pager]
+    log = diff-highlight | less
+    show = diff-highlight | less
+    diff = diff-highlight | less
+</code></pre>
+
+<p>差分が単語単位でもハイライト化されて分かりやすい。</p>
+
+<p>[f:id:grmn:20151124000409p:plain]</p>
+
+<p>いい感じ。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://motemen.hatenablog.com/entry/2013/11/26/Git_%E3%81%AE_diff_%E3%82%92%E7%BE%8E%E3%81%97%E3%81%8F%E8%A1%A8%E7%A4%BA%E3%81%99%E3%82%8B%E3%81%9F%E3%82%81%E3%81%AB%E5%BF%85%E8%A6%81%E3%81%AA%E3%81%9F%E3%81%A3%E3%81%9F_1_%E3%81%A4%E3%81%AE%E8%A8%AD">Git の diff を美しく表示するために必要なたった 1 つの設定 #git</a></li>
+<li><a href="https://github.com/git/git/tree/master/contrib/diff-highlight">diff-highlight README</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

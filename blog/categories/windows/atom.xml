@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: windows | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/windows/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ファイルリストを読み込んで目的のディレクトリにコピーする方法 in Windows]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/15/how-to-copy-list-of-filename-in-windows/"/>
+    <updated>2013-04-15T22:31:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/15/how-to-copy-list-of-filename-in-windows</id>
+    <content type="html"><![CDATA[<p>コマンドラインから以下を実行。リストファイル名とコピー先は適宜変更すること。</p>
+
+<pre><code class="sh">for /f %n in (listfile_path) do copy "%n" "destination"
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[C#でWindows Media Player ActiveX コントロールを使う その5]]></title>
+    <link href="http://blog.code-life.net/blog/2011/09/24/how-to-use-windows-media-player-activex-controll-5/"/>
+    <updated>2011-09-24T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/09/24/how-to-use-windows-media-player-activex-controll-5</id>
+    <content type="html"><![CDATA[<p>chakemiです。3連休なのに仕事でなにも出来ません(T T)</p>
+
+<p>今日は、再びWindows Media Player ActiveX コントロールの小ネタを取り上げたいと思います。</p>
+
+<!--more-->
+
+
+<p>Windows Media Player ActiveX コントロールの基本的は使い方は以前のページを参考に。
+<a href="/blog/2011/09/02/how-to-use-windows-media-player-activex-controll-1">その1</a>
+<a href="/blog/2011/09/03/how-to-use-windows-media-player-activex-controll-2">その2</a>
+<a href="/blog/2011/09/05/how-to-use-windows-media-player-activex-controll-3">その3</a></p>
+
+<p>今回は、ストリーミング再生時のバッファリング状況を表示できるようにしたいと思います。</p>
+
+<p>基本的にいままでプロジェクトを改修、拡張で行いますが、今回は簡単にテストするために
+WindowsMediaEncoderを使ってライブストリームを再生しようと思うので
+前回の<a href="/blog/2011/09/08/how-to-use-windows-media-player-activex-controll-4">その4</a>の時に実装したシークバーの機能を削除しちゃいます。</p>
+
+<p>※理由は、ライブストリームなので、currentMedia.durationプロパティから
+動画の長さを取得することができないのでエラーが発生しちゃうからです。</p>
+
+<p>では、簡単に実装してみたいと思います。
+まず、axWindowsMediaPlayer1.URLプロパティの値をWindowsMediaEncoderへ接続するためのパスに変更します。</p>
+
+<p>FormにTimerコントロールを追加し、
+axWindowsMediaPlayer1コントロールにBufferingイベントを追加します。
+Bufferingイベントが開始されたら、追加したTimerを開始して
+Timerのイベントハンドラー内でバッファー状況を更新してあげれば完成。</p>
+
+<pre><code class="as3">//WindowsMediaEncoderへ接続するためのパス
+axWindowsMediaPlayer1.URL = @"http://192.168.1.113:8080";
+    ～省略～
+
+private void axWindowsMediaPlayer1_Buffering(object sender, _WMPOCXEvents_BufferingEvent e)
+{
+    if (e.start == true)
+    {
+        timer2.Interval = 100;
+        timer2.Start();
+    }
+    else
+    {
+        label3.Text = ("no buffer");
+        timer2.Stop();
+    }
+
+}
+
+private void timer2_Tick(object sender, EventArgs e)
+{
+    label3.Text = (axWindowsMediaPlayer1.network.bufferingProgress + "%");
+}
+</code></pre>
+
+<p>axWindowsMediaPlayer1.network.bufferingCountプロパティなんかを使うとバッファリングを起こした回数なんかも拾えます。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RDPポートの変更とアカウント ロックアウトの設定]]></title>
+    <link href="http://blog.code-life.net/blog/2011/09/11/change-rdp-port/"/>
+    <updated>2011-09-11T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/09/11/change-rdp-port</id>
+    <content type="html"><![CDATA[<p>chakemiです。本日は2本立て(？)です。</p>
+
+<p>ここ最近、Windowsのリモートデスクトップの待受ポートの3389番ポートに対するスキャンが増加しているようです。
+<a href="http://itpro.nikkeibp.co.jp/article/NEWS/20110907/368233/">Windowsのリモートデスクトップで使うポートへの攻撃が急増中、JPCERT/CCが注意喚起</a></p>
+
+<p>普通にPCを使う程度なら、リモートデスクトップを使うことなんてないし、使っている人なら知ってる事と思いますが
+備忘録として、リモートデスクトップの待受ポートの変更方法をメモ。</p>
+
+<!--more-->
+
+
+<p>実行環境：WindowsXP SP3</p>
+
+<p>レジストリの書き換えになるため、自己責任でおこなってください。</p>
+
+<p>Windowsスタートメニューを開いて「ファイル名を指定して実行」もしくはWindowsキー+Rで、実行するプログラム名に「regedit」と入力</p>
+
+<p>「レジストリエディタ」が起動したら、「HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server\WinStations\RDP-Tcp\PortNumber」探して、右クリックから修正を開きます。</p>
+
+<p>ラジオボタンの10進数を選択すると、現在割り当てられている「3389」と表示されると思います。
+10進数を選択した状態で、変更したいポート番号を入力してOKをクリックします。 ※当然未使用のポート番号を入力してください。</p>
+
+<p>後はPCを再起動して変更の完了です。</p>
+
+<p>このPCにリモートデスクトップで接続する際は、IPの後に「:ポート番号」を付ける必要があります。
+また、アカウントにログイン失敗回数の制限をかけるのも効果的ではないかと思います。</p>
+
+<p>こちらは、管理者権限のあるアカウントでログインし、コントロールパネルの「管理ツール」を開きます。
+そこから「ローカルセキュリティポリシー」を開いて、「アカウントポリシー」-「アカウント ロックアウトのポリシー」を開きます。</p>
+
+<p>「アカウントのロックアウトのしきい値」をダブルクリックしてアカウントロックアウトまでの回数（0～999）を指定します。
+ちなみにadministratorアカウントは制限されません。</p>
+
+<p>また閾値を設定すると、「ロックアウト カウントのリセット」も変更1～99999分できるようになります。（デフォルトは30分）</p>
+
+<p>当然Administratorアカウント使ってリモートデスクトップしてたら意味ないですけど。。。</p>
+]]></content>
+  </entry>
+  
+</feed>

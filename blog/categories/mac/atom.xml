@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: mac | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/mac/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[]]></title>
+    <link href="http://blog.code-life.net/blog/2015/08/24/grc-generic-colouriser/"/>
+    <updated>2015-08-24T19:44:44+09:00</updated>
+    <id>http://blog.code-life.net/blog/2015/08/24/grc-generic-colouriser</id>
+    <content type="html"><![CDATA[<p><a href="https://github.com/pengwynn/grc">grc(Generic Colouriser)</a>はログファイルやコマンドの出力結果に色付けして見やすくしてくれるコマンドです。</p>
+
+<!--more-->
+
+
+<h2>インストール</h2>
+
+<p>homebrewでインストールできます。</p>
+
+<pre><code>brew install grc
+</code></pre>
+
+<p>インストール後 <code>~/.bashrc</code> または <code>~/.bash_profile</code>に以下を追記します。追記後<code>source ~/.bashrc</code>で反映させます。</p>
+
+<pre><code>source "`brew --prefix`/etc/grc.bashrc"
+</code></pre>
+
+<p>デフォルトで以下のコマンドに色付けがされます。</p>
+
+<ul>
+<li>configure</li>
+<li>diff</li>
+<li>make</li>
+<li>gcc</li>
+<li>g++</li>
+<li>as</li>
+<li>gas</li>
+<li>ld</li>
+<li>netstat</li>
+<li>ping</li>
+<li>traceroute</li>
+<li>head</li>
+<li>tail</li>
+<li>dig</li>
+<li>mount</li>
+<li>ps</li>
+<li>mtr</li>
+<li>df</li>
+</ul>
+
+
+<h2>pingの実行結果</h2>
+
+<p>[f:id:grmn:20150824233235p:plain]</p>
+
+<h2>dfの実行結果</h2>
+
+<p>[f:id:grmn:20150824233238p:plain]</p>
+
+<p>あまり使っている人がいなそうですが、地味に便利です。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="https://github.com/pengwynn/grc">grc(Generic Colouriser)</a></li>
+<li><a href="https://github.com/Homebrew/homebrew/blob/master/Library/Formula/grc.rb">homebrew/Library/Formula/grc.rb</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MacアプリCaffeineのメニューバーアイコンをRetinaディスプレイ用に変更する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon/"/>
+    <updated>2014-09-21T14:33:34+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/21/mac-retina-caffeine-icon</id>
+    <content type="html"><![CDATA[<p><a href="http://lightheadsw.com/caffeine/">Caffeine</a>は、Macのスリープモードを一時的に無効にするMacの定番アプリです。</p>
+
+<p>起動するとメニューバーにコーヒーカップのアイコンが表示され、クリックすると無効化のON・OFFを切り替えます。</p>
+
+<p>とてもシンプルな機能で重宝していますが一つ不満があります。</p>
+
+<p>アイコンがダサい・・・。</p>
+
+<p>{% img /images/2014/09/mac-caffeine-1.png %}</p>
+
+<!--more-->
+
+
+<h2>Caffeineのアイコンを変更する</h2>
+
+<p>Retinaディスプレイ対応 &amp; シャレオツなアイコンに変えました。</p>
+
+<h3>アイコンセットをダウンロード</h3>
+
+<p>3つ紹介しますが、探せばもっとあるかもしれません。ちなみに私は「1」を使用しました。</p>
+
+<ol>
+<li><a href="https://github.com/bkenny/retina-caffeine">bkenny/retina-caffeine</a></li>
+<li><a href="https://webjac.com/design/caffeine-retina-icons/">Caffeine Retina Icons</a></li>
+<li><a href="http://blog.timlockridge.com/blog/2013/04/26/retina-menu-bar-icons-for-caffeine/">Retina Menu Bar Icons for Caffeine</a></li>
+</ol>
+
+
+<h3>アイコンの置き換え</h3>
+
+<ol>
+<li>/Applications/Caffeine.appを<code>Ctrl + クリック</code>して<code>パッケージの内容を表示</code>を選択</li>
+<li>Contents/Resources内に置き換えたいアイコンをコピー</li>
+<li>(起動している場合)Caffeineを終了し、Caffeineを起動</li>
+</ol>
+
+
+<h3>結果</h3>
+
+<p>いい感じ。</p>
+
+<p>{% img /images/2014/09/mac-caffeine-2.png %}</p>
+
+<h2>注意</h2>
+
+<p>Caffeine自体のアップデートがあった場合、アイコンがデフォルト状態に戻ります。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac メニューバーにカレンダーを表示させるDay-Oが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2014/09/07/mac-day-o/"/>
+    <updated>2014-09-07T22:11:08+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/09/07/mac-day-o</id>
+    <content type="html"><![CDATA[<p>しばらく前から<a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Day-O</a>を利用している。 メニューバーからカレンダーが確認できてなかなか便利。</p>
+
+<!--more-->
+
+
+<p>{% img /images/2014/09/mac-day-o-1.png %}</p>
+
+<p>日付をクリックすると以下のような表示となる。</p>
+
+<p>{% img /images/2014/09/mac-day-o-2.png %}</p>
+
+<p><code>Preference</code>から日付のフォーマットを変更することもできる。</p>
+
+<p>デフォルトの日付&amp;時刻と別にDay-Oの表示がされていたのでデフォルトはOFFに、またカレンダーを確認するだけに利用してたDashboardも<a href="http://www.bresink.com/osx/TinkerTool.html">TinkerTool</a>で無効にしている。</p>
+
+<p><a href="http://shauninman.com/archive/2011/10/20/day_o_mac_menu_bar_clock">Download Day-O</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mac OS X Mavericks メニューバーに表示されているユーザー名を隠す]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/25/hide-user-name-from-menu-bar-in-mac-marvericks/"/>
+    <updated>2014-08-25T14:57:41+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/25/hide-user-name-from-menu-bar-in-mac-marvericks</id>
+    <content type="html"><![CDATA[<p>メニューバーに表示されるユーザー名は正直必要ないので非表示にしたい。</p>
+
+<!--more-->
+
+
+<h2>ユーザーとグループ</h2>
+
+<p>システム環境設定からユーザーとグループを選択</p>
+
+<h3>ログインオプションの選択</h3>
+
+<p>ログインオプションを選択する。</p>
+
+<p><a href="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png">{% img /images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-1.png 500 379 %}</a></p>
+
+<h3>ファストユーザスイッチメニューの表示</h3>
+
+<p>「ファストユーザスイッチメニューを表示」にチェックがはいっているので外す。</p>
+
+<p><a href="/images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png">{% img /images/2014/08/hide-user-name-from-menu-bar-in-mac-marvericks-2.png 500 379 %}</a></p>
+
+<p>これでメニューバーのユーザー名は非表示となる。
+<a href="http://evernote.com/intl/jp/skitch/">skitch</a>を使ってみたが便利だ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[行単位でファイルを結合するにはpasteコマンドが便利]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/25/parallel-merging/"/>
+    <updated>2013-04-25T22:52:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/25/parallel-merging</id>
+    <content type="html"><![CDATA[<p>2つのファイルを単純に結合するには「cat」コマンドを使えばいいですが、
+行ごとに結合をする場合 「paste」コマンドなるものがあることを知りました。</p>
+
+<!--more-->
+
+
+<h2>pasteコマンドを使ったファイルの連結</h2>
+
+<p>fileAとfileBをpasteコマンドで連結します。</p>
+
+<pre><code class="sh">$ paste fileA.txt fileB.txt &gt; fileC.txt
+</code></pre>
+
+<p>fileA.txt
+<code>
+AAA
+BBB
+CCC
+</code></p>
+
+<p>fileB.txt
+<code>
+111
+222
+333
+</code></p>
+
+<h3>出力結果</h3>
+
+<p>以下のフォーマットで出力してくれます。素敵！</p>
+
+<p>fileC.txt
+<code>
+AAA 111
+BBB 222
+CCC 333
+</code></p>
+
+<p>区切り文字はデフォルトはタブですが -d [区切り文字] オプションを指定することでカンマなどで区切ることができます。</p>
+
+<h2>区切り文字をカンマに</h2>
+
+<pre><code>$ paste -d , fileA.txt fileB.txt &gt; fileC.txt
+</code></pre>
+
+<h3>出力結果</h3>
+
+<p>fileC.txt
+<code>
+AAA,111
+BBB,222
+CCC,333
+</code></p>
+
+<p>使う機会はそれほどないかもしれませんが、知っておくと楽できそうです。</p>
+]]></content>
+  </entry>
+  
+</feed>

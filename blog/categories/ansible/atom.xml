@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ansible | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/ansible/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ansibleで複数行の編集を行う]]></title>
+    <link href="http://blog.code-life.net/blog/2016/02/09/ansible-blockinfile/"/>
+    <updated>2016-02-09T20:00:37+09:00</updated>
+    <id>http://blog.code-life.net/blog/2016/02/09/ansible-blockinfile</id>
+    <content type="html"><![CDATA[<p>今の会社では構成管理ツールに<a href="http://docs.ansible.com/ansible/index.html">Ansible</a>を採用している。
+このところ少し触ってみているが中々良さ気だ。</p>
+
+<!--more-->
+
+
+<h2>Ansibleの良い所</h2>
+
+<ul>
+<li>管理対象サーバにPythonがインストールするだけで動作する(大抵のLinuxディストリビューションにはPythonが最初からインストールされている！)</li>
+<li>YAML形式の設定ファイルで読みやすい</li>
+<li>Pythonで書かれてる(Python好き)</li>
+</ul>
+
+
+<h2>ファイルの編集</h2>
+
+<p>ホストの構成を管理するにあたって、設定ファイルを頻繁に作成・編集する。Ansibleにはその為の<a href="http://docs.ansible.com/ansible/list_of_files_modules.html">Filesモジュール</a>が用意されている。</p>
+
+<p>Ansible2.0より<a href="http://docs.ansible.com/ansible/blockinfile_module.html">blockinfile</a>モジュールが用意されたことで、以前はできなかった複数行の編集が簡単に行うことができる。</p>
+
+<pre><code>- name: Source nvm in ~/.profile
+  sudo: yes
+  sudo_user: "{{ install_user }}"
+  blockinfile: |
+    dest=~/.bash_profile
+    content='export NVM_DIR="/home/{{ install_user }}/.nvm"
+      [ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; . "$NVM_DIR/nvm.sh"'
+  tags: nvm
+</code></pre>
+
+<p>すると <code>~/.bash_profile</code> に</p>
+
+<pre><code># BEGIN ANSIBLE MANAGED BLOCK
+export NVM_DIR="/home/ffish/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] &amp;&amp; . "$NVM_DIR/nvm.sh"
+# END ANSIBLE MANAGED BLOCK
+</code></pre>
+
+<p>と追記されていることが確認できる。素晴らしいですね。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://docs.ansible.com/ansible/blockinfile_module.html">blockinfile</a></li>
+<li><a href="http://blog.keshi.org/hogememo/2014/08/24/ansible-blockinfile-module">Ansible blockinfile モジュール</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+</feed>

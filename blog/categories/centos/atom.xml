@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: centos | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/centos/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[sudo: chkconfig: command not found on CentOS5]]></title>
+    <link href="http://blog.code-life.net/blog/2015/08/09/chkconfig-command-not-found-on-centos5/"/>
+    <updated>2015-08-09T19:35:57+09:00</updated>
+    <id>http://blog.code-life.net/blog/2015/08/09/chkconfig-command-not-found-on-centos5</id>
+    <content type="html"><![CDATA[<p>久しぶりにCentOS5系を触ることがあり、いつも通りchkconfigコマンドを実行すると
+コマンドがないと怒られた。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<p>CentOS release 5.11 (Final)</p>
+
+<h2>原因</h2>
+
+<p>パスを確認すると/sbinにパスが通っていない。</p>
+
+<pre><code>$ printenv PATH
+/usr/kerberos/bin:/usr/local/bin:/bin:/usr/bin:/home/vagrant/bin
+</code></pre>
+
+<h2>対処法</h2>
+
+<p>sbinにパスを通す</p>
+
+<pre><code>$ vi ~/.bash_profile
+PATH=$PATH:/sbin:$HOME/bin
+</code></pre>
+
+<pre><code>$ source ~/.bash_profile
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CentOS]システム情報(メモリ情報、バージョン、カーネルのバージョン、CPU情報)を確認する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/18/centos-linux-system-information/"/>
+    <updated>2013-12-18T22:51:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/18/centos-linux-system-information</id>
+    <content type="html"><![CDATA[<h2>メモリ情報の確認</h2>
+
+<pre><code class="sh">$ cat /proc/meminfo
+</code></pre>
+
+<!--more-->
+
+
+<h3>結果</h3>
+
+<pre><code class="text">
+MemTotal:        1020532 kB
+MemFree:          855980 kB
+Buffers:           36860 kB
+Cached:            59728 kB
+
+... 省略 ...
+
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+DirectMap4k:        8128 kB
+DirectMap2M:     1040384 kB
+</code></pre>
+
+<h2>バージョン確認</h2>
+
+<pre><code class="sh">$ cat /etc/redhat-release
+</code></pre>
+
+<h3>結果</h3>
+
+<pre><code class="text">CentOS release 6.4 (Final)
+</code></pre>
+
+<h2>カーネルのバージョン確認</h2>
+
+<pre><code class="sh">$ cat /proc/version
+</code></pre>
+
+<h3>結果</h3>
+
+<pre><code class="text">Linux version 2.6.32-358.2.1.el6.x86_64 (mockbuild@c6b8.bsys.dev.centos.org) (gcc version 4.4.7 20120313 (Red Hat 4.4.7-3) (GCC) ) #1 SMP Wed Mar 13 00:26:49 UTC 2013
+</code></pre>
+
+<p>こっちでも確認できる</p>
+
+<pre><code class="sh">$ uname -a
+</code></pre>
+
+<h3>結果</h3>
+
+<pre><code class="text">Linux localhost.localdomain 2.6.32-358.2.1.el6.x86_64 #1 SMP Wed Mar 13 00:26:49 UTC 2013 x86_64 x86_64 x86_64 GNU/Linux
+</code></pre>
+
+<h2>CPU情報の確認</h2>
+
+<pre><code class="sh">$ cat /proc/cpuinfo
+</code></pre>
+
+<h3>結果</h3>
+
+<pre><code class="text">processor   : 0
+vendor_id   : GenuineIntel
+cpu family  : 6
+model       : 58
+model name  : Intel(R) Core(TM) i7-3770 CPU @ 3.40GHz
+stepping    : 9
+cpu MHz     : 3405.814
+cache size  : 6144 KB
+fpu     : yes
+fpu_exception   : yes
+cpuid level : 5
+wp      : yes
+flags       : fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 syscall nx rdtscp lm constant_tsc up rep_good pni monitor ssse3 lahf_lm
+bogomips    : 6811.62
+clflush size    : 64
+cache_alignment : 64
+address sizes   : 36 bits physical,  48 bits virtual
+power management:
+</code></pre>
+
+<p>地味に忘れる。</p>
+]]></content>
+  </entry>
+  
+</feed>

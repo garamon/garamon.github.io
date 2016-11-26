@@ -1,0 +1,398 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ruby | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[rbenv使うならこれもいれとけプラグイン4選]]></title>
+    <link href="http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin/"/>
+    <updated>2014-05-07T22:30:15+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/05/07/recommended-rbenv-plugin</id>
+    <content type="html"><![CDATA[<p>複数バージョンのRubyを管理をするツールrbenvですが、rbenvをもう少し便利にしてくれるプラグインを紹介したいと思います。</p>
+
+<!--more-->
+
+
+<h2>ruby-build</h2>
+
+<p><a href="https://github.com/sstephenson/ruby-build">ruby-build</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>rubyのコンパイル &amp; インストール</p>
+
+<h3>インストール</h3>
+
+<pre><code>$ git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
+</code></pre>
+
+<h2>rbenv-default-gems</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-default-gems">rbenv-default-gems</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>新しくrubyをインストールする際、~/.rbenv/default-gemsに記載してあるgemを自動的にインストールする</p>
+
+<p><code>sh ex) ~/.rbenv/default-gems
+bundler
+pry
+</code></p>
+
+<h3>Installation</h3>
+
+<pre><code class="sh">$ git clone https://github.com/sstephenson/rbenv-default-gems.git ~/.rbenv/plugins/rbenv-default-gems
+</code></pre>
+
+<h2>rbenv-gem-rehash</h2>
+
+<p><a href="https://github.com/sstephenson/rbenv-gem-rehash">rbenv-gem-rehash</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p>gemをインストール or アンインストールした際に自動的にrbenv rehashを行う</p>
+
+<h3>Installation</h3>
+
+<pre><code class="sh">$ git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+</code></pre>
+
+<h2>rbenv-update</h2>
+
+<p><a href="https://github.com/rkh/rbenv-update">rbenv-update</a></p>
+
+<h3>何するプラグイン?</h3>
+
+<p><code>rbenv update</code>と打てば rbenv &amp; rbenvプラグインをまとめて最新の状態にする</p>
+
+<h3>Installation</h3>
+
+<pre><code class="sh">$ git clone https://github.com/rkh/rbenv-update.git ~/.rbenv/plugins/rbenv-update
+</code></pre>
+
+<p>全部<a href="https://github.com/sstephenson/rbenv/wiki/Plugins#approved-plugins">wiki</a>に載ってるんすけどね。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rails Server WEBrickの起動やレスポンス速度が遅い場合の対処法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow/"/>
+    <updated>2014-04-14T20:41:27+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/04/14/rails-server-webrick-is-so-slow</id>
+    <content type="html"><![CDATA[<p>最近Railsを触っているのだが、いかんせんWebrickの起動やレスポンスが遅い。</p>
+
+<p>世のRubyistはこんな環境で開発しているのか(いやない)ということで調べた。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>Ruby on Rails4</li>
+<li>ruby 2.1.1p76</li>
+<li>Vagrant 1.5.2</li>
+</ul>
+
+
+<h2>Webrickの設定を見直す</h2>
+
+<p>google先生に伺うと下記の解決方法が多かったがボクの環境では効果が見られなかった。</p>
+
+<pre><code class="sh">$ gem which webrick
+/home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick.rb
+
+$ vi /home/vagrant/.rbenv/versions/2.1.1/lib/ruby/2.1.0/webrick/config.rb
+
+:DoNotReverseLookup =&gt; nil
+↓
+:DoNotReverseLookup =&gt; true
+</code></pre>
+
+<h2>Vagrant Synced Foldersの設定</h2>
+
+<p>synced_folderを<code>nfs</code> にするとパフォーマンスの向上が期待できると何処かで見た記憶があったので</p>
+
+<p>ドキュメントを覗いてみると <code>rsync</code> がバージョン1.5から利用できるとのこと。
+使わない手はないと早速1.5に上げて試してみた。</p>
+
+<pre><code class="ruby">config.vm.synced_folder "../target", "/share", type: "rsync"
+</code></pre>
+
+<p>初回起動時は立ち上がるまで若干時間がかかったが、それ以降は遅いとは感じない。</p>
+
+<p>肝心のWebrickのレスポンス速度は劇的に上がった。今までと比べると爆速。</p>
+
+<h3>注意点</h3>
+
+<p>ホストOS側で変更した点がゲストOSに反映されない。
+rsyncを利用する場合は <code>rsync</code> または <code>rsync-auto</code> を実行する必要がある。</p>
+
+<pre><code>$ vagrant up
+$ vagrant rsync #１度きりの同期
+or
+$ vagrant rsync-auto #監視して変更があれば同期 若干タイムラグがある。
+</code></pre>
+
+<h2>結局は&hellip;</h2>
+
+<p>rsyncで少し利用してみたが、同期のラグが気になった。
+変更してすぐに確認できないことがあるのでこの辺はストレスに感じる。</p>
+
+<p>また同期は一方方向 ホスト→ ゲストの為、仮想マシン上でコマンドを打ってファイルを作成しても
+ホストには反映されない。</p>
+
+<p>自分はゲストからコマンドを打つことが多いので困った点だった。
+こういった点はこれから改善されるのだと思う。</p>
+
+<p>ということでパフォーマンス的に問題がなかったので <code>nfs</code> に変更して開発している。</p>
+
+<hr />
+
+<p>追記 2014/04/15</p>
+
+<h2>参考</h2>
+
+<p><a href="https://www.vagrantup.com/blog/feature-preview-vagrant-1-5-rsync.html">Feature Preview: Rsync Synced Folders</a></p>
+
+<p><a href="http://docs.vagrantup.com/v2/getting-started/synced_folders.html">Synced Folders</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Rubyで画像処理 【RMagick】]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/21/ruby-rmagick/"/>
+    <updated>2011-12-21T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/21/ruby-rmagick</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>リア充週間が終わって、腑抜けております。
+さて今回もRuby。
+今日はRubyをやってるとき、一番ロジックを
+考えるのが楽しかったRMagickです。</p>
+
+<!--more-->
+
+
+<p>RMagickとは、Ruby版のImageMagickです。
+<a href="http://www.imagemagick.org/RMagick/doc/" title="RMagick" target="_blank">RMagick</a></p>
+
+<p>画像ファイルをリサイズしたり、加工したりできます。
+それでは、サンプルソースを見てみましょう。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>Ruby 1.8</li>
+<li>ImageMagick、RMagickがインストール済みであること</li>
+</ul>
+
+
+<h2>サンプル</h2>
+
+<p>リサイズとクロップとファイルサイズチェックのサンプルです。</p>
+
+<pre><code class="ruby">require 'RMagick'
+
+# 画像ファイルのパス指定
+img_path = "public/images/image.jpg"
+
+# 初期化
+img = Magick::ImageList.new(img_path)
+
+# 画像リサイズ (width, height)
+img = img.resize_to_fit(100, 100 * img.rows / img.columns)
+
+
+if (img.rows &amp;gt; 60) then
+    y = (img.rows - 60) / 2
+    # 画像クロップ (x, y, width, height)
+    img = img.crop(0, y, 100, 60)
+end
+
+
+# 画像ファイルサイズが大きい場合、
+# 圧縮率をかえて保存し直す
+i = 90
+while i &amp;gt; 5 do
+    if (File.size(img_path) &amp;gt;= 2000) then
+        img = img.write(img_path){img.quality = i}
+    else
+        break
+    end
+    i = i - 10
+end
+</code></pre>
+
+<p>大体はコメントで書いた通りです。
+画像のリサイズは横幅100pxで、元画像の比率を維持した場合です。</p>
+
+<p>クロップは縦幅が60pxより大きい場合、センターを中心に60px分抽出する例です。
+切り取る四角の頂点を左上を原点に指定します。
+例えば元画像のheightが100pxの場合、y = 20となり
+縦20pxから60px分クロップします。</p>
+
+<p>File.sizeのメソッドはRMagickではなくRubyのメソッド。
+ファイルサイズが想定より大きい場合、圧縮率（img.quality = i）を変更して保存し直します。
+iが圧縮率で100〜10%の間で圧縮します。
+10%ずつ下げて、最低レベルは10%ということ。</p>
+
+<p>以上です。
+今回はRMagickだったけど、PHP＋ImageMagickで同じことやっても
+基本はかわらないと思います。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyでXML出力しましょう]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/18/ruby-xml/"/>
+    <updated>2011-12-18T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/18/ruby-xml</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>今日はまたもやRuby！
+RubyOnRailsでXMLを出力してみましょう。</p>
+
+<!--more-->
+
+
+<p>RubyOnRailsでwebサービスを立ちあげた後、
+SEO対策のためsitemap.xmlを用意したりすると思います。
+ただ、フレームワークで作成したサイトの場合、
+staticでsitemap.xmlを用意する気はありません。
+そこで、sitemap.xml自体もフレームワークで出力しちゃおうと思います。</p>
+
+<h2>Controller</h2>
+
+<pre><code class="ruby controller/site_controller.rb">class SiteController &gt; ApplicationContoller
+  require "builder/xmlmarkup"
+
+  def sitemap
+    @xml = Builder::XmlMarkup.new
+    render(:type =&gt; :rxml)
+  end
+end
+</code></pre>
+
+<p>ポイントはHTMLではなくXMLと認識させることです。
+requireでライブラリを読み込むのは前回書いた通り。
+今回はxmlを出力するためのライブラリを読み込みます。
+xmlのフォーマットを利用できるように、XmlMarkup.new
+renderもちゃんと指定してください。</p>
+
+<h2>View</h2>
+
+<p>そしてViewはrenderでも指定した通り、
+通常はViewのファイル拡張子は.rhtmlのところを.rxmlにしましょう。
+view/sitemap.rxml</p>
+
+<pre><code class="php view/sitemap.rxml">@xml.instruct! :xml, :version =&gt; "1.0"
+@xml.urlset(:xmlns =&gt; "http://www.sitemaps.org/schemas/sitemap/0.9") do
+
+    @xml.url do
+        @xml.loc("http://code-life.net");
+        @xml.lastmod("2011-12-17")
+        @xml.changefreq("daily")
+        @xml.priorty("0.8")
+    end
+end
+</code></pre>
+
+<h3>出力結果</h3>
+
+<pre><code class="xml">&lt;?xml version=”1.0″ encoding=”UTF-8″?&gt;
+&lt;urlset xmlns=”http://www.sitemaps.org/schemas/sitemap/0.9″&gt;
+&lt;url&gt;
+    &lt;loc&gt;http://code-life.net/&lt;/loc&gt;
+    &lt;lastmod&gt;2011-12-17&lt;/lastmod&gt;
+    &lt;changefreq&gt;daily&lt;/changefreq&gt;
+    &lt;priority&gt;0.8&lt;/priority&gt;
+&lt;/url&gt;
+&lt;/urlset&gt;
+</code></pre>
+
+<p>これでいけちゃいます！笑。
+viewのコードと出力結果を見比べてもらうとわかると思いますが、
+例えば@xml.testとするとタグが出力されます。
+タグの終了がいらない場合の場合「!」をつけましょう。</p>
+
+<p>そして、タグの中に子のタグを入れたい場合はdo〜endで囲みましょう。
+簡単ですね。
+時限公開なんかをしているサイトだったら特に簡単にsitemap.xmlが作れちゃいます。</p>
+
+<p>以上です。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[RubyでMD5しましょう]]></title>
+    <link href="http://blog.code-life.net/blog/2011/12/14/md5-ruby/"/>
+    <updated>2011-12-14T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2011/12/14/md5-ruby</id>
+    <content type="html"><![CDATA[<p>iyamaです。</p>
+
+<p>懲りずにRubyネタ。</p>
+
+<!--more-->
+
+
+<p>この前、<a href="/blog/2011/12/12/to-s-ruby/">Rubyならではのメソッド 【to_s編】</a>というのを書いたら、ツッコミが入りました。
+あれは別にRuby特有ではないと。
+確かにね。笑。</p>
+
+<p>ActionScriptのではNumber型からString型にするときは以下のようにします。</p>
+
+<pre><code class="as3">value:Number = 3;
+trace(value.toString());
+</code></pre>
+
+<h3>実行結果</h3>
+
+<pre><code>3
+</code></pre>
+
+<p>確かに似てる。。
+前回のは、phpのみ使う人目線で考えてました。
+とりあえず、to_sは進数変換もできるってのが特徴です。
+以上、前回の補足でした。笑。</p>
+
+<p>さて今日は、ちゃちゃっと簡単にRubyでMD5しちゃいましょう。</p>
+
+<h2>環境</h2>
+
+<ul>
+<li>ruby1.8</li>
+</ul>
+
+
+<pre><code class="ruby">require 'digest/md5'
+
+str = "test"
+p Digest::MD5.hexdigest(str)
+</code></pre>
+
+<h3>実行結果</h3>
+
+<pre><code>098f6bcd4621d373cade4e832627b4f6
+</code></pre>
+
+<p>ポイントはrequire。
+これで使うライブラリをちゃんと宣言してください。</p>
+
+<p>※digestはRuby自体に含まれるライブラリなので呼び出すだけです。</p>
+
+<p>以上です。</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: ffmpeg | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/ffmpeg/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[FFMpegでHttp Live Streaming(HLS)向けにセグメント化する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming/"/>
+    <updated>2013-12-19T22:45:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/19/segmenter-from-ffmpeg-for-http-live-streaming</id>
+    <content type="html"><![CDATA[<p><a href="http://blog.code-life.net/blog/2013/04/14/how-to-install-m3u8-segmenter-on-centos/">CentOSにm3u8-segmenterをインストールする</a>がほんのちょっぴり人気なので、FFMpeg単体でもセグメントできるよって話です。</p>
+
+<!--more-->
+
+
+<h2>FFMpegでSegment化</h2>
+
+<p>コンテンツは既に準備されているものとし、セグメント化のみ行います。</p>
+
+<pre><code class="sh">ffmpeg -i sample.mp4 -acodec copy -vcodec copy \
+  -vbsf h264_mp4toannexb \
+  -map 0 \
+  -f segment \
+  -segment_format mpegts \
+  -segment_time 5 \
+  -segment_list playlist.m3u8 \
+  -segment_list_flags -cache \
+  stream_%d.ts
+</code></pre>
+
+<h3>オプションについて</h3>
+
+<ul>
+<li>-acodec copy -vcodec copy
+
+<ul>
+<li>コンテンツのコーデックをコピー。トランスコードは行われない。</li>
+</ul>
+</li>
+<li>-segment_time
+
+<ul>
+<li>分割秒数の設定。5秒を設定したとしても５秒ジャストでセグメント化されるわけではない。</li>
+</ul>
+</li>
+<li>-segment_list playlist.m3u8
+
+<ul>
+<li>プレイリストの出力先</li>
+</ul>
+</li>
+<li>-segment_list_flags -cache
+
+<ul>
+<li>キャッシュ(#EXT-X-ALLOW-CACHE)の無効化。デフォルトでは有効。</li>
+</ul>
+</li>
+</ul>
+
+
+<p>iPhoneやAndroidで再生し挙動を確認をしましたが、FFMpeg内蔵のsegmenterはm3u8-segmenterより優秀ですね。</p>
+
+<p>気が向いたらHLSの暗号化についても書こうかな。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://rest-term.com/archives/3008/">NginxとFFmpegを利用したHTTP Live Streaming配信</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CentOS6.xにFFmpegをインストールする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/04/14/how-to-install-ffmpeg-on-centos6-x86-64/"/>
+    <updated>2013-04-14T14:53:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/04/14/how-to-install-ffmpeg-on-centos6-x86-64</id>
+    <content type="html"><![CDATA[<p>CentOS 6.x系にインストールしたことはなかったので備忘録としてメモ。</p>
+
+<p>x264/AACのトランスコードだけできればいい環境を構築します。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<p>CentOS 6.3 x86_64</p>
+
+<p>バージョンの確認方法がわからない方は以下のコマンドで確認</p>
+
+<pre><code class="sh">$ cat /etc/redhat-release
+</code></pre>
+
+<p>64bitかどうかの確認は以下のコマンドで確認</p>
+
+<pre><code>$ uname -a
+</code></pre>
+
+<h2>必要なパッケージのインストール</h2>
+
+<pre><code>$ yum install autoconf automake make gcc gcc-c++ pkgconfig wget libtool zlib-devel
+</code></pre>
+
+<h2>リポジトリの追加</h2>
+
+<p>gitやらもろもろ必要となるのでepelとDAG(RPMforge)をリポジトリに追加する。</p>
+
+<h3>リポジトリのダウンロード</h3>
+
+<p><a href="http://dl.fedoraproject.org/pub/epel/6/x86_64/">epel</a></p>
+
+<p><a href="http://pkgs.repoforge.org/rpmforge-release/">Dag(RPMforge)</a></p>
+
+<pre><code>$ wget http://dl.fedoraproject.org/pub/epel/6/x86_64/epel-release-6-8.noarch.rpm
+$ wget http://pkgs.repoforge.org/rpmforge-release/rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+</code></pre>
+
+<h3>リポジトリの追加</h3>
+
+<pre><code>$ rpm -Uvh epel-release-6-8.noarch.rpm rpmforge-release-0.5.3-1.el6.rf.x86_64.rpm
+</code></pre>
+
+<h3>追加したリポジトリの使用制限をかける</h3>
+
+<p>追加したリポジトリの使用をする際は明示的に指定するよう制限をかける</p>
+
+<h4>epel</h4>
+
+<pre><code>$ vi /etc/yum.repos.d/epel.repo
+
+[epel]
+name=Extra Packages for Enterprise Linux 6 - $basearch
+#baseurl=http://download.fedoraproject.org/pub/epel/6/$basearch
+mirrorlist=https://mirrors.fedoraproject.org/metalink?repo=epel-6&amp;arch=$basearch
+failovermethod=priority
+enabled=0 ← 0に変更
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-EPEL-6
+</code></pre>
+
+<h4>DAG(RPMforge)</h4>
+
+<pre><code>$ vi /etc/yum.repos.d/rpmforge.repo
+
+[rpmforge]
+name = RHEL $releasever - RPMforge.net - dag
+baseurl = http://apt.sw.be/redhat/el6/en/$basearch/rpmforge
+mirrorlist = http://mirrorlist.repoforge.org/el6/mirrors-rpmforge
+#mirrorlist = file:///etc/yum.repos.d/mirrors-rpmforge
+enabled = 0 ← 0に変更
+protect = 0
+gpgkey = file:///etc/pki/rpm-gpg/RPM-GPG-KEY-rpmforge-dag
+gpgcheck = 1
+</code></pre>
+
+<h2>FFmpegのインストール</h2>
+
+<p>ソースコードからインストールするものが多いので作業ディレクトリを作成する</p>
+
+<pre><code>$ mkdir ~/ffmpeg-source
+</code></pre>
+
+<p>x264 FFmpegは最新版を利用するのでgitをインストール</p>
+
+<pre><code>$ yum install --enablerepo=epel git
+</code></pre>
+
+<h3>YASM</h3>
+
+<p>アセンブラ x264 FFmpegで使用される</p>
+
+<pre><code>$ yum install --enablerepo=epel yasm
+</code></pre>
+
+<h3>X264のインストール</h3>
+
+<pre><code>$ cd ~/ffmpeg-source
+$ git clone git://git.videolan.org/x264.git
+$ cd x264
+$ ./configure --enable-shared --disable-asm
+$ make
+$ make install
+</code></pre>
+
+<h3>libfdk_aac</h3>
+
+<pre><code>$ cd ~/ffmpeg-source
+$ git clone --depth 1 git://github.com/mstorsjo/fdk-aac.git
+$ cd fdk-aac
+$ autoreconf -fiv
+$ ./configure
+$ make
+$ make install
+</code></pre>
+
+<h3>ライブラリの設定</h3>
+
+<pre><code>$ export LD_LIBRARY_PATH=/usr/local/lib/
+$ echo /usr/local/lib &gt; /etc/ld.so.conf.d/custom-libs.conf
+$ ldconfig
+</code></pre>
+
+<h3>FFmpegのインストール</h3>
+
+<p>今回はver1.2をインストールします。</p>
+
+<pre><code>$ cd ~/ffmpeg-source
+$ git clone git://source.ffmpeg.org/ffmpeg.git
+$ cd ffmpeg
+</code></pre>
+
+<p>ブランチ一覧の表示</p>
+
+<pre><code>$ git branch -a
+
+* master
+  remotes/origin/HEAD -&gt; origin/master
+  remotes/origin/master
+  remotes/origin/oldabi
+  remotes/origin/release/0.10
+  remotes/origin/release/0.11
+  remotes/origin/release/0.5
+  remotes/origin/release/0.6
+  remotes/origin/release/0.7
+  remotes/origin/release/0.8
+  remotes/origin/release/0.9
+  remotes/origin/release/1.0
+  remotes/origin/release/1.1
+  remotes/origin/release/1.2
+</code></pre>
+
+<p>1.2のブランチに切り替え</p>
+
+<pre><code>$ git checkout -b n1.2 origin/release/1.2
+</code></pre>
+
+<p>切り替わっているか確認</p>
+
+<pre><code>$ git branch
+
+  master
+* n1.2
+</code></pre>
+
+<h4>インストール</h4>
+
+<pre><code>$ ./configure --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libx264 \
+    --enable-shared --arch=x86_64 --enable-pthreads
+$ make
+$ make install
+</code></pre>
+
+<h4>確認</h4>
+
+<pre><code>$ ffmpeg -version
+
+ffmpeg version 1.2
+built on Mar  3 2013 03:53:58 with gcc 4.4.6 (GCC) 20120305 (Red Hat 4.4.6-4)
+configuration: --enable-gpl --enable-nonfree --enable-libfdk_aac --enable-libx264 --enable-shared --arch=x86_64 --enable-pthreads
+libavutil      52. 18.100 / 52. 18.100
+libavcodec     54. 92.100 / 54. 92.100
+libavformat    54. 63.104 / 54. 63.104
+libavdevice    54.  3.103 / 54.  3.103
+libavfilter     3. 42.103 /  3. 42.103
+libswscale      2.  2.100 /  2.  2.100
+libswresample   0. 17.102 /  0. 17.102
+libpostproc    52.  2.100 / 52.  2.100
+</code></pre>
+
+<h2>トランスコード</h2>
+
+<p>下記のコマンドでトランスコードしてみましたが、問題はなさそうです。</p>
+
+<pre><code>$ ffmpeg -i big_buck_bunny_480p_surround-fix.avi -s 400x300 \
+  -c:v libx264 -c:v libx264 -profile:v baseline -preset:v slower \
+  -b:v 300k -maxrate 300k -minrate 300k -bufsize 1835k \
+  -ac 2 -c:a libfdk_aac -b:a 128k big_buck_bunny.mp4
+</code></pre>
+
+<h2>ライセンス</h2>
+
+<p>x.264 aacは商用で利用する際はライセンス料が発生するので注意して下さい。ライセンス気にしたくない方はAmazon Elastic TranceCoder使えばいいと思います。大抵のことはできますよ。</p>
+
+<p>あれ&hellip;Dag(RPMforge)使ってない&hellip;まぁ他のコーデックいれたりするとき使うのでいれとけばいいと思います。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://wiki.razuna.com/display/ecp/FFMpeg+Installation+on+CentOS+and+RedHat">Install FFmpeg on CentOS or RedHat EL 6.x</a></p>
+
+<p><a href="http://ffmpeg.org/trac/ffmpeg/wiki/CentosCompilationGuide#ffmpeg">Compile FFmpeg on CentOS 6.x</a></p>
+
+<p><a href="http://dev.classmethod.jp/cloud/amazon-linux-ffmpeg-encoding/">Amazon Linuxにffmpegを入れて動画エンコーディングする</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[FFMPEGでサムネイルを作成する]]></title>
+    <link href="http://blog.code-life.net/blog/2012/02/28/create-thumbnail-ffmpeg/"/>
+    <updated>2012-02-28T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/02/28/create-thumbnail-ffmpeg</id>
+    <content type="html"><![CDATA[<p>notoです。</p>
+
+<p>FFMPEGで複数サムネイルを切りだしたところ、稀にグレー一色のJPGファイルが書き出されている現象があったので、備忘録的なメモです。</p>
+
+<!--more-->
+
+
+<p>問題があったコマンドです。</p>
+
+<pre><code class="php thumbnail.php">$time   = '00:00:10'; // 秒または、HH:MM:SS[.xxx]形式
+$video  = 'hoge.mpg';
+$img    = 'hoge.jpg';
+
+$cmd = "ffmpeg -ss $time -i $video -vcodec mjpeg -vframes 1 -an -f image2 $img";
+//コマンド ffmpeg -ss 00:00:10 -i hoge.mpg -vcodec mjpeg -vframes 1 -an -f image2 hoge.jpg
+exec($cmd);
+</code></pre>
+
+<p>このコマンドを実行すると以下のワーニングが発生し、切り出したJPEGファイルがグレー一色となります。</p>
+
+<pre><code class="text">warning: first frame is no keyframe
+</code></pre>
+
+<p>色々試してみたのですが、うまくいかず結局 ss オプションの代わりに、 itsoffset オプションを利用しました。</p>
+
+<pre><code class="php thumbnail.php">$time   = '00:00:10'; // 秒または、HH:MM:SS[.xxx]形式
+$video  = 'hoge.mpg';
+$img    = 'hoge.jpg';
+
+$cmd = "ffmpeg -itsoffset -$time -i $video -vcodec mjpeg -vframes 1 -an -f image2 $img";
+//コマンド ffmpeg -itsoffset -00:00:10 -i hoge.mpg -vcodec mjpeg -vframes 1 -an -f image2 hoge.jpg
+exec($cmd);
+</code></pre>
+
+<p>この方法は確実にサムネイルを切りだすことができますが、切り出すまで時間がかかるというデメリットがあります。
+んーもっといい方法はないですかね。</p>
+]]></content>
+  </entry>
+  
+</feed>

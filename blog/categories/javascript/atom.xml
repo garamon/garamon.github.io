@@ -1,0 +1,417 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: javascript | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/javascript/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[jQueryイベントハンドラを登録したい要素数が多い場合はdelegateでパフォーマンスを向上させる]]></title>
+    <link href="http://blog.code-life.net/blog/2015/08/25/jquery-delegate-performance/"/>
+    <updated>2015-08-25T19:47:14+09:00</updated>
+    <id>http://blog.code-life.net/blog/2015/08/25/jquery-delegate-performance</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h2>イベントハンドラの登録は重い処理</h2>
+
+<p>``` html</p>
+
+<ul>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
+    ・・・省略・・・
+    <li>100</li>
+</ul>
+
+
+
+
+<script>
+$li.on('click', function(e) {
+    console.log('bind');
+});
+</script>
+
+
+<pre><code>
+上記のliすべてにイベントハンドラを登録しようとすると性能がかなり落ちます。
+元々イベントハンドラの登録自体が重い処理の為、その重い処理を大量の要素に行うと大きな影響を与えます。
+
+## delegate(委譲)で性能をあげる
+
+jQueryのonメソッドは、第2引数にイベントを発生させる要素をフィルタリングするセレクタを指定することで、親要素にハンドリングを委譲することができます。
+今回の場合、liで発生したイベントを親要素であるulがハンドリングをします。
+
+イベントハンドラの登録数を減らすことで性能の向上が期待できます。
+</code></pre>
+
+<p>$(&lsquo;ul&rsquo;).on(&lsquo;click&rsquo;, &lsquo;li&rsquo;, function(e) {
+    console.log(&lsquo;delegate&rsquo;);
+});
+```</p>
+
+<h2>jsPerfでの性能テスト結果</h2>
+
+<p><a href="http://jsperf.com">jsPerf</a>でbindとdelegateの性能テスト結果が以下になります。</p>
+
+<p>※テスト環境: Chrome 44.0.2403.157 on Mac OS X 10.9.5</p>
+
+<table>
+<thead>
+<tr>
+<th style="text-align:center;">          </th>
+<th> Ops/sec </th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center;"> bind     </td>
+<td> 5,962   </td>
+</tr>
+<tr>
+<td style="text-align:center;"> delegate </td>
+<td> 383,790 </td>
+</tr>
+</tbody>
+</table>
+
+
+<p>要素数が多い場合、delegeteの方が約64倍性能が高いことが分かります。テストの詳細は<a href="http://jsperf.com/jquey-delegate-peformance">jquey delegate peformance</a>
+から確認できます。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://gihyo.jp/magazine/wdpress/archive/2012/vol71">WEB+DB PRESS Vol.71</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CDNを使ってJSをロードする場合、CDNがダウンしたことも考える]]></title>
+    <link href="http://blog.code-life.net/blog/2015/08/16/jquery-cdn-fallback/"/>
+    <updated>2015-08-16T19:39:33+09:00</updated>
+    <id>http://blog.code-life.net/blog/2015/08/16/jquery-cdn-fallback</id>
+    <content type="html"><![CDATA[<!--more-->
+
+
+<h2>CDNを利用するメリット</h2>
+
+<ul>
+<li><p>同じCDNから同じファイルをロードしている場合、ブラウザのキャッシュが効き表示速度が向上する可能性がある。※ その為人気のあるCDN (Googleが提供するCDN <a href="https://developers.google.com/speed/libraries/?hl=ja">Google Hosted Libraries</a>等) を利用した方がヒット率があがる。</p></li>
+<li><p>アクセスしてきたユーザーに最適なサーバからファイルを配信する為、遅延が起こりにくい。</p></li>
+</ul>
+
+
+<h2>フォールバック</h2>
+
+<p>便利なCDNだが100%ダウンしないことはない。ダウンした場合はローカルのファイルを利用するフォールバック処理をいれておくことでサイトが見れない等の障害を防ぐことができる。</p>
+
+<p>[<a href="https://gist.github.com/850c3711d507bded0153:embed#gist850c3711d507bded0153">https://gist.github.com/850c3711d507bded0153:embed#gist850c3711d507bded0153</a>]</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[JQuery]checkboxのcheckedプロパティを変更してもchangeイベントは発火しない]]></title>
+    <link href="http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox/"/>
+    <updated>2013-12-09T23:07:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/12/09/jquery-trigger-change-event-on-checkbox</id>
+    <content type="html"><![CDATA[<p>checkboxをprop(&lsquo;checked&rsquo;, true)で値を変更してもchangeイベントが発火しないのでメモ</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>JQuery2.0.3</li>
+</ul>
+
+
+<h2>checkedプロパティを変更</h2>
+
+<p>見たら分かるんだけど、期待する動作はコンソールに「checkbox change!!」と出力されること。</p>
+
+<p>しかし、どうもcheckedプロパティを変更してもchangeイベントは発火しないよう。</p>
+
+<p>``` html
+&lt;!DOCTYPE html>
+<html>
+<head>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+</head>
+<body>
+<form>
+    <input id="checkbox1" type="checkbox" name="example" value="hoge">
+    <label for="checkbox1">Sample CheckBox</label>
+</form></p>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e) {
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true);
+    })();
+</script>
+
+
+<p></body>
+</html>
+```</p>
+
+<h2>triggerでイベントを発行</h2>
+
+<p>なのでtriggerでイベントハンドラの呼び出しをしてあげる必要がある。</p>
+
+<p>``` javascript</p>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e) {
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true).trigger('change');
+    })();
+</script>
+
+
+<pre><code>
+## イベントの発行元を判断する
+
+trigger経由で発行されたイベントの場合のみなんらかの処理がしたい時がある。
+
+そんな時は以下のようにしておく。
+</code></pre>
+
+<script type="text/javascript">
+    (function() {
+        $('input[name="example"]').on('change', function(e, param) {
+            if (param === true) {
+                // 何らかの処理
+            }
+            console.log('checkbox change!!');
+        });
+
+        $('input[name="example"]').prop('checked', true).trigger("change", [true]);
+    })();
+</script>
+
+
+<p>```</p>
+
+<p>ちなみにラジオボタンでも同じです。
+javascript好きになってきた今日この頃。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[javascript オブジェクトのマージあれこれ]]></title>
+    <link href="http://blog.code-life.net/blog/2013/05/29/javascript-object-merge/"/>
+    <updated>2013-05-29T22:45:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/05/29/javascript-object-merge</id>
+    <content type="html"><![CDATA[<p>最近 javascriptを書く機会が少し増えてきたのでオブジェクトのマージ方法を備忘録的にメモ。</p>
+
+<!--more-->
+
+
+<h2>pure JS</h2>
+
+<h3>通常のマージ</h3>
+
+<pre><code class="javascript">var merge = function (obj1, obj2) {
+    if (!obj2) {
+        obj2 = {};
+    }
+    for (var attrname in obj2) {
+        if (obj2.hasOwnProperty(attrname)) {
+            obj1[attrname] = obj2[attrname];
+        }
+    }
+};
+
+var obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: '00-0000-0000'
+};
+
+var obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+merge(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", city: "osaka", tel: "00-0000-0000", sex: "man"}
+</code></pre>
+
+<h3>存在しないプロパティのみマージ</h3>
+
+<pre><code class="javascript">
+var merge = function (obj1, obj2) {
+    if (!obj2) {
+        obj2 = {};
+    }
+    for (var attrname in obj2) {
+        if (obj2.hasOwnProperty(attrname) &amp;&amp; !obj1.hasOwnProperty(attrname)) {
+            obj1[attrname] = obj2[attrname];
+        }
+    }
+};
+
+var obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: '00-0000-0000'
+};
+
+var obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+merge(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "pigmon", city: "tokyo", tel: "00-0000-0000", sex: "man"}
+</code></pre>
+
+<h2>JQuery(1.9.1)</h2>
+
+<h3>通常のマージ</h3>
+
+<pre><code class="javascript">var obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: '00-0000-0000'
+};
+
+var obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+$.extend(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", city: "osaka", tel: "00-0000-0000", sex: "man"}
+</code></pre>
+
+<h3>再帰的にマージ</h3>
+
+<p>extendの第一引数にtrueを与えると再帰的にマージしてくれる</p>
+
+<pre><code class="javascript">
+var obj1 = {
+    name: 'pigmon',
+    address: {
+        city: 'tokyo',
+        tel: '00-0000-0000'
+    }
+};
+
+var obj2 = {
+    name: 'garamon',
+    address: {
+        city: 'osaka'
+    }
+};
+
+$.extend(true, obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", address: {city: "osaka", tel: "00-0000-0000"}}
+</code></pre>
+
+<h2>underscore.js(1.4.3)</h2>
+
+<h3>通常のマージ</h3>
+
+<pre><code class="javascript">obj1 = {
+    name: 'pigmon',
+    city: 'tokyo',
+    tel: "00-0000-0000"
+};
+
+obj2 = {
+    name: 'garamon',
+    city: 'osaka',
+    sex: 'man'
+};
+
+_.extend(obj1, obj2);
+console.log(obj1);
+
+// 実行結果
+=&gt; {name: "garamon", city: "osaka", tel: "00-0000-0000", sex: "man"}
+</code></pre>
+
+<p>ちなみにunderscore.jsでは再帰的にマージはしてくれないよう。</p>
+
+<p><a href="https://github.com/BenHall/underscore/commit/83133be8055dbecf23a27b866adbbae95b2140b7">これ</a>を見てるとできてるっぽいんだけど&hellip;</p>
+
+<h2>参考</h2>
+
+<p><a href="http://api.jquery.com/jQuery.extend/">jQuery.extend()</a></p>
+
+<p><a href="http://underscorejs.org/#extend">underscorejs extend</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[mousemoveイベントにbindした処理の実行間隔を制御する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval/"/>
+    <updated>2013-05-29T21:31:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/05/29/mousemove-event-interval</id>
+    <content type="html"><![CDATA[<p>制御するってのは言い過ぎですが、mousemoveイベントにbindした処理の実行間隔を空けたい場合、setIntervalで実行フラグのオン・オフを行い実行間隔を調整します。</p>
+
+<!--more-->
+
+
+<pre><code class="javascript">    (function() {
+        var enableHandler = true;
+
+        $("body").mousemove(function(e) {
+            if (enableHandler) {
+                // 何らかの処理
+                enableHandler = false;
+            }
+        });
+
+        var timer = window.setInterval(function() {
+            enableHandler = true;
+        }, 100);
+    })();
+</code></pre>
+
+<p>偉大なるは先人達の知恵。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://stackoverflow.com/questions/4648444/jquery-fire-mousemove-events-less-often">jQuery: Fire mousemove events less often</a></p>
+]]></content>
+  </entry>
+  
+</feed>

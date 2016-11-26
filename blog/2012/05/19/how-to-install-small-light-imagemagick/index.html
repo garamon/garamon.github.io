@@ -1,0 +1,544 @@
+
+<!DOCTYPE HTML>
+
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<title>ImageMagick + 画像サムネイル作成 Apache モジュール SMALL LIGHT をインストール - Code Life</title>
+	<meta name="author" content="noto">
+
+	
+	<meta name="description" content="ImageMagick + 画像サムネイル作成 Apache モジュール SMALL LIGHT をインストール notoです。
+cookpadの「tofu」のような画像キャッシュサーバを作る機会があるとかないとか言われているので、small_light &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Code Life" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://blog.code-life.net/blog/2012/05/19/how-to-install-small-light-imagemagick/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<link href="/stylesheets/font-awesome.min.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+	<script type="text/javascript">
+		var _gaq = _gaq || [];
+		_gaq.push(['_setAccount', 'UA-39715919-1']);
+		_gaq.push(['_trackPageview']);
+
+		(function() {
+			var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+			ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+		})();
+	</script>
+
+
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+    
+    <img src="http://www.gravatar.com/avatar/db45b6745103674d28d081b1ada986ba?s=160" alt="Profile Picture" style="width: 160px;">
+	
+</div>
+<hgroup>
+  <h1><a href="/">Code Life</a></h1>
+  
+    <h2>noto's blog</h2>
+  
+</hgroup>
+
+<nav id="main-nav"><ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/__noto" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/garamon" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">ImageMagick + 画像サムネイル作成 Apache モジュール SMALL LIGHT をインストール</h1>
+	<div class="entry-content" itemprop="articleBody"><p>notoです。
+cookpadの「tofu」のような画像キャッシュサーバを作る機会があるとかないとか言われているので、<a href="http://labs.edge.jp/smalllight/" title="small_light" target="_blank">small_light</a> でも検証してみようとインストールしてみました。</p>
+
+<p>構成は、<a href="http://blog.nomadscafe.jp/2011/03/short-term-edge-cache.html" title="Short-term Edge Cache (フロントサーバでの一時キャッシュ)">Short-term Edge Cache (フロントサーバでの一時キャッシュ)</a> + Apache(small_light) を想定しています。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>CentOS 6.2 (64bit)</li>
+<li>Apache 2.2.15</li>
+<li>ImageMagick 6.7.6</li>
+<li>small_light 1.1.1</li>
+</ul>
+
+
+<h2>ImageMagickのインストール</h2>
+
+<p>yumでインストールできるバージョンが古い &amp; ImageMagickはリリース頻度が高い為、rpmbuildしてインストールします。</p>
+
+<h3>rpmbuild用のユーザー作成</h3>
+
+<p>rootで rpmbuildを行うとシステムにダメージ与える可能性がある為、専用のユーザーを作成します。
+rpmbuild がインストールされていない場合は、yum でインストールして下さい。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>useradd rpmbuilder</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>rpmbuild 環境の準備</h3>
+
+<h4>rpmbuild用のユーザーにスイッチ</h4>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>su rpmbuilder</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h4>作業ディレクトリの作成</h4>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>mkdir -p ~/rpm/{BUILD,RPMS,SOURCES,SPECS,SRPMS}
+</span><span class='line'>echo "%_topdir $HOME/rpm" &gt;&gt; $HOME/.rpmmacros</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h4>ImageMagickのsrc.rpmをダウンロード</h4>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://www.imagemagick.org/download/linux/SRPMS/ImageMagick-6.7.6-9.src.rpm
+</span><span class='line'>rpm -Uvh ImageMagick-6.7.6-9.src.rpm</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>src.rpmは以下のURLで確認してください。</p>
+
+<p><a href="http://www.imagemagick.org/download/linux/SRPMS/">http://www.imagemagick.org/download/linux/SRPMS/</a></p>
+
+<h4>specファイルの編集</h4>
+
+<p>ImageMagickのパフォーマンス低下防止の為、openmpを無効化します。
+また、openmpを有効化すると <a href="http://labs.edge.jp/smalllight/" title="small_light" target="_blank">small_light</a> の makeでこけます。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ~/rpm/SPECS/
+</span><span class='line'>vi ImageMagick.spec
+</span><span class='line'>155行目あたり
+</span><span class='line'>%configure --enable-shared \
+</span><span class='line'>  --disable-static \
+</span><span class='line'>  --disable-openmp \  ← 追加
+</span><span class='line'>  ~ 中略 ~</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>rpmbuild</h3>
+
+<p>ビルド依存性の失敗することは分かっていますがビルドします。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rpmbuild -bb ImageMagick.spec</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>はいはい。ビルド依存性の失敗。ビルド依存性の失敗。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>エラー: ビルド依存性の失敗:
+</span><span class='line'>  bzip2-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  libtiff-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  giflib-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  ghostscript-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  djvulibre-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  libwmf-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  jasper-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  libtool-ltdl-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  libXext-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  libXt-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  lcms-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  librsvg2-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています
+</span><span class='line'>  OpenEXR-devel は ImageMagick-6.7.6-9.x86_64 に必要とされています</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>依存パッケージのインストール</h3>
+
+<p>必要なパッケージをインストールします。
+djvulibre-devel のみ標準リポジトリではインストールできない為、rpmforgeを利用しています。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>sudo yum install --enablerepo=rpmforge bzip2-devel freetype-devel libtiff-devel giflib-devel perl ghostscript-devel libwmf-devel libtool-ltdl-devel libX11-devel libXext-devel libXt-devel lcms-devel librsvg2-devel jasper-devel OpenEXR-devel djvulibre-devel</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>再度rpmbuild</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>rpmbuild -bb ImageMagick.spec</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>インストール</h3>
+
+<p>出来上がったrpmファイルをインストールします。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd ../RPMS/x86_64/
+</span><span class='line'>sudo rpm -Uvh  ImageMagick-6.7.6-9.x86_64.rpm  ImageMagick-c++-6.7.6-9.x86_64.rpm ImageMagick-devel-6.7.6-9.x86_64.rpm ImageMagick-c++-devel-6.7.6-9.x86_64.rpm ImageMagick-djvu-6.7.6-9.x86_64.rpm ImageMagick-doc-6.7.6-9.x86_64.rpm ImageMagick-perl-6.7.6-9.x86_64.rpm</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>確認</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>convert --version
+</span><span class='line'>Version: ImageMagick 6.7.6-9 2012-05-18 Q16 http://www.imagemagick.org
+</span><span class='line'>Copyright: Copyright (C) 1999-2012 ImageMagick Studio LLC
+</span><span class='line'>Features:</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h2>SMALL LIGHTのインストール</h2>
+
+<p><a href="http://labs.edge.jp/smalllight/" title="small_light" target="_blank">small_light</a> は、少し前に話題になったCookPadの <a href="http://www.slideshare.net/mirakui/ss-8150494" title="CookPad tofu" target="_blank">tofu</a> のようなパラメータを指定することで画像を動的にリサイズとかしてくれるモジュールです。元?livedoor ラボ「EDGE」がオープンソースとしてGoogleCode上で公開しています。
+<a href="http://code.google.com/p/smalllight/wiki/Install" title="smalllight" target="_blank">smalllightのインストール</a> は ドキュメントにそって行えば大抵は問題ないはずです。</p>
+
+<h3>依存パッケージのインストール</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>yum install --enablerepo=remi,epel httpd-devel imlib2-devel</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>libjpeg tarboのインストール</h3>
+
+<p>遅いより速いほうがいい！ということで libjpeg tarbo をインストールします。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>wget http://sourceforge.net/projects/libjpeg-turbo/files/1.2.0/libjpeg-turbo-1.2.0.x86_64.rpm/download
+</span><span class='line'>rpm -Uvh libjpeg-turbo-1.2.0.x86_64.rpm</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>ソースからいれたい方は以下のURLからダウンロードしてください。</p>
+
+<p><a href="http://sourceforge.net/projects/libjpeg-turbo/files/">http://sourceforge.net/projects/libjpeg-turbo/files/</a></p>
+
+<h3>libjpegの確認</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ldd /usr/lib64/libMagick*|grep jpeg</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>libjpeg tarbo への切り替え</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>echo /opt/libjpeg-turbo/lib64/ &gt; /etc/ld.so.conf.d/libjpeg-turbo.conf
+</span><span class='line'>ldconfig</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>libjpegの確認</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>ldd /usr/lib64/libMagick*|grep jpeg
+</span><span class='line'>
+</span><span class='line'>libjpeg.so.62 =&gt; /opt/libjpeg-turbo/lib64/libjpeg.so.62 (0x00007fa23d141000)
+</span><span class='line'>libjpeg.so.62 =&gt; /opt/libjpeg-turbo/lib64/libjpeg.so.62 (0x00007f0f99e9f000)
+</span><span class='line'>libjpeg.so.62 =&gt; /opt/libjpeg-turbo/lib64/libjpeg.so.62 (0x00007f71e69cc000)
+</span><span class='line'>libjpeg.so.62 =&gt; /opt/libjpeg-turbo/lib64/libjpeg.so.62 (0x00007facbdf95000)
+</span><span class='line'>libjpeg.so.62 =&gt; /opt/libjpeg-turbo/lib64/libjpeg.so.62 (0x00007ff7c823f000)
+</span><span class='line'>libjpeg.so.62 =&gt; /opt/libjpeg-turbo/lib64/libjpeg.so.62 (0x00007fa045bbd000)
+</span><span class='line'>libjpeg.so.62 =&gt; /opt/libjpeg-turbo/lib64/libjpeg.so.62 (0x00007fd0af276000)
+</span><span class='line'>libjpeg.so.62 =&gt; /opt/libjpeg-turbo/lib64/libjpeg.so.62 (0x00007fe7e5a21000)
+</span><span class='line'>libjpeg.so.62 =&gt; /opt/libjpeg-turbo/lib64/libjpeg.so.62 (0x00007f09969b0000)</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h3>SMALL LIGHTのインストール</h3>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>cd /usr/local/src
+</span><span class='line'>wget http://smalllight.googlecode.com/files/mod_small_light-1.1.1.tar.gz
+</span><span class='line'>tar zxf mod_small_light-1.1.1.tar.gz
+</span><span class='line'>cd mod_small_light-1.1.1
+</span><span class='line'>./configure --with-apxs=/usr/sbin/apxs
+</span><span class='line'>make
+</span><span class='line'>make install</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h4>makeで失敗する場合</h4>
+
+<p>ボクの場合は一度 make で失敗しました。
+現象は <a href="http://d.hatena.ne.jp/dai_yamashita/20110824/1314169466" title="Apacheの動的画像リサイズモジュール「smalllight」のmakeが通らなかったのを直してみた。" target="_blank">Apacheの動的画像リサイズモジュール「smalllight」のmakeが通らなかったのを直してみた。</a> と同じだと思います。</p>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>/usr/sbin/apxs -c -DENABLE_IMLIB2 -DENABLE_WAND -DENABLE_JPEG -ljpeg `/usr/bin/imlib2-config --cflags` `/usr/bin/imlib2-config --libs` `/usr/bin/Wand-config --cppflags` `/usr/bin/Wand-config --libs` \
+</span><span class='line'>        mod_small_light.c mod_small_light_*.c
+</span><span class='line'>apxs:Error: Unknown option: f.
+</span><span class='line'>Usage: apxs -g [-S &lt;var&gt;=] -n
+</span><span class='line'>       apxs -q [-S &lt;var&gt;=]  ...
+</span><span class='line'>       apxs -c [-S &lt;var&gt;=] [-o ] [-D [=]]
+</span><span class='line'>               [-I ] [-L ] [-l ] [-Wc,]
+</span><span class='line'>               [-Wl,] [-p]  ...
+</span><span class='line'>       apxs -i [-S &lt;var&gt;=] [-a] [-A] [-n ]  ...
+</span><span class='line'>       apxs -e [-S &lt;var&gt;=] [-a] [-A] [-n ]  ...
+</span><span class='line'>make: *** [all] エラー 1</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>上記エラーが出力されたら、ImageMagickのopenmpが有効になっていないか確認して下さい。
+きっと有効になっているので無効化後、small_lightのインストールを行って下さい。</p>
+
+<h4>パーミッションの変更</h4>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>chmod 755 /usr/lib64/httpd/modules/mod_small_light.so</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<h4>確認</h4>
+
+<div class='bogus-wrapper'><notextile><figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>httpd -M</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+
+<p>small_light_module (shared) が出力されていることを確認できたら無事完了です。
+使い方は<a href="http://code.google.com/p/smalllight/w/list" title="wiki" target="_blank">small_light wiki</a>に記載されているのでそちらを見たほうが早いと思います。</p>
+
+<h2>参考</h2>
+
+<ul>
+<li><a href="http://blog.xcir.net/index.php/2011/08/%E3%83%A9%E3%82%A4%E3%83%96%E3%83%89%E3%82%A2%E3%81%AEsmalllight%E3%82%92%E4%BD%BF%E3%81%A3%E3%81%A6%E5%8B%95%E7%9A%84%E3%81%AB%E7%94%BB%E5%83%8F%E3%82%92%E3%83%AA%E3%82%B5%E3%82%A4%E3%82%BA%E3%81%97/" title="ライブドアのsmalllightを使って動的に画像をリサイズしてみる" target="_blank">ライブドアのsmalllightを使って動的に画像をリサイズしてみる</a></li>
+<li><a href="http://d.hatena.ne.jp/dai_yamashita/20110824/1314169466" title="Apacheの動的画像リサイズモジュール「smalllight」のmakeが通らなかったのを直してみた。 " target="_blank">Apacheの動的画像リサイズモジュール「smalllight」のmakeが通らなかったのを直してみた。</a></li>
+<li><a href="http://blog.tnmt.info/2011/04/29/rpmbuild-for-beginner/" title="いまさら聞けないrpmbuildことはじめ" target="_blank">いまさら聞けないrpmbuildことはじめ</a></li>
+</ul>
+
+</div>
+
+</article>
+
+	<div class="ads">
+    <script type="text/javascript"><!--
+    google_ad_client = "ca-pub-1004737269453987";
+    /* big banner */
+    google_ad_slot = "2274687956";
+    google_ad_width = 728;
+    google_ad_height = 90;
+    //-->
+    </script>
+    <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
+</div>
+<div class="sharing">
+  <ul>
+    
+    <li class="hatena">
+      <a href="http://b.hatena.ne.jp/entry/http://blog.code-life.net/blog/2012/05/19/how-to-install-small-light-imagemagick/"
+          class="hatena-bookmark-button"
+          data-hatena-bookmark-layout="standard"
+          title="このエントリーをはてなブックマークに追加"
+      >
+      <img src="http://b.st-hatena.com/images/entry-button/button-only.gif"
+            alt="このエントリーをはてなブックマークに追加" width="20" height="20" style="border: none;"/></a>
+    </li>
+    
+    
+    <li class="twitter">
+      <a href="http://twitter.com/share"
+          class="twitter-share-button"
+          data-url=""
+          data-via="__noto"
+          data-counturl="">Tweet</a>
+    </li>
+    
+    
+    <li class="googleplus">
+      <div class="g-plusone"
+          data-size="medium"
+          data-href=""></div>
+    </li>
+    
+    
+    <li class="facebook">
+      <div class="fb-like"
+          data-share="false"
+          data-layout="button_count"
+          data-show-faces="false"
+          data-font="verdana"
+          data-href=""></div>
+    </li>
+    
+    
+    
+    <li class="pocket">
+      <a data-pocket-label="pocket" data-pocket-count="horizontal" class="pocket-btn" data-lang="en"></a>
+    </li>
+    
+  </ul>
+</div>
+
+
+
+<section id="comment">
+    <h1 class="title">Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</section>
+</div>
+			</div>
+			<footer id="footer" class="inner"><p>
+  Copyright &copy; 2016 - noto -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			
+
+<script type="text/javascript">
+      var disqus_shortname = 'garamon';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://blog.code-life.net/blog/2012/05/19/how-to-install-small-light-imagemagick/';
+        var disqus_url = 'http://blog.code-life.net/blog/2012/05/19/how-to-install-small-light-imagemagick/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+  <script type="text/javascript">
+    (function() {
+      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
+      script.src = 'https://apis.google.com/js/plusone.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
+    })();
+  </script>
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+ <script type="text/javascript" src="//b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"></script>
+
+
+
+<script type="text/javascript">!function(d,i){if(!d.getElementById(i)){var j=d.createElement("script");j.id=i;j.src="//widgets.getpocket.com/v1/j/btn.js?v=1";var w=d.getElementById(i);d.body.appendChild(j);}}(document,"pocket-btn-js");</script>
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

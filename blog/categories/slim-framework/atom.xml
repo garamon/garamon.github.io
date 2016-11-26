@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: slim framework | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/slim-framework/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[[Slim Framework]サブディレクトリにインストールした場合のリダイレクト方法]]></title>
+    <link href="http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory/"/>
+    <updated>2014-01-06T22:07:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/01/06/redirecting-slim-application-from-subdirectory</id>
+    <content type="html"><![CDATA[<p>簡単なWebアプリを作る機会があったので、PHPのマイクロフレームワークの一つである<a href="http://docs.slimframework.com">Slim Framework</a>を触ってみた。</p>
+
+<p>そこでサブディレクトリにインストールした場合のリダイレクト方法で少しハマったので共有しておく。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<p>Slim 2.4.0</p>
+
+<h2>getRootUriを利用する</h2>
+
+<p>Slim_Http_Request::getRootUriはサブディレクトリ名を返すのでそれを利用しリダイレクトを行う。</p>
+
+<p>ex) サブディレクトリ名がslimの場合、「/slim」という文字列を返す。</p>
+
+<pre><code class="php">$app-&gt;get('/index',  function () use ($app) {
+    $app-&gt;redirect($app-&gt;request-&gt;getRootUri() . '/hoge' );
+}
+</code></pre>
+
+<h2>urlForを利用する</h2>
+
+<p>Slimはrouteに任意の名前を割り当てることができ、urlForでURLを生成することができる。</p>
+
+<pre><code class="php">$app-&gt;get('/index',  function () use ($app) {
+    $app-&gt;render('index.php');
+})-&gt;name('index');
+
+$app-&gt;get('/edit',  function () use ($app) {
+    $app-&gt;redirect($app-&gt;urlFor('index'));
+}
+</code></pre>
+
+<p>これでインストール先がドキュメントルートだろうが、サブディレクトリだろうがコードを変える必要はなくなる。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://docs.slimframework.com/#Route-Names">Slim Framework Documentation</a></p>
+]]></content>
+  </entry>
+  
+</feed>

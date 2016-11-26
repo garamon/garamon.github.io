@@ -1,0 +1,674 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: css | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/css/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CompassでCSS]]></title>
+    <link href="http://blog.code-life.net/blog/2012/05/30/compass-css/"/>
+    <updated>2012-05-30T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/05/30/compass-css</id>
+    <content type="html"><![CDATA[<p>Yuuです。
+以前、<a href="/blog/2012/05/02/start-using-sass-css" title="Sassの使い始めメモ">Sassの記事</a>を書いたのですが、Compassのほうが便利そうだったので、切り替えました。</p>
+
+<!--more-->
+
+
+<p>Rubyは前回インストール済みなので、Compass入れるだけ。</p>
+
+<pre><code>gem update --system
+gem install compass
+</code></pre>
+
+<p>で、コマンド実行</p>
+
+<pre><code>compass create
+</code></pre>
+
+<p>これでファイルが生成されます。
+が、これ実行すると、なんかよくわからない感じでファイルが出力されます。
+自由にディレクトリ構成とかしたいですよね、ってことでconfigファイル作ります。</p>
+
+<pre><code class="ruby config.rb">http_path = "/"
+css_dir = "CSSの出力場所"
+sass_dir = "SCSSの保存場所"
+images_dir = "画像の保存場所"
+javascripts_dir = "JavaScriptの保存場所"
+output_style = Sassの出力形式（:expanded or :nested or :compact or :compressed）
+line_comments = CSSにSCSSの行番号を出力するか（true or false）
+</code></pre>
+
+<p>↓のような感じにしました。</p>
+
+<pre><code class="ruby config.rb">http_path = "/"
+css_dir = "css"
+sass_dir = "_scss"
+images_dir = "/"
+javascripts_dir = "js"
+output_style = :expanded
+line_comments = false
+</code></pre>
+
+<p>参考：<a href="http://www.skyward-design.net/blog/archives/000118.html" target="_blank">Compassを使ってSassのCSS出力を手軽にしよう｜Blog｜Skyward Design</a></p>
+
+<p>このconfig.rbを自分のサイト作成のディレクトリにおいて上げます。
+で、コマンドで下記を叩く。</p>
+
+<pre><code>compass watch
+</code></pre>
+
+<p>これでSCSSのファイルが編集され更新されたら、自動的にCSSを整形して出力してくれます。</p>
+
+<h2>Compassの機能</h2>
+
+<h3>インポート機能</h3>
+
+<p>creafixやらreset.cssをお手軽にインポートできます。</p>
+
+<pre><code class="css scss">@import "compass/utilities/general/clearfix";
+.clearfix{
+  @include clearfix;
+}
+</code></pre>
+
+<pre><code class="css css">.clearfix {
+  overflow: hidden;
+  *zoom: 1;
+}
+</code></pre>
+
+<p>という感じでインポートするだけで終わり。</p>
+
+<h3>ベンダープレフィックス</h3>
+
+<p>スマートフォン対応サイト作るときに面倒なベンダープレフィックス。
+これも結構簡単に設定できます。</p>
+
+<pre><code class="css scss">@import "compass/css3/border-radius";
+.border-radius {
+  @include border-radius;
+}
+</code></pre>
+
+<pre><code class="css css">.border-radius {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  -ms-border-radius: 5px;
+  -o-border-radius: 5px;
+  border-radius: 5px;
+}
+</code></pre>
+
+<p>デフォルト値が5pxなのでプレフィックス付きで5px出力されます。
+値を変えるなら</p>
+
+<pre><code class="css scss">$default-border-radius:20px;
+</code></pre>
+
+<p>という形で指定して、デフォルト値を変更するか、</p>
+
+<pre><code class="css scss">@include border-radius(2px);
+</code></pre>
+
+<p>という感じで個別の値を変更する感じです。
+これだけでとりあえず、作業効率はだいぶ上がりました。</p>
+
+<p>他にもmixinとかの機能やextendでクラス継承させたりもできるんですが、まだ完全に終えてないので徐々に覚えていこうと思います。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Sassの使い始めメモ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/05/02/start-using-sass-css/"/>
+    <updated>2012-05-02T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/05/02/start-using-sass-css</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>前回、LESSについて書き方だけメモったんですが、Sassについても触れてみようかと。</p>
+
+<!--more-->
+
+
+<h2>Sassを使うための環境構築</h2>
+
+<h3>windowsにRubyをインストール</h3>
+
+<p>とりあえず、Windows環境で構築します。</p>
+
+<p><a href="http://rubyinstaller.org/" target="_blank"><a href="http://rubyinstaller.org/">http://rubyinstaller.org/</a></a></p>
+
+<p>インストールするときに、チェック項目があったので、とりあえず全てチェック。
+特に、Pathの項目をチェックしておかないと、あとでシステムの環境変数を自分で変更しなければならなくなるので注意。</p>
+
+<h3>Rubyがインストールされたか確認。</h3>
+
+<pre><code>ruby -v
+ruby 1.9.3p194 (2012-04-20) [i386-mingw32]
+</code></pre>
+
+<p>バージョン情報が表示されれば、無事インストールされてます。</p>
+
+<h3>gemのアップデート</h3>
+
+<p>次にgemをアップデートします。</p>
+
+<pre><code>gem update --system
+</code></pre>
+
+<h3>gemでSassをインストール</h3>
+
+<pre><code>gem install sass
+</code></pre>
+
+<p>インストールが終われば、Sassを使う環境が構築できました。</p>
+
+<h2>Sassを使ってみる</h2>
+
+<h3>変数を使う</h3>
+
+<p>LESSでは、@マークでしたが、Sassは$です。
+記述したファイルを「C:\Documents and Settings\hogehoge」以下に「test.scss」という名前を付けて保存します。
+hogehogeはお使いのパソコンのユーザー名になります。</p>
+
+<pre><code class="css test.scss">$mgn: 10px;
+h1{
+     margin:$mgn;
+}
+h2{
+     margin:$mgn;
+}
+</code></pre>
+
+<h3>コンパイルする</h3>
+
+<pre><code>sass test.scss test.css
+</code></pre>
+
+<p>コマンドプロンプトで上記コマンドを打ちます。
+特に問題なく実行されれば、「test.scss」と同じところに「test.css」というファイルが出力されます。</p>
+
+<pre><code class="css test.css">h1 {
+  margin: 10px; }
+
+h2 {
+  margin: 10px; }
+</code></pre>
+
+<p>無事生成されていれば、Sassが使えるようになりました。</p>
+
+<h3>GUIでコンパイル</h3>
+
+<p>黒い画面が嫌いで、GUI操作のコンパイルでSassを使いたい！って人もいると思います。
+そんなときは、SCOUTが便利。</p>
+
+<p>SCOUT <a href="http://mhs.github.com/scout-app/" target="_blank"><a href="http://mhs.github.com/scout-app/">http://mhs.github.com/scout-app/</a></a></p>
+
+<p>Adobe AIRがインストールされていれば、使用できます。
+詳しいインストール方法はこちらの記事が参考になります。
+<a href="http://www.webcyou.com/?p=2280" target="_blank"><a href="http://www.webcyou.com/?p=2280">http://www.webcyou.com/?p=2280</a></a></p>
+
+<p>もうちょっと使いこなしてみないとも何とも言えないので、しばらくはLESSとSASSで色々遊んでみます。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[LESSの使い始めメモ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/04/28/start-using-less-css/"/>
+    <updated>2012-04-28T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/04/28/start-using-less-css</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>CSSのLESSデビューしようと思ったので、自分なりのメモです。</p>
+
+<!--more-->
+
+
+<h2>入れ子構造</h2>
+
+<p>長くなりやすい、CSSの要素指定を簡略化することができます。</p>
+
+<h3>CSS</h3>
+
+<pre><code class="css">#header li{
+     float:left;
+     text-align:center;
+}
+#header li a{
+     display:block;
+     background-color:#ccc;
+}
+#header li a:hover{
+     color:#fff;
+     background-color:#000;
+}
+</code></pre>
+
+<h3>LESS</h3>
+
+<pre><code class="css">#header{
+     li{
+          float:left;
+          text-align:center;
+          a{
+               display:block;
+               background-color:#ccc;
+               &amp;:hover{
+                    color:#fff;
+                    background-color:#000;
+               }
+          }
+     }
+}
+</code></pre>
+
+<h2>変数を使う</h2>
+
+<p>プログラム的には当たり前の、変数をCSSでも使えるようになります。</p>
+
+<h3>CSS</h3>
+
+<pre><code class="css">h1{
+     margin:10px;
+}
+h2{
+     margin:10px;
+}
+</code></pre>
+
+<h3>LESS</h3>
+
+<pre><code class="css">@mgn: 10px;
+h1{
+     margin:@mgn;
+}
+h2{
+     margin:@mgn;
+}
+</code></pre>
+
+<h2>引数・関数</h2>
+
+<h3>CSS</h3>
+
+<pre><code class="css">#header {
+  border-radius: 5px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+}
+#footer {
+  border-radius: 10px;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+}
+</code></pre>
+
+<h3>LESS</h3>
+
+<pre><code class="css">.rounded-corners (@radius: 5px) {
+  border-radius: @radius;
+  -webkit-border-radius: @radius;
+  -moz-border-radius: @radius;
+}
+#header {
+  .rounded-corners;
+}
+#footer {
+  .rounded-corners(10px);
+}
+</code></pre>
+
+<h2>計算</h2>
+
+<h3>CSS</h3>
+
+<pre><code class="css">#header {
+  color: #333;
+  border-left: 1px;
+  border-right: 2px;
+}
+#footer {
+  color: #114411;
+  border-color: #7d2717;
+}
+</code></pre>
+
+<h3>LESS</h3>
+
+<pre><code class="css">@the-border: 1px;
+@base-color: #111;
+@red:        #842210;
+#header {
+  color: @base-color * 3;
+  border-left: @the-border;
+  border-right: @the-border * 2;
+}
+#footer {
+  color: @base-color + #003300;
+  border-color: desaturate(@red, 10%);
+}
+</code></pre>
+
+<h2>LESSを適応する</h2>
+
+<p>Javascriptとかで適応する方法もあるみたいですが、
+LESSファイルをCSSコンパイルする方法が今のところは無難そうなので、下記の変換ツールを使ってCSSに変換します。
+<a href="http://lesstester.com/" target="_blank"><a href="http://lesstester.com/">http://lesstester.com/</a></a></p>
+
+<p>JSを読み込める環境であれば、下記のJSを適応させた上でLESSファイルを作成すればいいと思います。</p>
+
+<p>```html
+<link rel="stylesheet/less" type="text/css" href="styles.less"></p>
+
+<script src="less.js" type="text/javascript"></script>
+
+
+<p>```</p>
+
+<p>Downloads: <a href="http://lesscss.org/" target="_blank"><a href="http://lesscss.org/">http://lesscss.org/</a></a></p>
+
+<p>実業務で使う機会があるかというと、そうでもないんですが、個人的には積極的に使っていきたいところです。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[jQuery Mobileのコトハジメ]]></title>
+    <link href="http://blog.code-life.net/blog/2012/03/23/start-jquery-mobile/"/>
+    <updated>2012-03-23T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/03/23/start-jquery-mobile</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>VPSであーだこーだしていて、PHPから書きだされたファイルがApache権限ではてさて、SuPHP？パフォーマンス？fastcgi？って感じの初心者っぷりでgoogle先生をを頼り中な今日この頃。</p>
+
+<p>さて、本題。
+スマートフォンサイト作るとき、jQuery Mobileにお世話になってます。</p>
+
+<ul>
+<li>スマートフォンサイトのUIをカッコ良くさせたい。</li>
+<li>さっくり実装させたい。</li>
+</ul>
+
+
+<p>こんなときに便利でお手軽なjQuery Mobile。
+とりあえず、コトハジメ的に備忘録です。</p>
+
+<!--more-->
+
+
+<h2>はじめに</h2>
+
+<ul>
+<li>使用Ver：1.0.1</li>
+</ul>
+
+
+<p>わからないことは、jQuery Mobileの<a href="http://jquerymobile.com/demos/1.0.1/" target="_blank">DEMO</a>を見る。
+英語がわからない時は、<a href="http://dev.screw-axis.com/doc/jquery_mobile/" target="_blank">日本語リファレンス</a>見る。</p>
+
+<p>デモサイト見ればレイアウト実装のサンプルが豊富なので、たいていのことはカバーできます。</p>
+
+<h2>初期テンプレート</h2>
+
+<p>```html
+&lt;!DOCTYPE html>
+<html lang="ja" dir="ltr">
+<head>
+  <meta charset="UTF-8" />
+  <title>code life</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.css" />
+  <script src="http://code.jquery.com/jquery-1.6.4.min.js"></script>
+  <script src="jquery.mobile.init.js"></script>
+  <script src="http://code.jquery.com/mobile/1.0.1/jquery.mobile-1.0.1.min.js"></script>
+</head>
+<body></p>
+
+<div data-role="page">
+  <header data-role="header">
+    <h1>タイトル</h1>
+  </header>
+  <div data-role="content">
+    <h1>見出し1</h1>
+    <p>コンテンツ内容</p>
+    <h2>見出し2</h2>
+    <p>コンテンツ内容</p>
+    <h3>見出し3</h3>
+    <p>コンテンツ内容</p>
+  </div>
+  <footer data-role="footer">
+    <h4>CopyRight &copy; Code-life.net. All rights reserved.</h4>
+  </footer>
+</div>
+
+
+<p></body>
+</html>
+```</p>
+
+<p><a href="/images/2012/03/start-jquery-mobile-1.jpg">{% img /images/2012/03/start-jquery-mobile-1.jpg 300 264 %}</a></p>
+
+<p>公式を参考にすると上記のような感じになります。</p>
+
+<h3>jQuery Mobile 初期設定</h3>
+
+<p>エラーメッセージなどが英語だったりするので設定を変更するために下記のJSを読み込みます。</p>
+
+<p>```javascript</p>
+
+<script src="jquery.mobile.init.js"></script>
+
+
+<pre><code></code></pre>
+
+<p>$(document).bind(&lsquo;mobileinit&rsquo;, function(){
+    $.mobile.loadingMessage = &lsquo;読み込み中&rsquo;;
+    $.mobile.pageLoadErrorMessage = &lsquo;読み込みに失敗しました&rsquo;;
+    $.mobile.dialog.prototype.options.closeBtnText = &lsquo;閉じる&rsquo;;
+    $.mobile.selectmenu.prototype.options.closeText= &lsquo;閉じる&rsquo;;
+    $.mobile.listview.prototype.options.filterPlaceholder = &lsquo;検索文字列&rsquo;;
+    $.mobile.page.prototype.options.backBtnText = &lsquo;戻る&rsquo;;
+  });
+```</p>
+
+<p>ポイントは、上記スクリプトをjQuery MobileのJS読み込み前に読み込むこと。</p>
+
+<p>参考: <a href="http://dev.screw-axis.com/doc/jquery_mobile/api/configuring_defaults/" target="_blank">グローバル設定</a></p>
+
+<h3>jQuery Mobile CSS初期設定</h3>
+
+<p>文字数が要素内で一定値をオーバーすると、文字が省略されてしまうので、それをCSSで解除してあげる。</p>
+
+<pre><code class="css">.ui-header .ui-title,
+.ui-footer .ui-title,
+.ui-btn-inner,
+.ui-li-heading,
+.ui-li .ui-btn-text a.ui-link-inherit,
+.ui-li-desc {
+  overflow: visible;
+  white-space: normal;
+}
+</code></pre>
+
+<h3>デザインを変更する</h3>
+
+<p>デフォルトのデザインをそのまま使う場合はあまりないので、それぞれのデザインをオリジナルなものに変更します。</p>
+
+<p>```html</p>
+
+<div data-role="page" data-theme="f">
+  <header data-role="header" data-theme="f">
+    <h1>タイトル</h1>
+  </header>
+  <div data-role="content" data-theme="f">
+    <h1>見出し1</h1>
+    <p>コンテンツ内容</p>
+    <h2>見出し2</h2>
+    <p>コンテンツ内容</p>
+    <h3>見出し3</h3>
+    <p>コンテンツ内容</p>
+  </div>
+  <footer data-role="footer" data-theme="f">
+    <h4>CopyRight &copy; Code-life.net. All rights reserved.</h4>
+  </footer>
+</div>
+
+
+<p>```</p>
+
+<p>data-theme=&ldquo;f"をそれぞれの要素に追加しました。</p>
+
+<p>data-themeによって、スタイルの切り替えが可能。
+jQuery Mobileでは、aからeまでのスタイルがセットされているので、何もスタイルがセットされていないf～zなど任意のスタイルを指定してあげれば、当然スタイルがセットされてないのでデザインが解除されます。</p>
+
+<p><a href="/images/2012/03/start-jquery-mobile-2.jpg">{% img /images/2012/03/start-jquery-mobile-2.jpg 300 241 %}</a></p>
+
+<p>あとはそれぞれいつも通りにCSSでデザイン作るだけです。</p>
+
+<h3>jQuery Mobileのデフォルトスタイルをカスタマイズ</h3>
+
+<p>テーマが折角あるようなのでテーマcssを作りたい。</p>
+
+<p>JavaScriptで適用されているCSSスタイルが何なのかを見るときは、ブラウザの要素検証だったり、firebugだったりで適用CSSを確認しますよね。
+それをすべて追って、上書きするのは大変です。</p>
+
+<p>そんなときは、jQuery Mobileの<a href="http://jquerymobile.com/themeroller/" target="_blank">Theme Roller</a>を使います。
+このウェブツールを使うと、jQuery Mobileのテーマをちょちょいと作ることができます。</p>
+
+<p><a href="/images/2012/03/start-jquery-mobile-3.png">{% img /images/2012/03/start-jquery-mobile-3.png 300 171 %}</a></p>
+
+<p>カラーコード指定で迷った場合は、Adobe Kulerからも選択できます。
+ちなみにKulerをどう反映すればいいか最初はわからなかったんですが、カラーアイコン（？）をドラック＆ドロップで反映できます。
+そのデザイン反映したやつを左上のDownload Themeでダウンロードする。</p>
+
+<p>あとはそれを組み込んで随時改修していきましょう。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[HTML5の新要素にidやclassを設定する理由]]></title>
+    <link href="http://blog.code-life.net/blog/2012/03/15/html5-id-class/"/>
+    <updated>2012-03-15T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/03/15/html5-id-class</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>今回は大枠のレイアウト要素の実装に入る前の準備。
+後輩に、「何で？」と聞かれた部分なので自分の整理も含めて。</p>
+
+<!--more-->
+
+
+<h2>テンプレート</h2>
+
+<h3>HTML</h3>
+
+<p>```html
+<body id="top"></p>
+
+<!--=====================================================================
+  HEADER
+======================================================================-->
+
+
+<p><header id="header">
+</header></p>
+
+<!--=====================================================================
+  MAIN
+======================================================================-->
+
+
+<div id="main">
+  <div id="slideShow">
+  </div>
+  <div id="content">
+  </div>
+  <div id="sidebar">
+  </div>
+</div>
+
+
+<!--=====================================================================
+  FOOTER
+======================================================================-->
+
+
+<p><footer id="footer">
+</footer>
+</body>
+```</p>
+
+<h3>CSS</h3>
+
+<pre><code class="css">#header{
+  width:100%;
+}
+#main{
+  width:100%;
+}
+#main #slideShow{
+  /* slideshow */
+}
+#main #content{
+  width:50%;
+  float:left;
+}
+#main #sidebar{
+  width:50%;
+  float:right;
+}
+#footer{
+  width:100%;
+  crear:both;
+}
+</code></pre>
+
+<p>※実際の実装時は上記プロパティ変更します。</p>
+
+<h2>解説</h2>
+
+<p>大きく分けると上のような感じになると思います。</p>
+
+<p>ポイントは</p>
+
+<pre><code class="html">&lt;header id="header"&gt;
+&lt;/header&gt;
+</code></pre>
+
+<p>に対して、CSSで</p>
+
+<pre><code class="css">#header{}
+</code></pre>
+
+<p>と指定しているところ。</p>
+
+<p>headerという新要素ができたのだから、idやclass振らずにそのままCSSで</p>
+
+<pre><code class="css">header{}
+</code></pre>
+
+<p>これでも有効にはなります</p>
+
+<ul>
+<li>HTML5はまだ仕様確定ではないという点。</li>
+<li>headerという要素はartcle内などでも後々使用するという点。</li>
+<li>そもそも、わかりやすいようにしている。</li>
+</ul>
+
+
+<p>などを考慮して、新要素には必ずidなりclassを振るようにしています。
+ただし、idをなんでもかんでも振ればいいってわけでもないですし、共通できるスタイルはclassにする感じです。</p>
+
+<p>次は、CSSの中身をやろうかと思いますが、ソースコードが長くなりすぎたので、どうやろうか悩み中。。。</p>
+]]></content>
+  </entry>
+  
+</feed>

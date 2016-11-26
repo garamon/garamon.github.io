@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: cakephp | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/cakephp/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHP2.x クエリーログを取得する]]></title>
+    <link href="http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2/"/>
+    <updated>2014-08-29T10:58:40+09:00</updated>
+    <id>http://blog.code-life.net/blog/2014/08/29/how-to-get-query-log-in-cakephp2</id>
+    <content type="html"><![CDATA[<p>どんなクエリが発行されているか確認したい場合があった際のメモ</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<ul>
+<li>CakePHP 2.5.2</li>
+<li>MySQL 5.5.30</li>
+</ul>
+
+
+<h2>注意</h2>
+
+<p>この方法でクエリーログが取得できるのはデバッグレベル2の場合のみ</p>
+
+<h2>クエリーログを取得する</h2>
+
+<pre><code class="php">$log = $this-&gt;{$Model}-&gt;getDataSource()-&gt;getLog(false, false);
+</code></pre>
+
+<ul>
+<li>第１引数は、ソートの有無。trueの場合はtook(ms)で降順ソート</li>
+<li>第2引数では、クエリーを格納している変数の初期化を行うか否か</li>
+</ul>
+
+
+<h3>返却値</h3>
+
+<p>以下のデータ構造で返却される。</p>
+
+<pre><code class="php sample value">Array
+(
+    [log] =&gt; Array
+        (
+            [0] =&gt; Array
+                (
+                    [query] =&gt; SELECT `username` FROM `users`  AS `User`
+                    [params] =&gt; Array
+                        (
+                        )
+
+                    [affected] =&gt; 1
+                    [numRows] =&gt; 1
+                    [took] =&gt; 1
+                )
+
+            [1] =&gt; Array
+                (
+                    [query] =&gt; SELECT `name` FROM `groups`  AS `Group`
+                    [params] =&gt; Array
+                        (
+                        )
+
+                    [affected] =&gt; 1
+                    [numRows] =&gt; 1
+                    [took] =&gt; 0
+                )
+        )
+
+    [count] =&gt; 2
+    [time] =&gt; 1
+)
+</code></pre>
+
+<p><code>getLog</code>が行っている処理内容</p>
+
+<pre><code class="php lib/Cake/Model/Datasource/DboSource.php">/**
+ * Get the query log as an array.
+ *
+ * @param boolean $sorted Get the queries sorted by time taken, defaults to false.
+ * @param boolean $clear If True the existing log will cleared.
+ * @return array Array of queries run as an array
+ */
+public function getLog($sorted = false, $clear = true) {
+    if ($sorted) {
+        $log = sortByKey($this-&gt;_queriesLog, 'took', 'desc', SORT_NUMERIC);
+    } else {
+        $log = $this-&gt;_queriesLog;
+    }
+    if ($clear) {
+        $this-&gt;_queriesLog = array();
+    }
+    return array('log' =&gt; $log, 'count' =&gt; $this-&gt;_queriesCnt, 'time' =&gt; $this-&gt;_queriesTime);
+}
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CakePHP]モデルのコールバックを無効化にする]]></title>
+    <link href="http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback/"/>
+    <updated>2013-09-25T21:59:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/09/25/cakephp-model-callback</id>
+    <content type="html"><![CDATA[<p>モデルの<a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html">コールバックメソッド</a>が様々ありますが、無効化したい場合があります。</p>
+
+<p>find, save共に第２引数にcallbacksをキーとした配列を渡すことでモデルのコールバック実行の可否を伝えることが可能です。</p>
+
+<!--more-->
+
+
+<h2>find(beforeFind, afterFind共に無効化)</h2>
+
+<pre><code class="php">$this-&gt;find('first', array(
+    'callbacks' =&gt; false
+));
+</code></pre>
+
+<h2>find(beforeFindのみ有効)</h2>
+
+<pre><code class="php">$this-&gt;find('first', array(
+    'callbacks' =&gt; 'before'
+));
+</code></pre>
+
+<h2>find(afterFindのみ有効)</h2>
+
+<pre><code class="php">$this-&gt;find('first', array(
+    'callbacks' =&gt; 'after'
+));
+</code></pre>
+
+<h2>save(beforeSave, afterSave共に無効化)</h2>
+
+<pre><code class="php">$this-&gt;save($data, array(
+    'callbacks' =&gt; false
+));
+</code></pre>
+
+<h2>save(beforeSaveのみ有効)</h2>
+
+<pre><code class="php">$this-&gt;save($data, array(
+    'callbacks' =&gt; 'before'
+));
+</code></pre>
+
+<h2>save(afterSaveのみ有効)</h2>
+
+<pre><code class="php">$this-&gt;save($data, array(
+    'callbacks' =&gt; 'after'
+));
+</code></pre>
+
+<p>という小ネタ。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHP2 CssController could not be found が発生する場合]]></title>
+    <link href="http://blog.code-life.net/blog/2013/03/21/cakephp2-css-controller-could-not-be-found/"/>
+    <updated>2013-03-21T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/03/21/cakephp2-css-controller-could-not-be-found</id>
+    <content type="html"><![CDATA[<p>存在しないcssを指定してないか確認しましょう。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[CakePHP2 モデルからログインしているユーザー情報を取得する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/03/09/how-to-get-logged-in-user-in-model-cakephp/"/>
+    <updated>2013-03-09T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/03/09/how-to-get-logged-in-user-in-model-cakephp</id>
+    <content type="html"><![CDATA[<p>Modelからログインしているユーザー情報を取得したい場合があります。
+もちろん <code>$this-&gt;Auth-&gt;user()</code> では取得できないので一手間かけてあげます。</p>
+
+<!--more-->
+
+
+<h2>環境</h2>
+
+<p>CakePHP 2.2.2</p>
+
+<h2>モデルからログインしているユーザー情報を取得する</h2>
+
+<p>AppModel.phpに以下のメソッドを追加します。</p>
+
+<p>やってることはAuthComponent内で行なっていることとそんなに大差はなく、
+キーの指定までは必要ないだろうと省いています。</p>
+
+<pre><code class="php AppModel.php">protected function _getCurrentUser() {
+    App::uses('CakeSession', 'Model/Datasource');
+    $Session = new CakeSession();
+
+    $user = $Session-&gt;read('Auth.User');
+    return $user;
+}
+</code></pre>
+
+<p>これで <code>$this-&gt;_getCurrentUser()</code> を呼び出してあげればユーザー情報が取得できます。</p>
+
+<p>他の方法としては、AuthComponentのインスタンスを生成してuserメソッドをそのまま呼び出してもいいと思います。</p>
+
+<p>※2013/3/28 サンプルコード追記</p>
+
+<pre><code class="php AppModel.php">protected function _getCurrentUser() {
+    App::uses('AuthComponent',  'Controller/Component');
+    return AuthComponent::user();
+}
+</code></pre>
+
+<p>参考というかパク(ry</p>
+
+<h2>参考</h2>
+
+<p><a href="http://stackoverflow.com/questions/2149990/cakephp-get-user-info-in-models">CakePHP: get user info in models</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[[CakePHP2] Htmlヘルパーで出力されるタグを変更する]]></title>
+    <link href="http://blog.code-life.net/blog/2013/03/09/changing-the-tags-output-cakephp2/"/>
+    <updated>2013-03-09T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2013/03/09/changing-the-tags-output-cakephp2</id>
+    <content type="html"><![CDATA[<p>Htmlヘルパー便利ですよね。けど期待したタグが出力されない場合があります。
+出力されるタグを独自にカスタマイズする仕組みがあるのでそれを利用しましょう。</p>
+
+<!--more-->
+
+
+<h2>タグ定義ファイルを作成する</h2>
+
+<p>[install_dir]/app/Config 以下に tags.php を作成します。
+例えば、以下のように独自の定義をします。</p>
+
+<pre><code class="php tags.php">$config = array(
+    'tags' =&gt; array(
+        'css' =&gt; '&lt;link rel="%s" href="%s" %s&gt;',
+    )
+);
+</code></pre>
+
+<h2>タグ定義ファイルのロード</h2>
+
+<p>定義したタグを反映させるために、タグ定義ファイルを読みこませる必要があります。
+my_tags.phpとした場合は、tags.php を my_tags.phpに変えてください。</p>
+
+<pre><code class="php">$this-&gt;Html-&gt;loadConfig('tags.php');
+</code></pre>
+
+<h3>定義ファイルがphpファイルでない場合(iniファイルの場合)</h3>
+
+<p>第2引数にreaderクラス名を指定します。
+コアファイルを覗くとphpファイルとiniファイルはサポートされてるようです。</p>
+
+<pre><code class="php">$this-&gt;Html-&gt;loadConfig(array('tags.ini', 'ini'));`
+</code></pre>
+
+<h3>定義ファイルの場所がConfig直下にない場合</h3>
+
+<p>例えばタグ定義ファイルが [install_dir]/app/Config/tag/tags.php と配置されてる場合、
+第2引数にパスを指定します。</p>
+
+<pre><code class="php">$this-&gt;Html-&gt;loadConfig('tags.php', APP . 'Config' . DS . 'tag');
+</code></pre>
+
+<p>loadConfigメソッドではHtmlヘルパーに設定されている$_tagsと読み込まれた定義をmergeしているので
+元のタグを残したい場合は、名前の衝突が起きないよう注意が必要です。</p>
+
+<h2>参考</h2>
+
+<p><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#changing-the-tags-output-by-htmlhelper" title="Changing the tags output by HtmlHelper" target="_blank">Changing the tags output by HtmlHelper</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: squid | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/squid/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Squidの稼働状態をコマンドで確認する]]></title>
+    <link href="http://blog.code-life.net/blog/2012/05/31/how-to-check-squid-status/"/>
+    <updated>2012-05-31T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/05/31/how-to-check-squid-status</id>
+    <content type="html"><![CDATA[<p>notoです。
+Proxyサーバ、キャッシュサーバとして利用されている Squid を触る機会があったのでメモです。</p>
+
+<!--more-->
+
+
+<h2>確認できる項目を表示する</h2>
+
+<p>以下のコマンドで確認できる項目が一覧で表示されます。</p>
+
+<pre><code>squidclient mgr:
+</code></pre>
+
+<pre><code>offline_toggle          Toggle offline_mode setting         hidden
+shutdown                Shut Down the Squid Process         hidden
+reconfigure             Reconfigure Squid                   hidden
+menu                    Cache Manager Menu                  public
+pconn                   Persistent Connection Utilization Histograms    public
+mem                     Memory Utilization                  public
+squidaio_counts         Async IO Function Counters          public
+diskd                   DISKD Stats                         public
+config                  Current Squid Configuration         hidden
+comm_epoll_incoming     comm_incoming() stats               public
+ipcache                 IP Cache Stats and Contents         public
+fqdncache               FQDN Cache Stats and Contents       public
+idns                    Internal DNS Statistics             public
+redirector              URL Redirector Stats                public
+external_acl            External ACL stats                  public
+http_headers            HTTP Header Statistics              public
+info                    General Runtime Information         public
+service_times           Service Times (Percentiles)         public
+filedescriptors         Process Filedescriptor Allocation   public
+objects                 All Cache Objects                   public
+vm_objects              In-Memory and In-Transit Objects    public
+io                      Server-side network read() size histograms  public
+counters                Traffic and Resource Counters       public
+peer_select             Peer Selection Algorithms           public
+digest_stats            Cache Digest and ICP blob           public
+5min                    5 Minute Average of Counters        public
+60min                   60 Minute Average of Counters       public
+utilization             Cache Utilization                   public
+histograms              Full Histogram Counts               public
+active_requests         Client-side Active Requests         public
+openfd_objects          Objects with Swapout files open     public
+store_digest            Store Digest                        public
+store_log_tags          Histogram of store.log tags         public
+storedir                Store Directory Stats               public
+store_io                Store IO Interface Stats            public
+store_check_cachable_stats  storeCheckCachable() Stats          public
+refresh                 Refresh Algorithm Statistics        public
+delay                   Delay Pool Levels                   public
+forward                 Request Forwarding Statistics       public
+cbdata                  Callback Data Registry Contents     public
+events                  Event Queue                         public
+client_list             Cache Client List                   public
+asndb                   AS Number Database                  public
+carp                    CARP information                    public
+userhash                peer userhash information           public
+sourcehash              peer sourcehash information         public
+server_list             Peer Cache Statistics               public
+</code></pre>
+
+<h2>キャッシュディレクトリの情報を確認する</h2>
+
+<p>以下のコマンドで、キャッシュが格納されているディレクトリ情報を確認することができます。</p>
+
+<pre><code>squidclient mgr:storedir
+</code></pre>
+
+<p>キャッシュ容量や、現在 何％利用されているかを確認することができます。</p>
+
+<pre><code>HTTP/1.0 200 OK
+Server: squid/3.1.10
+Mime-Version: 1.0
+Date: Sun, 20 May 2012 06:47:35 GMT
+Content-Type: text/plain
+Expires: Sun, 20 May 2012 06:47:35 GMT
+Last-Modified: Sun, 20 May 2012 06:47:35 GMT
+X-Cache: MISS from image.cache.com
+X-Cache-Lookup: MISS from image.cache.com:3128
+Via: 1.0 image.cache.com (squid/3.1.10)
+Connection: close
+
+Store Directory Statistics:
+Store Entries          : 35
+Maximum Swap Size      : 102400 KB
+Current Store Swap Size:     1344 KB
+Current Capacity       : 1% used, 99% free
+
+Store Directory #0 (ufs): /var/spool/squid
+FS Block Size 4096 Bytes
+First level subdirectories: 16
+Second level subdirectories: 256
+Maximum Size: 102400 KB
+Current Size: 1344 KB
+Percent Used: 1.31%
+Filemap bits in use: 8 of 16384 (0%)
+Filesystem Space in use: 1842560/18102140 KB (10%)
+Filesystem Inodes in use: 61967/1150560 (5%)
+Flags: SELECTED
+Removal policy: lru
+LRU reference age: 1.36 days
+</code></pre>
+
+<h2>メモリ使用量を確認する</h2>
+
+<p>以下のコマンドで、メモリ使用量を確認することができます。</p>
+
+<pre><code>squidclient mgr:mem
+</code></pre>
+
+<pre><code>・・・省略・・・
+Cumulative allocated volume: 34.53 MB
+Current overhead: 24962 bytes (11.150%)
+Idle pool limit: 5.00 MB
+Total Pools created: 97
+Pools ever used:     78 (shown above)
+Currently in use:    53
+String Pool  Impact
+     (%strings)  (%volume)
+Short Strings            100     99
+Medium Strings           0   1
+Long Strings             0   0
+Other Strings            0   0
+
+Large buffers: 0 (0 KB)
+</code></pre>
+
+<p>検証時や、障害時に使えそうです。
+Squidの設定方法がまだよく分かっていないので、勉強したらブログに記載したいと思います。</p>
+]]></content>
+  </entry>
+  
+</feed>

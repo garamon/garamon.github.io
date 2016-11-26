@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: wordpress | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/wordpress/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[【WordPress】投稿の添付画像一覧をリンク付きで取得]]></title>
+    <link href="http://blog.code-life.net/blog/2012/04/24/wordpress-image-link/"/>
+    <updated>2012-04-24T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/04/24/wordpress-image-link</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>このブログはWordpressということで、折角なのでWordpressネタです。
+投稿記事に添付された画像一覧を取得してみます。</p>
+
+<!--more-->
+
+
+<h2>投稿画像をリンク付きで出力</h2>
+
+<pre><code class="php">&lt;?php
+     $images = get_children(array(
+          'post_parent' =&gt; $post-&gt;ID,
+          'post_type' =&gt; 'attachment',
+          'exclude' =&gt; get_post_thumbnail_id($post-&gt;ID),
+          'post_mime_type' =&gt; 'image'
+     ));
+     foreach ( $images as $attachment_id =&gt; $attachment ) {
+          $att_image_link = wp_get_attachment_link($attachment_id, 'thumbnail', true, false);
+          echo $att_image_link;
+     }
+?&gt;
+</code></pre>
+
+<p>get_childrenで投稿の添付ファイルを取得。</p>
+
+<p>wp_get_attachment_linkで添付ファイルへのリンクを示すHTMLを取得。
+設定としては、表示はthumbnailサイズ、リンクは出力という感じ。</p>
+
+<h3>投稿画像をリンク付きで出力</h3>
+
+<p>WPって、attachmentのimage.phpファイルとかの説明があまりないようなイメージなんですが、
+image.phpとかで表示するならこんな感じでしょうか。</p>
+
+<pre><code class="php">&lt;?php
+     if (wp_attachment_is_image($post-&gt;id)) {
+        $att_image = wp_get_attachment_image_src( $post-&gt;id, "full-size");
+        $att_image_name=$att_image[0];
+        echo '&lt;img src="' . $att_image_name .'" /&gt;';
+     }
+?&gt;
+</code></pre>
+
+<p>wordpressはまだまだ勉強が足りないので、慣れていきたいところ。</p>
+]]></content>
+  </entry>
+  
+</feed>

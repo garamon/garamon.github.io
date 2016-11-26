@@ -1,0 +1,473 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: movable type | Code Life]]></title>
+  <link href="http://blog.code-life.net/blog/categories/movable-type/atom.xml" rel="self"/>
+  <link href="http://blog.code-life.net/"/>
+  <updated>2016-11-26T21:13:31+09:00</updated>
+  <id>http://blog.code-life.net/</id>
+  <author>
+    <name><![CDATA[noto]]></name>
+    <email><![CDATA[noto.code.life@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[【MT】ケータイキットのMTKeitaiPaginateタグで記事分割]]></title>
+    <link href="http://blog.code-life.net/blog/2012/06/11/movable-type-mtkeitaipaginate/"/>
+    <updated>2012-06-11T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/06/11/movable-type-mtkeitaipaginate</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>最近サーバ構築と見積もり・提案書しかやってないので、あまりコード書いてない今日この頃。
+かと思ってたら、MT案件が来てしまったので、思い出しを兼ねて、ケータイキットでよく使うページ分割タグです。</p>
+
+<!--more-->
+
+
+<h2>通常の最新記事10件呼び出し</h2>
+
+<p>```html
+<MTEntries lastn="10">
+<MTEntriesHeader></p>
+
+<div class="hfeed">
+    <h1>ブログ記事</h1>
+</MTEntriesHeader>
+    <div class="hentry entry" id="entry-<mt:EntryID>">
+        <h2 class="entry-title"><a rel="bookmark" href="<mt:Var name="permalink">"><$MTEntryTitle$></a></h2>
+        <div class="entry-content">
+            <$MTEntryBody$>
+        </div>
+    </div>
+<MTEntriesFooter>
+</div>
+
+
+<p></MTEntriesFooter>
+</MTEntries>
+```</p>
+
+<h2>最新記事10件呼び出しつつ、表示は5件でページ分割</h2>
+
+<p>```html</p>
+
+<!-- ▼MTKeitaiPaginateBreakが5回実行されたらページ分割 -->
+
+
+<p><MTKeitaiPaginate break_tags="" max_sections="5">
+<MTEntries lastn="10">
+    <MTEntriesHeader>
+        <div class="hfeed">
+            <h1>ブログ記事</h1>
+    </MTEntriesHeader>
+        <div class="hentry entry" id="entry-<mt:EntryID>&ldquo;>
+            <h2 class="entry-title"><a rel="bookmark" href="<mt:Var name="permalink">&rdquo;>&lt;$MTEntryTitle$></a></h2>
+            <div class="entry-content">
+                &lt;$MTEntryBody$>
+            </div>
+        </div>
+        <!-- ▼ページの分割タグ -->
+        &lt;$MTKeitaiPaginateBreak$>
+    <MTEntriesFooter>
+        </div>
+    </MTEntriesFooter>
+</MTEntries>
+</MTKeitaiPaginate>
+```</p>
+
+<p>MTKeitaiPaginateでEntriesを囲んでいます。
+で、分割したいところでを使用しています。</p>
+
+<p>MTKeitaiPaginateの値は<a href="http://mt.keitaikit.jp/index.php/%E3%82%BF%E3%82%B0/%E3%83%9A%E3%83%BC%E3%82%B8%E5%88%86%E5%89%B2">公式マニュアル</a>を参考に。</p>
+
+<p>これだけだと、ページナビゲーションが出力されないので、
+ナビゲーション部分を記述してあげます。</p>
+
+<pre><code class="html">&lt;MTKeitaiIfMultiplePages&gt;
+    &lt;!-- ▼現在のページと総ページ数 --&gt;
+    &lt;$MTKeitaiCurrentPageNum$&gt;/&lt;$MTKeitaiLastPageNum$&gt;&lt;br /&gt;
+
+    &lt;!-- ▼前のページがあったら出力 --&gt;
+    &lt;MTKeitaiIfHasPreviousPage&gt;
+        &lt;a href="&lt;$MTKeitaiPreviousPageLink$&gt;"&gt;&lt;前の記事&lt;/a&gt;
+    &lt;/MTKeitaiIfHasPreviousPage&gt;
+
+    &lt;!-- ▼次のページがあったら出力 --&gt;
+    &lt;MTKeitaiIfHasNextPage&gt;
+        &lt;a href="&lt;$MTKeitaiNextPageLink$&gt;"&gt;次の記事&gt;&lt;/a&gt;
+    &lt;/MTKeitaiIfHasNextPage&gt;
+
+    &lt;!-- ▼ページナビゲーションの表示 --&gt;
+    &lt;MTKeitaiPages&gt;
+
+        &lt;MTKeitaiIfPagesCurrent&gt;
+            &lt;$MTKeitaiPagesNum$&gt;
+        &lt;MTKeitaiElse&gt;
+            &lt;a href="&lt;$MTKeitaiPagesLink$&gt;"&gt;&lt;$MTKeitaiPagesNum$&gt;&lt;/a&gt;
+        &lt;/MTKeitaiElse&gt;
+        &lt;/MTKeitaiIfPagesCurrent&gt;
+
+        &lt;!-- ▼ページナビゲーションの区切り指定 --&gt;
+        &lt;MTKeitaiPagesSeparator&gt; | &lt;/MTKeitaiPagesSeparator&gt;
+    &lt;/MTKeitaiPages&gt;
+
+    &lt;!-- ▼一番最初のページへのリンク --&gt;
+    &lt;MTKeitaiIfHasPreviousPage&gt;
+        &lt;a href="&lt;$MTKeitaiFirstPageLink$&gt;"&gt;&lt;&lt;&lt;/a&gt;
+    &lt;/MTKeitaiIfHasPreviousPage&gt;
+
+    &lt;!-- ▼一番最後のページへのリンク --&gt;
+    &lt;MTKeitaiIfHasNextPage&gt;
+        &lt;a href="&lt;$MTKeitaiLastPageLink$&gt;"&gt;&gt;&gt;&lt;/a&gt;
+    &lt;/MTKeitaiIfHasNextPage&gt;
+&lt;/MTKeitaiIfMultiplePages&gt;
+</code></pre>
+
+<p>基本的な機能は、<a href="http://www.sixapart.jp/movabletype/plugins/mtpaginate.html" target="_blank">MTPaginate</a>と同様の機能です。ただ、ケータイキットプラグイン使えば、簡単にページ分割できますって感じで。
+どこのコンテンツで使うのかっていうと、携帯サイトだとニュースとかで出番が多かったりします。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[MTAppjQueryPlusで管理画面のカスタムフィールドを任意に増減]]></title>
+    <link href="http://blog.code-life.net/blog/2012/04/16/mtappjqueryplus-movable-type/"/>
+    <updated>2012-04-16T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/04/16/mtappjqueryplus-movable-type</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>Movable Typeでは管理画面のカスタマイズが、個人的には微妙にハードルが高い感じがします。
+そこで、MT CAFEのLTで紹介されていた下記のプラグインを利用して管理画面をカスタマイズしてみようと思います。</p>
+
+<p>使用するプラグイン</p>
+
+<ul>
+<li>MTAppjQuery</li>
+<li>MTAppjQueryPlus</li>
+<li>Splitプラグイン</li>
+</ul>
+
+
+<p>上記のプラグインを利用し、管理画面のカスタムフィールドをユーザーが任意に増減できるようにしてみたいと思います。</p>
+
+<!--more-->
+
+
+<h2>はじめに</h2>
+
+<h3>MTAppjQueryとは？</h3>
+
+<p>MTAppjQuery とは、Movable Type 5 の管理画面を jQuery でカスタマイズしやすくするプラグインです。</p>
+
+<p><a href="https://twitter.com/tinybeans" target="_blank">@tinybeans</a>さん
+Download：<a href="http://www.tinybeans.net/blog/download/mt-plugin/mtapp-jquery.html" target="_blank">MTAppjQuery - Movable Type 5 の管理画面をjQueryでカスタマイズしやすくするプラグイン</a></p>
+
+<h3>MTAppjQueryPlusとは？</h3>
+
+<p>MTAppjQuerPlusは、「MTAppjQueryプラグイン」を元に独自に拡張をしたjQueryプラグイン集です。
+MovableTypeをCMSとして運用する際の使い勝手の向上を目的としています。</p>
+
+<p><a href="https://twitter.com/#!/riatw">@riatw</a>さん
+Download：<a href="https://github.com/riatw/mt-plugin-MTAppjQueryPlus" target="_blank">riatw/mt-plugin-MTAppjQueryPlus</a></p>
+
+<h3>Split プラグインとは？</h3>
+
+<p>split モディファイアの値に区切り文字を設定すれば、区切り文字で split した配列変数を返却します。</p>
+
+<p>MTAppjQueryPlusの$.MTAppTableConverterで使用。</p>
+
+<p><a href="http://www.koikikukan.com/" target="_blank">小粋空間</a>さん
+Download：<a href="http://www.koikikukan.com/archives/2009/01/20-015555.php" target="_blank">Split プラグイン</a></p>
+
+<h2>検証環境</h2>
+
+<ul>
+<li>Movable Type 5.13</li>
+</ul>
+
+
+<h2>インストール</h2>
+
+<ol>
+<li>MTAppjQueryプラグインをインストール
+
+<ul>
+<li> plugins 以下</li>
+<li> mt-static/plugins 以下</li>
+</ul>
+</li>
+<li>MTAppjQueryPlusプラグインをインストール
+
+<ul>
+<li>mt-static/plugins 以下</li>
+</ul>
+</li>
+<li>Splitプラグインをインストール
+
+<ul>
+<li>plugins 以下</li>
+</ul>
+</li>
+</ol>
+
+
+<h2>使用方法</h2>
+
+<p>今回の目的は増減可能なカスタムフィールドなので、
+MTAppjQueryPlusの<code>$.fn.MTAppTableConverter</code>を使ってみようと思います。</p>
+
+<h3>MTAppjQueryPlusとjquery-uiを管理画面へ読み込む</h3>
+
+<ol>
+<li>ウェブサイト→ブログ→ツール→プラグイン</li>
+<li>MTAppjQuery0.25.1→設定</li>
+<li>フリーエリアに下記を記述</li>
+</ol>
+
+
+<p>```html</p>
+
+<script src="http://blog.code-life.net/mt/mt-static/plugins/MTAppjQueryPlus/MTAppjQueryPlus.js" type="text/javascript"></script>
+
+
+<pre><code>
+※リンクパスはMTをインストールしたフォルダに変更してください。
+
+### カスタムフィールドの作成
+
+$.fn.MTAppTableConverterは 複数行のテキストエリアに対してのみ使用可能ということなので、
+ブログ記事に対してカスタムフィールドを追加します。
+
+[{% img /images/2012/04/mtappjqueryplus-movable-type-1-300x204.png 300 204 %}][2]
+
+ブログ記事画面で設定したカスタムフィールドを表示させます。
+
+[{% img /images/2012/04/mtappjqueryplus-movable-type-2-300x270.jpg 300 270 %}][3]
+
+### user.jsに処理を記述する
+
+場所：/mt/mt-static/plugins/_MTAppjQuery/js/user.js
+</code></pre>
+
+<p>$(&ldquo;#customfield_xxx&rdquo;).MTAppTableConverter({
+colcnt:2, //列数
+type:&lsquo;text/textarea&rsquo;,
+thead:&lsquo; 項目 内容 &rsquo;
+});
+```</p>
+
+<p>※<code>#customfield_xxx</code>の、xxxはカスタムフィールドのベースネーム</p>
+
+<p>上記をアップロードして反映すると、投稿記事画面のフィールドが下記のようになります。</p>
+
+<p><a href="/images/2012/04/mtappjqueryplus-movable-type-3.jpg">{% img /images/2012/04/mtappjqueryplus-movable-type-3-300x60.jpg 300 60 %}</a></p>
+
+<p>これで項目を追加するボタンを押せば、フィールドが任意に追加できます。</p>
+
+<h3>入力されたフィールドの情報を出力する。</h3>
+
+<p>こちらは、READMEのサンプルを使用させてもらいました。</p>
+
+<p>```html</p>
+
+<table>
+<mt:ignore>/* 対象とするフィールド名の指定 */</mt:ignore>
+<mt:entryexcerpt split="\n" setvar="rowarray">
+<mt:loop name="rowarray">
+<tr>
+<mt:var name="__counter__" setvar="rowcounter">
+    <mt:var name="__value__" split="##" setvar="colarray">
+    <mt:loop name="colarray">
+    <mt:var name="__counter__" setvar="colcounter">
+        <mt:ignore>** テーブルのセルの出力部分、条件に応じてclass等の指定 **</mt:ignore>
+            <mt:if name="colcounter" eq="1">
+            <th><mt:var name="__value__"></th>
+            <mt:else>
+            <td><mt:var name="__value__"></td>
+            </mt:if>
+        <mt:ignore>** テーブルのセルの出力部分、ここまで **</mt:ignore>
+    </mt:loop>
+</tr>
+</mt:loop>
+</table>
+
+
+<p>```</p>
+
+<p><code>split="##"</code>で入力された値を分割しています。</p>
+
+<p>以上で実装完了です。
+出力やり方を変えればいろいろな場面で応用できると思います。</p>
+
+<p>他にも機能はあるので、しばらくはMTAppjQueryとMTAppjQueryPlusを楽しんでみようと思います。
+実装にあたって、色々教えて頂いた<a href="https://twitter.com/#!/riatw">riatw</a>さん、有難うございました。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Movable Typeで必要そうなプラグインとか]]></title>
+    <link href="http://blog.code-life.net/blog/2012/04/12/movable-type-plugins/"/>
+    <updated>2012-04-12T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/04/12/movable-type-plugins</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>本当はMTAppjQueryPlusをまとめようと思いましたが、
+現在進行形でやってるところなので、今回は別の話題で。</p>
+
+<p>Movable Typeをサーバにインストールするとき、Perlモジュールが足りなかったり、
+この機能がほしいなぁとか初期のときに困る事が多いので、とりあえず初期の初期をまとめます。</p>
+
+<p>ということで完全に自分用メモです。</p>
+
+<!--more-->
+
+
+<pre><code># yum -y install perl-Crypt-DSA perl-IPC-Run perl-Archive-Zip perl-Cache perl-HTML-Parser perl-Crypt-SSLeay perl-GD perl-Archive-Tar perl-XML-Parser perl-IO-Compress perl-XML-Atom ImageMagick-perl perl-Mail-Sendmail
+</code></pre>
+
+<p>最初CPANで一つ一つやってたのですが、失敗しまくり。</p>
+
+<h2>プラグイン</h2>
+
+<h3>QuickRebuild</h3>
+
+<p>複数ウェブサイト及びブログの再構築</p>
+
+<p><a href="http://code.google.com/p/quickrebuild-mtplugin/downloads/list" target="_blank"><a href="http://code.google.com/p/quickrebuild-mtplugin/downloads/list">http://code.google.com/p/quickrebuild-mtplugin/downloads/list</a></a></p>
+
+<h3>DuplicateEntry</h3>
+
+<p>ブログ記事の複製、移動</p>
+
+<p><a href="http://www.skyarc.co.jp/engineerblog/entry/duplicateentry.html" target="_blank"><a href="http://www.skyarc.co.jp/engineerblog/entry/duplicateentry.html">http://www.skyarc.co.jp/engineerblog/entry/duplicateentry.html</a></a></p>
+
+<h3>MTAppjQuery</h3>
+
+<p>管理画面カスタマイズ</p>
+
+<p><a href="http://www.h-fj.com/blog/archives/2007/08/13-102304.php" target="_blank"><a href="http://www.tinybeans.net/blog/download/mt-plugin/mtapp-jquery.html">http://www.tinybeans.net/blog/download/mt-plugin/mtapp-jquery.html</a></a></p>
+
+<h3>ApplyModifier</h3>
+
+<p>改行削除（MT4を使う場合）</p>
+
+<p><a href="http://www.h-fj.com/blog/archives/2007/08/13-102304.php" target="_blank"><a href="http://www.h-fj.com/blog/archives/2007/08/13-102304.php">http://www.h-fj.com/blog/archives/2007/08/13-102304.php</a></a></p>
+
+<h3>rimEx</h3>
+
+<p>ホワイトスペース削除（↑とセットで。MT4を使う場合）</p>
+
+<p><a href="http://www.h-fj.com/blog/archives/2007/10/31-151141.php" target="_blank"><a href="http://www.h-fj.com/blog/archives/2007/10/31-151141.php">http://www.h-fj.com/blog/archives/2007/10/31-151141.php</a></a></p>
+
+<p>ひとまずこんなところで。
+ここは随時追加してまとめていきたい。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Movable Typeの カスタムフィールドの一括表示処理]]></title>
+    <link href="http://blog.code-life.net/blog/2012/04/08/movable-type-custom-field/"/>
+    <updated>2012-04-08T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/04/08/movable-type-custom-field</id>
+    <content type="html"><![CDATA[<p>Yuuです。</p>
+
+<p>本日はMT Cafe Tokyoに参加してきました。
+そこで、いろいろ質問していたことを実践してみようと思います。</p>
+
+<p>そもそもやりたかったこと。</p>
+
+<ul>
+<li>MTタグでカスタムフィールドの一括表示処理</li>
+<li>管理画面のカスタムフィールドをユーザーが任意に増減。</li>
+</ul>
+
+
+<p>ということで、まずはカスタムフィールド処理です。</p>
+
+<!--more-->
+
+
+<p>通常であれば、</p>
+
+<pre><code class="html">&lt;$mt:CustomField01$&gt;
+&lt;$mt:CustomField02$&gt;
+&lt;$mt:CustomField03$&gt;
+&lt;$mt:CustomField04$&gt;
+&lt;$mt:CustomField05$&gt;
+&lt;$mt:CustomField06$&gt;
+</code></pre>
+
+<p>という感じで表示できると思います。</p>
+
+<p>でも、これが100個とかだったら100行書かなくてはなりません。
+ということでこれを一括で表示します。</p>
+
+<pre><code class="html">&lt;mt:Entries lastn="1"&gt;
+  &lt;mt:EntryCustomFields&gt;
+    &lt;mt:If tag="EntryCustomFieldValue"&gt;
+      &lt;$MTEntryCustomFieldName$&gt;
+    &lt;/mt:If&gt;
+  &lt;/mt:EntryCustomFields&gt;
+&lt;/mt:Entries&gt;
+</code></pre>
+
+<p>最新エントリー1件のカスタムフィールド情報を取得して表示しています。
+というか、テンプレートタグに書いてありましたね。
+いつもブログとかしかみてなかったので完全に見逃してました。</p>
+
+<p>デフォルトタグのみで実現できてしまったので、あっさり解決してしまったという。</p>
+
+<p>ちょっとまだいろいろ検証できてないので、 追記でこれをソートしたり、特定のフィールドのみとかやってみようと思います。</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Movable TypeのMTIncludeで振り分け]]></title>
+    <link href="http://blog.code-life.net/blog/2012/04/03/movable-type-mtinclude-variable/"/>
+    <updated>2012-04-03T00:00:00+09:00</updated>
+    <id>http://blog.code-life.net/blog/2012/04/03/movable-type-mtinclude-variable</id>
+    <content type="html"><![CDATA[<p>Yuuです。
+前回に続き、Movable Type話題です。</p>
+
+<p>MTのモジュールを、MTIncludeで呼び出す。
+そして呼び出した内容を、マルチデバイス向けに手動で振り分けしてみようと思います。</p>
+
+<!--more-->
+
+
+<h2>基礎テンプレート</h2>
+
+<h3>呼び出し元</h3>
+
+<pre><code class="html">&lt;mt:include module="モジュール" device="SmartPhone"&gt;
+</code></pre>
+
+<h3>呼び出し内容</h3>
+
+<pre><code class="html">&lt;mt:If name="device" eq="SmartPhone"&gt;
+  &lt;!-- スマートフォンの内容 --&gt;
+&lt;mt:ElseIf eq="FeaturePhone"&gt;
+  &lt;!-- フィーチャーフォンの内容 --&gt;
+&lt;mt:ElseIf eq="Tablet"&gt;
+  &lt;!-- iPadとか --&gt;
+&lt;mt:Else&gt;
+  &lt;!-- その他 --&gt;
+&lt;/mt:If&gt;
+</code></pre>
+
+<h2>解説</h2>
+
+<p>MTincludeでは変数を定義できて、定義した変数を読み込むことができます。</p>
+
+<p>ということで、ポイントは <code>device="SmartPhone"</code> ここの設定をそれぞれ書き換えることで呼び出す内容を変更できます。</p>
+
+<p>この振り分けはあくまでテンプレート上のことなので、ユーザー端末によっての振り分けは別途PHPなりJavascriptなりhtaccessで振り分けが必要です。
+ただ、コンテンツ管理的には1モジュールで管理できるので、個人的には重宝してます。</p>
+
+<p>MTの公式ブログにも説明が載っていました。
+<a href="http://www.movabletype.jp/blog/mtinclude_variable.html" target="_blank"><a href="http://www.movabletype.jp/blog/mtinclude_variable.html">http://www.movabletype.jp/blog/mtinclude_variable.html</a></a></p>
+]]></content>
+  </entry>
+  
+</feed>
